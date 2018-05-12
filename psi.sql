@@ -13,13 +13,17 @@ alter table usuario
 add constraint uq_senha unique(senha);
 
 create table psicologo(
-	crp int primary key not null,
+	idpsicologo int primary key not null auto_increment,
+	crp varchar(50) not null,
 	nomepsicologo varchar(100) not null,
 	emailpsicologo varchar(50) not null,
 	sexopsicologo char,
 	datanascimento date,
 	usuario_idusuario int
 );
+
+alter table psicologo
+add constraint uq_crp unique(crp);
 
 alter table psicologo
 add constraint uq_emailpsicologo unique(emailpsicologo);
@@ -34,11 +38,11 @@ create table clinica(
 	estado varchar(45),
 	nomeclinica varchar(50) not null,
 	telefone varchar(20),
-	crp_psicologo int
+	id_psicologo int
 );
 
 alter table clinica
-add constraint fk_crp foreign key (crp_psicologo) references psicologo(crp);
+add constraint fk_id_psicologo foreign key (id_psicologo) references psicologo(idpsicologo);
 
 create table paciente(
 	idpaciente int AUTO_INCREMENT primary key,
@@ -48,7 +52,7 @@ create table paciente(
 	emailpaciente varchar(50) not null,
 	nomepaciente varchar(50) not null,
 	sexopaciente char,
-	psicologo_crp int,
+	id_psicologo int,
 	telefonepaciente varchar(20)
 );
 
@@ -56,7 +60,7 @@ alter table paciente
 add constraint uq_emailpaciente unique(emailpaciente);
 
 alter table paciente
-add constraint fk_crppsi foreign key (psicologo_crp) references psicologo(crp);
+add constraint fk_psicologo_id foreign key (id_psicologo) references psicologo(idpsicologo);
 
 create table prontuario(
 	numeroprontuario int primary key not null auto_increment,
@@ -66,7 +70,7 @@ create table prontuario(
 	tratamentoadotado text,
 	cid10 varchar(45),
 	evolucao text,
-	psicologo_crp int,
+	id_psicologo int,
 	clinica_id int,
 	paciente_id int
 );
@@ -75,7 +79,7 @@ alter table prontuario
 add constraint fk_clinicaid foreign key (clinica_id) references clinica(idclinica);
 
 alter table prontuario
-add constraint fk_crpp foreign key (psicologo_crp) references psicologo(crp);
+add constraint fk_psicologoid foreign key (id_psicologo) references psicologo(idpsicologo);
 
 alter table prontuario
 add constraint fk_idpaciente foreign key (paciente_id) references paciente(idpaciente);
