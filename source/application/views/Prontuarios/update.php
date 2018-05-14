@@ -1,4 +1,5 @@
 <div class="ls-main">
+<div class="container-fluid">
 	<div class="ls-box ls-board-box">
 	<header class="ls-info-header">
 		<h2 class="ls-title-3 ls-ico-search">Detalhes</h2>
@@ -125,11 +126,13 @@
 		  	</label>
 		</fieldset>
 
-		<input type="hidden" name="psicologocrp" required="required" value='<?php echo $prontuarios->psicologo_crp;?>'>
+		<input type="hidden" name="id_psicologo" required="required" value='<?php echo $prontuarios->id_psicologo;?>'>
 		<input type="hidden" name="numeroprontuario" value="<?php echo $prontuarios->numeroprontuario ?>">
-		<button type="submit" class="ls-btn-primary">Salvar todos os dados</button>
+		<button type="submit" class="ls-btn">Salvar todos os dados</button>
 		<a href="<?=base_url()?>prontuarioscontroller/view" class="ls-btn-danger">Voltar</a>
 
 	</form>
-	</div>
+	</div>	
+</div>
+
 </div>

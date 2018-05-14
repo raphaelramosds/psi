@@ -1,7 +1,8 @@
 <div class="ls-main">
-	<div class="ls-box ls-board-box">
+	<div class="container-fluid">
+<div class="ls-box ls-board-box">
 	<header class="ls-info-header">
-		<h2 class="ls-title-3">Registre um novo prontuário</h2>
+		<h2 class="ls-title-3">Registre uma nova ficha</h2>
 	</header>
 	<form action="<?=base_url()?>prontuarioscontroller/add" method="POST" class="ls-form ls-form-horizontal row" data-ls-module="form">
 		<fieldset>
@@ -85,10 +86,11 @@
 			    <b class="ls-label-text">Evolucao</b>
 			    <textarea rows="10" name="evolucao" required="required"></textarea>
 		  	</label>
-				<input type="hidden" name="psicologocrp" required="required" value="<?php echo $crp; ?>">
+				<input type="hidden" name="id_psicologo" required="required" value="<?php echo $crp; ?>">
 		</fieldset>
 		<button type="submit" class="ls-btn">Salvar todos os dados</button>
 		<a href="<?=base_url()?>pacientescontroller" class="ls-btn-danger">Voltar</a>
 	</form>
+	</div>
 	</div>
 </div>

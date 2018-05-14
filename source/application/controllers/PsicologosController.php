@@ -22,7 +22,7 @@ class PsicologosController extends CI_Controller {
 		$this->load->model('PsicologosModel');
 		$data = array(
 			//Enviar o CRP do psicólogo para a cláusula WHERE dentro do Model
-			'datapsicologos' => $this->PsicologosModel->view($psicologo[0]->crp),
+			'datapsicologos' => $this->PsicologosModel->view($psicologo[0]->idpsicologo),
 		);
 		$this->load->view('Psicologos/index', $data);
 	}
@@ -72,7 +72,7 @@ class PsicologosController extends CI_Controller {
 
 	public function update(){
 		$this->load->model('PsicologosModel');
-		$this->PsicologosModel->crp = $this->input->post('crp');
+		$this->PsicologosModel->idpsicologo = $this->input->post('idpsicologo');
 		$dados = $this->get();
 		$this->PsicologosModel->update($dados);
 		redirect('psicologoscontroller');

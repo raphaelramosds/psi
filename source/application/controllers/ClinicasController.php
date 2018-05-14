@@ -59,7 +59,7 @@ class ClinicasController extends CI_Controller {
 		$this->load->view('Home/menu',$user);
 		$this->load->model('ClinicasModel');
 		$data= array(
-			'dataclinica'=>$this->ClinicasModel->view($psicologo[0]->crp, $config['per_page'],$offset),
+			'dataclinica'=>$this->ClinicasModel->view($psicologo[0]->idpsicologo, $config['per_page'],$offset),
 			'delete' => $this->session->flashdata('delete'),
 			'pagination' => $this->pagination->create_links()
 		);
@@ -75,7 +75,7 @@ class ClinicasController extends CI_Controller {
 		$this->load->model('ClinicasModel');
 
 		$data= array(
-			'dataclinica'=>$this->ClinicasModel->search($psicologo[0]->crp, $nomeclinica),
+			'dataclinica'=>$this->ClinicasModel->search($psicologo[0]->idpsicologo, $nomeclinica),
 			'delete' => $this->session->flashdata('delete')
 		);
 		$this->load->view('Clinicas/index', $data);
@@ -87,14 +87,14 @@ class ClinicasController extends CI_Controller {
 			'telefone' => $this->input->post('telefone'),
 			'estado' => $this->input->post('estado'),
 			'cidade' => $this->input->post('cidade'),
-			'crp_psicologo' => $this->input->post('crp_psicologo')
+			'id_psicologo' => $this->input->post('id_psicologo')
 		);
 		return $dados;
 	}
 
 	public function create(){
 		$psicologo = $this->session->userdata('crp');
-		$dados['crp'] = $psicologo[0]->crp;
+		$dados['crp'] = $psicologo[0]->idpsicologo;
 		$user['nomeusuario'] = $this->session->userdata('nomeusuario');
 		$this->load->view('Home/menu',$user);
 		$this->load->view('Clinicas/create',$dados);

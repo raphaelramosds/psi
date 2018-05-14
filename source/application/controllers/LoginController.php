@@ -28,7 +28,7 @@ class LoginController extends CI_Controller {
 
 		//Caso autentique, recupere o CRP do psicólogo pelo ID do usuário e crie uma sessão
 		if (count($query) == 1) {
-			$this->db->select('crp');
+			$this->db->select('crp, idpsicologo');
 			$this->db->from('psicologo, usuario');
 			$this->db->where('psicologo.usuario_idusuario = usuario.idusuario');
 			$this->db->where('usuario_idusuario', $query[0]->idusuario);

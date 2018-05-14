@@ -1,5 +1,6 @@
 <div class="ls-main">
-	<div class="ls-box ls-board-box">
+	<div class="container-fluid">
+<div class="ls-box ls-board-box">
 		<header class="ls-info-header">
 			<h2 class="ls-title-3">Editar clínica</h2>
 		</header>
@@ -56,11 +57,12 @@
 					<p class="ls-labe-info">Para um contato...</p>
 					<input type="text" name="telefone" required="required" value="<?php echo $clinicas->telefone;?>" class="ls-mask-phone8_with_ddd" placeholder="(99) 9999-9999">
 				</label>
-				<input type="hidden" name="crp_psicologo" required="required" value="<?php echo $clinicas->crp_psicologo;?>">
+				<input type="hidden" name="id_psicologo" required="required" value="<?php echo $clinicas->id_psicologo;?>">
 			</fieldset>
 			<input type="hidden" name="idclinica" value="<?php echo $clinicas->idclinica;?>">
 			<button type="submit" class="ls-btn">Salvar dados da clínica</button>
 			<a href="<?=base_url()?>clinicascontroller" class="ls-btn-danger">Voltar</a>
 		</form>
+	</div>
 	</div>
 </div>

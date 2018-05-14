@@ -1,4 +1,5 @@
 <div class="ls-main">
+<div class="container-fluid">
 	<div class="ls-box ls-board-box">
 		<header class="ls-info-header">
 			<h2 class="ls-title-3">Registre um uma nova sessão</h2>
@@ -26,8 +27,13 @@
 				<textarea rows="4" name="descricao"></textarea>
 			</label>
 			</fieldset>
-			<button type="submit" class="ls-btn">Salvar dados da sessão</button>
-			<a href="<?=base_url()?>sessoescontroller/view" class="ls-btn-danger">Voltar</a>
+			
+			<div class="ls-actions-btn">
+				<button type="submit" class="ls-btn">Salvar dados da sessão</button>
+				<a href="<?=base_url()?>sessoescontroller/view" class="ls-btn-danger">Voltar</a>	
+			</div>
 		</form>
-	</div>
+	</div>	
+</div>
+
 </div>

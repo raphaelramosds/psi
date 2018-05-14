@@ -1,4 +1,5 @@
 <div class="ls-main">
+	<div class="container-fluid">
 	<div class="ls-box ls-board-box">
 		<header class="ls-info-header">
 			<h2 class="ls-title-3">Editar um paciente</h2>
@@ -27,7 +28,7 @@
 					<b class="ls-label-text">Profissão</b>
 					<input type="text" name="profissao" value="<?php echo $pacientes->profissao; ?>" required="required">
 				</label>
-				<input type="hidden" name="psicologo_crp" value="<?php echo $pacientes->psicologo_crp; ?>" required="required">
+				<input type="hidden" name="id_psicologo" value="<?php echo $pacientes->id_psicologo; ?>" required="required">
 				<label class="ls-label col-md-4 col-xs-12">
 					<b class="ls-label-text">Cartão de saúde</b>
 					<p class="ls-labe-info">Número do cartão de saúde</p>
@@ -52,5 +53,7 @@
 				<button type="submit" class="ls-btn">Salvar dados do paciente</button>
  			 <a href="<?=base_url()?>pacientescontroller" class="ls-btn-danger">Voltar</a>
 		</form>
+	</div>		
 	</div>
+
 </div>

@@ -1,20 +1,20 @@
 <?php
 
 class PsicologosModel extends CI_Model{
-	public $crp;
+	public $idpsicologo;
 
 	function __construct(){
 		parent::__construct();
 	}
 
-	public function view($crp){
-		$this->db->where('crp', $crp);
+	public function view($id){
+		$this->db->where('idpsicologo', $id);
 		$query = $this->db->get('psicologo');
 		return $query->result();
 	}
 
 	public function receberId($id){
-		$this->db->where('crp',$id);
+		$this->db->where('idpsicologo',$id);
 		$query = $this->db->get('psicologo');
 		return $query->row();
 	}
@@ -24,13 +24,13 @@ class PsicologosModel extends CI_Model{
 	}
 
 	public function delete($id){
-		$this->db->where('crp',$id);
+		$this->db->where('idpsicologo',$id);
 		$this->db->delete('psicologo');
 	}
 
 	public function update($dados){
 		$this->db->set($dados);
-		$this->db->where('crp', $this->crp);
+		$this->db->where('idpsicologo', $this->idpsicologo);
 		$this->db->update('psicologo');
 	}
 

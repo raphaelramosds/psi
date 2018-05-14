@@ -7,27 +7,27 @@ class PacientesModel extends CI_Model {
 		parent::__construct();
 	}
 
-	public function view($crp,$limit = NULL, $offset = NULL){
+	public function view($id,$limit = NULL, $offset = NULL){
 		if ($limit) {
 			//Número de registro a serem retornados ($limit) e a página de registro ($offset)
 			$this->db->limit($limit, $offset);
 		}
 		$this->db->from('psicologo, paciente');
-		$this->db->where('psicologo.crp = paciente.psicologo_crp');
-		$this->db->where('psicologo_crp', $crp);
+		$this->db->where('psicologo.idpsicologo = paciente.id_psicologo');
+		$this->db->where('id_psicologo', $id);
 		$this->db->order_by("nomepaciente", "asc");
 		$query = $this->db->get();
 		return $query->result();
 	}
 
-	public function search($crp,$nomepaciente,$limit = NULL, $offset = NULL){
+	public function search($id,$nomepaciente,$limit = NULL, $offset = NULL){
 		//SELECT * FROM PACIENTE WHERE psicologo_crp = $crp AND LIKE '%Raphael%'
 		if ($limit) {
 			//Número de registro a serem retornados ($limit) e a página de registro ($offset)
 			$this->db->limit($limit, $offset);
 		}
 		$this->db->from('paciente');
-		$this->db->where('psicologo_crp', $crp);
+		$this->db->where('id_psicologo', $id);
 		$this->db->like('nomepaciente', $nomepaciente);
 		return $this->db->get()->result();
 	}

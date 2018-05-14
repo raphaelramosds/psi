@@ -8,19 +8,19 @@ class ProntuariosModel extends CI_Model{
 		parent::__construct();
 	}
 
-	public function view($crp, $paciente){
-		// SELECT * FROM psicologo, prontuario WHERE psicologo.crp = prontuario.psicologo_crp AND psicologo.crp = $crp
-		$this->db->from('psicologo, prontuario');
-		$this->db->where('prontuario.psicologo_crp = '.$crp);
+	public function view($id, $paciente){
+		// SELECT * FROM prontuario WHERE psicologo.crp = prontuario.psicologo_crp AND psicologo.crp = $crp
+		$this->db->from('prontuario');
+		$this->db->where('prontuario.id_psicologo = '.$id);
 		$this->db->where('prontuario.paciente_id = '.$paciente);
 		$query = $this->db->get();
 		return $query->result();
 	}
 
-	public function search($crp, $nomepaciente){
+	public function search($id, $nomepaciente){
 		//select * from prontuario, paciente where prontuario.psicologo_crp=500 and prontuario.paciente_id = paciente.idpaciente and nomepaciente like '_inicial_%'
 		$this->db->from('prontuario, paciente');
-		$this->db->where('prontuario.psicologo_crp',$crp);
+		$this->db->where('prontuario.id_psicologo',$id);
 		$this->db->where('prontuario.paciente_id = paciente.idpaciente');
 		$this->db->like('nomepaciente', $nomepaciente);
 		$query = $this->db->get()->result();

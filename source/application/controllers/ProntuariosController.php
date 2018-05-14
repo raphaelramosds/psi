@@ -16,16 +16,17 @@ class ProntuariosController extends CI_Controller {
 	}
 
 	public function view(){
-		$psicologo	= $this->session->userdata('crp');
-		$crp 				= $psicologo[0]->crp;
 		$paciente 	= $this->session->userdata('paciente');
+
+		$psicologo	= $this->session->userdata('crp');
+		$idpsicologo = $psicologo[0]->idpsicologo;
 
 		$user['nomeusuario'] = $this->session->userdata('nomeusuario');
 		$this->load->view('Home/menu', $user);
 		$this->load->model('ProntuariosModel');
 		$data = array(
 			//Mostre os prontuários relacionados ao psicologo e ao paciente...
-			'dataprontuarios' => $this->ProntuariosModel->view($crp, $paciente),
+			'dataprontuarios' => $this->ProntuariosModel->view($idpsicologo, $paciente),
 			'delete' => $this->session->flashdata('delete')
 		);
 		$this->load->view('Prontuarios/index', $data);
@@ -41,7 +42,7 @@ class ProntuariosController extends CI_Controller {
 			'encaminhado'=>$this->input->post('encaminhado'),
 			'numeroprontuario'=>$this->input->post('numeroprontuario'),
 			'paciente_id' => $this->input->post('paciente_id'),
-			'psicologo_crp' => $this->input->post('psicologocrp'),
+			'id_psicologo' => $this->input->post('id_psicologo'),
 			'tratamentoadotado'=> $this->input->post('tratamentoadotado'),
 			'evolucao' => $this->input->post('evolucao')
 		);
@@ -54,7 +55,7 @@ class ProntuariosController extends CI_Controller {
 
 
 		$psicologo = $this->session->userdata('crp');
-		$crp = $psicologo[0]->crp;
+		$crp = $psicologo[0]->idpsicologo;
 
 		$data = array(
 			'crp' => $crp,
@@ -71,16 +72,21 @@ class ProntuariosController extends CI_Controller {
 		$this->load->model('ProntuariosModel');
 		$dados = $this->get();
 		$this->ProntuariosModel->add($dados);
-		$this->session->userdata('paciente');
-		redirect("prontuarioscontroller/view");
+
+		$add = $this->session->userdata('paciente');
+		$this->session->set_flashdata('add',$add);
+
+		redirect("pacientescontroller");
 	}
 
 	public function delete($idprontuario=NULL){
 		$this->load->model('ProntuariosModel');
 		$this->ProntuariosModel->delete($idprontuario);
-		$this->session->set_flashdata('delete','Sucesso ao deletar a ficha');
-		$this->session->userdata('paciente');
-		redirect('prontuarioscontroller/view');
+
+		$delete = $this->session->userdata('paciente');
+		$this->session->set_flashdata('delete', $delete);
+
+		redirect('pacientescontroller');
 	}
 
 	public function edit($id){
@@ -90,7 +96,7 @@ class ProntuariosController extends CI_Controller {
 
 
 		$psicologo = $this->session->userdata('crp');
-		$crp = $psicologo[0]->crp;
+		$crp = $psicologo[0]->idpsicologo;
 
 		$dados = array(
 			'prontuarios' => $this->ProntuariosModel->recuperarId($id),
@@ -109,8 +115,11 @@ class ProntuariosController extends CI_Controller {
 		$this->pront->numeroprontuario = $this->input->post('numeroprontuario');
 		$dados = $this->get();
 		$this->pront->update($dados);
-		$this->session->userdata('paciente');
-		redirect('prontuarioscontroller/view');
+
+		$edit = $this->session->userdata("paciente");
+		$this->session->set_flashdata('edit',$edit);
+		
+		redirect('pacientescontroller');
 	}
 
 }

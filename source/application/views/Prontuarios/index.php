@@ -3,14 +3,7 @@
 </style>
 
 <div class="ls-main">
-	<?php
-		if (isset($delete)){
-			echo "<div class='ls-alert-success'>$delete</div>";
-		}
-		if (isset($dependence)) {
-			echo "<div class='ls-alert-danger'>$dependece</div>";
-		}
-	 ?>
+	<div class="container-fluid">
 	<div class="ls-box ls-board-box">
 	<header class="ls-info-header">
 		<h2 class="ls-title-3 ls-ico-folder">
@@ -27,6 +20,14 @@
 			</b>
 		</h2>
 	</header>
+	<?php
+		if (isset($delete)){
+			echo "<div class='ls-alert-success'>$delete</div>";
+		}
+		if (isset($dependence)) {
+			echo "<div class='ls-alert-danger'>$dependece</div>";
+		}
+	 ?>
 	<table class="ls-table">
 		<tr>
 			<th>Número da ficha</th>
@@ -74,9 +75,9 @@
 				</td>
 			</tr>
 		<?php endforeach; ?>
-	 	<!--Detalhar informações de Evolução, Diagnóstico e o tratamento adotado-->
 	 </table>
 	 <?php  echo "<a href='".base_url()."prontuarioscontroller/create/".$dataprontuarios[0]->paciente_id."' class='ls-btn'>Adcionar nova ficha</a>";?>
 	 <?php  echo "<a href='".base_url()."pacientescontroller' class='ls-btn-danger'>Voltar</a> " ?>
+	</div>
 	</div>
 </div>

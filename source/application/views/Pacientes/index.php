@@ -2,16 +2,22 @@
 	.ls-table a{margin-left: 10px;}
 </style>
 <div class="ls-main">
-	<?php
-		if (isset($delete)) {
-			echo "<div class='ls-alert-success'>$delete</div>";
-		}
-
-	 ?>
+	<div class="container-fluid">
 	<div class="ls-box ls-board-box">
 	<header class="ls-info-header">
 		<h2 class="ls-title-3 ls-ico-accessibility">Pacientes cadastrados</h2>
 	</header>
+	<?php
+		if (isset($delete)) {
+			echo "<div class='ls-alert-success'><strong>Sucesso</strong> Ficha deletada </div>";
+		}
+		if (isset($add)) {
+			echo "<div class='ls-alert-success'><strong>Sucesso</strong> Ficha adcionada </div>";
+		}
+		if (isset($edit)) {
+			echo "<div class='ls-alert-success'><strong>Sucesso</strong> Ficha atualizada </div>";
+		}
+	 ?>
 	<form  action="<?=base_url()?>pacientescontroller/search" class="ls-form ls-form-inline" method="POST">
 		 <label class="ls-label" role="search">
 			 <input type="text" id="q" name="paciente" aria-label="Faça sua busca pelo paciente" placeholder="Nome do paciente" required="" class="ls-field">
@@ -51,9 +57,9 @@
 								echo "<li><a href='".base_url()."pacientescontroller/edit/$value->idpaciente' class='ls-ico-pencil' title='Editar'>Editar</a></li>";
 								echo "<li>";
 										if (count($paciente_prontuario) > 0) {
-											echo "<a href='".base_url()."prontuarioscontroller/index/$value->idpaciente' class='ls-ico-search' title='Ver prontuário'>Ver prontuário</a>";
+											echo "<a href='".base_url()."prontuarioscontroller/index/$value->idpaciente' class='ls-ico-search' title='Ver ficha'>Ver ficha</a>";
 										} else{
-											echo "<a href='".base_url()."prontuarioscontroller/create/$value->idpaciente' class='ls-ico-plus' title='Adcionar prontuário'>Adcionar prontuário</a>";
+											echo "<a href='".base_url()."prontuarioscontroller/create/$value->idpaciente' class='ls-ico-plus' title='Adcionar ficha'>Adcionar ficha	</a>";
 										}
 								echo "</li>";
 							echo "</ul>";
@@ -69,5 +75,6 @@
 			echo $pagination;
 		?>
 	 </div>
+	</div>
 	</div>
 </div>

@@ -64,9 +64,11 @@ class PacientesController extends CI_Controller {
 		//Ver apenas os seus pacientes...
 		$data = array(
 			//view($crp, $limit, $offset)
-			'datapacientes'=>$this->PacientesModel->view($psicologo[0]->crp, $config['per_page'], $offset),
+			'datapacientes'=>$this->PacientesModel->view($psicologo[0]->idpsicologo, $config['per_page'], $offset),
 			'delete' => $this->session->flashdata('delete'),
-			'pagination' => $this->pagination->create_links()
+			'pagination' => $this->pagination->create_links(),
+			'add' => $this->session->flashdata('add'),
+			'edit'=> $this->session->flashdata('edit')
 
 		);
 		$this->load->view('Pacientes/index', $data);
@@ -81,7 +83,7 @@ class PacientesController extends CI_Controller {
 		$this->load->model('PacientesModel','pacientes');
 
 		$data = array(
-			'datapacientes'=>$this->pacientes->search($psicologo[0]->crp, $paciente),
+			'datapacientes'=>$this->pacientes->search($psicologo[0]->idpsicologo, $paciente),
 			'delete' => $this->session->flashdata('delete'),
 			'pagination' => NULL
 		);
@@ -95,7 +97,7 @@ class PacientesController extends CI_Controller {
 			'nomepaciente' => $this->input->post('nomepaciente'),
 			'numerosus' => $this->input->post('numerosus'),
 			'profissao' => $this->input->post('profissao'),
-			'psicologo_crp' =>  $this->input->post('psicologo_crp'),
+			'id_psicologo' =>  $this->input->post('id_psicologo'),
 			'sexopaciente' =>  $this->input->post('sexopaciente'),
 			'telefonepaciente' => $this->input->post('telefonepaciente')
 		);
@@ -104,7 +106,7 @@ class PacientesController extends CI_Controller {
 
 	public function create(){
 		$psicologo = $this->session->userdata('crp');
-		$dados['crp'] = $psicologo[0]->crp;
+		$dados['crp'] = $psicologo[0]->idpsicologo;
 		$user['nomeusuario'] = $this->session->userdata('nomeusuario');
 		$this->load->view('Home/menu',$user);
 		$this->load->view('Pacientes/create', $dados);

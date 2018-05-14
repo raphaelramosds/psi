@@ -19,16 +19,16 @@ class HomeController extends CI_Controller {
 		$username = $this->session->userdata('crp');
 		$this->db->select("nomepsicologo");
 		$this->db->from('psicologo');
-		$this->db->where('crp', $username[0]->crp);
+		$this->db->where('idpsicologo', $username[0]->idpsicologo);
 		$query = $this->db->get()->result();
 		//Criou-se uma sessão para o nome do usuário, por que ela deve ser chamada em todos os controladores
 
 		$this->session->set_userdata('nomeusuario', $query);
 		$psicologo = $this->session->userdata('crp');
-		$crp = $psicologo[0]->crp;
+		$idpsicologo = $psicologo[0]->idpsicologo;
 		$dados = array(
-			'countersclinica' => $this->ClinicasModel->view($psicologo[0]->crp),
-			"counterpaciente" => $this->PacientesModel->view($crp),
+			'countersclinica' => $this->ClinicasModel->view($idpsicologo),
+			"counterpaciente" => $this->PacientesModel->view($idpsicologo),
 			'titulo' => 'Tela inicial',
 			'nomeusuario' => $this->session->userdata('nomeusuario'),
 		);

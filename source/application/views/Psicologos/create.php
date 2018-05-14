@@ -39,13 +39,11 @@
 				<label class="ls-label col-md-6 col-xs-12">
 					<b class="ls-label-text">CRP</b>
 					<p class="ls-labe-info">Só você tem um...</p>
-					<input type="number" name="crp" required="required">
+					<input type="text" name="crp" required="required">
 				</label>
-				<label class="ls-label col-md-6 col-xs-12">
-					<b class="ls-label-text">Usuário</b>
-					<p class="ls-labe-info">Esse será o seu id enquanto usuário, não mude-o...</p>
-					<input type="number" value="<?php echo $username[0]->idusuario ?>" name="idusuario" required="required">
-				</label>
+
+					<input type="hidden" value="<?php echo $username[0]->idusuario ?>" name="idusuario" required="required">
+
 			</fieldset>
 			<div class="ls-actions-btn">
 			   <button class="ls-btn">Terminar!</button>
