@@ -20,10 +20,23 @@
 					<input type="text" name ="username" required="required">
 				</label>
 				<label for="" class="ls-label col-md-3">
-					<b class="ls-label-text">Senha</b>
-					<p class="ls-label-info">Digite a sua senha</p>
-					<input type="password" name ="senha" required="required">
+	               <b class="ls-label-text ls-hidden-accessible">Senha</b>
+	                <div class="ls-prefix-group ls-field-lg">
+	                  <input id="password_field" class="ls-login-bg-password" name="senha" type="password" placeholder="Senha" required >
+	                  <a class="ls-label-text-prefix ls-toggle-pass ls-ico-eye" data-toggle-class="ls-ico-eye, ls-ico-eye-blocked" data-target="#password_field" href="#"></a>
+	                </div>
 				</label>
+				<?php if (isset($erro_senha)): ?>
+					<?=$erro_senha?>
+				<?php endif ?>
+				<label for="" class="ls-label col-md-3">
+               <b class="ls-label-text ls-hidden-accessible">Confirmação</b>
+                <div class="ls-prefix-group ls-field-lg">
+                  <input id="password_confirm" class="ls-login-bg-password" name="confirm_senha" type="password" placeholder="Confirme sua senha" required >
+                  <a class="ls-label-text-prefix ls-toggle-pass ls-ico-eye" data-toggle-class="ls-ico-eye, ls-ico-eye-blocked" data-target="#password_confirm" href="#"></a>
+                </div>
+				</label>
+				
 			</fieldset>
 			<div class="ls-actions-btn">
 				<button class="ls-btn">Avançar</button>

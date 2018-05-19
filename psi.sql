@@ -9,8 +9,6 @@ create table usuario(
 alter table usuario
 add constraint uq_username unique(username);
 
-alter table usuario
-add constraint uq_senha unique(senha);
 
 create table psicologo(
 	idpsicologo int primary key not null auto_increment,

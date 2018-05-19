@@ -27,7 +27,7 @@
           </div>
           <div class="ls-box-body">
             <span class="ls-board-data">
-              <strong><?php echo count($id_paciente); ?></strong>
+              <strong><?=count($id_paciente); ?></strong>
             </span>
           </div>
           <div class="ls-box-footer">
@@ -43,7 +43,7 @@
           </div>
           <div class="ls-box-body">
             <span class="ls-board-data">
-              <strong><?php echo count($id_clinicas); ?></strong>
+              <strong><?=count($id_clinicas); ?></strong>
             </span>
           </div>
           <div class="ls-box-footer">

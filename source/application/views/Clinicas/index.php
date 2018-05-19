@@ -25,25 +25,24 @@
 				<th>Cidade</th>
 				<th class="ls-txt-center"></th>
 			</tr>
-			<?php
-				foreach ($dataclinica as $value) {
-					echo "<tr>";
-						echo "<td>".$value->nomeclinica.'</td>';
-						echo "<td>".$value->telefone.'</td>';
-						echo "<td>".$value->estado.'</td>';
-						echo "<td>".$value->cidade.'</td>';
-						echo "<td class='ls-txt-left'>";
-						echo "<div data-ls-module='dropdown' class='ls-dropdown'>";
-							echo "<a href='#' class='ls-btn'>Ação</a>";
-							echo "<ul class='ls-dropdown-nav'>";
-								echo "<li><a href='".base_url()."/clinicascontroller/delete/$value->idclinica' class='ls-ico-remove' title='Excluir'>Excluir</a></li>";
-								echo "<li><a href='".base_url()."/clinicascontroller/edit/$value->idclinica' class='ls-ico-pencil'title='Editar'>Editar</a></li>";
-							echo "</ul>";
-						echo "</div>";
-						echo "</td>";
-					echo "</tr>";
-				}
-		 	?>
+			<?php foreach ($dataclinica as $value): ?>
+				<tr>
+					<td><?=$value->nomeclinica?></td>
+					<td><?=$value->telefone?></td>
+					<td><?=$value->estado?></td>
+					<td><?=$value->cidade?></td>
+					<td class="ls-txt-left">
+						<div data-ls-module='dropdown' class='ls-dropdown'>
+							<a href="$" class="ls-btn">Ação</a>
+							<ul class="ls-dropdown-nav">
+
+								<li><a href="<?=base_url()?>clinicascontroller/edit/<?=$value->idclinica?>" class='ls-ico-pencil' title='Editar'>Editar</a></li>
+								<li><a href="<?=base_url()?>clinicascontroller/delete/<?=$value->idclinica?>" class='ls-ico-remove ls-color-danger' title='Excluir'>Excluir</a></li>								
+							</ul>
+						</div>
+					</td>
+				</tr>
+			<?php endforeach ?>
 		 </table>
 		 <div class="ls-pagination-filter">
 			<?php

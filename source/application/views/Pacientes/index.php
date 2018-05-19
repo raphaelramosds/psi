@@ -9,7 +9,7 @@
 	</header>
 	<?php
 		if (isset($delete)) {
-			echo "<div class='ls-alert-success'><strong>Sucesso</strong> Ficha deletada </div>";
+			echo "<div class='ls-alert-success'><strong>Sucesso</strong> Paciente deletado </div>";
 		}
 		if (isset($add)) {
 			echo "<div class='ls-alert-success'><strong>Sucesso</strong> Ficha adcionada </div>";
@@ -36,39 +36,43 @@
 			<th>Numeros SUS</th>
 			<th></th>
 		</tr>
-		<?php
-			foreach ($datapacientes as $value) {
+		<?php foreach ($datapacientes as $value): ?>
+			<?php
 				$this->db->from('prontuario, paciente');
 				$this->db->where('prontuario.paciente_id = '.$value->idpaciente);
 				$paciente_prontuario = $this->db->get()->result();
-				echo "<tr>";
-					echo "<td>".$value->nomepaciente.'</td>';
-					echo "<td>".$value->emailpaciente.'</td>';
-					echo "<td>".$value->telefonepaciente.'</td>';
-					echo "<td>".$value->profissao.'</td>';
-					echo "<td>".$value->sexopaciente.'</td>';
-					echo "<td>".$value->cartaosaude.'</td>';
-					echo "<td>".$value->numerosus.'</td>';
-					echo "<td class='ls-txt-left'>";
-						echo "<div data-ls-module='dropdown' class='ls-dropdown'>";
-							echo "<a href='#' class='ls-btn'>Ação</a>";
-							echo "<ul class='ls-dropdown-nav'>";
-								echo "<li><a href='".base_url()."pacientescontroller/delete/$value->idpaciente' class='ls-ico-remove' title='Excluir'>Excluir</a></li>";
-								echo "<li><a href='".base_url()."pacientescontroller/edit/$value->idpaciente' class='ls-ico-pencil' title='Editar'>Editar</a></li>";
-								echo "<li>";
-										if (count($paciente_prontuario) > 0) {
-											echo "<a href='".base_url()."prontuarioscontroller/index/$value->idpaciente' class='ls-ico-search' title='Ver ficha'>Ver ficha</a>";
-										} else{
-											echo "<a href='".base_url()."prontuarioscontroller/create/$value->idpaciente' class='ls-ico-plus' title='Adcionar ficha'>Adcionar ficha	</a>";
-										}
-								echo "</li>";
-							echo "</ul>";
-						echo "</div>";
-						//Verificar se existe um prontuário pelo id do paciente
-					echo "</td>";
-				echo "</tr>";
-			}
-	 	?>
+			 ?>
+			 <tr>
+			 	<td><?=$value->nomepaciente?></td>
+			 	<td><?=$value->emailpaciente?></td>
+			 	<td><?=$value->telefonepaciente?></td>
+			 	<td><?=$value->profissao?></td>
+			 	<td><?=$value->sexopaciente?></td>
+			 	<td><?=$value->cartaosaude?></td>
+			 	<td><?=$value->numerosus?></td>
+			 	<td class='ls-txt-left'>
+			 		<div data-ls-module='dropdown' class='ls-dropdown'>
+						<a href='#' class='ls-btn'>Ação</a>
+						<ul class='ls-dropdown-nav'>
+
+							<li>
+								<a href="<?=base_url()?>pacientescontroller/edit/<?=$value->idpaciente?>" class='ls-ico-pencil ' title='Editar'>Editar</a>
+							</li>
+							<li>
+								<?php if (count($paciente_prontuario) > 0): ?>
+									<a href="<?=base_url()?>prontuarioscontroller/index/<?=$value->idpaciente?>" class='ls-ico-search' title='Ver prontuário'>Ver prontuário</a>
+								<?php else: ?>
+									<a href="<?=base_url()?>prontuarioscontroller/create/<?=$value->idpaciente?>" class='ls-ico-plus' title='Adcionar prontuário'>Adcionar prontuário</a>
+								<?php endif ?>
+							</li>
+							<li>
+								<a href="<?=base_url()?>pacientescontroller/delete/<?=$value->idpaciente?>" class='ls-ico-remove ls-color-danger' title='Excluir'>Excluir</a>
+							</li>
+						</ul>
+					</div>
+			 	</td>
+			 </tr>
+		<?php endforeach ?>
 	 </table>
 	 <div class="ls-pagination-filter">
 	 	<?php
