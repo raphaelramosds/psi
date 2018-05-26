@@ -32,12 +32,12 @@
 				<label class="ls-label col-md-4 col-xs-12">
 					<b class="ls-label-text">Cartão de saúde</b>
 					<p class="ls-labe-info">Número do cartão de saúde</p>
-					<input type="number" name="cartaosaude" required="required" value="<?php echo $pacientes->cartaosaude; ?>">
+					<input type="number" name="cartaosaude" value="<?php echo $pacientes->cartaosaude; ?>">
 				</label>
 				<label class="ls-label col-md-4 col-xs-12">
 					<b class="ls-label-text">Número SUS</b>
 					<p class="ls-labe-info">Número do cartão SUS</p>
-					<input type="number" name="numerosus" required="required" value="<?php echo $pacientes->numerosus ?>">
+					<input type="number" name="numerosus" value="<?php echo $pacientes->numerosus ?>">
 				</label>
 				<label class="ls-label col-md-4 col-xs-12">
 					<b class="ls-label-text">Email</b>
