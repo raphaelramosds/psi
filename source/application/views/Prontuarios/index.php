@@ -32,7 +32,7 @@
 				<tr>
 					<th>Número da ficha</th>
 					<th>Clínica</th>
-					<th>Cid 10</th>
+					<th>CID10/DSM</th>
 					<th>Encaminhado</th>
 					<th>Alta</th>
 					<th></th>

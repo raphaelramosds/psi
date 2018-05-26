@@ -71,7 +71,7 @@
 			</label>
 
 			<label for="" class="ls-label col-md-4 col-xs-12">
-				<b class="ls-label-text">Cid 10</b>
+				<b class="ls-label-text">CID10/DSM</b>
 				<p class="ls-label-info">Identifique a doença</p>
 				<input type="text" name="cid10" required="required" value="<?php echo $prontuarios->cid10; ?>">
 			</label>

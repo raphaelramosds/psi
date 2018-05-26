@@ -48,8 +48,22 @@
 			 	<td><?=$value->telefonepaciente?></td>
 			 	<td><?=$value->profissao?></td>
 			 	<td><?=$value->sexopaciente?></td>
-			 	<td><?=$value->cartaosaude?></td>
-			 	<td><?=$value->numerosus?></td>
+
+			 	<td>
+				 	<?php if($value->cartaosaude == 0):?>
+						<?="Não registrado"?>
+					<?php else:?>
+						<?=$value->cartaosaude?>
+					<?php endif;?>
+				 </td>
+
+			 	<td>
+				 	<?php if($value->numerosus == 0):?>
+					 	<?="Não registrado"?>
+					 <?php else:?>
+					 	<?=$value->numerosus?>
+					 <?php endif;?>
+				 </td>
 			 	<td class='ls-txt-left'>
 			 		<div data-ls-module='dropdown' class='ls-dropdown'>
 						<a href='#' class='ls-btn'>Ação</a>
