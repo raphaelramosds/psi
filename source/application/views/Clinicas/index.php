@@ -46,7 +46,9 @@
 		 </table>
 		 <div class="ls-pagination-filter">
 			<?php
-				echo $pagination;
+			    if(isset($pagination)){
+			        echo $pagination;   
+			    }
 			?>
 		 </div>
 		</div>
