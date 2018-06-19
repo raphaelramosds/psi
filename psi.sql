@@ -1,5 +1,3 @@
-create database psi;
-
 create table usuario(
 	idusuario int AUTO_INCREMENT primary key,
 	username varchar(45) not null,

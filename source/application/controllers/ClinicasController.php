@@ -112,7 +112,7 @@ class ClinicasController extends CI_Controller {
 			$this->load->model('ClinicasModel');
 			$this->ClinicasModel->delete($id);
 			$this->session->set_flashdata('delete','Sucesso ao deletar a clínica');
-			redirect('clinicascontroller');
+			redirect('ClinicasController');
 		}
 	}
 
@@ -132,6 +132,6 @@ class ClinicasController extends CI_Controller {
 		//Receber os outros dados dentro de um array e mandar para o SET no model
 		$dados = $this->get();
 		$this->ClinicasModel->update($dados);
-		redirect('clinicascontroller');
+		redirect('ClinicasController');
 	}
 }

@@ -1,7 +1,7 @@
 <div class="ls-main">
 	<div class="container-fluid">
 			<h1 class="ls-title-intro ls-ico-user">Meu Perfil</h1>
-			<div class="ls-box ls-board-box">
+			<div class="ls-box ls-board-box"  style="border:none;">
 				<?php foreach ($datapsicologos as $row): ?>
 
 				<ul class="ls-tabs-nav" id="awesome-dropdown-tab">
@@ -34,8 +34,8 @@
 						<hr>
 				  </div>
 				</div>
-				<?php echo "<a href='psicologoscontroller/edit/$row->idpsicologo' class='ls-ico-pencil ls-btn' title='Editar'>Editar informações</a>"?>
-				<?php echo '<a href="'.base_url().'homecontroller" class="ls-btn-danger">Voltar</a>'; ?>
+				<a href="<?=base_url()?>PsicologosController/edit/<?=$row->idpsicologo?>"  class='ls-ico-pencil ls-btn' title='Editar' >Editar informações</a>
+				<a href="<?=base_url()?>HomeController" class="ls-btn-danger" >Voltar</a>
 				<?php endforeach; ?>
 			</div>
 	</div>

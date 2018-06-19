@@ -124,7 +124,7 @@ class PacientesController extends CI_Controller {
 			$this->load->model('PacientesModel');
 			$this->PacientesModel->delete($id);
 			$this->session->set_flashdata('delete','Paciente deletado com sucesso!');
-			redirect('pacientescontroller');
+			redirect('PacientesController');
 		}
 	}
 

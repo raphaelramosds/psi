@@ -65,17 +65,17 @@
 							<div data-ls-module='dropdown' class='ls-dropdown'>
 								<a href='#' class='ls-btn'>Ação</a>
 								<ul class="ls-dropdown-nav">
-									<li><a href="<?=base_url()?>sessoescontroller/index/<?=$value->numeroprontuario?>" class='ls-ico-docs' title='Ver sessões'>Ver sessões</a></li>
-									<li><a href="<?=base_url()?>prontuarioscontroller/edit/<?=$value->numeroprontuario?>" class='ls-ico-search' title='Detalhar'>Ver informações</a></li>		
-									<li><a href="<?=base_url()?>prontuarioscontroller/delete/<?=$value->numeroprontuario?>" class='ls-ico-remove ls-color-danger' title='Excluir'>Excluir</a></li>									
+									<li><a href="<?=base_url()?>SessoesController/index/<?=$value->numeroprontuario?>" class='ls-ico-docs' title='Ver sessões'>Ver sessões</a></li>
+									<li><a href="<?=base_url()?>ProntuariosController/edit/<?=$value->numeroprontuario?>" class='ls-ico-search' title='Detalhar'>Ver informações</a></li>		
+									<li><a href="<?=base_url()?>ProntuariosController/delete/<?=$value->numeroprontuario?>" class='ls-ico-remove ls-color-danger' title='Excluir'>Excluir</a></li>									
 								</ul>
 							</div>
 						</td>
 					</tr>
 				<?php endforeach; ?>
 			 </table>
-			 <a href="<?=base_url()?>prontuarioscontroller/create/<?=$dataprontuarios[0]->paciente_id?>" class='ls-btn'> Adcionar nova ficha</a>
-			 <a href="<?=base_url()?>pacientescontroller" class="ls-btn-danger">Voltar</a>
+			 <a href="<?=base_url()?>ProntuariosController/create/<?=$dataprontuarios[0]->paciente_id?>" class='ls-btn'> Adcionar nova ficha</a>
+			 <a href="<?=base_url()?>PacientesController" class="ls-btn-danger">Voltar</a>
 		</div>
 	</div>
 </div>

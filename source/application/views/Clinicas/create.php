@@ -4,7 +4,7 @@
 		<header class="ls-info-header">
 			<h2 class="ls-title-3">Registre uma nova clínica</h2>
 		</header>
-		<form action="<?=base_url()?>clinicascontroller/add" method="POST" class="ls-form ls-form-horizontal row" data-ls-module="form">
+		<form action="<?=base_url()?>ClinicasController/add" method="POST" class="ls-form ls-form-horizontal row" data-ls-module="form">
 			<fieldset>
 				<label class="ls-label col-md-12">
 					<b class="ls-label-text">Nome da clínica</b>
@@ -60,7 +60,7 @@
 				<input type="hidden" name="id_psicologo" required="required" value="<?php echo $crp; ?>">
 			</fieldset>
 			<button type="submit" class="ls-btn">Salvar dados da clínica</button>
-			<a href="<?=base_url()?>clinicascontroller" class="ls-btn-danger">Voltar</a>
+			<a href="<?=base_url()?>ClinicasController" class="ls-btn-danger">Voltar</a>
 		</form>
 	</div>
 	</div>

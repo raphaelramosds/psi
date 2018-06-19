@@ -12,7 +12,7 @@ class ProntuariosController extends CI_Controller {
 			redirect('/');
 		}
 		$this->session->set_userdata('paciente', $idpaciente);
-		redirect('prontuarioscontroller/view');
+		redirect('ProntuariosController/view');
 	}
 
 	public function view(){
@@ -76,7 +76,7 @@ class ProntuariosController extends CI_Controller {
 		$add = $this->session->userdata('paciente');
 		$this->session->set_flashdata('add',$add);
 
-		redirect("pacientescontroller");
+		redirect("PacientesController");
 	}
 
 	public function delete($idprontuario=NULL){
@@ -86,7 +86,7 @@ class ProntuariosController extends CI_Controller {
 		$delete = $this->session->userdata('paciente');
 		$this->session->set_flashdata('delete', $delete);
 
-		redirect('pacientescontroller');
+		redirect('PacientesController');
 	}
 
 	public function edit($id){
@@ -119,7 +119,7 @@ class ProntuariosController extends CI_Controller {
 		$edit = $this->session->userdata("paciente");
 		$this->session->set_flashdata('edit',$edit);
 		
-		redirect('pacientescontroller');
+		redirect('PacientesController');
 	}
 
 }

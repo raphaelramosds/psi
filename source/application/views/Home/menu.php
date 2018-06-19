@@ -26,7 +26,7 @@
       </a>
       <nav class="ls-dropdown-nav ls-user-menu">
         <ul>
-          <li><a href="<?=base_url()?>psicologoscontroller">Meu Perfil</a></li>
+          <li><a href="<?=base_url()?>PsicologosController">Meu Perfil</a></li>
           <li><a href="<?=base_url()?>HomeController/loggout">Encerrar sessão</a></li>
          </ul>
       </nav>
@@ -46,17 +46,17 @@
         <nav class="ls-menu">
           <ul>
               <li><a href="<?=base_url()?>HomeController" class="ls-ico-home">Início</a></li>
-              <li><a href="<?=base_url()?>psicologoscontroller" class="ls-ico-user">Meu perfil</a></li>
+              <li><a href="<?=base_url()?>PsicologosController" class="ls-ico-user">Meu perfil</a></li>
               <li>
                 <a href="#" class="ls-ico-bukets">Cadastro</a>
                 <ul>
-                  <li><a href="<?=base_url()?>clinicascontroller" class="ls-ico-location">Clínicas</a></li>
-                  <li><a href="<?=base_url()?>pacientescontroller" class="ls-ico-accessibility">Pacientes</a></li>
+                  <li><a href="<?=base_url()?>ClinicasController" class="ls-ico-location">Clínicas</a></li>
+                  <li><a href="<?=base_url()?>PacientesController" class="ls-ico-accessibility">Pacientes</a></li>
                   <!-- <li><a href="<?=base_url()?>sessoescontroller">Sessões</a></li> -->
                 </ul>
               </li>
               <li>
-                <a href="<?=base_url()?>/HomeController/loggout" class="ls-ico-export" style="color:#006D3E;">Sair</a>
+                <a href="<?=base_url()?>HomeController/loggout" class="ls-ico-export" style="color:#1DD1A4;">Sair</a>
               </li>
           </u>
         </nav>

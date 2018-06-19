@@ -7,19 +7,20 @@
 	<script type="text/javascript" src="<?=base_url()?>assets/js/jquery.js"></script>
 	<script src="<?=base_url()?>assets/js/locastyle.js" type="text/javascript"></script>
 </head>
-<div class="container" style="margin-top: 200px;">
-	<div class="ls-box ls-board-box">
-		<header class="ls-info-header">
-			<h2 class="ls-title-3">Novo usuário</h2>
+<div class="container" style="margin-top: 200px;max-width:900px;">
+	<div class="ls-box ls-board-box" style="border:none;">
+		<header class="ls-info-header" style="text-align:center;border:none">
+			<h2 class="ls-title-3" >Cadastre seu <span style="background:#1DD1A4;padding:10px;color:white;">usuário</span></h2>
 		</header>
-		<form action="<?=base_url()?>usuarioscontroller/add" role="form" method="POST">
+		<form action="<?=base_url()?>UsuariosController/add" role="form" method="POST">
 			<fieldset>
-				<label for="" class="ls-label col-md-3">
+				<style>label{margin: 0 auto;}</style>
+				<label for="" class="ls-label col-md-4" >
 					<b class="ls-label-text">Nome de usuário</b>
 					<p class="ls-label-info">Digite o nome de usuário</p>
 					<input type="text" name ="username" required="required">
 				</label>
-				<label for="" class="ls-label col-md-3">
+				<label for="" class="ls-label col-md-4">
 	               <b class="ls-label-text ls-hidden-accessible">Senha</b>
 	                <div class="ls-prefix-group ls-field-lg">
 	                  <input id="password_field" class="ls-login-bg-password" name="senha" type="password" placeholder="Senha" required >
@@ -29,7 +30,7 @@
 				<?php if (isset($erro_senha)): ?>
 					<?=$erro_senha?>
 				<?php endif ?>
-				<label for="" class="ls-label col-md-3">
+				<label for="" class="ls-label col-md-4">
                <b class="ls-label-text ls-hidden-accessible">Confirmação</b>
                 <div class="ls-prefix-group ls-field-lg">
                   <input id="password_confirm" class="ls-login-bg-password" name="confirm_senha" type="password" placeholder="Confirme sua senha" required >
@@ -38,8 +39,8 @@
 				</label>
 				
 			</fieldset>
-			<div class="ls-actions-btn">
-				<button class="ls-btn">Avançar</button>
+			<div class="ls-actions-btn" style="text-align:center;border:none">
+				<button class="ls-btn"  style="background-color:#1DD1A4;color:white;padding:1em;width:200px;">Avançar</button>
 			</div>
 		</form>
 	</div>

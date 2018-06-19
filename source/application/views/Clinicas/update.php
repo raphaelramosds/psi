@@ -4,7 +4,7 @@
 		<header class="ls-info-header">
 			<h2 class="ls-title-3">Editar clínica</h2>
 		</header>
-		<form action="<?=base_url()?>clinicascontroller/update" method="POST" class="ls-form ls-form-horizontal row" data-ls-module="form">
+		<form action="<?=base_url()?>ClinicasController/update" method="POST" class="ls-form ls-form-horizontal row" data-ls-module="form">
 			<fieldset>
 				<label class="ls-label col-md-12">
 					<b class="ls-label-text">Nome da clínica</b>
@@ -61,7 +61,7 @@
 			</fieldset>
 			<input type="hidden" name="idclinica" value="<?php echo $clinicas->idclinica;?>">
 			<button type="submit" class="ls-btn">Salvar dados da clínica</button>
-			<a href="<?=base_url()?>clinicascontroller" class="ls-btn-danger">Voltar</a>
+			<a href="<?=base_url()?>ClinicasController" class="ls-btn-danger">Voltar</a>
 		</form>
 	</div>
 	</div>

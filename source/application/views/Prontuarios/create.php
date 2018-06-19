@@ -4,7 +4,7 @@
 	<header class="ls-info-header">
 		<h2 class="ls-title-3">Registre uma nova ficha</h2>
 	</header>
-	<form action="<?=base_url()?>prontuarioscontroller/add" method="POST" class="ls-form ls-form-horizontal row" data-ls-module="form">
+	<form action="<?=base_url()?>ProntuariosController/add" method="POST" class="ls-form ls-form-horizontal row" data-ls-module="form">
 		<fieldset>
 			<!-- <label for="" class="ls-label col-md-12">
 				<b class="ls-label-text">Número do prontuário</b>
@@ -89,7 +89,7 @@
 				<input type="hidden" name="id_psicologo" required="required" value="<?php echo $crp; ?>">
 		</fieldset>
 		<button type="submit" class="ls-btn">Salvar todos os dados</button>
-		<a href="<?=base_url()?>pacientescontroller" class="ls-btn-danger">Voltar</a>
+		<a href="<?=base_url()?>PacientesController" class="ls-btn-danger">Voltar</a>
 	</form>
 	</div>
 	</div>

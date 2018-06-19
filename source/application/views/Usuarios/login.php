@@ -8,10 +8,12 @@
 </head>
 <div class="ls-login-parent">
   <div class="ls-login-inner">
-    <div class="ls-login-container" >
+    <div class="ls-login-container">
+      <h1 class="ls-login-logo">Prontuário eletrônico à <span style="background:#1dd1a4;color:white;padding:5px;">Psicologia</span></h1>
+      <small><i>"Tenha seus prontuários a qualquer hora e em qualquer lugar"</i></small>
+      <hr>
       <div class="ls-login-box">
-        <h1 class="ls-login-logo"><img src="" /></h1>
-          <form role="form" class="ls-form ls-login-form" action="logincontroller/auth" method="POST">
+          <form role="form" class="ls-form ls-login-form" action="LoginController/auth" method="POST">
             <fieldset>
               <?php
                 if (isset($success)) {
@@ -37,8 +39,8 @@
                 </div>
               </label>
 
-              <input type="submit" value="Entrar" class="ls-btn ls-btn-block ls-btn-lg">
-              <p class="ls-txt-center ls-login-signup">Não possui um usuário no Psi? <br> <a href="usuarioscontroller/create">Cadastre-se agora</a></p>
+              <input type="submit" value="Entrar" class="ls-btn ls-btn-block ls-btn-lg" style="background-color:#1DD1A4;color:white;">
+              <p class="ls-txt-center ls-login-signup">Não possui um usuário no Psi? <br> <a href="<?=base_url()?>UsuariosController/create">Cadastre-se agora</a></p>
             </fieldset>
           </form>
         </div>

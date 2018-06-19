@@ -50,7 +50,7 @@ class SessoesController extends CI_Controller {
 		$this->load->model('SessoesModel');
 		$dados = $this->get();
 		$this->SessoesModel->add($dados);
-		redirect("sessoescontroller/view");
+		redirect("SessoesController/view");
 	}
 	public function delete($id){
 		$this->load->model('SessoesModel');

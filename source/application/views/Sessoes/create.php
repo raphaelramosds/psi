@@ -4,7 +4,7 @@
 		<header class="ls-info-header">
 			<h2 class="ls-title-3">Registre um uma nova sessão</h2>
 		</header>
-		<form action="<?=base_url()?>sessoescontroller/add" method="POST" class="ls-form ls-form-horizontal row">
+		<form action="<?=base_url()?>SessoesController/add" method="POST" class="ls-form ls-form-horizontal row">
 			<fieldset>
 			<label class="ls-label col-md-4 col-xs-12">
 				<b class="ls-label-text">Título da sessão</b>
@@ -30,7 +30,7 @@
 			
 			<div class="ls-actions-btn">
 				<button type="submit" class="ls-btn">Salvar dados da sessão</button>
-				<a href="<?=base_url()?>sessoescontroller/view" class="ls-btn-danger">Voltar</a>	
+				<a href="<?=base_url()?>SessoesController/view" class="ls-btn-danger">Voltar</a>	
 			</div>
 		</form>
 	</div>	

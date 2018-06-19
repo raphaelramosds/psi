@@ -37,23 +37,23 @@ class UsuariosController extends CI_Controller {
 		if ($this->input->post('confirm_senha') != $this->input->post('senha')) {
 			$erro_senha = "<div class='ls-alert-danger'><strong>Opa!</strong> Parece que as senhas não estão iguais...</div>";
 			$this->session->set_flashdata('erro_senha',$erro_senha);
-			redirect("usuarioscontroller/create");
+			redirect("UsuariosController/create");
 		}
 		$this->usuarios->add($dadosusuario);
 		//Informa o nome do usuário para a query poder retornar o seu id
 		$usuario = $this->usuarios->viewid($dadosusuario["username"]);
 		//A variável $usuario é o id do usuario cadastrado, cria-se uma sessão para que ela seja mandada para a tela de cadastro do psicólogo
 		$this->session->set_userdata('username',  $usuario);
-		redirect("psicologoscontroller/create");
+		redirect("PsicologosController/create");
 	}
 
 	public function delete($id=NULL){
 		if ($id == NULL) {
-			redirect("usuarioscontroller");
+			redirect("UsuariosController");
 		}else{
 			$this->load->model('UsuariosModel');
 			$this->UsuariosModel->delete($id);
-			redirect("usuarioscontroller");
+			redirect("UsuariosController");
 		}
 	}
 

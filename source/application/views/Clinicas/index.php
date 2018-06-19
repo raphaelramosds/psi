@@ -10,12 +10,12 @@
 		<?php if(isset($delete)){
 			echo "<div class='ls-alert-success'>$delete</div>";
 		} ?>
-		<form  action="<?=base_url()?>clinicascontroller/search" class="ls-form ls-form-inline" method="POST">
+		<form  action="<?=base_url()?>ClinicasController/search" class="ls-form ls-form-inline" method="POST">
 			 <label class="ls-label" role="search">
 				 <input type="text" id="q" name="clinica" aria-label="Faça sua busca pela clínica" placeholder="Nome da clínica" required="" class="ls-field">
 			 </label>
 				 <input type="submit" value="Buscar" class="ls-btn" title="Buscar">
-				 	 <a href="<?=base_url()?>clinicascontroller/create" class="ls-ico-plus ls-btn">Adcionar uma clínica</a>
+				 	 <a href="<?=base_url()?>ClinicasController/create" class="ls-ico-plus ls-btn">Adcionar uma clínica</a>
 		 </form>
 		<table class="ls-table">
 			<tr>
@@ -36,8 +36,8 @@
 							<a href="$" class="ls-btn">Ação</a>
 							<ul class="ls-dropdown-nav">
 
-								<li><a href="<?=base_url()?>clinicascontroller/edit/<?=$value->idclinica?>" class='ls-ico-pencil' title='Editar'>Editar</a></li>
-								<li><a href="<?=base_url()?>clinicascontroller/delete/<?=$value->idclinica?>" class='ls-ico-remove ls-color-danger' title='Excluir'>Excluir</a></li>								
+								<li><a href="<?=base_url()?>ClinicasController/edit/<?=$value->idclinica?>" class='ls-ico-pencil' title='Editar'>Editar</a></li>
+								<li><a href="<?=base_url()?>ClinicasController/delete/<?=$value->idclinica?>" class='ls-ico-remove ls-color-danger' title='Excluir'>Excluir</a></li>								
 							</ul>
 						</div>
 					</td>

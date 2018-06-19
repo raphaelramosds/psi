@@ -5,7 +5,7 @@
 		<header class="ls-info-header">
 			<h2 class="ls-title-3">Registre um novo psicólogo</h2>
 		</header>
-		<form action="<?=base_url()?>psicologoscontroller/update" method="POST" class="ls-form ls-form-horizontal row">
+		<form action="<?=base_url()?>PsicologosController/update" method="POST" class="ls-form ls-form-horizontal row">
 			<fieldset>
 				<label class="ls-label col-md-12">
 					<b class="ls-label-text">Nome do psicologo</b>

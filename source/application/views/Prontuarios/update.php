@@ -4,7 +4,7 @@
 	<header class="ls-info-header">
 		<h2 class="ls-title-3 ls-ico-search">Detalhes</h2>
 	</header>
-	<form action="<?=base_url()?>prontuarioscontroller/update" method="POST" class="ls-form ls-form-horizontal row" data-ls-module="form">
+	<form action="<?=base_url()?>ProntuariosController/update" method="POST" class="ls-form ls-form-horizontal row" data-ls-module="form">
 		<fieldset>
 <!-- 			<label for="" class="ls-label col-md-12">
 				<b class="ls-label-text">Número do prontuário</b>
@@ -108,20 +108,22 @@
 
 		  	<label class="ls-label col-md-12">
 			    <b class="ls-label-text">Tratamento adotado</b>
-			    <textarea rows="10" name="tratamentoadotado" required="required">
-			    	<?php print($prontuarios->tratamentoadotado)?>
+			    <textarea rows="10"  name="tratamentoadotado" required="required">
+			    	<?=$prontuarios->tratamentoadotado?>
 			    </textarea>
 		  	</label>
+			  
 		  	<label class="ls-label col-md-12">
 			    <b class="ls-label-text">Diagnóstico</b>
 			    <textarea rows="10" name="diagnostico" required="required">
-			    	<?php print($prontuarios->diagnostico)?>
+			    	<?=$prontuarios->diagnostico?>
 			    </textarea>
 		  	</label>
+			  
 		  	<label class="ls-label col-md-12">
 			    <b class="ls-label-text">Evolucao</b>
 			    <textarea rows="10" name="evolucao" required="required">
-			    	<?php print($prontuarios->evolucao)?>
+			    	<?=$prontuarios->evolucao?>
 			    </textarea>
 		  	</label>
 		</fieldset>
@@ -129,7 +131,7 @@
 		<input type="hidden" name="id_psicologo" required="required" value='<?php echo $prontuarios->id_psicologo;?>'>
 		<input type="hidden" name="numeroprontuario" value="<?php echo $prontuarios->numeroprontuario ?>">
 		<button type="submit" class="ls-btn">Salvar todos os dados</button>
-		<a href="<?=base_url()?>prontuarioscontroller/view" class="ls-btn-danger">Voltar</a>
+		<a href="<?=base_url()?>ProntuariosController/view" class="ls-btn-danger">Voltar</a>
 
 	</form>
 	</div>	

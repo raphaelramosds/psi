@@ -21,14 +21,14 @@
 					<td><?=$value->data?></td>
 					<td><?=$value->descricao?></td>
 					<td class='ls-txt-center'>
-						<a href="<?=base_url()?>sessoescontroller/delete/<?=$value->idsessao?>" class='ls-ico-remove ls-btn-danger' title='Excluir'>Excluir</a>
-						<a href="<?=base_url()?>sessoescontroller/edit/<?=$value->idsessao?>" class='ls-ico-remove ls-btn' title='Editar'>Editar</a>
+						<a href="<?=base_url()?>SessoesController/delete/<?=$value->idsessao?>" class='ls-ico-remove ls-btn-danger' title='Excluir'>Excluir</a>
+						<a href="<?=base_url()?>SessoesController/edit/<?=$value->idsessao?>" class='ls-ico-remove ls-btn' title='Editar'>Editar</a>
 					</td>
 				</tr>
 			<?php endforeach ?>
 		 </table>
-		 <a href="<?=base_url()?>sessoescontroller/create" class="ls-ico-plus ls-btn">Adcionar um sessão</a>
-		 <a href="<?=base_url()?>prontuarioscontroller/view" class="ls-btn-danger">Voltar</a>
+		 <a href="<?=base_url()?>SessoesController/create" class="ls-ico-plus ls-btn">Adcionar um sessão</a>
+		 <a href="<?=base_url()?>ProntuariosController/view" class="ls-btn-danger">Voltar</a>
 		</div>
 </div>
 </div>
