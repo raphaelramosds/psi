@@ -53,7 +53,7 @@
 				<input type="text" name="cid10" required="required">
 			</label>
 
-			<label for="" class="ls-label col-md-4 col-xs-12">
+			<label for="" class="ls-label col-md-6 col-xs-12">
 				<b class="ls-label-text">Alta</b>
 				<div class="ls-custom-select">
 					<select class="ls-select" name="alta" required="required">
@@ -63,7 +63,7 @@
 				</div>
 			</label>
 
-			<label for="" class="ls-label col-md-4 col-xs-12">
+			<label for="" class="ls-label col-md-6 col-xs-12">
 				<b class="ls-label-text">Encaminhado</b>
 				<div class="ls-custom-select">
 					<select class="ls-select" name="encaminhado" required="required">
@@ -73,16 +73,16 @@
 				</div>
 			</label>
 
-		  	<label class="ls-label col-md-12">
+		  	<label class="ls-label col-md-4">
 			    <b class="ls-label-text">Tratamento adotado</b>
 			    <textarea rows="10" name="tratamentoadotado" required="required"></textarea>
 		  	</label>
 
-		  	<label class="ls-label col-md-12">
+		  	<label class="ls-label col-md-4">
 			    <b class="ls-label-text">Diagnóstico</b>
 			    <textarea rows="10" name="diagnostico" required="required"></textarea>
 		  	</label>
-		  	<label class="ls-label col-md-12">
+		  	<label class="ls-label col-md-4">
 			    <b class="ls-label-text">Evolucao</b>
 			    <textarea rows="10" name="evolucao" required="required"></textarea>
 		  	</label>
