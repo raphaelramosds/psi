@@ -10,7 +10,7 @@
 <div class="container" style="margin-top: 200px;max-width:900px;">
 	<div class="ls-box ls-board-box" style="border:none;">
 		<header class="ls-info-header" style="text-align:center;border:none">
-			<h2 class="ls-title-3" >Cadastre seu <span style="background:#1DD1A4;padding:10px;color:white;">usuário</span></h2>
+			<h2 class="ls-title-3" >Cadastre seu <span style="background:#1DD1A4;padding:10px;color:white;display:inline-block">usuário</span></h2>
 		</header>
 		<form action="<?=base_url()?>UsuariosController/add" role="form" method="POST">
 			<fieldset>
