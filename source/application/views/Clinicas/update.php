@@ -58,10 +58,10 @@
 					<input type="text" name="telefone" required="required" value="<?php echo $clinicas->telefone;?>" class="ls-mask-phone8_with_ddd" placeholder="(99) 9999-9999">
 				</label>
 				<input type="hidden" name="id_psicologo" required="required" value="<?php echo $clinicas->id_psicologo;?>">
+				<input type="hidden" name="idclinica" value="<?php echo $clinicas->idclinica;?>">
+				<button type="submit" class="ls-btn">Salvar dados da clínica</button>
+				<a href="<?=base_url()?>ClinicasController" class="ls-btn-danger">Voltar</a>
 			</fieldset>
-			<input type="hidden" name="idclinica" value="<?php echo $clinicas->idclinica;?>">
-			<button type="submit" class="ls-btn">Salvar dados da clínica</button>
-			<a href="<?=base_url()?>ClinicasController" class="ls-btn-danger">Voltar</a>
 		</form>
 	</div>
 	</div>
