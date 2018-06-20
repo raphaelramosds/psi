@@ -19,10 +19,12 @@ class LoginController extends CI_Controller {
   public function auth(){
     $data = array(
       'nome' => $this->input->post('username'),
-      'senha' => $this->input->post('senha')
-    );
+      'senha' => $this->input->post("senha")
+		);
+		$senha = md5($data["nome"].$data["senha"]);
+
 		$this->db->where('username', $data["nome"]);
-		$this->db->where('senha', $data["senha"]);
+		$this->db->where('senha', $senha);
 
 		$query = $this->db->get('usuario')->result();
 
