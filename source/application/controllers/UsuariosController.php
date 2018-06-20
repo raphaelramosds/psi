@@ -34,6 +34,8 @@ class UsuariosController extends CI_Controller {
 	public function add(){
 		$this->load->model('UsuariosModel','usuarios');
 		$dadosusuario = $this->get();
+		$dadosusuario['senha'] = md5($dadosusuario['username'].$dadosusuario['senha']);
+
 		if ($this->input->post('confirm_senha') != $this->input->post('senha')) {
 			$erro_senha = "<div class='ls-alert-danger'><strong>Opa!</strong> Parece que as senhas não estão iguais...</div>";
 			$this->session->set_flashdata('erro_senha',$erro_senha);
