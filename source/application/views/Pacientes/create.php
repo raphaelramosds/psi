@@ -1,8 +1,8 @@
 <div class="ls-main">
 	<div class="container-fluid">
-		<div class="ls-box ls-board-box">
-			<header class="ls-info-header">
-				<h2 class="ls-title-3">Registre um novo paciente</h2>
+		<div class="ls-box ls-board-box ls-no-border">
+			<header class="ls-info-header ls-no-border">
+				<h2 class="ls-title-3 ls-ico-accessibility">Registre um novo paciente</h2>
 			</header>
 			<form action="<?=base_url()?>PacientesController/add" method="POST" class="ls-form ls-form-horizontal row" data-ls-module="form">
 				<fieldset>
@@ -26,7 +26,7 @@
 					</label>
 
 					<input type="hidden" name="id_psicologo" required="required"
-						value="<?php echo $crp?>">
+						value="<?php echo $psicologo?>">
 
 					<label class="ls-label col-md-4 col-xs-12">
 						<b class="ls-label-text">Cartão de saúde</b>

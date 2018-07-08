@@ -50,25 +50,25 @@ class PacientesController extends CI_Controller {
 		$config = $this->getpagination();
 		$this->pagination->initialize($config);
 
-		if ($this->session->userdata('crp') == NULL) {
+		if ($this->session->userdata('psicologo') == NULL) {
 			redirect('/');
 		}
 
 		//Se o valor via URL foi informado, $offset vai receber esse valor. Caso não for informado, offset receberá zero
 		$offset = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
 
-		$psicologo = $this->session->userdata('crp');
-		$user['nomeusuario'] = $this->session->userdata('nomeusuario');
+		$psicologo = $this->session->userdata('psicologo');
+		$user['nomepsicologo'] = $this->session->userdata('nomepsicologo');
 		$this->load->view('Home/menu',$user);
 		$this->load->model('PacientesModel');
-		//Ver apenas os seus pacientes...
+
 		$data = array(
-			//view($crp, $limit, $offset)
 			'datapacientes'=>$this->PacientesModel->view($psicologo[0]->idpsicologo, $config['per_page'], $offset),
 			'delete' => $this->session->flashdata('delete'),
 			'pagination' => $this->pagination->create_links(),
 			'add' => $this->session->flashdata('add'),
-			'edit'=> $this->session->flashdata('edit')
+			'update_prontuario'=> $this->session->flashdata('update_prontuario'),
+			'update_paciente' => $this->session->flashdata('update_paciente')
 
 		);
 		$this->load->view('Pacientes/index', $data);
@@ -76,8 +76,8 @@ class PacientesController extends CI_Controller {
 
 	public function search(){
 		$paciente = $this->input->post('paciente');
-		$psicologo = $this->session->userdata('crp');
-		$user['nomeusuario'] = $this->session->userdata('nomeusuario');
+		$psicologo = $this->session->userdata('psicologo');
+		$user['nomepsicologo'] = $this->session->userdata('nomepsicologo');
 
 		$this->load->view('Home/menu',$user);
 		$this->load->model('PacientesModel','pacientes');
@@ -105,9 +105,9 @@ class PacientesController extends CI_Controller {
 	}
 
 	public function create(){
-		$psicologo = $this->session->userdata('crp');
-		$dados['crp'] = $psicologo[0]->idpsicologo;
-		$user['nomeusuario'] = $this->session->userdata('nomeusuario');
+		$psicologo = $this->session->userdata('psicologo');
+		$dados['psicologo'] = $psicologo[0]->idpsicologo;
+		$user['nomepsicologo'] = $this->session->userdata('nomepsicologo');
 		$this->load->view('Home/menu',$user);
 		$this->load->view('Pacientes/create', $dados);
 	}
@@ -121,15 +121,17 @@ class PacientesController extends CI_Controller {
 
 	public function delete($id){
 		if ($id != NULL) {
+			$delete = "<div class='ls-background-primary ls-sm-space ls-sm-margin-bottom ls-text-md ls-ico-checkmark'>Deletado com sucesso! </div>";
 			$this->load->model('PacientesModel');
 			$this->PacientesModel->delete($id);
-			$this->session->set_flashdata('delete','Paciente deletado com sucesso!');
+			$this->session->set_flashdata('delete',$delete);
 			redirect('PacientesController');
 		}
 	}
 
 	public function edit($id){
-		$user['nomeusuario'] = $this->session->userdata('nomeusuario');
+
+		$user['nomepsicologo'] = $this->session->userdata('nomepsicologo');
 		$this->load->model('PacientesModel');
 		$dados['pacientes'] = $this->PacientesModel->receberId($id);
 		$this->load->view('Home/menu',$user);
@@ -137,6 +139,9 @@ class PacientesController extends CI_Controller {
 	}
 
 	public function update(){
+		$update = "<div class='ls-background-primary ls-sm-space ls-sm-margin-bottom ls-text-md ls-ico-checkmark'>Atualizado com sucesso! </div>";
+		$this->session->set_flashdata('update_paciente', $update);
+
 		$this->load->model('PacientesModel','pacientes');
 		$this->pacientes->id = $this->input->post('idpaciente');
 		$dados = $this->get();

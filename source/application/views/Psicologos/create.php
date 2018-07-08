@@ -42,7 +42,7 @@
 					<input type="text" name="crp" required="required">
 				</label>
 
-					<input type="hidden" value="<?php echo $username[0]->idusuario ?>" name="idusuario" required="required">
+					<input type="hidden" value="<?php echo $id_user[0]->idusuario ?>" name="idusuario" required="required">
 
 			</fieldset>
 			<div class="ls-actions-btn">

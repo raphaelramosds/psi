@@ -7,30 +7,26 @@ class HomeController extends CI_Controller {
 	}
 
 	public function index(){
-		if ($this->session->userdata('crp') == NULL) {
-			$erro_sessao = "<div class='ls-alert-info'><strong>Ops!</strong> Faça o seu login antes de entrar...</div>";
+		if ($this->session->userdata('psicologo') == NULL) {
+			$erro_sessao = "<div class='ls-sm-space ls-txt-center ls-color-info' style='font-size:20px;'><strong>Ops!</strong> Faça o seu login antes de entrar...</div>";
 			$this->session->set_flashdata('erro_sessao', $erro_sessao);
 			redirect('/');
 		}
 		$this->load->model('ClinicasModel');
 		$this->load->model('PacientesModel');
 
-		//Recuperar nome do psicólogo pelo CRP
-		$username = $this->session->userdata('crp');
-		$this->db->select("nomepsicologo");
-		$this->db->from('psicologo');
-		$this->db->where('idpsicologo', $username[0]->idpsicologo);
-		$query = $this->db->get()->result();
-		//Criou-se uma sessão para o nome do usuário, por que ela deve ser chamada em todos os controladores
+		//Recuperar nome do psicólogo
+		$user = $this->session->userdata('psicologo');
+		$this->session->set_userdata('nomepsicologo', $user[0]->nomepsicologo);
 
-		$this->session->set_userdata('nomeusuario', $query);
-		$psicologo = $this->session->userdata('crp');
+		$psicologo = $this->session->userdata('psicologo');
 		$idpsicologo = $psicologo[0]->idpsicologo;
+
 		$dados = array(
 			'countersclinica' => $this->ClinicasModel->view($idpsicologo),
 			"counterpaciente" => $this->PacientesModel->view($idpsicologo),
 			'titulo' => 'Tela inicial',
-			'nomeusuario' => $this->session->userdata('nomeusuario'),
+			'nomepsicologo' => $this->session->userdata('nomepsicologo'),
 		);
 
 		$this->load->view('Home/menu', $dados);
@@ -38,8 +34,8 @@ class HomeController extends CI_Controller {
 	}
 
 	public function loggout(){
-		$this->session->unset_userdata('crp');
-		$this->session->unset_userdata('nomeusuario');
+		$this->session->unset_userdata('psicologo');
+		$this->session->unset_userdata('nomepsicologo');
 		redirect('/');
 	}
 

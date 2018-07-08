@@ -17,7 +17,7 @@
             <fieldset>
               <?php
                 if (isset($success)) {
-                  echo "<div class='ls-alert-success'><strong>Sucesso!</strong> Você conseguiu, parabéns!</div>";
+                  echo "<div class='ls-sm-space ls-txt-center ls-color-success' style='font-size:20px;'><strong>Sucesso!</strong> agora entre no sistema </div>";
                 }
                 if (isset($erro)) {
                   echo $erro;

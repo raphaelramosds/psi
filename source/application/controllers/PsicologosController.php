@@ -8,15 +8,15 @@ class PsicologosController extends CI_Controller {
 	}
 
 	public function index(){
-		if ($this->session->userdata('crp') == NULL) {
+		if ($this->session->userdata('psicologo') == NULL) {
 			redirect('/');
 		}
 		//Recuperar dados do psicólogo através do seu CRP
-		$psicologo = $this->session->userdata('crp');
+		$psicologo = $this->session->userdata('psicologo');
 
-		//Em cada controlador, chamar a sessão nomeusuario (userdata)
+		//Em cada controlador, chamar a sessão nomepsicologo (userdata)
 		//Para recuperar a query no controlador de Home e, assim, retornar o nome do psicólgo
-		$user['nomeusuario'] = $this->session->userdata('nomeusuario');
+		$user['nomepsicologo'] = $this->session->userdata('nomepsicologo');
 		$this->load->view('Home/menu', $user);
 
 		$this->load->model('PsicologosModel');
@@ -42,7 +42,7 @@ class PsicologosController extends CI_Controller {
 
 	public function create(){
 		//Receba o id do usuário que foi enviado do cadastro pela query do model usuário...
-		$data["username"] = $this->session->userdata("username");
+		$data["id_user"] = $this->session->userdata("id_user");
 		$this->load->view('Psicologos/create', $data);
 	}
 
@@ -63,7 +63,7 @@ class PsicologosController extends CI_Controller {
 	}
 
 	public function edit($id){
-		$user['nomeusuario'] = $this->session->userdata('nomeusuario');
+		$user['nomepsicologo'] = $this->session->userdata('nomepsicologo');
 		$this->load->model('PsicologosModel', 'psicologos');
 		$dados['psicologos'] = $this->psicologos->receberId($id);
 		$this->load->view('Home/menu',$user);

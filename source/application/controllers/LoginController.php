@@ -28,18 +28,16 @@ class LoginController extends CI_Controller {
 
 		$query = $this->db->get('usuario')->result();
 
-		//Caso autentique, recupere o CRP do psicólogo pelo ID do usuário e crie uma sessão
 		if (count($query) == 1) {
-			$this->db->select('crp, idpsicologo');
-			$this->db->from('psicologo, usuario');
-			$this->db->where('psicologo.usuario_idusuario = usuario.idusuario');
-			$this->db->where('usuario_idusuario', $query[0]->idusuario);
-			$crp = $this->db->get()->result();
-			$this->session->set_userdata('crp',$crp);
+			$this->db->select('*');
+			$this->db->from('psicologo');
+			$this->db->where('psicologo.usuario_idusuario', $query[0]->idusuario);
+			$psicologo = $this->db->get()->result();
+			$this->session->set_userdata('psicologo',$psicologo);
 			redirect('HomeController');
 		}
 		else{
-			$div_erro = "<div class='ls-alert-danger'><strong>Ops!</strong> Usuário ou senha incorretos!</div>";
+			$div_erro = "<div class='ls-sm-space ls-txt-center' style='font-size:20px; color:red;'>Usuário ou senha incorretos!</div>";
 			$this->session->set_flashdata('erro_autenticacao', $div_erro);
 			redirect('LoginController');
 		}

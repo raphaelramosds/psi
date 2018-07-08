@@ -4,8 +4,8 @@
 
 	<div class="ls-main">
 		<div class="container-fluid">
-		<div class="ls-box ls-board-box">
-			<header class="ls-info-header">
+		<div class="ls-box ls-board-box ls-no-border">
+			<header class="ls-info-header ls-no-border">
 				<h2 class="ls-title-3 ls-ico-folder">
 					Prontuário de
 					<b>
@@ -20,14 +20,6 @@
 					</b>
 				</h2>
 			</header>
-			<?php
-				if (isset($delete)){
-					echo "<div class='ls-alert-success'>$delete</div>";
-				}
-				if (isset($dependence)) {
-					echo "<div class='ls-alert-danger'>$dependece</div>";
-				}
-			 ?>
 			<table class="ls-table">
 				<tr>
 					<th>Número da ficha</th>
@@ -65,8 +57,8 @@
 							<div data-ls-module='dropdown' class='ls-dropdown'>
 								<a href='#' class='ls-btn'>Ação</a>
 								<ul class="ls-dropdown-nav">
-									<li><a href="<?=base_url()?>SessoesController/index/<?=$value->numeroprontuario?>" class='ls-ico-docs' title='Ver sessões'>Ver sessões</a></li>
-									<li><a href="<?=base_url()?>ProntuariosController/edit/<?=$value->numeroprontuario?>" class='ls-ico-search' title='Detalhar'>Ver informações</a></li>		
+									<li><a href="<?=base_url()?>SessoesController/index/<?=$value->numeroprontuario?>" class='ls-ico-docs ls-color-black ls-no-bghover' title='Ver sessões'>Ver sessões</a></li>
+									<li><a href="<?=base_url()?>ProntuariosController/edit/<?=$value->numeroprontuario?>" class='ls-ico-search ls-color-black ls-no-bghover' title='Detalhar'>Ver informações</a></li>		
 									<li><a href="<?=base_url()?>ProntuariosController/delete/<?=$value->numeroprontuario?>" class='ls-ico-remove ls-color-danger' title='Excluir'>Excluir</a></li>									
 								</ul>
 							</div>

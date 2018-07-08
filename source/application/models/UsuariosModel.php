@@ -19,14 +19,6 @@ class UsuariosModel extends CI_Model{
 		$this->db->insert('usuario',$dados);
 	}
 
-	//Pegar o username e retornar o id dele
-	function viewid($username){
-		$this->db->select('idusuario');
-		$this->db->where('username',$username);
-		$query = $this->db->get('usuario');
-		return $query->result();
-	}
-
 	function delete($id){
 		$this->db->where('idusuario',$id);
 		$this->db->delete('usuario');

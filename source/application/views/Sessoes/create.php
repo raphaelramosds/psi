@@ -1,8 +1,8 @@
 <div class="ls-main">
 <div class="container-fluid">
-	<div class="ls-box ls-board-box">
-		<header class="ls-info-header">
-			<h2 class="ls-title-3">Registre um uma nova sessão</h2>
+	<div class="ls-box ls-board-box ls-no-border">
+		<header class="ls-info-header ls-no-border">
+			<h2 class="ls-title-3 ls-ico-stats">Registre um uma nova sessão</h2>
 		</header>
 		<form action="<?=base_url()?>SessoesController/add" method="POST" class="ls-form ls-form-horizontal row">
 			<fieldset>

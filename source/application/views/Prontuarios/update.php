@@ -1,7 +1,7 @@
 <div class="ls-main">
 <div class="container-fluid">
-	<div class="ls-box ls-board-box">
-	<header class="ls-info-header">
+	<div class="ls-box ls-board-box ls-no-border">
+	<header class="ls-info-header ls-no-border">
 		<h2 class="ls-title-3 ls-ico-search">Detalhes</h2>
 	</header>
 	<form action="<?=base_url()?>ProntuariosController/update" method="POST" class="ls-form ls-form-horizontal row" data-ls-module="form">

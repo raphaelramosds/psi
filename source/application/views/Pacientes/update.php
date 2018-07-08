@@ -1,8 +1,8 @@
 <div class="ls-main">
 	<div class="container-fluid">
-	<div class="ls-box ls-board-box">
-		<header class="ls-info-header">
-			<h2 class="ls-title-3">Editar um paciente</h2>
+	<div class="ls-box ls-board-box ls-no-border">
+		<header class="ls-info-header ls-no-border">
+			<h2 class="ls-title-3 ls-ico-pencil">Editar paciente</h2>
 		</header>
 		<form action="<?=base_url()?>PacientesController/update" method="POST" class="ls-form ls-form-horizontal row" data-ls-module="form">
 			<fieldset>
@@ -32,20 +32,12 @@
 				<label class="ls-label col-md-4 col-xs-12">
 					<b class="ls-label-text">Cartão de saúde</b>
 					<p class="ls-labe-info">Número do cartão de saúde</p>
-<<<<<<< HEAD
 					<input type="number" name="cartaosaude"  value="<?php echo $pacientes->cartaosaude; ?>">
-=======
-					<input type="number" name="cartaosaude" value="<?php echo $pacientes->cartaosaude; ?>">
->>>>>>> 47401d6b0e373c8237f285c1bc77e7afb8985d7e
 				</label>
 				<label class="ls-label col-md-4 col-xs-12">
 					<b class="ls-label-text">Número SUS</b>
 					<p class="ls-labe-info">Número do cartão SUS</p>
-<<<<<<< HEAD
 					<input type="number" name="numerosus"  value="<?php echo $pacientes->numerosus ?>">
-=======
-					<input type="number" name="numerosus" value="<?php echo $pacientes->numerosus ?>">
->>>>>>> 47401d6b0e373c8237f285c1bc77e7afb8985d7e
 				</label>
 				<label class="ls-label col-md-4 col-xs-12">
 					<b class="ls-label-text">Email</b>

@@ -51,25 +51,26 @@ class ClinicasController extends CI_Controller {
 		$this->pagination->initialize($config);
 		$offset = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
 
-		if ($this->session->userdata('crp') == NULL) {
+		if ($this->session->userdata('psicologo') == NULL) {
 			redirect('/');
 		}
-		$psicologo = $this->session->userdata('crp');
-		$user['nomeusuario'] = $this->session->userdata('nomeusuario');
+		$psicologo = $this->session->userdata('psicologo');
+		$user['nomepsicologo'] = $this->session->userdata('nomepsicologo');
 		$this->load->view('Home/menu',$user);
 		$this->load->model('ClinicasModel');
 		$data= array(
 			'dataclinica'=>$this->ClinicasModel->view($psicologo[0]->idpsicologo, $config['per_page'],$offset),
 			'delete' => $this->session->flashdata('delete'),
+			'update' => $this->session->flashdata('update'),
 			'pagination' => $this->pagination->create_links()
 		);
 		$this->load->view('Clinicas/index', $data);
 	}
 
 	public function search(){
-		$psicologo = $this->session->userdata('crp');
+		$psicologo = $this->session->userdata('psicologo');
 		$nomeclinica = $this->input->post('clinica');
-		$user['nomeusuario'] = $this->session->userdata('nomeusuario');
+		$user['nomepsicologo'] = $this->session->userdata('nomepsicologo');
 
 		$this->load->view('Home/menu',$user);
 		$this->load->model('ClinicasModel');
@@ -93,9 +94,9 @@ class ClinicasController extends CI_Controller {
 	}
 
 	public function create(){
-		$psicologo = $this->session->userdata('crp');
-		$dados['crp'] = $psicologo[0]->idpsicologo;
-		$user['nomeusuario'] = $this->session->userdata('nomeusuario');
+		$psicologo = $this->session->userdata('psicologo');
+		$dados['psicologo'] = $psicologo[0]->idpsicologo;
+		$user['nomepsicologo'] = $this->session->userdata('nomepsicologo');
 		$this->load->view('Home/menu',$user);
 		$this->load->view('Clinicas/create',$dados);
 	}
@@ -109,29 +110,30 @@ class ClinicasController extends CI_Controller {
 
 	public function delete($id){
 		if ($id != NULL) {
+			$delete = "<div class='ls-background-primary ls-sm-space ls-sm-margin-bottom ls-text-md ls-ico-checkmark'>Sucesso ao deletar a clinica</div>";
+
 			$this->load->model('ClinicasModel');
 			$this->ClinicasModel->delete($id);
-			$this->session->set_flashdata('delete','Sucesso ao deletar a clínica');
+			$this->session->set_flashdata('delete',$delete);
 			redirect('ClinicasController');
 		}
 	}
 
 	public function edit($id){
-		$user['nomeusuario'] = $this->session->userdata('nomeusuario');
+		$user['nomepsicologo'] = $this->session->userdata('nomepsicologo');
 		$this->load->view('Home/menu',$user);
 		$this->load->model('ClinicasModel');
 		$dados["clinicas"] =  $this->ClinicasModel->recuperarId($id);
 		$this->load->view('Clinicas/update', $dados);
 	}
-	//Maneira certa de fazer:
 	public function update(){
-		//Carregar o model
+		$update = "<div class='ls-background-primary ls-sm-space ls-sm-margin-bottom ls-text-md ls-ico-checkmark'>Sucesso ao atualizar a clinica</div>"; 
+		
 		$this->load->model('ClinicasModel');
-		//Receber o ID primário para modificar dentro da class do Model
 		$this->ClinicasModel->idclinica = $this->input->post('idclinica');
-		//Receber os outros dados dentro de um array e mandar para o SET no model
 		$dados = $this->get();
 		$this->ClinicasModel->update($dados);
+		$this->session->set_flashdata("update",$update);
 		redirect('ClinicasController');
 	}
 }

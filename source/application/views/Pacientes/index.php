@@ -3,19 +3,22 @@
 </style>
 <div class="ls-main">
 	<div class="container-fluid">
-	<div class="ls-box ls-board-box">
-	<header class="ls-info-header">
+	<div class="ls-box ls-board-box ls-no-border">
+	<header class="ls-info-header ls-no-border" >
 		<h2 class="ls-title-3 ls-ico-accessibility">Pacientes cadastrados</h2>
 	</header>
 	<?php
 		if (isset($delete)) {
-			echo "<div class='ls-alert-success'><strong>Sucesso</strong> Paciente deletado </div>";
+			echo "<div class='ls-background-primary ls-sm-space ls-sm-margin-bottom ls-text-md ls-ico-checkmark'>Deletado com sucesso! </div>";
 		}
 		if (isset($add)) {
-			echo "<div class='ls-alert-success'><strong>Sucesso</strong> Ficha adcionada </div>";
+			echo "<div class='ls-background-primary ls-sm-space ls-sm-margin-bottom ls-text-md ls-ico-checkmark'>Ficha adcionada </div>";
 		}
-		if (isset($edit)) {
-			echo "<div class='ls-alert-success'><strong>Sucesso</strong> Ficha atualizada </div>";
+		if (isset($update_prontuario)) {
+			echo "<div class='ls-background-primary ls-sm-space ls-sm-margin-bottom ls-text-md ls-ico-checkmark'>Ficha atualizada </div>";
+		}
+		if (isset($update_paciente)){
+			echo $update_paciente;
 		}
 	 ?>
 	<form  action="<?=base_url()?>PacientesController/search" class="ls-form ls-form-inline" method="POST">
@@ -70,13 +73,13 @@
 						<ul class='ls-dropdown-nav'>
 
 							<li>
-								<a href="<?=base_url()?>PacientesController/edit/<?=$value->idpaciente?>" class='ls-ico-pencil ' title='Editar'>Editar</a>
+								<a href="<?=base_url()?>PacientesController/edit/<?=$value->idpaciente?>" class='ls-ico-pencil ls-color-black ls-no-bghover' title='Editar'>Editar</a>
 							</li>
 							<li>
 								<?php if (count($paciente_prontuario) > 0): ?>
-									<a href="<?=base_url()?>ProntuariosController/index/<?=$value->idpaciente?>" class='ls-ico-search' title='Ver prontuário'>Ver prontuário</a>
+									<a href="<?=base_url()?>ProntuariosController/index/<?=$value->idpaciente?>" class='ls-ico-search ls-color-black ls-no-bghover' title='Ver prontuário'>Ver prontuário</a>
 								<?php else: ?>
-									<a href="<?=base_url()?>ProntuariosController/create/<?=$value->idpaciente?>" class='ls-ico-plus' title='Adcionar prontuário'>Adcionar prontuário</a>
+									<a href="<?=base_url()?>ProntuariosController/create/<?=$value->idpaciente?>" class='ls-ico-plus ls-color-black ls-no-bghover' title='Adcionar prontuário'>Adcionar prontuário</a>
 								<?php endif ?>
 							</li>
 							<li>

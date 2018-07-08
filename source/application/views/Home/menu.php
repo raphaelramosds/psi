@@ -17,10 +17,7 @@
       <a href="#" class="ls-ico-user">
         <img src="assets/images/locastyle/avatar-example.jpg" alt="" />
         <span class="ls-name">
-          <?php
-            foreach ($nomeusuario as $row) {
-              echo $row->nomepsicologo;
-            }
+          <?=$nomepsicologo
           ?>
         </span>
       </a>

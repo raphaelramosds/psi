@@ -8,7 +8,7 @@ class SessoesController extends CI_Controller {
 	}
 
 	public function index($numeroprontuario){
-		if ($this->session->userdata('crp') == NULL) {
+		if ($this->session->userdata('psicologo') == NULL) {
 			redirect('/');
 		}
 		$this->session->set_userdata('prontuario', $numeroprontuario);
@@ -19,7 +19,7 @@ class SessoesController extends CI_Controller {
 	public function view(){
 		$prontuario = $this->session->userdata('prontuario');
 
-		$user['nomeusuario'] = $this->session->userdata('nomeusuario');
+		$user['nomepsicologo'] = $this->session->userdata('nomepsicologo');
 		$this->load->view('Home/menu',$user);
 		$this->load->model('SessoesModel');
 		$data = array(
@@ -41,7 +41,7 @@ class SessoesController extends CI_Controller {
 
 	public function create(){
 		$dados['prontuario'] = $this->session->userdata('prontuario');
-		$user['nomeusuario'] = $this->session->userdata('nomeusuario');
+		$user['nomepsicologo'] = $this->session->userdata('nomepsicologo');
 		$this->load->view('Home/menu',$user);
 		$this->load->view('Sessoes/create', $dados);
 	}
@@ -59,7 +59,7 @@ class SessoesController extends CI_Controller {
 	}
 
 	public function edit($id){
-		$user['nomeusuario'] = $this->session->userdata('nomeusuario');
+		$user['nomepsicologo'] = $this->session->userdata('nomepsicologo');
 		$this->load->model('SessoesModel', 'sessoes');
 		$dados['sessao'] = $this->sessoes->recuperarId($id);
 		$this->load->view('Home/menu',$user);

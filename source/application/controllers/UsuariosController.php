@@ -42,10 +42,14 @@ class UsuariosController extends CI_Controller {
 			redirect("UsuariosController/create");
 		}
 		$this->usuarios->add($dadosusuario);
+
+		$this->db->select('idusuario');
+		$this->db->where('username',$dadosusuario['username']);
+		$usuario = $this->db->get('usuario')->result();
+
 		//Informa o nome do usuário para a query poder retornar o seu id
-		$usuario = $this->usuarios->viewid($dadosusuario["username"]);
-		//A variável $usuario é o id do usuario cadastrado, cria-se uma sessão para que ela seja mandada para a tela de cadastro do psicólogo
-		$this->session->set_userdata('username',  $usuario);
+		//A variável $usuario é o retorno da query do id do usuario cadastrado, cria-se uma sessão para que ela seja mandada para a tela de cadastro do psicólogo
+		$this->session->set_userdata('id_user',  $usuario);
 		redirect("PsicologosController/create");
 	}
 
@@ -72,6 +76,4 @@ class UsuariosController extends CI_Controller {
 		$this->UsuariosModel->update($dados);
 		redirect('UsuariosController');
 	}
-
-
 }

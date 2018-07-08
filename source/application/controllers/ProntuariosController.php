@@ -8,7 +8,7 @@ class ProntuariosController extends CI_Controller {
 	}
 
 	public function index($idpaciente){
-		if ($this->session->userdata('crp') == NULL) {
+		if ($this->session->userdata('psicologo') == NULL) {
 			redirect('/');
 		}
 		$this->session->set_userdata('paciente', $idpaciente);
@@ -18,10 +18,10 @@ class ProntuariosController extends CI_Controller {
 	public function view(){
 		$paciente 	= $this->session->userdata('paciente');
 
-		$psicologo	= $this->session->userdata('crp');
+		$psicologo	= $this->session->userdata('psicologo');
 		$idpsicologo = $psicologo[0]->idpsicologo;
 
-		$user['nomeusuario'] = $this->session->userdata('nomeusuario');
+		$user['nomepsicologo'] = $this->session->userdata('nomepsicologo');
 		$this->load->view('Home/menu', $user);
 		$this->load->model('ProntuariosModel');
 		$data = array(
@@ -54,16 +54,16 @@ class ProntuariosController extends CI_Controller {
 		$this->load->model('PacientesModel','pacientes');
 
 
-		$psicologo = $this->session->userdata('crp');
-		$crp = $psicologo[0]->idpsicologo;
+		$psicologo = $this->session->userdata('psicologo');
+		$psicologo = $psicologo[0]->idpsicologo;
 
 		$data = array(
-			'crp' => $crp,
-			'clinicas' => $this->clinicas->view($crp),
+			'psicologo' => $psicologo,
+			'clinicas' => $this->clinicas->view($psicologo),
 			'paciente' => $paciente
 		);
 
-		$user['nomeusuario'] = $this->session->userdata('nomeusuario');
+		$user['nomepsicologo'] = $this->session->userdata('nomepsicologo');
 		$this->load->view('Home/menu',$user);
 		$this->load->view('Prontuarios/create',$data);
 	}
@@ -95,16 +95,16 @@ class ProntuariosController extends CI_Controller {
 		$this->load->model('ProntuariosModel');
 
 
-		$psicologo = $this->session->userdata('crp');
-		$crp = $psicologo[0]->idpsicologo;
+		$psicologo = $this->session->userdata('psicologo');
+		$psicologo = $psicologo[0]->idpsicologo;
 
 		$dados = array(
 			'prontuarios' => $this->ProntuariosModel->recuperarId($id),
-			'clinicas' => $this->clinicas->view($crp),
-			'pacientes' => $this->pacientes->view($crp)
+			'clinicas' => $this->clinicas->view($psicologo),
+			'pacientes' => $this->pacientes->view($psicologo)
 		);
 
-		$user['nomeusuario'] = $this->session->userdata('nomeusuario');
+		$user['nomepsicologo'] = $this->session->userdata('nomepsicologo');
 
 		$this->load->view('Home/menu',$user);
 		$this->load->view('Prontuarios/update', $dados);
@@ -113,11 +113,11 @@ class ProntuariosController extends CI_Controller {
 	public function update(){
 		$this->load->model('ProntuariosModel','pront');
 		$this->pront->numeroprontuario = $this->input->post('numeroprontuario');
-		$dados = $this->get();
+		$dados = $this->get();	
 		$this->pront->update($dados);
 
 		$edit = $this->session->userdata("paciente");
-		$this->session->set_flashdata('edit',$edit);
+		$this->session->set_flashdata('update_prontuario',$edit);
 		
 		redirect('PacientesController');
 	}

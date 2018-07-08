@@ -3,8 +3,8 @@
 </style>
 <div class="ls-main">
 	<div class="container-fluid">
-		<div class="ls-box ls-board-box">
-		<header class="ls-info-header">
+		<div class="ls-box ls-board-box ls-no-border">
+		<header class="ls-info-header ls-no-border">
 			<h2 class="ls-title-3 ls-ico-stats">Sessões cadastradas</h2>
 		</header>
 		<table class="ls-table">

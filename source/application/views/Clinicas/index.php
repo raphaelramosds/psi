@@ -3,13 +3,18 @@
 </style>
 <div class="ls-main">
 	<div class="container-fluid">
-		<div class="ls-box ls-board-box">
-		<header class="ls-info-header">
+		<div class="ls-box ls-board-box ls-no-border">
+		<header class="ls-info-header ls-no-border">
 			<h2 class="ls-title-3 ls-ico-location">Clínicas cadastradas</h2>
 		</header>
-		<?php if(isset($delete)){
-			echo "<div class='ls-alert-success'>$delete</div>";
-		} ?>
+		<?php 
+			if(isset($delete)){
+				echo $delete;
+			}
+			if (isset($update)){
+				echo $update;
+			}
+			 ?>
 		<form  action="<?=base_url()?>ClinicasController/search" class="ls-form ls-form-inline" method="POST">
 			 <label class="ls-label" role="search">
 				 <input type="text" id="q" name="clinica" aria-label="Faça sua busca pela clínica" placeholder="Nome da clínica" required="" class="ls-field">
@@ -36,7 +41,7 @@
 							<a href="$" class="ls-btn">Ação</a>
 							<ul class="ls-dropdown-nav">
 
-								<li><a href="<?=base_url()?>ClinicasController/edit/<?=$value->idclinica?>" class='ls-ico-pencil' title='Editar'>Editar</a></li>
+								<li><a href="<?=base_url()?>ClinicasController/edit/<?=$value->idclinica?>" class='ls-ico-pencil ls-color-black ls-no-bghover' title='Editar'>Editar</a></li>
 								<li><a href="<?=base_url()?>ClinicasController/delete/<?=$value->idclinica?>" class='ls-ico-remove ls-color-danger' title='Excluir'>Excluir</a></li>								
 							</ul>
 						</div>

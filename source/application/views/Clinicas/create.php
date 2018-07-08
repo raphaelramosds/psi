@@ -1,7 +1,7 @@
 <div class="ls-main">
 	<div class="container-fluid">
-<div class="ls-box ls-board-box">
-		<header class="ls-info-header">
+<div class="ls-box ls-board-box ls-no-border">
+		<header class="ls-info-header ls-no-border">
 			<h2 class="ls-title-3">Registre uma nova clínica</h2>
 		</header>
 		<form action="<?=base_url()?>ClinicasController/add" method="POST" class="ls-form ls-form-horizontal row" data-ls-module="form">
@@ -57,7 +57,7 @@
 					<p class="ls-labe-info">Para um contato...</p>
 					<input type="text" name="telefone" required="required" class="ls-mask-phone8_with_ddd" placeholder="(99) 9999-9999">
 				</label>
-				<input type="hidden" name="id_psicologo" required="required" value="<?php echo $crp; ?>">
+				<input type="hidden" name="id_psicologo" required="required" value="<?php echo $psicologo; ?>">
 				<button type="submit" class="ls-btn">Salvar dados da clínica</button>
 				<a href="<?=base_url()?>ClinicasController" class="ls-btn-danger">Voltar</a>
 			</fieldset>
