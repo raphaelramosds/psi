@@ -8,6 +8,7 @@
 				  <li class="ls-active"><a data-ls-module="tabs" href="#tab3">Gerais</a></li>
 				  <li><a data-ls-module="tabs" href="#tab4">Específicas</a></li>
 				</ul>
+
 				<div class="ls-tabs-container" id="awesome-tab-content">
 				  <div id="tab3" class="ls-tab-content ls-active">
 						<h3 class="ls-title-5">

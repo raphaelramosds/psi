@@ -49,25 +49,6 @@ class ProntuariosController extends CI_Controller {
 		return $dados;
 	}
 
-	public function create($paciente){
-		$this->load->model('ClinicasModel', 'clinicas');
-		$this->load->model('PacientesModel','pacientes');
-
-
-		$psicologo = $this->session->userdata('psicologo');
-		$psicologo = $psicologo[0]->idpsicologo;
-
-		$data = array(
-			'psicologo' => $psicologo,
-			'clinicas' => $this->clinicas->view($psicologo),
-			'paciente' => $paciente
-		);
-
-		$user['nomepsicologo'] = $this->session->userdata('nomepsicologo');
-		$this->load->view('Home/menu',$user);
-		$this->load->view('Prontuarios/create',$data);
-	}
-
 	public function add(){
 		$this->load->model('ProntuariosModel');
 		$dados = $this->get();

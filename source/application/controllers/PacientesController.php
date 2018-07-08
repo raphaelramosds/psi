@@ -47,6 +47,9 @@ class PacientesController extends CI_Controller {
 	}
 
 	public function index(){
+		//
+		$this->load->model("ClinicasModel","clinicas");
+
 		$config = $this->getpagination();
 		$this->pagination->initialize($config);
 
@@ -58,18 +61,24 @@ class PacientesController extends CI_Controller {
 		$offset = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
 
 		$psicologo = $this->session->userdata('psicologo');
+		$id_psicologo = $psicologo[0]->idpsicologo;
+
 		$user['nomepsicologo'] = $this->session->userdata('nomepsicologo');
 		$this->load->view('Home/menu',$user);
 		$this->load->model('PacientesModel');
 
 		$data = array(
-			'datapacientes'=>$this->PacientesModel->view($psicologo[0]->idpsicologo, $config['per_page'], $offset),
+			'datapacientes'=>$this->PacientesModel->view($id_psicologo, $config['per_page'], $offset),
 			'delete' => $this->session->flashdata('delete'),
 			'pagination' => $this->pagination->create_links(),
 			'add' => $this->session->flashdata('add'),
 			'update_prontuario'=> $this->session->flashdata('update_prontuario'),
-			'update_paciente' => $this->session->flashdata('update_paciente')
-
+			'update_paciente' => $this->session->flashdata('update_paciente'),
+			//Dados do Model Prontuário
+			//'id' psicologo
+			'psicologo' => $id_psicologo,
+			//clinicas cadastradas pelo psicologo
+			'clinicas' => $this->clinicas->view($id_psicologo)
 		);
 		$this->load->view('Pacientes/index', $data);
 	}
