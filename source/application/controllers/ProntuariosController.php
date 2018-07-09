@@ -18,6 +18,8 @@ class ProntuariosController extends CI_Controller {
 	public function view(){
 		$paciente 	= $this->session->userdata('paciente');
 
+		$this->load->model("ClinicasModel","clinicas");
+
 		$psicologo	= $this->session->userdata('psicologo');
 		$idpsicologo = $psicologo[0]->idpsicologo;
 
@@ -27,7 +29,9 @@ class ProntuariosController extends CI_Controller {
 		$data = array(
 			//Mostre os prontuários relacionados ao psicologo e ao paciente...
 			'dataprontuarios' => $this->ProntuariosModel->view($idpsicologo, $paciente),
-			'delete' => $this->session->flashdata('delete')
+			'delete' => $this->session->flashdata('delete'),
+			'clinicas' => $this->clinicas->view($idpsicologo),
+			"psicologo" => $idpsicologo
 		);
 		$this->load->view('Prontuarios/index', $data);
 	}

@@ -66,8 +66,91 @@
 					</tr>
 				<?php endforeach; ?>
 			 </table>
-			 <a href="<?=base_url()?>ProntuariosController/create/<?=$dataprontuarios[0]->paciente_id?>" class='ls-btn'> Adcionar nova ficha</a>
+			 <a  data-ls-module="modal" data-target="#ficha" onClick="paciente(<?=$dataprontuarios[0]->paciente_id?>)" class='ls-btn'> Adcionar nova ficha</a>
 			 <a href="<?=base_url()?>PacientesController" class="ls-btn-danger">Voltar</a>
 		</div>
 	</div>
+</div>
+
+<!-- Modal div: -->
+<div class="ls-modal" id="ficha">
+  <div class="ls-modal-box ls-sm-space">
+    <div class="ls-modal-header">
+		<button data-dismiss="modal">&times;</button>
+      	<h4 class="ls-modal-title">Cadastrar nova ficha</h4>
+    </div>
+
+    <div class="ls-modal-body" id="myModalBody">
+      <form action="<?=base_url()?>ProntuariosController/add" method="POST" class="ls-form ls-form-horizontal row" data-ls-module="form">
+			<!-- Clínica -->
+			<label for="clinica" class="ls-label">
+				<b class="ls-label-text">Clínica</b>
+				<p class="ls-label-info">Nome da clínica</p>
+				<div class="ls-custom-select">
+					<select class="ls-select" name="clinicaid">
+						<option value=""></option>
+						<?php foreach ($clinicas as $value):?>
+							<option value="<?=$value->idclinica?>"><?=$value->nomeclinica?></option>
+						<?php endforeach;?>
+					</select>
+				</div>
+			</label>
+
+			<!-- Cid 10 -->
+			<label for="" class="ls-label">
+				<b class="ls-label-text">CID10/DSM</b>
+				<p class="ls-label-info">Identifique a doença</p>
+				<input type="text" name="cid10" required="required">
+			</label>
+
+			<!-- Alta -->
+			<label for="" class="ls-label">
+				<b class="ls-label-text">Alta</b>
+				<div class="ls-custom-select">
+					<select class="ls-select" name="alta" required="required">
+						<option value="S">Sim</option>
+						<option value="N">Não</option>
+					</select>
+				</div>
+			</label>
+
+			<!-- Encaminhado -->
+			
+			<label for="" class="ls-label">
+				<b class="ls-label-text">Encaminhado</b>
+				<div class="ls-custom-select">
+					<select class="ls-select" name="encaminhado" required="required">
+						<option value="S">Sim</option>
+						<option value="N">Não</option>
+					</select>
+				</div>
+			</label>
+
+			<!-- Tratamento -->
+			<label class="ls-label">
+			    <b class="ls-label-text">Tratamento adotado</b>
+			    <textarea rows="10" name="tratamentoadotado" required="required"></textarea>
+		  	</label>
+
+			<label class="ls-label">
+			    <b class="ls-label-text">Diagnóstico</b>
+			    <textarea rows="10" name="diagnostico" required="required"></textarea>
+		  	</label>
+
+		  	<label class="ls-label">
+			    <b class="ls-label-text">Evolução</b>
+			    <textarea rows="10" name="evolucao" required="required"></textarea>
+		  	</label>
+			<!-- id do psicologo -->
+			<input type="hidden" name="id_psicologo" required="required" value="<?=$psicologo?>">
+			<input type="hidden" name="paciente_id" required="required" id="paciente_id" value="">
+			<script>
+				function paciente(idpaciente){
+					document.getElementById('paciente_id').value = idpaciente;
+				}
+			</script>
+			<button type="submit" class="ls-btn">Salvar ficha</button>
+	  </form>
+    </div>
+  </div>
 </div>
