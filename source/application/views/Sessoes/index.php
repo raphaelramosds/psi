@@ -22,12 +22,12 @@
 					<td><?=$value->descricao?></td>
 					<td class='ls-txt-center'>
 						<a href="<?=base_url()?>SessoesController/delete/<?=$value->idsessao?>" class='ls-ico-remove ls-btn-danger' title='Excluir'>Excluir</a>
-						<a href="<?=base_url()?>SessoesController/edit/<?=$value->idsessao?>" class='ls-ico-remove ls-btn' title='Editar'>Editar</a>
+						<a href="<?=base_url()?>SessoesController/edit/<?=$value->idsessao?>" class='ls-ico-search ls-btn' title='Editar'>Ver/Editar</a>
 					</td>
 				</tr>
 			<?php endforeach ?>
 		 </table>
-		 <a href="<?=base_url()?>SessoesController/create" class="ls-ico-plus ls-btn">Adcionar um sessão</a>
+		 <a href="<?=base_url()?>SessoesController/create" class="ls-btn">Adcionar um sessão</a>
 		 <a href="<?=base_url()?>ProntuariosController/view" class="ls-btn-danger">Voltar</a>
 		</div>
 </div>
