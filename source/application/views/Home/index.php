@@ -1,17 +1,5 @@
 
 <main class="ls-main ">
-<?php
-  $id_clinicas = [];
-  $id_paciente = [];
-
-  foreach ($countersclinica as $key) {
-    array_push($id_clinicas, $key->idclinica);
-  }
-
-  foreach ($counterpaciente as $key) {
-    array_push($id_paciente, $key->idpaciente);
-  }
-?>
 <div class="container-fluid">
   <h1 class="ls-title-intro ls-ico-home">Página inicial</h1>
   <div class="ls-box ls-board-box">
@@ -27,7 +15,7 @@
           </div>
           <div class="ls-box-body">
             <span class="ls-board-data">
-              <strong><?=count($id_paciente); ?></strong>
+              <strong><?=$counterpaciente?></strong>
             </span>
           </div>
           <div class="ls-box-footer">
@@ -43,7 +31,7 @@
           </div>
           <div class="ls-box-body">
             <span class="ls-board-data">
-              <strong><?=count($id_clinicas); ?></strong>
+              <strong><?=$countersclinica; ?></strong>
             </span>
           </div>
           <div class="ls-box-footer">

@@ -7,12 +7,15 @@ class ClinicasController extends CI_Controller {
 		parent::__construct();
 	}
 	public function getpagination(){
+		$psicologo = $this->session->userdata('psicologo');
+		$this->load->model("ClinicasModel","clinicas");
+
 		$config = array(
 			'base_url' 	=> base_url('ClinicasController/index'),
-			'per_page' 	=> 4,
+			'per_page' 	=> 6,
 			'num_links' => 10,
 			'uri_segment' => 3,
-			'total_rows' => $this->db->count_all('clinica'),
+			'total_rows' => $this->clinicas->count_results($psicologo[0]->idpsicologo),
 
 			'full_tag_open' => "<ul class = 'ls-pagination-filter'>",
 			'full_tag_close' => "</ul>",
@@ -123,16 +126,16 @@ class ClinicasController extends CI_Controller {
 		$user['nomepsicologo'] = $this->session->userdata('nomepsicologo');
 		$this->load->view('Home/menu',$user);
 		$this->load->model('ClinicasModel');
-		$dados["clinicas"] =  $this->ClinicasModel->recuperarId($id);
+		$dados["clinicas"] =  $this->ClinicasModel->view_id($id);
 		$this->load->view('Clinicas/update', $dados);
 	}
 	public function update(){
 		$update = "<div class='ls-background-primary ls-sm-space ls-sm-margin-bottom ls-text-md ls-ico-checkmark'>Sucesso ao atualizar a clinica</div>"; 
 		
-		$this->load->model('ClinicasModel');
-		$this->ClinicasModel->idclinica = $this->input->post('idclinica');
+		$this->load->model('ClinicasModel','clinicas');
+		$this->clinicas->idclinica = $this->input->post('idclinica');
 		$dados = $this->get();
-		$this->ClinicasModel->update($dados);
+		$this->clinicas->update($dados);
 		$this->session->set_flashdata("update",$update);
 		redirect('ClinicasController');
 	}

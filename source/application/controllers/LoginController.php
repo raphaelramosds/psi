@@ -10,7 +10,7 @@ class LoginController extends CI_Controller {
   public function index(){
 		$flash = array(
 			'success' => $this->session->flashdata('success'),
-			'erro' => $this->session->userdata('erro_autenticacao')
+			'erro' => $this->session->flashdata('erro_autenticacao')
 		);
 		$this->load->view('Usuarios/login', $flash);
   }

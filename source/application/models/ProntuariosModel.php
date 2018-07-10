@@ -35,7 +35,7 @@ class ProntuariosModel extends CI_Model{
 		$this->db->delete('prontuario');
 	}
 
-	public function recuperarId($id){
+	public function view_id($id){
 		$this->db->where('numeroprontuario', $id);
 		$query = $this->db->get('prontuario');
 		return $query->row();

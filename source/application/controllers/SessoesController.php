@@ -61,7 +61,7 @@ class SessoesController extends CI_Controller {
 	public function edit($id){
 		$user['nomepsicologo'] = $this->session->userdata('nomepsicologo');
 		$this->load->model('SessoesModel', 'sessoes');
-		$dados['sessao'] = $this->sessoes->recuperarId($id);
+		$dados['sessao'] = $this->sessoes->view_id($id);
 		$this->load->view('Home/menu',$user);
 		$this->load->view('Sessoes/update', $dados);
 	}

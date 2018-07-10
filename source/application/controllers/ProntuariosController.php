@@ -77,14 +77,14 @@ class ProntuariosController extends CI_Controller {
 	public function edit($id){
 		$this->load->model('ClinicasModel', 'clinicas');
 		$this->load->model('PacientesModel','pacientes');
-		$this->load->model('ProntuariosModel');
+		$this->load->model('ProntuariosModel','prontuarios');
 
 
 		$psicologo = $this->session->userdata('psicologo');
 		$psicologo = $psicologo[0]->idpsicologo;
 
 		$dados = array(
-			'prontuarios' => $this->ProntuariosModel->recuperarId($id),
+			'prontuarios' => $this->prontuarios->view_id($id),
 			'clinicas' => $this->clinicas->view($psicologo),
 			'pacientes' => $this->pacientes->view($psicologo)
 		);
@@ -96,10 +96,10 @@ class ProntuariosController extends CI_Controller {
 	}
 
 	public function update(){
-		$this->load->model('ProntuariosModel','pront');
-		$this->pront->numeroprontuario = $this->input->post('numeroprontuario');
+		$this->load->model('ProntuariosModel','prontuarios');
+		$this->prontuarios->numeroprontuario = $this->input->post('numeroprontuario');
 		$dados = $this->get();	
-		$this->pront->update($dados);
+		$this->prontuarios->update($dados);
 
 		$edit = $this->session->userdata("paciente");
 		$this->session->set_flashdata('update_prontuario',$edit);

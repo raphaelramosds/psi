@@ -41,7 +41,7 @@ class PacientesModel extends CI_Model {
 		$this->db->delete('paciente');
 	}
 
-	public function receberId($id){
+	public function view_id($id){
 		$this->db->where('idpaciente', $id);
 		$query = $this->db->get('paciente');
 		return $query->row();
@@ -50,5 +50,13 @@ class PacientesModel extends CI_Model {
 		$this->db->set($dados);
 		$this->db->where('idpaciente',$this->id);
 		$this->db->update('paciente');
+	}
+
+	public function count_results($id_psicologo){
+		$this->db->select('idpaciente');
+		$this->db->from('paciente');
+		$this->db->where('id_psicologo',$id_psicologo);
+		$num_results = $this->db->count_all_results();
+		return $num_results;
 	}
 }

@@ -15,7 +15,7 @@ class SessoesModel extends CI_Model{
 		return $query->result();
 	}
 
-	public function recuperarId($id){
+	public function view_id($id){
 		$this->db->where('idsessao', $id);
 		$query = $this->db->get('sessao');
 		return $query->row();

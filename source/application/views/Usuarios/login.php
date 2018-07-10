@@ -9,15 +9,16 @@
 <div class="ls-login-parent">
   <div class="ls-login-inner">
     <div class="ls-login-container">
-      <h1 class="ls-login-logo">Prontuário eletrônico à <span style="background:#1dd1a4;color:white;padding:5px;">Psicologia</span></h1>
-      <small><i>"Tenha seus prontuários a qualquer hora e em qualquer lugar"</i></small>
-      <hr>
-      <div class="ls-login-box">
+      <div class="ls-xs-space">
+        <h2 class="ls-login-logo ls-title-4">Prontuário Eletrônico direcionado à <span style="background:#1dd1a4;color:white;padding:5px;font-weight:normal;display:inline-block;">Psicologia</span></h2>
+      </div>
+     
+      <div class="ls-login-box ls-md-margin-top">
           <form role="form" class="ls-form ls-login-form" action="LoginController/auth" method="POST">
             <fieldset>
               <?php
                 if (isset($success)) {
-                  echo "<div class='ls-sm-space ls-txt-center ls-color-success' style='font-size:20px;'><strong>Sucesso!</strong> agora entre no sistema </div>";
+                  echo $success;
                 }
                 if (isset($erro)) {
                   echo $erro;
@@ -40,7 +41,7 @@
               </label>
 
               <input type="submit" value="Entrar" class="ls-btn ls-btn-block ls-btn-lg" style="background-color:#1DD1A4;color:white;">
-              <p class="ls-txt-center ls-login-signup">Não possui um usuário no Psi? <br> <a href="<?=base_url()?>UsuariosController/create">Cadastre-se agora</a></p>
+              <p class="ls-login-signup">Não possui um usuário no sistema? <br> <a href="<?=base_url()?>UsuariosController/create" class="no_link">Cadastre-se agora</a></p>
             </fieldset>
           </form>
         </div>

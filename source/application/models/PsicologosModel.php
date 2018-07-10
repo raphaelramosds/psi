@@ -13,7 +13,7 @@ class PsicologosModel extends CI_Model{
 		return $query->result();
 	}
 
-	public function receberId($id){
+	public function view_id($id){
 		$this->db->where('idpsicologo',$id);
 		$query = $this->db->get('psicologo');
 		return $query->row();

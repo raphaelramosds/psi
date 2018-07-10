@@ -12,8 +12,8 @@ class HomeController extends CI_Controller {
 			$this->session->set_flashdata('erro_sessao', $erro_sessao);
 			redirect('/');
 		}
-		$this->load->model('ClinicasModel');
-		$this->load->model('PacientesModel');
+		$this->load->model('ClinicasModel',"clinicas");
+		$this->load->model('PacientesModel',"pacientes");
 
 		//Recuperar nome do psicólogo
 		$user = $this->session->userdata('psicologo');
@@ -23,8 +23,8 @@ class HomeController extends CI_Controller {
 		$idpsicologo = $psicologo[0]->idpsicologo;
 
 		$dados = array(
-			'countersclinica' => $this->ClinicasModel->view($idpsicologo),
-			"counterpaciente" => $this->PacientesModel->view($idpsicologo),
+			'countersclinica' => $this->clinicas->count_results($psicologo[0]->idpsicologo),
+			"counterpaciente" => $this->pacientes->count_results($psicologo[0]->idpsicologo),
 			'titulo' => 'Tela inicial',
 			'nomepsicologo' => $this->session->userdata('nomepsicologo'),
 		);

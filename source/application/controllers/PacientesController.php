@@ -8,12 +8,15 @@ class PacientesController extends CI_Controller {
 	}
 
 	public function getpagination(){
+		$this->load->model('PacientesModel','pacientes');
+		$psicologo = $this->session->userdata("psicologo");
+
 		$config = array(
 			'base_url' 	=> base_url('PacientesController/index'),
 			'per_page' 	=> 4,
 			'num_links' => 10,
 			'uri_segment' => 3,
-			'total_rows' => $this->db->count_all('paciente'),
+			'total_rows' => $this->pacientes->count_results($psicologo[0]->idpsicologo),
 
 			'full_tag_open' => "<ul class = 'ls-pagination-filter'>",
 			'full_tag_close' => "</ul>",
@@ -141,8 +144,8 @@ class PacientesController extends CI_Controller {
 	public function edit($id){
 
 		$user['nomepsicologo'] = $this->session->userdata('nomepsicologo');
-		$this->load->model('PacientesModel');
-		$dados['pacientes'] = $this->PacientesModel->receberId($id);
+		$this->load->model('PacientesModel','pacientes');
+		$dados['pacientes'] = $this->pacientes->view_id($id);
 		$this->load->view('Home/menu',$user);
 		$this->load->view('Pacientes/update', $dados);
 	}

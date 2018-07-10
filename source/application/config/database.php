@@ -10,6 +10,11 @@ $db['default'] = array(
         'username' => 'root',
         'password' => '',
         'database' => 'psi',
+        
+        // 'username' => 'id6224306_root',
+        // 'password' => '12345',
+        // 'database' => 'id6224306_psi',
+        
         'dbdriver' => 'mysqli',
         'dbprefix' => '',
         'pconnect' => TRUE,

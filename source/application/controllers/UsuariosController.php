@@ -37,7 +37,7 @@ class UsuariosController extends CI_Controller {
 		$dadosusuario['senha'] = md5($dadosusuario['username'].$dadosusuario['senha']);
 
 		if ($this->input->post('confirm_senha') != $this->input->post('senha')) {
-			$erro_senha = "<div class='ls-alert-danger'><strong>Opa!</strong> Parece que as senhas não estão iguais...</div>";
+			$erro_senha = "<div class='ls-sm-space ls-txt-center' style='font-size:20px; color:red;'>Parece que as senhas não são iguais</div>";
 			$this->session->set_flashdata('erro_senha',$erro_senha);
 			redirect("UsuariosController/create");
 		}
@@ -65,7 +65,7 @@ class UsuariosController extends CI_Controller {
 
 	public function edit($id){
 		$this->load->model('UsuariosModel');
-		$dados['user'] = $this->UsuariosModel->recuperarId($id);
+		$dados['user'] = $this->UsuariosModel->view_id($id);
 		$this->load->view('Home/menu');
 		$this->load->view('Usuarios/update', $dados);
 	}

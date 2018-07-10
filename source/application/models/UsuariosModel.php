@@ -5,7 +5,7 @@ class UsuariosModel extends CI_Model{
 	function __construct(){
 		parent::__construct();
 	}
-	function recuperarId($id){
+	function view_id($id){
 		$this->db->where('idusuario',$id);
 		//Recuperando informação de registro a partir da id
 		$query = $this->db->get('usuario');
