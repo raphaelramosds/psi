@@ -74,9 +74,9 @@ class PacientesController extends CI_Controller {
 			'datapacientes'=>$this->PacientesModel->view($id_psicologo, $config['per_page'], $offset),
 			'delete' => $this->session->flashdata('delete'),
 			'pagination' => $this->pagination->create_links(),
-			'add' => $this->session->flashdata('add'),
-			'update_prontuario'=> $this->session->flashdata('update_prontuario'),
 			'update_paciente' => $this->session->flashdata('update_paciente'),
+			'add_paciente' => $this->session->flashdata('add_paciente'),
+			'delete_paciente' => $this->session->flashdata('delete_paciente'),
 			//Dados do Model Prontuário
 			//'id' psicologo
 			'psicologo' => $id_psicologo,
@@ -125,39 +125,43 @@ class PacientesController extends CI_Controller {
 	}
 
 	public function add(){
+		$add_paciente = "<div class='ls-background-primary ls-sm-space ls-sm-margin-bottom ls-text-md ls-ico-checkmark'>Adcionado com sucesso! </div>";
+
 		$this->load->model('PacientesModel');
 		$dados = $this->get();
 		$this->PacientesModel->add($dados);
+		$this->session->set_flashdata("add_paciente",$add_paciente);
 		redirect('PacientesController');
 	}
 
 	public function delete($id){
 		if ($id != NULL) {
-			$delete = "<div class='ls-background-primary ls-sm-space ls-sm-margin-bottom ls-text-md ls-ico-checkmark'>Deletado com sucesso! </div>";
+			$delete_paciente = "<div class='ls-background-primary ls-sm-space ls-sm-margin-bottom ls-text-md ls-ico-checkmark'>Deletado com sucesso! </div>";
+
 			$this->load->model('PacientesModel');
 			$this->PacientesModel->delete($id);
-			$this->session->set_flashdata('delete',$delete);
+			$this->session->set_flashdata("delete_paciente",$delete_paciente);
 			redirect('PacientesController');
 		}
 	}
 
 	public function edit($id){
-
-		$user['nomepsicologo'] = $this->session->userdata('nomepsicologo');
 		$this->load->model('PacientesModel','pacientes');
+		
+		$user['nomepsicologo'] = $this->session->userdata('nomepsicologo');
 		$dados['pacientes'] = $this->pacientes->view_id($id);
 		$this->load->view('Home/menu',$user);
 		$this->load->view('Pacientes/update', $dados);
 	}
 
 	public function update(){
-		$update = "<div class='ls-background-primary ls-sm-space ls-sm-margin-bottom ls-text-md ls-ico-checkmark'>Atualizado com sucesso! </div>";
-		$this->session->set_flashdata('update_paciente', $update);
+		$dados = $this->get();
+		$update_paciente = "<div class='ls-background-primary ls-sm-space ls-sm-margin-bottom ls-text-md ls-ico-checkmark'>Atualizado com sucesso! </div>";
 
 		$this->load->model('PacientesModel','pacientes');
 		$this->pacientes->id = $this->input->post('idpaciente');
-		$dados = $this->get();
 		$this->pacientes->update($dados);
+		$this->session->set_flashdata("update_paciente",$update_paciente);
 		redirect('PacientesController');
 	}
 

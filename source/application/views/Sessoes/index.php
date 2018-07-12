@@ -1,12 +1,16 @@
-<style>
-	.ls-table a{margin-left: 10px;}
-</style>
 <div class="ls-main">
 	<div class="container-fluid">
 		<div class="ls-box ls-board-box ls-no-border">
 		<header class="ls-info-header ls-no-border">
 			<h2 class="ls-title-3 ls-ico-stats">Sessões cadastradas</h2>
 		</header>
+		<?php if(isset($add_sessao)):?>
+			<?=$add_sessao?>
+			<?php elseif(isset($delete_sessao)):?>
+			<?=$delete_sessao?>
+			<?php elseif(isset($update_sessao)):?>
+			<?=$update_sessao?>
+			<?php endif;?>
 		<table class="ls-table">
 			<tr><!--
 				<th>Id</th> -->
@@ -30,5 +34,5 @@
 		 <a href="<?=base_url()?>SessoesController/create" class="ls-btn">Adcionar um sessão</a>
 		 <a href="<?=base_url()?>ProntuariosController/view" class="ls-btn-danger">Voltar</a>
 		</div>
-</div>
+	</div>
 </div>

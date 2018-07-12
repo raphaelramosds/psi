@@ -1,26 +1,16 @@
-<style>
-	.ls-table a{margin-left: 10px;}
-</style>
 <div class="ls-main">
 	<div class="container-fluid">
 		<div class="ls-box ls-board-box ls-no-border">
 			<header class="ls-info-header ls-no-border" >
 			<h2 class="ls-title-3 ls-ico-accessibility">Pacientes cadastrados</h2>
 			</header>
-			<?php
-			if (isset($delete)) {
-				echo "<div class='ls-background-primary ls-sm-space ls-sm-margin-bottom ls-text-md ls-ico-checkmark'>Deletado com sucesso! </div>";
-			}
-			if (isset($add)) {
-				echo "<div class='ls-background-primary ls-sm-space ls-sm-margin-bottom ls-text-md ls-ico-checkmark'>Ficha adcionada </div>";
-			}
-			if (isset($update_prontuario)) {
-				echo "<div class='ls-background-primary ls-sm-space ls-sm-margin-bottom ls-text-md ls-ico-checkmark'>Ficha atualizada </div>";
-			}
-			if (isset($update_paciente)){
-				echo $update_paciente;
-			}
-			?>
+			<?php if(isset($add_paciente)):?>
+			<?=$add_paciente?>
+			<?php elseif(isset($delete_paciente)):?>
+			<?=$delete_paciente?>
+			<?php elseif(isset($update_paciente)):?>
+			<?=$update_paciente?>
+			<?php endif;?>
 			<form  action="<?=base_url()?>PacientesController/search" class="ls-form ls-form-inline" method="POST">
 				<label class="ls-label" role="search">
 					<input type="text" id="q" name="paciente" aria-label="Faça sua busca pelo paciente" placeholder="Nome do paciente" required="" class="ls-field">
@@ -41,32 +31,30 @@
 			</tr>
 			<?php foreach ($datapacientes as $value): ?>
 				<?php
-					$this->db->from('prontuario, paciente');
-					$this->db->where('prontuario.paciente_id = '.$value->idpaciente);
-					$paciente_prontuario = $this->db->get()->result();
-					?>
+				$this->db->from('prontuario, paciente');
+				$this->db->where('prontuario.paciente_id = '.$value->idpaciente);
+				$paciente_prontuario = $this->db->get()->result();
+				?>
 				<tr>
 					<td><?=$value->nomepaciente?></td>
 					<td><?=$value->emailpaciente?></td>
 					<td><?=$value->telefonepaciente?></td>
 					<td><?=$value->profissao?></td>
 					<td><?=$value->sexopaciente?></td>
-
 					<td>
 						<?php if($value->cartaosaude == 0):?>
-							<?="Não registrado"?>
+						<?="Não registrado"?>
 						<?php else:?>
-							<?=$value->cartaosaude?>
+						<?=$value->cartaosaude?>
 						<?php endif;?>
-						</td>
-
+					</td>
 					<td>
 						<?php if($value->numerosus == 0):?>
-							<?="Não registrado"?>
-							<?php else:?>
-							<?=$value->numerosus?>
-							<?php endif;?>
-						</td>
+						<?="Não registrado"?>
+						<?php else:?>
+						<?=$value->numerosus?>
+						<?php endif;?>
+					</td>
 					<td class='ls-txt-left'>
 						<div data-ls-module='dropdown' class='ls-dropdown'>
 							<a href='#' class='ls-btn'>Ação</a>
@@ -74,10 +62,9 @@
 								<li><a href="<?=base_url()?>PacientesController/edit/<?=$value->idpaciente?>" class='ls-ico-pencil ls-color-black ls-no-bghover' title='Editar'>Editar</a></li>
 								<li>
 									<?php if (count($paciente_prontuario) > 0): ?>
-										<a href="<?=base_url()?>ProntuariosController/index/<?=$value->idpaciente?>" class='ls-ico-search ls-color-black ls-no-bghover' title='Ver prontuário'>Ver prontuário</a>
+									<a href="<?=base_url()?>ProntuariosController/index/<?=$value->idpaciente?>" class='ls-ico-search ls-color-black ls-no-bghover' title='Ver prontuário'>Ver prontuário</a>
 									<?php else: ?>
-										
-										<a  class='ls-ico-plus ls-color-black ls-no-bghover ls-cursor-pointer' title='Adcionar prontuário' data-ls-module="modal" data-target="#prontuario" onClick="paciente(<?=$value->idpaciente?>)">Adcionar prontuário</a>
+									<a class='ls-ico-plus ls-color-black ls-no-bghover ls-cursor-pointer' title='Adcionar prontuário' data-ls-module="modal" data-target="#prontuario" onClick="paciente(<?=$value->idpaciente?>)">Adcionar prontuário</a>
 									<?php endif ?>
 								</li>
 								<li><a href="<?=base_url()?>PacientesController/delete/<?=$value->idpaciente?>" class='ls-ico-remove ls-color-danger' title='Excluir'>Excluir</a></li>
@@ -88,15 +75,13 @@
 			<?php endforeach ?>
 			</table>
 			<div class="ls-pagination-filter">
-			<?=$pagination?>
+				<?php if(isset($pagination)):?>
+				<?=$pagination?>
+				<?php endif;?>
 			</div>
 		</div>
 	</div>
 </div>
-
-
-
-
 <!-- Modal div: -->
 <div class="ls-modal" id="prontuario">
   <div class="ls-modal-box ls-sm-space">
@@ -124,7 +109,7 @@
 			<!-- Cid 10 -->
 			<label for="" class="ls-label">
 				<b class="ls-label-text">CID10/DSM</b>
-				<p class="ls-label-info">Identifique a doença</p>
+				<p class="ls-label-info">Abrir pesquisa de CID10</a></p>
 				<input type="text" name="cid10" required="required">
 			</label>
 

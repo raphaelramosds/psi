@@ -6,8 +6,10 @@
     <link href="<?=base_url()?>assets/css/locastyle.css" rel="stylesheet" type="text/css">
     <!-- <link rel="icon" sizes="192x192" href=""> -->
     <link rel="apple-touch-icon" href="<?=base_url()?>assets/images/ico-boilerplate.png">
+    <link rel="stylesheet" href="<?=base_url()?>assets/css/list.css">
     <script type="text/javascript" src="<?=base_url()?>assets/js/jquery.js"></script>
     <script src="<?=base_url()?>assets/js/locastyle.js" type="text/javascript"></script>
+    <script src="<?=base_url()?>assets/js/jquery.hideseek.js"></script>
   </head>
   <body>
   <div class="ls-topbar ">
@@ -17,8 +19,7 @@
       <a href="#" class="ls-ico-user">
         <img src="assets/images/locastyle/avatar-example.jpg" alt="" />
         <span class="ls-name">
-          <?=$nomepsicologo
-          ?>
+          <?=$nomepsicologo?>
         </span>
       </a>
       <nav class="ls-dropdown-nav ls-user-menu">
@@ -55,7 +56,7 @@
               <li>
                 <a href="<?=base_url()?>HomeController/loggout" class="ls-ico-export" style="color:#1DD1A4;">Sair</a>
               </li>
-          </u>
+          </ul>
         </nav>
     </div>
   </aside>

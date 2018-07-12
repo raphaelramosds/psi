@@ -23,7 +23,10 @@ class SessoesController extends CI_Controller {
 		$this->load->view('Home/menu',$user);
 		$this->load->model('SessoesModel');
 		$data = array(
-			'datasessoes' => $this->SessoesModel->view($prontuario)
+			'datasessoes' => $this->SessoesModel->view($prontuario),
+			'update_sessao' => $this->session->flashdata('update_sessao'),
+			'add_sessao' => $this->session->flashdata('add_sessao'),
+			'delete_sessao' => $this->session->flashdata('delete_sessao')
 		);
 		$this->load->view('Sessoes/index',$data);
 	}
@@ -47,14 +50,19 @@ class SessoesController extends CI_Controller {
 	}
 
 	public function add(){
-		$this->load->model('SessoesModel');
 		$dados = $this->get();
+		$add_sessao ="<div class='ls-background-primary ls-sm-space ls-sm-margin-bottom ls-text-md ls-ico-checkmark'>Adcionado com sucesso! </div>";
+		$this->load->model('SessoesModel');
 		$this->SessoesModel->add($dados);
+		$this->session->set_flashdata("add_sessao",$add_sessao);
 		redirect("SessoesController/view");
 	}
 	public function delete($id){
+		$delete_sessao = "<div class='ls-background-primary ls-sm-space ls-sm-margin-bottom ls-text-md ls-ico-checkmark'>Deletado com sucesso! </div>";
 		$this->load->model('SessoesModel');
 		$this->SessoesModel->delete($id);
+
+		$this->session->set_flashdata("delete_sessao",$delete_sessao);
 		redirect('SessoesController/view');
 	}
 
@@ -67,10 +75,12 @@ class SessoesController extends CI_Controller {
 	}
 
 	public function update(){
+		$update_sessao = "<div class='ls-background-primary ls-sm-space ls-sm-margin-bottom ls-text-md ls-ico-checkmark'>Atualizado com sucesso! </div>";
 		$this->load->model('SessoesModel','sessoes');
 		$this->sessoes->idsessao = $this->input->post('idsessao');
 		$dados = $this->get();
 		$this->sessoes->update($dados);
+		$this->session->set_flashdata("update_sessao",$update_sessao);
 		redirect('SessoesController/view');
 	}
 

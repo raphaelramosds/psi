@@ -8,16 +8,16 @@
 			<label for="" class="ls-label col-md-3">
 				<b class="ls-label-text">Nome de usuário</b>
 				<p class="ls-label-info">Digite o nome de usuário</p>
-				<input type="text" name ="username" required="required" value="<?php echo $user->username;?>">
+				<input type="text" name ="username" required="required" value="<?=$user->username;?>">
 			</label>
 			<label for="" class="ls-label col-md-3">
 				<b class="ls-label-text">Senha</b>
 				<p class="ls-label-info">Digite a sua senha</p>
-				<input type="password" name ="senha" required="required" value="<?php echo $user->senha; ?>">
+				<input type="password" name ="senha" required="required" value="<?=$user->senha; ?>">
 			</label>
 		</fieldset>
 		<div class="ls-actions-btn">
-			<input type="hidden" name="idusuario" value="<?php echo $user->idusuario; ?>">
+			<input type="hidden" name="idusuario" value="<?=$user->idusuario; ?>">
 			<button class="ls-btn-primary">Salvar</button>
 		</div>
 	</form>

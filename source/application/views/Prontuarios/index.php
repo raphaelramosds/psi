@@ -1,9 +1,11 @@
-<style>
-	.ls-table a{margin-left: 10px;}
-</style>
+<?php
+if($dataprontuarios == NULL){
+	redirect("PacientesController");
+}
+?>
 
-	<div class="ls-main">
-		<div class="container-fluid">
+<div class="ls-main">
+	<div class="container-fluid">
 		<div class="ls-box ls-board-box ls-no-border">
 			<header class="ls-info-header ls-no-border">
 				<h2 class="ls-title-3 ls-ico-folder">
@@ -20,6 +22,13 @@
 					</b>
 				</h2>
 			</header>
+			<?php if(isset($add_prontuario)):?>
+			<?=$add_prontuario?>
+			<?php elseif(isset($delete_prontuario)):?>
+			<?=$delete_prontuario?>
+			<?php elseif(isset($update_prontuario)):?>
+			<?=$update_prontuario?>
+			<?php endif;?>
 			<table class="ls-table">
 				<tr>
 					<th>Número da ficha</th>
@@ -29,6 +38,10 @@
 					<th>Alta</th>
 					<th></th>
 				</tr>
+				<?php
+					$url = base_url("assets/xml/doencas.xml");
+					$xml = simplexml_load_file($url);
+				?>
 				<?php foreach ($dataprontuarios as $value): ?>
 					<tr>
 						<td>
@@ -36,16 +49,22 @@
 						</td>
 						<td>
 							<?php
-								$this->db->select('nomeclinica');
-								$this->db->from('clinica');
-								$this->db->where('idclinica = '.$value->clinica_id);
-								$this->db->order_by("nomeclinica", "asc");
-								$query = $this->db->get()->result();
-								echo $query[0]->nomeclinica;
+							$this->db->select('nomeclinica');
+							$this->db->from('clinica');
+							$this->db->where('idclinica = '.$value->clinica_id);
+							$this->db->order_by("nomeclinica", "asc");
+							$query = $this->db->get()->result();
+							echo $query[0]->nomeclinica;
 							?>
 						</td>
 						<td>
-							<?=$value->cid10 ?>
+							<?php 
+							foreach($xml->doenca as $line){
+								if($line->codigo == $value->cid10){
+									echo $line->nome;
+								}
+							}
+							?>
 						</td>
 						<td>
 							<?=$value->encaminhado ?>
@@ -100,7 +119,7 @@
 			<label for="" class="ls-label">
 				<b class="ls-label-text">CID10/DSM</b>
 				<p class="ls-label-info">Identifique a doença</p>
-				<input type="text" name="cid10" required="required">
+				<input type="text" name="cid10" required="required" placeholder="Código da doença">
 			</label>
 
 			<!-- Alta -->
@@ -144,7 +163,7 @@
 			<!-- id do psicologo -->
 			<input type="hidden" name="id_psicologo" required="required" value="<?=$psicologo?>">
 			<input type="hidden" name="paciente_id" required="required" id="paciente_id" value="">
-			<script>
+			<script type="text/javascript">
 				function paciente(idpaciente){
 					document.getElementById('paciente_id').value = idpaciente;
 				}

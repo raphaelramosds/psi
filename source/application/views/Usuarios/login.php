@@ -16,17 +16,13 @@
       <div class="ls-login-box ls-md-margin-top">
           <form role="form" class="ls-form ls-login-form" action="LoginController/auth" method="POST">
             <fieldset>
-              <?php
-                if (isset($success)) {
-                  echo $success;
-                }
-                if (isset($erro)) {
-                  echo $erro;
-                }
-                if ($this->session->userdata('erro_sessao') ) {
-                  echo $this->session->userdata('erro_sessao');
-                }
-               ?>
+              <?php if(isset($success)):?>
+              <?=$success?>
+              <?php elseif(isset($erro)):?>
+              <?=$erro?>
+              <?php elseif($this->session->userdata('erro_sessao')):?>
+              <?=$this->session->userdata('erro_sessao');?>
+              <?php endif;?>
               <label class="ls-label">
                 <b class="ls-label-text ls-hidden-accessible">Usuário</b>
                 <input class="ls-login-bg-user ls-field-lg"  name="username" type="text" placeholder="Usuário" required autofocus >

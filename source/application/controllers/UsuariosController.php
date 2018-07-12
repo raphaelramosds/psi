@@ -7,7 +7,7 @@ class UsuariosController extends CI_Controller {
 		parent::__construct();
 	}
 	public function index(){
-		if ($this->session->userdata('crp') == NULL) {
+		if ($this->session->userdata('psicologo') == NULL) {
 			redirect('/');
 		}
 		$this->load->view('Home/menu');

@@ -63,9 +63,10 @@ class ClinicasController extends CI_Controller {
 		$this->load->model('ClinicasModel');
 		$data= array(
 			'dataclinica'=>$this->ClinicasModel->view($psicologo[0]->idpsicologo, $config['per_page'],$offset),
-			'delete' => $this->session->flashdata('delete'),
-			'update' => $this->session->flashdata('update'),
-			'pagination' => $this->pagination->create_links()
+			'pagination' => $this->pagination->create_links(),
+			"add_clinica" => $this->session->flashdata('add_clinica'),
+			"update_clinica" => $this->session->flashdata('update_clinica'),
+			"delete_clinica" => $this->session->flashdata('delete_clinica') 
 		);
 		$this->load->view('Clinicas/index', $data);
 	}
@@ -105,19 +106,21 @@ class ClinicasController extends CI_Controller {
 	}
 
 	public function add(){
+		$add_clinica = "<div class='ls-background-primary ls-sm-space ls-sm-margin-bottom ls-text-md ls-ico-checkmark'>Adcionado com sucesso! </div>";
+
 		$this->load->model('ClinicasModel');
-		$dados = $this->get();
+		$dados = $this->get();	
 		$this->ClinicasModel->add($dados);
+		$this->session->set_flashdata("add_clinica",$add_clinica);
 		redirect('ClinicasController');
 	}
 
 	public function delete($id){
 		if ($id != NULL) {
-			$delete = "<div class='ls-background-primary ls-sm-space ls-sm-margin-bottom ls-text-md ls-ico-checkmark'>Sucesso ao deletar a clinica</div>";
-
+			$delete_clinica = "<div class='ls-background-primary ls-sm-space ls-sm-margin-bottom ls-text-md ls-ico-checkmark'>Deletado com sucesso! </div>";
 			$this->load->model('ClinicasModel');
 			$this->ClinicasModel->delete($id);
-			$this->session->set_flashdata('delete',$delete);
+			$this->session->set_flashdata("delete_clinica",$delete_clinica);
 			redirect('ClinicasController');
 		}
 	}
@@ -130,13 +133,12 @@ class ClinicasController extends CI_Controller {
 		$this->load->view('Clinicas/update', $dados);
 	}
 	public function update(){
-		$update = "<div class='ls-background-primary ls-sm-space ls-sm-margin-bottom ls-text-md ls-ico-checkmark'>Sucesso ao atualizar a clinica</div>"; 
-		
+		$update_clinica = "<div class='ls-background-primary ls-sm-space ls-sm-margin-bottom ls-text-md ls-ico-checkmark'>Atualizado com sucesso! </div>";
+		$dados = $this->get();
 		$this->load->model('ClinicasModel','clinicas');
 		$this->clinicas->idclinica = $this->input->post('idclinica');
-		$dados = $this->get();
 		$this->clinicas->update($dados);
-		$this->session->set_flashdata("update",$update);
+		$this->session->set_flashdata("update_clinica",$update_clinica);
 		redirect('ClinicasController');
 	}
 }

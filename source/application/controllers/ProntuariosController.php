@@ -31,7 +31,10 @@ class ProntuariosController extends CI_Controller {
 			'dataprontuarios' => $this->ProntuariosModel->view($idpsicologo, $paciente),
 			'delete' => $this->session->flashdata('delete'),
 			'clinicas' => $this->clinicas->view($idpsicologo),
-			"psicologo" => $idpsicologo
+			"psicologo" => $idpsicologo,
+			"add_prontuario" => $this->session->flashdata('add_prontuario'),
+			"delete_prontuario" => $this->session->flashdata('delete_prontuario'),
+			"update_prontuario" => $this->session->flashdata('update_prontuario'),
 		);
 		$this->load->view('Prontuarios/index', $data);
 	}
@@ -54,24 +57,23 @@ class ProntuariosController extends CI_Controller {
 	}
 
 	public function add(){
+		$add_prontuario = "<div class='ls-background-primary ls-sm-space ls-sm-margin-bottom ls-text-md ls-ico-checkmark'>Adcionado com sucesso! </div>";
+
 		$this->load->model('ProntuariosModel');
 		$dados = $this->get();
 		$this->ProntuariosModel->add($dados);
-
-		$add = $this->session->userdata('paciente');
-		$this->session->set_flashdata('add',$add);
-
+		$this->session->set_flashdata("add_prontuario",$add_prontuario);
+		
 		redirect("PacientesController");
 	}
 
 	public function delete($idprontuario=NULL){
+		$delete_prontuario = "<div class='ls-background-primary ls-sm-space ls-sm-margin-bottom ls-text-md ls-ico-checkmark'>Deletado com sucesso!</div>";
+
 		$this->load->model('ProntuariosModel');
 		$this->ProntuariosModel->delete($idprontuario);
-
-		$delete = $this->session->userdata('paciente');
-		$this->session->set_flashdata('delete', $delete);
-
-		redirect('PacientesController');
+		$this->session->set_flashdata("delete_prontuario",$delete_prontuario);
+		redirect('ProntuariosController/view');
 	}
 
 	public function edit($id){
@@ -96,15 +98,14 @@ class ProntuariosController extends CI_Controller {
 	}
 
 	public function update(){
+		$update_prontuario = "<div class='ls-background-primary ls-sm-space ls-sm-margin-bottom ls-text-md ls-ico-checkmark'>Atualizado com sucesso! </div>";
+
 		$this->load->model('ProntuariosModel','prontuarios');
 		$this->prontuarios->numeroprontuario = $this->input->post('numeroprontuario');
 		$dados = $this->get();	
 		$this->prontuarios->update($dados);
-
-		$edit = $this->session->userdata("paciente");
-		$this->session->set_flashdata('update_prontuario',$edit);
-		
-		redirect('PacientesController');
+		$this->session->set_flashdata("update_prontuario",$update_prontuario);
+		redirect('ProntuariosController/view');
 	}
 
 }
