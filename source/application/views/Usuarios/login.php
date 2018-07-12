@@ -37,7 +37,7 @@
               </label>
 
               <input type="submit" value="Entrar" class="ls-btn ls-btn-block ls-btn-lg" style="background-color:#1DD1A4;color:white;">
-              <p class="ls-login-signup">Não possui um usuário no sistema? <br> <a href="<?=base_url()?>UsuariosController/create" class="no_link">Cadastre-se agora</a></p>
+              <p class="ls-login-signup">Não possui um usuário no sistema? <br> <a href="<?=base_url()?>cadastre" class="no_link">Cadastre-se agora</a></p>
             </fieldset>
           </form>
         </div>

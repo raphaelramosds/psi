@@ -24,7 +24,7 @@
       </a>
       <nav class="ls-dropdown-nav ls-user-menu">
         <ul>
-          <li><a href="<?=base_url()?>PsicologosController">Meu Perfil</a></li>
+          <li><a href="<?=base_url()?>view-psycho">Meu Perfil</a></li>
           <li><a href="<?=base_url()?>HomeController/loggout">Encerrar sessão</a></li>
          </ul>
       </nav>
@@ -33,7 +33,7 @@
   <span class="ls-show-sidebar ls-ico-menu"></span>
   <!-- Nome do produto/marca com sidebar -->
     <h1 class="ls-brand-name">
-      <a href="<?=base_url()?>HomeController" class="ls-ico">
+      <a href="<?=base_url()?>home" class="ls-ico">
         <img src="<?= base_url()?>assets/images/logo.png" height="30px" width="60px">
       </a>
     </h1>
@@ -43,13 +43,13 @@
     <div class="ls-sidebar-inner">
         <nav class="ls-menu">
           <ul>
-              <li><a href="<?=base_url()?>HomeController" class="ls-ico-home">Início</a></li>
-              <li><a href="<?=base_url()?>PsicologosController" class="ls-ico-user">Meu perfil</a></li>
+              <li><a href="<?=base_url()?>home" class="ls-ico-home">Início</a></li>
+              <li><a href="<?=base_url()?>view-psycho" class="ls-ico-user">Meu perfil</a></li>
               <li>
                 <a href="#" class="ls-ico-bukets">Cadastro</a>
                 <ul>
-                  <li><a href="<?=base_url()?>ClinicasController" class="ls-ico-location">Clínicas</a></li>
-                  <li><a href="<?=base_url()?>PacientesController" class="ls-ico-accessibility">Pacientes</a></li>
+                  <li><a href="<?=base_url()?>view-clinica" class="ls-ico-location">Clínicas</a></li>
+                  <li><a href="<?=base_url()?>view-paciente" class="ls-ico-accessibility">Pacientes</a></li>
                   <!-- <li><a href="<?=base_url()?>sessoescontroller">Sessões</a></li> -->
                 </ul>
               </li>

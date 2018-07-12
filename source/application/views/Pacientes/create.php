@@ -52,7 +52,7 @@
 
 				</fieldset>
 			   <button type="submit" class="ls-btn">Salvar dados do paciente</button>
-				 <a href="<?=base_url()?>PacientesController" class="ls-btn-danger">Voltar</a>
+				 <a href="<?=base_url()?>view-paciente" class="ls-btn-danger">Voltar</a>
 			</form>
 		</div>
 	</div>

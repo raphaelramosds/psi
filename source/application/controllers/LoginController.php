@@ -34,12 +34,12 @@ class LoginController extends CI_Controller {
 			$this->db->where('psicologo.usuario_idusuario', $query[0]->idusuario);
 			$psicologo = $this->db->get()->result();
 			$this->session->set_userdata('psicologo',$psicologo);
-			redirect('HomeController');
+			redirect('home');
 		}
 		else{
 			$div_erro = "<div class='ls-sm-space ls-txt-center' style='font-size:20px; color:red;'>Usuário ou senha incorretos!</div>";
 			$this->session->set_flashdata('erro_autenticacao', $div_erro);
-			redirect('LoginController');
+			redirect('login');
 		}
   }
 

@@ -12,7 +12,7 @@ class SessoesController extends CI_Controller {
 			redirect('/');
 		}
 		$this->session->set_userdata('prontuario', $numeroprontuario);
-		redirect('SessoesController/view');
+		redirect('view-sessao');
 
 	}
 
@@ -55,7 +55,7 @@ class SessoesController extends CI_Controller {
 		$this->load->model('SessoesModel');
 		$this->SessoesModel->add($dados);
 		$this->session->set_flashdata("add_sessao",$add_sessao);
-		redirect("SessoesController/view");
+		redirect("view-sessao");
 	}
 	public function delete($id){
 		$delete_sessao = "<div class='ls-background-primary ls-sm-space ls-sm-margin-bottom ls-text-md ls-ico-checkmark'>Deletado com sucesso! </div>";
@@ -63,7 +63,7 @@ class SessoesController extends CI_Controller {
 		$this->SessoesModel->delete($id);
 
 		$this->session->set_flashdata("delete_sessao",$delete_sessao);
-		redirect('SessoesController/view');
+		redirect('view-sessao');
 	}
 
 	public function edit($id){
@@ -81,7 +81,7 @@ class SessoesController extends CI_Controller {
 		$dados = $this->get();
 		$this->sessoes->update($dados);
 		$this->session->set_flashdata("update_sessao",$update_sessao);
-		redirect('SessoesController/view');
+		redirect('view-sessao');
 	}
 
 }

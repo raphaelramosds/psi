@@ -12,7 +12,7 @@ class ClinicasController extends CI_Controller {
 
 		$config = array(
 			'base_url' 	=> base_url('ClinicasController/index'),
-			'per_page' 	=> 6,
+			'per_page' 	=> 4,
 			'num_links' => 10,
 			'uri_segment' => 3,
 			'total_rows' => $this->clinicas->count_results($psicologo[0]->idpsicologo),
@@ -112,7 +112,7 @@ class ClinicasController extends CI_Controller {
 		$dados = $this->get();	
 		$this->ClinicasModel->add($dados);
 		$this->session->set_flashdata("add_clinica",$add_clinica);
-		redirect('ClinicasController');
+		redirect('view-clinica');
 	}
 
 	public function delete($id){
@@ -121,7 +121,7 @@ class ClinicasController extends CI_Controller {
 			$this->load->model('ClinicasModel');
 			$this->ClinicasModel->delete($id);
 			$this->session->set_flashdata("delete_clinica",$delete_clinica);
-			redirect('ClinicasController');
+			redirect('view-clinica');
 		}
 	}
 
@@ -139,6 +139,6 @@ class ClinicasController extends CI_Controller {
 		$this->clinicas->idclinica = $this->input->post('idclinica');
 		$this->clinicas->update($dados);
 		$this->session->set_flashdata("update_clinica",$update_clinica);
-		redirect('ClinicasController');
+		redirect('view-clinica');
 	}
 }

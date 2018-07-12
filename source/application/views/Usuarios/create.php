@@ -41,7 +41,7 @@
 			</fieldset>
 			<div class="ls-actions-btn" style="text-align:center;border:none">
 				<button class="ls-btn"  style="background-color:#1DD1A4;color:white;padding:1em;width:250px;">Avançar</button>
-				<p class="ls-login-signup"><a href="<?=base_url()?>LoginController">Voltar</a></p>
+				<p class="ls-login-signup"><a href="<?=base_url()?>login">Voltar</a></p>
 			</div>
 		</form>
 	</div>

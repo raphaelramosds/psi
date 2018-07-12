@@ -33,8 +33,8 @@
 						<hr>
 				  </div>
 				</div>
-				<a href="<?=base_url()?>PsicologosController/edit/<?=$row->idpsicologo?>"  class='ls-ico-pencil ls-btn' title='Editar' >Editar informações</a>
-				<a href="<?=base_url()?>HomeController" class="ls-btn-danger" >Voltar</a>
+				<a href="<?=base_url()?>update-psycho/<?=$row->idpsicologo?>"  class='ls-ico-pencil ls-btn' title='Editar' >Editar informações</a>
+				<a href="<?=base_url()?>home" class="ls-btn-danger" >Voltar</a>
 				<?php endforeach; ?>
 			</div>
 	</div>

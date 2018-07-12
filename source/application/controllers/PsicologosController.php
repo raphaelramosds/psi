@@ -52,15 +52,15 @@ class PsicologosController extends CI_Controller {
 		$success = "<div class='ls-sm-space ls-txt-center ls-color-success' style='font-size:20px;'><strong>Sucesso!</strong> agora entre no sistema </div>";
 		$this->PsicologosModel->add($dados);
 		$this->session->set_flashdata('success',$success);
-		redirect('LoginController');
+		redirect('login');
 	}
 	public function delete($id=NULL){
 		if($id == NULL){
-			redirect('PsicologosController');
+			redirect('view-psycho');
 		}
 		$this->load->model('PsicologosModel');
 		$this->PsicologosModel->delete($id);
-		redirect('PsicologosController');
+		redirect('view-psycho');
 	}
 
 	public function edit($id){
@@ -76,7 +76,7 @@ class PsicologosController extends CI_Controller {
 		$this->PsicologosModel->idpsicologo = $this->input->post('idpsicologo');
 		$dados = $this->get();
 		$this->PsicologosModel->update($dados);
-		redirect('PsicologosController');
+		redirect('view-psycho');
 	}
 
 }

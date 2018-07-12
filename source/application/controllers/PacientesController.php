@@ -131,7 +131,7 @@ class PacientesController extends CI_Controller {
 		$dados = $this->get();
 		$this->PacientesModel->add($dados);
 		$this->session->set_flashdata("add_paciente",$add_paciente);
-		redirect('PacientesController');
+		redirect('view-paciente');
 	}
 
 	public function delete($id){
@@ -141,7 +141,7 @@ class PacientesController extends CI_Controller {
 			$this->load->model('PacientesModel');
 			$this->PacientesModel->delete($id);
 			$this->session->set_flashdata("delete_paciente",$delete_paciente);
-			redirect('PacientesController');
+			redirect('view-paciente');
 		}
 	}
 
@@ -162,7 +162,7 @@ class PacientesController extends CI_Controller {
 		$this->pacientes->id = $this->input->post('idpaciente');
 		$this->pacientes->update($dados);
 		$this->session->set_flashdata("update_paciente",$update_paciente);
-		redirect('PacientesController');
+		redirect('view-paciente');
 	}
 
 }

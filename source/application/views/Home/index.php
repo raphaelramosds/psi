@@ -18,7 +18,7 @@
               </span>
             </div>
             <div class="ls-box-footer">
-              <a href="<?=base_url()?>PacientesController" class="ls-btn ls-btn-xs">Ver pacientes</a>
+              <a href="<?=base_url()?>view-paciente" class="ls-btn ls-btn-xs">Ver pacientes</a>
             </div>
           </div>
         </div>
@@ -33,7 +33,7 @@
               </span>
             </div>
             <div class="ls-box-footer">
-              <a href="<?=base_url()?>ClinicasController" class="ls-btn ls-btn-xs">Ver clínicas</a>
+              <a href="<?=base_url()?>view-clinica" class="ls-btn ls-btn-xs">Ver clínicas</a>
             </div>
           </div>
         </div>

@@ -16,7 +16,7 @@
 					<input type="text" id="q" name="paciente" aria-label="Faça sua busca pelo paciente" placeholder="Nome do paciente" required="" class="ls-field">
 				</label>
 				<input type="submit" value="Buscar" class="ls-btn" title="Buscar">
-					<a href="<?=base_url()?>PacientesController/create" class="ls-ico-plus ls-btn	">Adcionar um paciente</a>
+					<a href="<?=base_url()?>create-paciente" class="ls-ico-plus ls-btn	">Adcionar um paciente</a>
 			</form>
 			<table class="ls-table">
 			<tr>
@@ -59,15 +59,15 @@
 						<div data-ls-module='dropdown' class='ls-dropdown'>
 							<a href='#' class='ls-btn'>Ação</a>
 							<ul class='ls-dropdown-nav'>
-								<li><a href="<?=base_url()?>PacientesController/edit/<?=$value->idpaciente?>" class='ls-ico-pencil ls-color-black ls-no-bghover' title='Editar'>Editar</a></li>
+								<li><a href="<?=base_url()?>update-paciente/<?=$value->idpaciente?>" class='ls-ico-pencil ls-color-black ls-no-bghover' title='Editar'>Editar</a></li>
 								<li>
 									<?php if (count($paciente_prontuario) > 0): ?>
-									<a href="<?=base_url()?>ProntuariosController/index/<?=$value->idpaciente?>" class='ls-ico-search ls-color-black ls-no-bghover' title='Ver prontuário'>Ver prontuário</a>
+									<a href="<?=base_url()?>index-prontuario/<?=$value->idpaciente?>" class='ls-ico-search ls-color-black ls-no-bghover' title='Ver prontuário'>Ver prontuário</a>
 									<?php else: ?>
 									<a class='ls-ico-plus ls-color-black ls-no-bghover ls-cursor-pointer' title='Adcionar prontuário' data-ls-module="modal" data-target="#prontuario" onClick="paciente(<?=$value->idpaciente?>)">Adcionar prontuário</a>
 									<?php endif ?>
 								</li>
-								<li><a href="<?=base_url()?>PacientesController/delete/<?=$value->idpaciente?>" class='ls-ico-remove ls-color-danger' title='Excluir'>Excluir</a></li>
+								<li><a href="<?=base_url()?>delete-paciente/<?=$value->idpaciente?>" class='ls-ico-remove ls-color-danger' title='Excluir'>Excluir</a></li>
 							</ul>
 						</div>
 					</td>

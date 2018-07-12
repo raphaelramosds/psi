@@ -16,7 +16,7 @@
 					<input type="text" id="q" name="clinica" aria-label="Faça sua busca pela clínica" placeholder="Nome da clínica" required="" class="ls-field">
 				</label>
 				<input type="submit" value="Buscar" class="ls-btn" title="Buscar">
-				<a href="<?=base_url()?>ClinicasController/create" class="ls-ico-plus ls-btn">Adcionar uma clínica</a>
+				<a href="<?=base_url()?>create-clinica" class="ls-ico-plus ls-btn">Adcionar uma clínica</a>
 			</form>
 			<table class="ls-table">
 				<tr>
@@ -36,8 +36,8 @@
 						<div data-ls-module='dropdown' class='ls-dropdown'>
 							<a href="$" class="ls-btn">Ação</a>
 							<ul class="ls-dropdown-nav">
-								<li><a href="<?=base_url()?>ClinicasController/edit/<?=$value->idclinica?>" class='ls-ico-pencil ls-color-black ls-no-bghover' title='Editar'>Editar</a></li>
-								<li><a href="<?=base_url()?>ClinicasController/delete/<?=$value->idclinica?>" class='ls-ico-remove ls-color-danger' title='Excluir'>Excluir</a></li>								
+								<li><a href="<?=base_url()?>update-clinica/<?=$value->idclinica?>" class='ls-ico-pencil ls-color-black ls-no-bghover' title='Editar'>Editar</a></li>
+								<li><a href="<?=base_url()?>delete-clinica/<?=$value->idclinica?>" class='ls-ico-remove ls-color-danger' title='Excluir'>Excluir</a></li>								
 							</ul>
 						</div>
 					</td>

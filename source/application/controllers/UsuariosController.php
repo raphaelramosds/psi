@@ -50,7 +50,7 @@ class UsuariosController extends CI_Controller {
 		//Informa o nome do usuário para a query poder retornar o seu id
 		//A variável $usuario é o retorno da query do id do usuario cadastrado, cria-se uma sessão para que ela seja mandada para a tela de cadastro do psicólogo
 		$this->session->set_userdata('id_user',  $usuario);
-		redirect("PsicologosController/create");
+		redirect("create-psycho");
 	}
 
 	public function delete($id=NULL){
