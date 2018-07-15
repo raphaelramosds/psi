@@ -20,27 +20,26 @@ class LoginController extends CI_Controller {
     $data = array(
       'nome' => $this->input->post('username'),
       'senha' => $this->input->post("senha")
-		);
-		$senha = md5($data["nome"].$data["senha"]);
+	);
+	$senha = md5($data["nome"].$data["senha"]);
 
-		$this->db->where('username', $data["nome"]);
-		$this->db->where('senha', $senha);
+	$this->db->where('username', $data["nome"]);
+	$this->db->where('senha', $senha);
 
-		$query = $this->db->get('usuario')->result();
+	$query = $this->db->get('usuario')->result();
 
-		if (count($query) == 1) {
-			$this->db->select('*');
-			$this->db->from('psicologo');
-			$this->db->where('psicologo.usuario_idusuario', $query[0]->idusuario);
-			$psicologo = $this->db->get()->result();
-			$this->session->set_userdata('psicologo',$psicologo);
-			redirect('home');
-		}
-		else{
-			$div_erro = "<div class='ls-sm-space ls-txt-center' style='font-size:20px; color:red;'>Usuário ou senha incorretos!</div>";
-			$this->session->set_flashdata('erro_autenticacao', $div_erro);
-			redirect('login');
-		}
+	if (count($query) == 1) {
+		$this->db->select('*');
+		$this->db->from('psicologo');
+		$this->db->where('psicologo.usuario_idusuario', $query[0]->idusuario);
+		$psicologo = $this->db->get()->result();
+		$this->session->set_userdata('psicologo',$psicologo);
+		redirect('home');
+	}
+	else{
+		$div_erro = "<div class='ls-sm-space ls-txt-center' style='font-size:20px; color:red;'>Usuário ou senha incorretos!</div>";
+		$this->session->set_flashdata('erro_autenticacao', $div_erro);
+		redirect('login');
+	}
   }
-
 }

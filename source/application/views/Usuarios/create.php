@@ -19,6 +19,9 @@
 				<label for="" class="ls-label col-md-4" >
 					<b class="ls-label-text">Nome de usuário</b>
 					<p class="ls-label-info">Digite o nome de usuário. Ex.: usuario123</p>
+					<?php if (isset($erro_user)):?>
+						<?=$erro_user?>
+					<?php endif;?>
 					<input type="text" name ="username" required="required">
 				</label>
 				<label for="" class="ls-label col-md-4">
@@ -38,7 +41,6 @@
                   <a class="ls-label-text-prefix ls-toggle-pass ls-ico-eye" data-toggle-class="ls-ico-eye, ls-ico-eye-blocked" data-target="#password_confirm" href="#"></a>
                 </div>
 				</label>
-				
 			</fieldset>
 			<div class="ls-actions-btn" style="text-align:center;border:none">
 				<button class="ls-btn"  style="background-color:#1DD1A4;color:white;padding:1em;width:250px;">Avançar</button>

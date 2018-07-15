@@ -99,10 +99,9 @@ class ClinicasController extends CI_Controller {
 
 	public function create(){
 		$psicologo = $this->session->userdata('psicologo');
-		$dados['psicologo'] = $psicologo[0]->idpsicologo;
 		$user['nomepsicologo'] = $this->session->userdata('nomepsicologo');
 		$this->load->view('Home/menu',$user);
-		$this->load->view('Clinicas/create',$dados);
+		$this->load->view('Clinicas/create',array('psicologo'=>$psicologo[0]->idpsicologo));
 	}
 
 	public function add(){
