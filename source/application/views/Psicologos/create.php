@@ -8,7 +8,7 @@
 	<script src="<?=base_url()?>assets/js/locastyle.js" type="text/javascript"></script>
 </head>
 <!--Tela de cadastro psicólogo-->
-<div class="container" style="margin-top:200px;">
+<div class="container" style="margin-top:200px;max-width:500px;">
 	<div class="ls-box ls-board-box" style="border:none;">
 		<header class="ls-info-header" style="border:none;">
 			<h2 class="ls-title-3">Quase pronto, <span style="background:#1DD1A4;padding:10px;color:white;display:inline-block;" >Psicólogo!</span></h2>
@@ -44,7 +44,7 @@
 
 			</fieldset>
 			<div class="ls-actions-btn">
-			   <button class="ls-btn"  style="background-color:#1DD1A4;color:white;padding:1em;width:200px;font-size:18px;">Terminar</button>
+			   <button class="ls-btn"  style="background-color:#1DD1A4;color:white;width:100%;font-size:15px;">Terminar</button>
 			 </div>
 		</form>
 	</div>
