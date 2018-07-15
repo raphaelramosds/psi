@@ -4,13 +4,14 @@
 	<link href="<?=base_url()?>assets/css/locastyle.css" rel="stylesheet" type="text/css">
 	<link rel="icon" sizes="192x192" href="<?=base_url()?>assets/images/ico-boilerplate.png">
 	<link rel="apple-touch-icon" href="<?=base_url()?>assets/images/ico-boilerplate.png">
+	<link rel="stylesheet" href="<?=base_url()?>assets/css/links_style.css" type="text/css">
 	<script type="text/javascript" src="<?=base_url()?>assets/js/jquery.js"></script>
 	<script src="<?=base_url()?>assets/js/locastyle.js" type="text/javascript"></script>
 </head>
 <div class="container" style="margin-top: 200px;max-width:900px;">
 	<div class="ls-box ls-board-box" style="border:none;">
 		<header class="ls-info-header" style="text-align:center;border:none">
-			<h2 class="ls-title-3" >Cadastre seu <span style="background:#1dd1a4;color:white;padding:5px;font-weight:normal;display:inline-block;">usuário</span></h2>
+			<h2 class="ls-title-3" >Cadastre seu <span style="background:#1DD1A4;padding:10px;color:white;display:inline-block;">usuário</span></h2>
 		</header>
 		<form action="<?=base_url()?>UsuariosController/add" role="form" method="POST">
 			<fieldset>
@@ -41,7 +42,8 @@
 			</fieldset>
 			<div class="ls-actions-btn" style="text-align:center;border:none">
 				<button class="ls-btn"  style="background-color:#1DD1A4;color:white;padding:1em;width:250px;">Avançar</button>
-				<p class="ls-login-signup"><a href="<?=base_url()?>login">Voltar</a></p>
+				<hr>
+				<a href="<?=base_url()?>login" class="link_direct">Voltar</a>
 			</div>
 		</form>
 	</div>

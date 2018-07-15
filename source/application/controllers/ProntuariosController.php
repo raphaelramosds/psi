@@ -60,8 +60,8 @@ class ProntuariosController extends CI_Controller {
 		$add_prontuario = "<div class='ls-background-primary ls-sm-space ls-sm-margin-bottom ls-text-md ls-ico-checkmark'>Adcionado com sucesso! </div>";
 
 		$this->load->model('ProntuariosModel');
-		$dados = $this->get();
-		$this->ProntuariosModel->add($dados);
+		$prontuario_reg = $this->get();
+		$this->ProntuariosModel->add($prontuario_reg);
 		$this->session->set_flashdata("add_prontuario",$add_prontuario);
 		redirect("view-paciente");
 	}

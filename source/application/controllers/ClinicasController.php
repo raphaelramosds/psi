@@ -109,8 +109,8 @@ class ClinicasController extends CI_Controller {
 		$add_clinica = "<div class='ls-background-primary ls-sm-space ls-sm-margin-bottom ls-text-md ls-ico-checkmark'>Adcionado com sucesso! </div>";
 
 		$this->load->model('ClinicasModel');
-		$dados = $this->get();	
-		$this->ClinicasModel->add($dados);
+		$clinica_reg = $this->get();	
+		$this->ClinicasModel->add($clinica_reg);
 		$this->session->set_flashdata("add_clinica",$add_clinica);
 		redirect('view-clinica');
 	}

@@ -128,8 +128,8 @@ class PacientesController extends CI_Controller {
 		$add_paciente = "<div class='ls-background-primary ls-sm-space ls-sm-margin-bottom ls-text-md ls-ico-checkmark'>Adcionado com sucesso! </div>";
 
 		$this->load->model('PacientesModel');
-		$dados = $this->get();
-		$this->PacientesModel->add($dados);
+		$paciente_reg = $this->get();
+		$this->PacientesModel->add($paciente_reg);
 		$this->session->set_flashdata("add_paciente",$add_paciente);
 		redirect('view-paciente');
 	}

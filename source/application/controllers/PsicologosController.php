@@ -47,13 +47,16 @@ class PsicologosController extends CI_Controller {
 	}
 
 	public function add(){
-		$this->load->model('PsicologosModel');
-		$dados = $this->get();
 		$success = "<div class='ls-sm-space ls-txt-center ls-color-success' style='font-size:20px;'><strong>Sucesso!</strong> agora entre no sistema </div>";
-		$this->PsicologosModel->add($dados);
+		$id_user = $this->session->userdata("id_user");
+		$pycho_reg = $this->get();
+		$this->load->model('PsicologosModel','psicologos');
+		//Se o psicólogo não se cadastrar ou fechar a aba, faça com que o id do seu usuário seja excluído
+		$this->psicologos->add($pycho_reg);
 		$this->session->set_flashdata('success',$success);
 		redirect('login');
 	}
+
 	public function delete($id=NULL){
 		if($id == NULL){
 			redirect('view-psycho');
