@@ -23,11 +23,11 @@ if($dataprontuarios == NULL){
 				</h2>
 			</header>
 			<?php if(isset($add_prontuario)):?>
-			<?=$add_prontuario?>
+			<div class='ls-background-primary ls-sm-space ls-sm-margin-bottom ls-text-md ls-ico-checkmark'><?=$add_prontuario?></div>
 			<?php elseif(isset($delete_prontuario)):?>
-			<?=$delete_prontuario?>
+			<div class='ls-background-primary ls-sm-space ls-sm-margin-bottom ls-text-md ls-ico-checkmark'><?=$delete_prontuario?></div>
 			<?php elseif(isset($update_prontuario)):?>
-			<?=$update_prontuario?>
+			<div class='ls-background-primary ls-sm-space ls-sm-margin-bottom ls-text-md ls-ico-checkmark'><?=$update_prontuario?></div>
 			<?php endif;?>
 			<table class="ls-table">
 				<tr>

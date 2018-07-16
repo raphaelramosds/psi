@@ -20,7 +20,7 @@
 					<b class="ls-label-text">Nome de usuário</b>
 					<p class="ls-label-info">Digite o nome de usuário. Ex.: usuario123</p>
 					<?php if (isset($erro_user)):?>
-						<?=$erro_user?>
+					<div class='ls-sm-space' style='font-size:20px; color:red;'><?=$erro_user?></div>
 					<?php endif;?>
 					<input type="text" name ="username" required="required">
 				</label>
@@ -33,7 +33,7 @@
 				</label>
 				<label for="" class="ls-label col-md-4">
 				<?php if (isset($erro_senha)): ?>
-					<?=$erro_senha?>
+				<div class='ls-sm-space ls-txt-center' style='font-size:20px; color:red;'><?=$erro_senha?></div>
 				<?php endif ?>
                <b class="ls-label-text ls-hidden-accessible">Confirmação</b>
                 <div class="ls-prefix-group ls-field-lg">

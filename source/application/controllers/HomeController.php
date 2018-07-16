@@ -8,8 +8,6 @@ class HomeController extends CI_Controller {
 
 	public function index(){
 		if ($this->session->userdata('psicologo') == NULL) {
-			$erro_sessao = "<div class='ls-sm-space ls-txt-center ls-color-info' style='font-size:20px;'><strong>Ops!</strong> Faça o seu login antes de entrar...</div>";
-			$this->session->set_flashdata('erro_sessao', $erro_sessao);
 			redirect('/');
 		}
 		$this->load->model('ClinicasModel',"clinicas");
@@ -22,15 +20,12 @@ class HomeController extends CI_Controller {
 		$psicologo = $this->session->userdata('psicologo');
 		$idpsicologo = $psicologo[0]->idpsicologo;
 
-		$dados = array(
+		$this->load->view('Home/menu', array('nomepsicologo'=>$this->session->userdata('nomepsicologo')));
+		$this->load->view('Home/index', array(
 			'countersclinica' => $this->clinicas->count_results($psicologo[0]->idpsicologo),
-			"counterpaciente" => $this->pacientes->count_results($psicologo[0]->idpsicologo),
-			'titulo' => 'Tela inicial',
-			'nomepsicologo' => $this->session->userdata('nomepsicologo'),
-		);
-
-		$this->load->view('Home/menu', $dados);
-		$this->load->view('Home/index',$dados);
+			'counterpaciente' => $this->pacientes->count_results($psicologo[0]->idpsicologo),
+			'titulo' => 'Início',
+		));
 	}
 
 	public function loggout(){

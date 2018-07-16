@@ -1,6 +1,6 @@
 <main class="ls-main ">
   <div class="container-fluid">
-    <h1 class="ls-title-intro ls-ico-home ls-txt-center">Página inicial</h1>
+    <h1 class="ls-title-intro ls-ico-home ls-txt-center"><?=$titulo?></h1>
     <div class="ls-box ls-board-box">
       <header class="ls-info-header ls-txt-center">
         <h2 class="ls-title-3 ls-ico-docs">Relatórios</h2>

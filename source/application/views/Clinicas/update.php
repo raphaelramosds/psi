@@ -12,7 +12,6 @@
 				</label>
 				<label class="ls-label col-md-4 col-xs-12">
 					<b class="ls-label-text">Estado</b>
-					<!-- <input type="text" name="estado" required="required" value="<?=$clinicas->estado;?>"> -->
 					<div class="ls-custom-select">
 						<?php
 						$options = array(

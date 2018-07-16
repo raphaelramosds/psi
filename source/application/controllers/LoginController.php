@@ -8,37 +8,37 @@ class LoginController extends CI_Controller {
 
 	//Carregar a tela de login e após autenticar, criar uma sessão para direcionar à tela incial
   public function index(){
-		$flash = array(
+		$this->load->view('Usuarios/login', array(
 			'success' => $this->session->flashdata('success'),
 			'erro' => $this->session->flashdata('erro_autenticacao')
-		);
-		$this->load->view('Usuarios/login', $flash);
+		));
   }
 
   //Criar uma sessão para colocar os dados do usuário
   public function auth(){
-    $data = array(
+  	$user_reg = array(
       'nome' => $this->input->post('username'),
       'senha' => $this->input->post("senha")
 	);
-	$senha = md5($data["nome"].$data["senha"]);
 
-	$this->db->where('username', $data["nome"]);
+	$senha = md5($user_reg["nome"].$user_reg["senha"]);
+
+	$this->db->where('username', $user_reg["nome"]);
 	$this->db->where('senha', $senha);
 
 	$query = $this->db->get('usuario')->result();
 
-	if (count($query) == 1) {
+	if (count($query) == 1){
 		$this->db->select('*');
 		$this->db->from('psicologo');
 		$this->db->where('psicologo.usuario_idusuario', $query[0]->idusuario);
 		$psicologo = $this->db->get()->result();
 		$this->session->set_userdata('psicologo',$psicologo);
+
 		redirect('home');
 	}
 	else{
-		$div_erro = "<div class='ls-sm-space ls-txt-center' style='font-size:20px; color:red;'>Usuário ou senha incorretos!</div>";
-		$this->session->set_flashdata('erro_autenticacao', $div_erro);
+		$this->session->set_flashdata('erro_autenticacao', 'Usuário ou senha incorretos');
 		redirect('login');
 	}
   }

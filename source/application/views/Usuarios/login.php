@@ -18,11 +18,9 @@
           <form role="form" class="ls-form ls-login-form" action="LoginController/auth" method="POST">
             <fieldset>
               <?php if(isset($success)):?>
-              <?=$success?>
+              <div class='ls-sm-space ls-txt-center ls-color-success' style='font-size:20px;'><?=$success?></div>
               <?php elseif(isset($erro)):?>
-              <?=$erro?>
-              <?php elseif($this->session->userdata('erro_sessao')):?>
-              <?=$this->session->userdata('erro_sessao');?>
+              <div class='ls-sm-space ls-txt-center' style='font-size:20px; color:red;'><?=$erro?></div>
               <?php endif;?>
               <label class="ls-label">
                 <b class="ls-label-text ls-hidden-accessible">Usuário</b>

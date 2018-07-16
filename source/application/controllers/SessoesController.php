@@ -19,68 +19,63 @@ class SessoesController extends CI_Controller {
 	public function view(){
 		$prontuario = $this->session->userdata('prontuario');
 
-		$user['nomepsicologo'] = $this->session->userdata('nomepsicologo');
-		$this->load->view('Home/menu',$user);
-		$this->load->model('SessoesModel');
-		$data = array(
-			'datasessoes' => $this->SessoesModel->view($prontuario),
+		$this->load->view('Home/menu',array('nomepsicologo'=>$this->session->userdata('nomepsicologo')));
+		$this->load->model('SessoesModel','sessoes');
+
+		$this->load->view('Sessoes/index',array(
+			'datasessoes' => $this->sessoes->view($prontuario),
 			'update_sessao' => $this->session->flashdata('update_sessao'),
 			'add_sessao' => $this->session->flashdata('add_sessao'),
 			'delete_sessao' => $this->session->flashdata('delete_sessao')
-		);
-		$this->load->view('Sessoes/index',$data);
+		));
 	}
 
 	public function get(){
-		$dados = array(
+		return array(
 			'data' => $this->input->post('data'),
 			'descricao' =>  $this->input->post('descricao'),
 			'numero_prontuario' => $this->input->post('numeroprontuario'),	
 			'titulo' => $this->input->post('titulo')
 		);
-
-		return $dados;
 	}
 
 	public function create(){
-		$dados['prontuario'] = $this->session->userdata('prontuario');
-		$user['nomepsicologo'] = $this->session->userdata('nomepsicologo');
-		$this->load->view('Home/menu',$user);
-		$this->load->view('Sessoes/create', $dados);
+		$this->load->view('Home/menu',array('nomepsicologo'=>$this->session->userdata('nomepsicologo')));
+		$this->load->view('Sessoes/create', array('prontuario'=>$this->session->userdata('prontuario')));
 	}
 
 	public function add(){
-		$dados = $this->get();
-		$add_sessao ="<div class='ls-background-primary ls-sm-space ls-sm-margin-bottom ls-text-md ls-ico-checkmark'>Adcionado com sucesso! </div>";
-		$this->load->model('SessoesModel');
-		$this->SessoesModel->add($dados);
-		$this->session->set_flashdata("add_sessao",$add_sessao);
+		$ses_reg = $this->get();
+
+		$this->load->model('SessoesModel','sessoes');
+		$this->sessoes->add($ses_reg);
+		$this->session->set_flashdata("add_sessao",'Adcionada com sucesso!');
 		redirect("view-sessao");
 	}
 	public function delete($id){
-		$delete_sessao = "<div class='ls-background-primary ls-sm-space ls-sm-margin-bottom ls-text-md ls-ico-checkmark'>Deletado com sucesso! </div>";
-		$this->load->model('SessoesModel');
-		$this->SessoesModel->delete($id);
+		$this->load->model('SessoesModel','sessoes');
+		$this->sessoes->delete($id);
 
-		$this->session->set_flashdata("delete_sessao",$delete_sessao);
+		$this->session->set_flashdata("delete_sessao","Deletada com sucesso!");
+		
 		redirect('view-sessao');
 	}
 
 	public function edit($id){
-		$user['nomepsicologo'] = $this->session->userdata('nomepsicologo');
 		$this->load->model('SessoesModel', 'sessoes');
-		$dados['sessao'] = $this->sessoes->view_id($id);
-		$this->load->view('Home/menu',$user);
-		$this->load->view('Sessoes/update', $dados);
+
+		$this->load->view('Home/menu',array('nomepsicologo'=>$this->session->userdata('nomepsicologo')));
+		$this->load->view('Sessoes/update', array('sessao'=>$this->sessoes->view_id($id)));
 	}
 
 	public function update(){
-		$update_sessao = "<div class='ls-background-primary ls-sm-space ls-sm-margin-bottom ls-text-md ls-ico-checkmark'>Atualizado com sucesso! </div>";
 		$this->load->model('SessoesModel','sessoes');
 		$this->sessoes->idsessao = $this->input->post('idsessao');
-		$dados = $this->get();
-		$this->sessoes->update($dados);
-		$this->session->set_flashdata("update_sessao",$update_sessao);
+		$ses_reg = $this->get();
+
+		$this->sessoes->update($ses_reg);
+		$this->session->set_flashdata("update_sessao",'Atualizada com sucesso!');
+
 		redirect('view-sessao');
 	}
 

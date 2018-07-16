@@ -25,7 +25,7 @@
 						<input type="text" name="profissao" required="required">
 					</label>
 
-					<input type="hidden" name="id_psicologo" required="required" value="<?=$psicologo?>">
+					<input type="hidden" name="id_psicologo" required="required" value="<?=$psicologo_id?>">
 
 					<label class="ls-label col-md-4 col-xs-12">
 						<b class="ls-label-text">Cartão de saúde</b>

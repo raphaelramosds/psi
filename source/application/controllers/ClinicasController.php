@@ -6,6 +6,98 @@ class ClinicasController extends CI_Controller {
 	function __construct(){
 		parent::__construct();
 	}
+
+	public function index(){
+		$config = $this->getpagination();
+		$this->pagination->initialize($config);
+		$offset = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
+
+		if ($this->session->userdata('psicologo') == NULL) {
+			redirect('/');
+		}
+
+		$psicologo = $this->session->userdata('psicologo');
+		
+		$this->load->view('Home/menu',array('nomepsicologo'=>$this->session->userdata('nomepsicologo')));
+		$this->load->model('ClinicasModel','clinicas');
+
+		$this->load->view('Clinicas/index', array(
+			'dataclinica'=>$this->clinicas->view($psicologo[0]->idpsicologo, $config['per_page'],$offset),
+			'pagination' => $this->pagination->create_links(),
+			"add_clinica" => $this->session->flashdata('add_clinica'),
+			"update_clinica" => $this->session->flashdata('update_clinica'),
+			"delete_clinica" => $this->session->flashdata('delete_clinica') 
+		));
+	}
+
+	public function search(){
+		$psicologo = $this->session->userdata('psicologo');
+		$nomeclinica = $this->input->post('clinica');
+
+		$this->load->view('Home/menu',array('nomepsicologo'=>$this->session->userdata('nomepsicologo')));
+		$this->load->model('ClinicasModel','clinicas');
+
+		$this->load->view('Clinicas/index', array(
+			'dataclinica'=>$this->clinicas->search($psicologo[0]->idpsicologo, $nomeclinica),
+			'delete' => $this->session->flashdata('delete')
+		));
+	}
+
+	public function get(){
+		return array(
+			'nomeclinica' => $this->input->post('nomeclinica'),
+			'telefone' => $this->input->post('telefone'),
+			'estado' => $this->input->post('estado'),
+			'cidade' => $this->input->post('cidade'),
+			'id_psicologo' => $this->input->post('id_psicologo')
+		);
+	}
+
+	public function create(){
+		$psicologo = $this->session->userdata('psicologo');
+
+		$this->load->view('Home/menu',array('nomepsicologo'=>$this->session->userdata('nomepsicologo')));
+		$this->load->view('Clinicas/create',array('psicologo'=>$psicologo[0]->idpsicologo));
+	}
+
+	public function add(){
+		$this->load->model('ClinicasModel');
+
+		$clinica_reg = $this->get();	
+
+		$this->ClinicasModel->add($clinica_reg);
+		$this->session->set_flashdata("add_clinica","Adcionada com sucesso!");
+		
+		redirect('view-clinica');
+	}
+
+	public function delete($id){
+		if ($id != NULL) {
+			$this->load->model('ClinicasModel');
+			$this->ClinicasModel->delete($id);
+			$this->session->set_flashdata("delete_clinica",'Deletada com sucesso!');
+
+			redirect('view-clinica');
+		}
+	}
+
+	public function edit($id){
+		$this->load->view('Home/menu',array('nomepsicologo'=>$this->session->userdata('nomepsicologo')));
+		$this->load->model('ClinicasModel','clinicas');
+	
+		$this->load->view('Clinicas/update', array('clinicas'=>$this->clinicas->view_id($id)));
+	}
+
+	public function update(){
+		$clinica_reg = $this->get();
+		$this->load->model('ClinicasModel','clinicas');
+		$this->clinicas->idclinica = $this->input->post('idclinica');
+		$this->clinicas->update($clinica_reg);
+		$this->session->set_flashdata("update_clinica",'Atualizada com sucesso!');
+
+		redirect('view-clinica');
+	}
+
 	public function getpagination(){
 		$psicologo = $this->session->userdata('psicologo');
 		$this->load->model("ClinicasModel","clinicas");
@@ -46,98 +138,5 @@ class ClinicasController extends CI_Controller {
 			'num_tag_close' => "</li>"
 		);
 		return $config;
-	}
-
-
-	public function index(){
-		$config = $this->getpagination();
-		$this->pagination->initialize($config);
-		$offset = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
-
-		if ($this->session->userdata('psicologo') == NULL) {
-			redirect('/');
-		}
-		$psicologo = $this->session->userdata('psicologo');
-		$user['nomepsicologo'] = $this->session->userdata('nomepsicologo');
-		$this->load->view('Home/menu',$user);
-		$this->load->model('ClinicasModel');
-		$data= array(
-			'dataclinica'=>$this->ClinicasModel->view($psicologo[0]->idpsicologo, $config['per_page'],$offset),
-			'pagination' => $this->pagination->create_links(),
-			"add_clinica" => $this->session->flashdata('add_clinica'),
-			"update_clinica" => $this->session->flashdata('update_clinica'),
-			"delete_clinica" => $this->session->flashdata('delete_clinica') 
-		);
-		$this->load->view('Clinicas/index', $data);
-	}
-
-	public function search(){
-		$psicologo = $this->session->userdata('psicologo');
-		$nomeclinica = $this->input->post('clinica');
-		$user['nomepsicologo'] = $this->session->userdata('nomepsicologo');
-
-		$this->load->view('Home/menu',$user);
-		$this->load->model('ClinicasModel');
-
-		$data= array(
-			'dataclinica'=>$this->ClinicasModel->search($psicologo[0]->idpsicologo, $nomeclinica),
-			'delete' => $this->session->flashdata('delete')
-		);
-		$this->load->view('Clinicas/index', $data);
-	}
-
-	public function get(){
-		$dados = array(
-			'nomeclinica' => $this->input->post('nomeclinica'),
-			'telefone' => $this->input->post('telefone'),
-			'estado' => $this->input->post('estado'),
-			'cidade' => $this->input->post('cidade'),
-			'id_psicologo' => $this->input->post('id_psicologo')
-		);
-		return $dados;
-	}
-
-	public function create(){
-		$psicologo = $this->session->userdata('psicologo');
-		$user['nomepsicologo'] = $this->session->userdata('nomepsicologo');
-		$this->load->view('Home/menu',$user);
-		$this->load->view('Clinicas/create',array('psicologo'=>$psicologo[0]->idpsicologo));
-	}
-
-	public function add(){
-		$add_clinica = "<div class='ls-background-primary ls-sm-space ls-sm-margin-bottom ls-text-md ls-ico-checkmark'>Adcionado com sucesso! </div>";
-
-		$this->load->model('ClinicasModel');
-		$clinica_reg = $this->get();	
-		$this->ClinicasModel->add($clinica_reg);
-		$this->session->set_flashdata("add_clinica",$add_clinica);
-		redirect('view-clinica');
-	}
-
-	public function delete($id){
-		if ($id != NULL) {
-			$delete_clinica = "<div class='ls-background-primary ls-sm-space ls-sm-margin-bottom ls-text-md ls-ico-checkmark'>Deletado com sucesso! </div>";
-			$this->load->model('ClinicasModel');
-			$this->ClinicasModel->delete($id);
-			$this->session->set_flashdata("delete_clinica",$delete_clinica);
-			redirect('view-clinica');
-		}
-	}
-
-	public function edit($id){
-		$user['nomepsicologo'] = $this->session->userdata('nomepsicologo');
-		$this->load->view('Home/menu',$user);
-		$this->load->model('ClinicasModel');
-		$dados["clinicas"] =  $this->ClinicasModel->view_id($id);
-		$this->load->view('Clinicas/update', $dados);
-	}
-	public function update(){
-		$update_clinica = "<div class='ls-background-primary ls-sm-space ls-sm-margin-bottom ls-text-md ls-ico-checkmark'>Atualizado com sucesso! </div>";
-		$dados = $this->get();
-		$this->load->model('ClinicasModel','clinicas');
-		$this->clinicas->idclinica = $this->input->post('idclinica');
-		$this->clinicas->update($dados);
-		$this->session->set_flashdata("update_clinica",$update_clinica);
-		redirect('view-clinica');
 	}
 }

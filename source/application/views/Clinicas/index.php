@@ -5,11 +5,11 @@
 				<h2 class="ls-title-3 ls-ico-location">Clínicas cadastradas</h2>
 			</header>
 			<?php if(isset($add_clinica)):?>
-			<?=$add_clinica?>
+			<div class='ls-background-primary ls-sm-space ls-sm-margin-bottom ls-text-md ls-ico-checkmark'><?=$add_clinica?></div>
 			<?php elseif(isset($delete_clinica)):?>
-			<?=$delete_clinica?>
+			<div class='ls-background-primary ls-sm-space ls-sm-margin-bottom ls-text-md ls-ico-checkmark'><?=$delete_clinica?></div>
 			<?php elseif(isset($update_clinica)):?>
-			<?=$update_clinica?>
+			<div class='ls-background-primary ls-sm-space ls-sm-margin-bottom ls-text-md ls-ico-checkmark'><?=$update_clinica?></div>
 			<?php endif;?>
 			<form  action="<?=base_url()?>ClinicasController/search" class="ls-form ls-form-inline" method="POST">
 				<label class="ls-label" role="search">

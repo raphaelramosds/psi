@@ -11,24 +11,23 @@ class PsicologosController extends CI_Controller {
 		if ($this->session->userdata('psicologo') == NULL) {
 			redirect('/');
 		}
-		//Recuperar dados do psicólogo através do seu CRP
+	
 		$psicologo = $this->session->userdata('psicologo');
 
 		//Em cada controlador, chamar a sessão nomepsicologo (userdata)
 		//Para recuperar a query no controlador de Home e, assim, retornar o nome do psicólgo
-		$user['nomepsicologo'] = $this->session->userdata('nomepsicologo');
-		$this->load->view('Home/menu', $user);
+		$this->load->view('Home/menu', array('nomepsicologo'=>$this->session->userdata('nomepsicologo')));
 
-		$this->load->model('PsicologosModel');
-		$data = array(
+		$this->load->model('PsicologosModel','psicologos');
+
+		$this->load->view('Psicologos/index', array(
 			//Enviar o CRP do psicólogo para a cláusula WHERE dentro do Model
-			'datapsicologos' => $this->PsicologosModel->view($psicologo[0]->idpsicologo),
-		);
-		$this->load->view('Psicologos/index', $data);
+			'datapsicologos' => $this->psicologos->view($psicologo[0]->idpsicologo),
+		));
 	}
 
 	public function get(){
-		$dados = array(
+		return array(
 			'crp' => $this->input->post('crp'),
 			'datanascimento' => $this->input->post('datanasc'),
 			'emailpsicologo' => $this->input->post('emailpsicologo'),
@@ -36,24 +35,22 @@ class PsicologosController extends CI_Controller {
 			'sexopsicologo' => $this->input->post('sexopsicologo'),
 			'usuario_idusuario' =>  $this->input->post('idusuario'),
 		);
-		return $dados;
 	}
-
 
 	public function create(){
 		//Receba o id do usuário que foi enviado do cadastro pela query do model usuário...
-		$data["id_user"] = $this->session->userdata("id_user");
-		$this->load->view('Psicologos/create', $data);
+		$this->load->view('Psicologos/create', array('id_user'=> $this->session->userdata("id_user")));
 	}
 
 	public function add(){
-		$success = "<div class='ls-sm-space ls-txt-center ls-color-success' style='font-size:20px;'><strong>Sucesso!</strong> agora entre no sistema </div>";
 		$id_user = $this->session->userdata("id_user");
 		$pycho_reg = $this->get();
+
 		$this->load->model('PsicologosModel','psicologos');
-		//Se o psicólogo não se cadastrar ou fechar a aba, faça com que o id do seu usuário seja excluído
+
 		$this->psicologos->add($pycho_reg);
-		$this->session->set_flashdata('success',$success);
+		$this->session->set_flashdata('success','Sucesso ao se cadastrar');
+		
 		redirect('login');
 	}
 
@@ -63,22 +60,24 @@ class PsicologosController extends CI_Controller {
 		}
 		$this->load->model('PsicologosModel');
 		$this->PsicologosModel->delete($id);
+
 		redirect('view-psycho');
 	}
 
 	public function edit($id){
-		$user['nomepsicologo'] = $this->session->userdata('nomepsicologo');
 		$this->load->model('PsicologosModel', 'psicologos');
-		$dados['psicologos'] = $this->psicologos->view_id($id);
-		$this->load->view('Home/menu',$user);
-		$this->load->view('Psicologos/update', $dados);
+
+		$this->load->view('Home/menu',array('nomepsicologo'=>$this->session->userdata('nomepsicologo')));
+		$this->load->view('Psicologos/update', array('psicologos'=>$this->psicologos->view_id($id)));
 	}
 
 	public function update(){
-		$this->load->model('PsicologosModel');
-		$this->PsicologosModel->idpsicologo = $this->input->post('idpsicologo');
-		$dados = $this->get();
-		$this->PsicologosModel->update($dados);
+		$psycho_reg = $this->get();
+
+		$this->load->model('PsicologosModel','psicologos');
+		$this->psicologos->idpsicologo = $this->input->post('idpsicologo');
+		$this->PsicologosModel->update($psycho_reg);
+		
 		redirect('view-psycho');
 	}
 
