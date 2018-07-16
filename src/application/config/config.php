@@ -2,7 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 
-$config['base_url'] = 'http://localhost/psi/source';
+$config['base_url'] = 'http://localhost/psi/src';
 //$config['base_url'] = 'https://prontuariospsi.000webhostapp.com/';
 
 $config['index_page'] = '';
