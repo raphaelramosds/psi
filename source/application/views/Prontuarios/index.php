@@ -67,9 +67,8 @@ if($dataprontuarios == NULL){
 									$find = TRUE;
 								}
 							}
-							
 							if($find == FALSE){
-								echo "Essa doença não existe";
+								echo "<span style='color:red'>Essa doença não existe</span>";
 							}
 							?>
 						</td>
