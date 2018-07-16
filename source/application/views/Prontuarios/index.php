@@ -59,10 +59,17 @@ if($dataprontuarios == NULL){
 						</td>
 						<td>
 							<?php 
+							$find = FALSE;
+
 							foreach($xml->doenca as $line){
 								if($line->codigo == $value->cid10){
 									echo $line->nome;
+									$find = TRUE;
 								}
+							}
+							
+							if($find == FALSE){
+								echo "Essa doença não existe";
 							}
 							?>
 						</td>
