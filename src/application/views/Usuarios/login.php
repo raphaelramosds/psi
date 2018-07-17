@@ -21,6 +21,10 @@
               <div class='ls-sm-space ls-txt-center ls-color-success' style='font-size:20px;'><?=$success?></div>
               <?php elseif(isset($erro)):?>
               <div class='ls-sm-space ls-txt-center' style='font-size:20px; color:red;'><?=$erro?></div>
+              <?php elseif(isset($success_update_password)):?>
+              <div class='ls-sm-space ls-txt-center ls-color-success' style='font-size:20px;'><?=$success_update_password?></div>
+              <?php elseif(isset($erro_update_password)):?>
+              <div class='ls-sm-space ls-txt-center ls-color-success' style='font-size:20px;'><?=$erro_update_password?></div>
               <?php endif;?>
               <label class="ls-label">
                 <b class="ls-label-text ls-hidden-accessible">Usuário</b>
@@ -36,7 +40,10 @@
               </label>
               <style>.foco_input:hover{}</style>
               <input type="submit" value="Entrar" class="ls-btn ls-btn-block ls-btn-lg foco_input" style="background:#1DD1A4;color:white;">
-              <a href="<?=base_url()?>cadastre" class="link_direct">Cadastre-se agora</a>
+              <div style="line-height:25px;">
+              <a href="<?=base_url()?>cadastre" class="link_direct">Cadastre-se agora</a><br>
+              <a href="<?=base_url()?>forgot-password" class="link_direct" >Esqueci minha senha</a>
+              </div>
             </fieldset>
           </form>
         </div>

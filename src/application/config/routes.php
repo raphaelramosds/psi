@@ -10,6 +10,7 @@ $route['translate_uri_dashes'] = FALSE;
 $route['home'] = 'HomeController';
 $route['login'] = 'LoginController';
 $route['cadastre'] = 'UsuariosController/create';
+$route['forgot-password'] = 'LoginController/forgotPassword';
 
 //Psicólogo
 $route['create-psycho'] = 'PsicologosController/create';

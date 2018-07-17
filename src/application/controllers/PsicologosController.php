@@ -76,7 +76,7 @@ class PsicologosController extends CI_Controller {
 
 		$this->load->model('PsicologosModel','psicologos');
 		$this->psicologos->idpsicologo = $this->input->post('idpsicologo');
-		$this->PsicologosModel->update($psycho_reg);
+		$this->psicologos->update($psycho_reg);
 		
 		redirect('view-psycho');
 	}

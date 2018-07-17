@@ -11,20 +11,12 @@
 <div class="container" style="margin-top: 200px;max-width:900px;">
 	<div class="ls-box ls-board-box" style="border:none;">
 		<header class="ls-info-header" style="text-align:center;border:none">
-			<h2 class="ls-title-3" >Cadastre seu <span style="background:#1DD1A4;padding:10px;color:white;display:inline-block;">usuário</span></h2>
+			<h2 class="ls-title-3" >Nova <span style="background:#1DD1A4;padding:10px;color:white;display:inline-block;">senha</span></h2>
 		</header>
-		<form action="<?=base_url()?>UsuariosController/add" role="form" method="POST">
+		<form action="<?=base_url()?>UsuariosController/update_method_password" role="form" method="POST">
 			<fieldset>
 				<style>label{margin: 0 auto;}</style>
-				<label for="" class="ls-label col-md-4" >
-					<b class="ls-label-text">Nome de usuário</b>
-					<p class="ls-label-info">Digite o nome de usuário. Ex.: usuario123</p>
-					<?php if (isset($erro_user)):?>
-					<div class='ls-sm-space' style='font-size:20px; color:red;'><?=$erro_user?></div>
-					<?php endif;?>
-					<input type="text" name ="username" required="required">
-				</label>
-				<label for="" class="ls-label col-md-4">
+                <label for="" class="ls-label col-md-4">
 	               <b class="ls-label-text ls-hidden-accessible">Senha</b>
 	                <div class="ls-prefix-group ls-field-lg">
 	                  <input id="password_field" class="ls-login-bg-password" name="senha" type="password" placeholder="Senha" required >
@@ -40,12 +32,10 @@
                   <input id="password_confirm" class="ls-login-bg-password" name="confirm_senha" type="password" placeholder="Confirme sua senha" required >
                   <a class="ls-label-text-prefix ls-toggle-pass ls-ico-eye" data-toggle-class="ls-ico-eye, ls-ico-eye-blocked" data-target="#password_confirm" href="#"></a>
                 </div>
-				</label>
+                </label>    
 			</fieldset>
 			<div class="ls-actions-btn" style="text-align:center;border:none;line-height:50px;">
-				<button class="ls-btn"  style="background-color:#1DD1A4;color:white;padding:1em;width:250px;">Avançar</button>
-				<br>
-				<a href="<?=base_url()?>login" class="link_direct" >Voltar</a>
+				<button class="ls-btn"  style="background-color:#1DD1A4;color:white;padding:1em;width:250px;">Criar nova senha</button><br>
 			</div>
 		</form>
 	</div>
