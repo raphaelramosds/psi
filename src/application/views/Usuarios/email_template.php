@@ -13,13 +13,6 @@
 	.title{
 		color: #1c1c1c;
 	}
-
-	.header_box{
-		padding: 1em;
-		color: white;
-
-	}
-
 	.box_message{
 		border-left:4px solid #1c1c1c;
 		padding:2em;
@@ -29,7 +22,6 @@
 		background-color: #1dd1a4;
 		padding:.5em;
 		color: white;
-		font-weight:bold;
 	}
 	</style>
 	<div class="box_message">
