@@ -71,7 +71,7 @@ class UsuariosController extends CI_Controller {
 
 		if ($code_type != $code_auth){
 			$this->session->set_flashdata('erro_code','Código inválido ou já foi utilizado');
-			redirect('LoginController/auth_code');
+			redirect('auth-code');
 		}else{
 			$code_auth = md5(rand());
 			$this->edit_password($usuario[0]->idusuario);

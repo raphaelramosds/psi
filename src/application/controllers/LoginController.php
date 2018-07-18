@@ -10,7 +10,7 @@ class LoginController extends CI_Controller {
   public function index(){
 		$this->load->view('Usuarios/login', array(
 			'success' => $this->session->flashdata('success'),
-			'erro' => $this->session->flashdata('erro_autenticacao'),
+			'erro'    => $this->session->flashdata('erro_autenticacao'),
 			'success_update_password' => $this->session->flashdata('success_update_password')
 		));
   }
@@ -18,7 +18,7 @@ class LoginController extends CI_Controller {
   //Criar uma sessão para colocar os dados do usuário
   public function auth(){
 		$user_reg = array(
-			'nome' => $this->input->post('username'),
+			'nome'  => $this->input->post('username'),
 			'senha' => $this->input->post("senha")
 		);
 
@@ -42,27 +42,26 @@ class LoginController extends CI_Controller {
 			$this->session->set_flashdata('erro_autenticacao', 'Usuário ou senha incorretos');
 			redirect('login');
 		}
-  }
+  	}
 
-  public function auth_code(){
+  	public function auth_code(){
 	  $this->load->view('Usuarios/confirm_code', array(
 		  'erro_code' => $this->session->flashdata('erro_code')
 	  ));
-  }
+  	}
 
-  public function forgotPassword(){
+  	public function forgotPassword(){
 		$this->load->view('Usuarios/recovery', array(
-			'invalid_email'=>$this->session->flashdata('invalid_email'),
+			'invalid_email'      => $this->session->flashdata('invalid_email'),
 			'success_send_email' => $this->session->flashdata('success_send_email'),
-			'erro_send_email' => $this->session->flashdata('erro_send_email')
+			'erro_send_email'    => $this->session->flashdata('erro_send_email')
 		));
-  }
+  	}
 
   
-  public function recoveryPass(){
+  	public function recoveryPass(){
 		$this->load->model('UsuariosModel','usuarios');
-		$email = $this->input->post('email');
-
+		$email   = $this->input->post('email');
 		$request = $this->usuarios->verify_email($email);
 
 		if (count($request) == 0){
@@ -85,7 +84,6 @@ class LoginController extends CI_Controller {
 
 		$this->session->set_userdata('usuario_data_confirm',$usuario_data);
 
-		$base_url = base_url('UsuariosController/edit_password/'.$usuario[0]->idusuario);
 
 		$this->load->library("email");
 
@@ -112,7 +110,7 @@ class LoginController extends CI_Controller {
 
 		if ($this->email->send()){
 			$this->session->set_flashdata('success_send_email','Email enviado com sucesso!');
-			redirect('LoginController/auth_code');
+			redirect('auth-code');
 		}
 		else{
 			$this->session->set_flashdata('erro_send_email',$this->email->print_debugger());

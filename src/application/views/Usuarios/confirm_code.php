@@ -11,7 +11,8 @@
 <div class="container" style="margin-top: 200px;max-width:900px;">
 	<div class="ls-box ls-board-box" style="border:none;">
 		<header class="ls-info-header" style="text-align:center;border:none">
-            <h2 class="ls-title-3" >Confirme seu código</h2><br>
+            <h2 class="ls-title-3" >Código de ativação</h2><br>
+			<hr>
             <small>Espere alguns minutos até chegar ao seu email...</small>
 		</header>
 		<form action="<?=base_url()?>UsuariosController/confirm_code" role="form" method="POST">
