@@ -28,11 +28,11 @@ class PsicologosController extends CI_Controller {
 
 	public function get(){
 		return array(
-			'crp' => $this->input->post('crp'),
-			'datanascimento' => $this->input->post('datanasc'),
-			'emailpsicologo' => $this->input->post('emailpsicologo'),
-			'nomepsicologo' => $this->input->post('nomepsicologo'),
-			'sexopsicologo' => $this->input->post('sexopsicologo'),
+			'crp' 				=> $this->input->post('crp'),
+			'datanascimento' 	=> $this->input->post('datanasc'),
+			'emailpsicologo' 	=> $this->input->post('emailpsicologo'),
+			'nomepsicologo' 	=> $this->input->post('nomepsicologo'),
+			'sexopsicologo' 	=> $this->input->post('sexopsicologo'),
 			'usuario_idusuario' =>  $this->input->post('idusuario'),
 		);
 	}
@@ -43,8 +43,8 @@ class PsicologosController extends CI_Controller {
 	}
 
 	public function add(){
-		$id_user = $this->session->userdata("id_user");
-		$pycho_reg = $this->get();
+		$id_user 	= $this->session->userdata("id_user");
+		$pycho_reg 	= $this->get();
 
 		$this->load->model('PsicologosModel','psicologos');
 

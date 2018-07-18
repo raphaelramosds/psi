@@ -24,7 +24,7 @@ class HomeController extends CI_Controller {
 		$this->load->view('Home/index', array(
 			'countersclinica' => $this->clinicas->count_results($psicologo[0]->idpsicologo),
 			'counterpaciente' => $this->pacientes->count_results($psicologo[0]->idpsicologo),
-			'titulo' => 'Início',
+			'titulo' 		  => 'Início',
 		));
 	}
 

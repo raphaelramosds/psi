@@ -23,19 +23,19 @@ class SessoesController extends CI_Controller {
 		$this->load->model('SessoesModel','sessoes');
 
 		$this->load->view('Sessoes/index',array(
-			'datasessoes' => $this->sessoes->view($prontuario),
+			'datasessoes' 	=> $this->sessoes->view($prontuario),
 			'update_sessao' => $this->session->flashdata('update_sessao'),
-			'add_sessao' => $this->session->flashdata('add_sessao'),
+			'add_sessao' 	=> $this->session->flashdata('add_sessao'),
 			'delete_sessao' => $this->session->flashdata('delete_sessao')
 		));
 	}
 
 	public function get(){
 		return array(
-			'data' => $this->input->post('data'),
-			'descricao' =>  $this->input->post('descricao'),
+			'data' 				=> $this->input->post('data'),
+			'descricao' 		=> $this->input->post('descricao'),
 			'numero_prontuario' => $this->input->post('numeroprontuario'),	
-			'titulo' => $this->input->post('titulo')
+			'titulo'	 		=> $this->input->post('titulo')
 		);
 	}
 

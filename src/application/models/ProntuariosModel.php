@@ -46,4 +46,5 @@ class ProntuariosModel extends CI_Model{
 		$this->db->where('numeroprontuario', $this->numeroprontuario);
 		$this->db->update('prontuario');
 	}
+
 }

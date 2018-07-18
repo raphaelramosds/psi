@@ -24,20 +24,20 @@ class PacientesController extends CI_Controller {
 		$psicologo = $this->session->userdata('psicologo');
 		$id_psicologo = $psicologo[0]->idpsicologo;
 
-		$this->load->view('Home/menu', array('nomepsicologo' => $this->session->userdata('nomepsicologo')));
+		$this->load->view('Home/menu', array('nomepsicologo'=>$this->session->userdata('nomepsicologo')));
 		$this->load->model('PacientesModel');
 
 		$this->load->view('Pacientes/index', array(
-			'datapacientes'=>$this->PacientesModel->view($id_psicologo, $config['per_page'], $offset),
-			'delete' => $this->session->flashdata('delete'),
-			'pagination' => $this->pagination->create_links(),
-			'update_paciente' => $this->session->flashdata('update_paciente'),
-			'add_paciente' => $this->session->flashdata('add_paciente'),
-			'delete_paciente' => $this->session->flashdata('delete_paciente'),
+			'datapacientes'		=> $this->PacientesModel->view($id_psicologo, $config['per_page'], $offset),
+			'delete' 			=> $this->session->flashdata('delete'),
+			'pagination' 		=> $this->pagination->create_links(),
+			'update_paciente' 	=> $this->session->flashdata('update_paciente'),
+			'add_paciente' 		=> $this->session->flashdata('add_paciente'),
+			'delete_paciente' 	=> $this->session->flashdata('delete_paciente'),
 			//Dados do Model-View Prontuário
-			'psicologo' => $id_psicologo,
+			'psicologo' 		=> $id_psicologo,
 			//Exibir Clínicas cadastradas pelo psicologo
-			'clinicas' => $this->clinicas->view($id_psicologo)
+			'clinicas' 			=> $this->clinicas->view($id_psicologo)
 		));
 	}
 
@@ -59,14 +59,14 @@ class PacientesController extends CI_Controller {
 
 	public function get(){
 		return array(
-			'cartaosaude' => $this->input->post('cartaosaude'),
-			'emailpaciente' => $this->input->post('email'),
-			'nomepaciente' => $this->input->post('nomepaciente'),
-			'numerosus' => $this->input->post('numerosus'),
-			'profissao' => $this->input->post('profissao'),
-			'id_psicologo' =>  $this->input->post('id_psicologo'),
-			'sexopaciente' =>  $this->input->post('sexopaciente'),
-			'telefonepaciente' => $this->input->post('telefonepaciente')
+			'cartaosaude' 		=> $this->input->post('cartaosaude'),
+			'emailpaciente' 	=> $this->input->post('email'),
+			'nomepaciente' 		=> $this->input->post('nomepaciente'),
+			'numerosus' 		=> $this->input->post('numerosus'),
+			'profissao' 		=> $this->input->post('profissao'),
+			'id_psicologo' 		=> $this->input->post('id_psicologo'),
+			'sexopaciente' 		=> $this->input->post('sexopaciente'),
+			'telefonepaciente' 	=> $this->input->post('telefonepaciente')
 		);
 	}
 
@@ -119,39 +119,39 @@ class PacientesController extends CI_Controller {
 		$psicologo = $this->session->userdata("psicologo");
 
 		$config = array(
-			'base_url' 	=> base_url('PacientesController/index'),
-			'per_page' 	=> 4,
-			'num_links' => 10,
-			'uri_segment' => 3,
-			'total_rows' => $this->pacientes->count_results($psicologo[0]->idpsicologo),
+			'base_url' 			=> base_url('PacientesController/index'),
+			'per_page' 			=> 4,
+			'num_links' 		=> 10,
+			'uri_segment' 		=> 3,
+			'total_rows' 		=> $this->pacientes->count_results($psicologo[0]->idpsicologo),
 
-			'full_tag_open' => "<ul class = 'ls-pagination-filter'>",
-			'full_tag_close' => "</ul>",
+			'full_tag_open' 	=> "<ul class = 'ls-pagination-filter'>",
+			'full_tag_close' 	=> "</ul>",
 
-			'first_link' => FALSE,
-			'last_link' => FALSE,
+			'first_link' 		=> FALSE,
+			'last_link' 		=> FALSE,
 
-			'first_tag_open' => "<li>",
-			'first_tag_close' => "</li>",
+			'first_tag_open' 	=> "<li>",
+			'first_tag_close' 	=> "</li>",
 
-			'prev_link' => "Anterior",
+			'prev_link' 		=> "Anterior",
 
-			'prev_tag_open'=>"<li>",
-			'prev_tag_close' => "</li>",
+			'prev_tag_open'		=> "<li>",
+			'prev_tag_close' 	=> "</li>",
 
-			'next_link' => "Proxima",
+			'next_link' 		=> "Proxima",
 
-			'next_tag_open' => "<li>",
-			'next_tag_close' => "</li>",
+			'next_tag_open' 	=> "<li>",
+			'next_tag_close'	=> "</li>",
 
-			'last_tag_open' => "<li>",
-			'last_tag_close' => "</li>",
+			'last_tag_open' 	=> "<li>",
+			'last_tag_close'    => "</li>",
 
-			'cur_tag_open' => "<li class = 'ls-active'><a href='#'>",
-			'cur_tag_close' => "</a></li>",
+			'cur_tag_open' 		=> "<li class = 'ls-active'><a href='#'>",
+			'cur_tag_close' 	=> "</a></li>",
 
-			'num_tag_open' => "<li>",
-			'num_tag_close' => "</li>"
+			'num_tag_open' 		=> "<li>",
+			'num_tag_close' 	=> "</li>"
 		);
 		return $config;
 	}

@@ -22,25 +22,25 @@ class UsuariosController extends CI_Controller {
 	public function get(){
 		return array(
 			'idusuario' => $this->input->post('idusuario'),
-			'username' => $this->input->post('username'),
-			'senha' => $this->input->post('senha')
+			'username' 	=> $this->input->post('username'),
+			'senha' 	=> $this->input->post('senha')
 		);
 	}
 
 	public function create(){
 		$this->load->view('Usuarios/create',
 		array(
-			'erro_senha'=>$this->session->flashdata('erro_senha'), 
-			'erro_user'=>$this->session->flashdata('erro_user')
+			'erro_senha'	=> $this->session->flashdata('erro_senha'), 
+			'erro_user'		=> $this->session->flashdata('erro_user')
 		));
 	}
 
 	public function add(){
 		$this->load->model('UsuariosModel','usuarios');
-		$user_reg = $this->get();
-
-		$user_reg['senha'] = md5($user_reg['username'].$user_reg['senha']);
-		$users_count = count($this->usuarios->duplicate_user($user_reg['username']));
+		
+		$user_reg 			= $this->get();
+		$user_reg['senha']  = md5($user_reg['username'].$user_reg['senha']);
+		$users_count 		= count($this->usuarios->duplicate_user($user_reg['username']));
 
 		if($users_count == 1){
 			$this->session->set_flashdata('erro_user','Nome de usuário já existe');
