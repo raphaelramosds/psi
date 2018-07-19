@@ -1,34 +1,37 @@
 <?php
 
-class PsicologosModel extends CI_Model{
+class PsicologosModel extends CI_Model
+{
+	
 	public $idpsicologo;
 
-	function __construct(){
-		parent::__construct();
-	}
-
-	public function view($id){
+	public function view($id)
+	{
 		$this->db->where('idpsicologo', $id);
 		$query = $this->db->get('psicologo');
 		return $query->result();
 	}
 
-	public function view_id($id){
+	public function view_id($id)
+	{
 		$this->db->where('idpsicologo',$id);
 		$query = $this->db->get('psicologo');
 		return $query->row();
 	}
 
-	public function add($dados){
+	public function add($dados)
+	{
 		$this->db->insert('psicologo', $dados);
 	}
 
-	public function delete($id){
+	public function delete($id)
+	{
 		$this->db->where('idpsicologo',$id);
 		$this->db->delete('psicologo');
 	}
 
-	public function update($dados){
+	public function update($dados)
+	{
 		$this->db->set($dados);
 		$this->db->where('idpsicologo', $this->idpsicologo);
 		$this->db->update('psicologo');

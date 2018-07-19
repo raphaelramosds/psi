@@ -1,21 +1,22 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class ProntuariosController extends CI_Controller {
+class ProntuariosController extends CI_Controller 
+{
 
-	function __construct(){
-		parent::__construct();
-	}
-
-	public function index($idpaciente){
-		if ($this->session->userdata('psicologo') == NULL) {
+	public function index($idpaciente)
+	{
+		if ($this->session->userdata('psicologo') == NULL) 
+		{
 			redirect('/');
 		}
+
 		$this->session->set_userdata('paciente', $idpaciente);
 		redirect('view-prontuario');
 	}
 
-	public function view(){
+	public function view()
+	{
 		$paciente = $this->session->userdata('paciente');
 
 		$this->load->model("ClinicasModel","clinicas");
@@ -38,7 +39,8 @@ class ProntuariosController extends CI_Controller {
 		));
 	}
 
-	public function get(){
+	public function get()
+	{
 		return array(
 			'alta' 		 		=> $this->input->post('alta'),
 			'cid10' 	 		=> $this->input->post('cid10'),
@@ -53,7 +55,8 @@ class ProntuariosController extends CI_Controller {
 		);
 	}
 
-	public function add(){
+	public function add()
+	{
 		$this->load->model('ProntuariosModel','prontuarios');
 
 		$prontuario_reg = $this->get();
@@ -65,7 +68,8 @@ class ProntuariosController extends CI_Controller {
 
 	}
 
-	public function delete($idprontuario=NULL){
+	public function delete($idprontuario = NULL)
+	{
 		$this->load->model('ProntuariosModel','prontuarios');
 		$this->prontuarios->delete($idprontuario);
 		$this->session->set_flashdata("delete_prontuario","Deletado com sucesso!");
@@ -89,7 +93,8 @@ class ProntuariosController extends CI_Controller {
 		));
 	}
 
-	public function update(){
+	public function update()
+	{
 
 		$prontuario_reg = $this->get();	
 

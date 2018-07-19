@@ -1,12 +1,11 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class HomeController extends CI_Controller {
-	function __construct(){
-		parent::__construct();
-	}
+class HomeController extends CI_Controller 
+{
 
-	public function index(){
+	public function index()
+	{
 		if ($this->session->userdata('psicologo') == NULL) {
 			redirect('/');
 		}
@@ -28,7 +27,8 @@ class HomeController extends CI_Controller {
 		));
 	}
 
-	public function loggout(){
+	public function loggout()
+	{
 		$this->session->unset_userdata('psicologo');
 		$this->session->unset_userdata('nomepsicologo');
 		redirect('/');

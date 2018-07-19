@@ -1,18 +1,17 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class ClinicasController extends CI_Controller {
-
-	function __construct(){
-		parent::__construct();
-	}
-
-	public function index(){
+class ClinicasController extends CI_Controller 
+{
+	
+	public function index()
+	{
 		$config = $this->getpagination();
 		$this->pagination->initialize($config);
 		$offset = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
 
-		if ($this->session->userdata('psicologo') == NULL) {
+		if ($this->session->userdata('psicologo') == NULL) 
+		{
 			redirect('/');
 		}
 
@@ -30,7 +29,8 @@ class ClinicasController extends CI_Controller {
 		));
 	}
 
-	public function search(){
+	public function search()
+	{
 		$psicologo = $this->session->userdata('psicologo');
 		$nomeclinica = $this->input->post('clinica');
 
@@ -43,7 +43,8 @@ class ClinicasController extends CI_Controller {
 		));
 	}
 
-	public function get(){
+	public function get()
+	{
 		return array(
 			'nomeclinica' 	=> $this->input->post('nomeclinica'),
 			'telefone' 		=> $this->input->post('telefone'),
@@ -53,14 +54,16 @@ class ClinicasController extends CI_Controller {
 		);
 	}
 
-	public function create(){
+	public function create()
+	{
 		$psicologo = $this->session->userdata('psicologo');
 
 		$this->load->view('Home/menu',array('nomepsicologo'=>$this->session->userdata('nomepsicologo')));
 		$this->load->view('Clinicas/create',array('psicologo'=>$psicologo[0]->idpsicologo));
 	}
 
-	public function add(){
+	public function add()
+	{
 		$this->load->model('ClinicasModel');
 
 		$clinica_reg = $this->get();	
@@ -71,8 +74,10 @@ class ClinicasController extends CI_Controller {
 		redirect('view-clinica');
 	}
 
-	public function delete($id){
-		if ($id != NULL) {
+	public function delete($id)
+	{
+		if ($id != NULL) 
+		{
 			$this->load->model('ClinicasModel');
 			$this->ClinicasModel->delete($id);
 			$this->session->set_flashdata("delete_clinica",'Deletada com sucesso!');
@@ -81,14 +86,16 @@ class ClinicasController extends CI_Controller {
 		}
 	}
 
-	public function edit($id){
+	public function edit($id)
+	{
 		$this->load->view('Home/menu',array('nomepsicologo'=>$this->session->userdata('nomepsicologo')));
 		$this->load->model('ClinicasModel','clinicas');
 	
 		$this->load->view('Clinicas/update', array('clinicas'=>$this->clinicas->view_id($id)));
 	}
 
-	public function update(){
+	public function update()
+	{
 		$clinica_reg = $this->get();
 		$this->load->model('ClinicasModel','clinicas');
 		$this->clinicas->idclinica = $this->input->post('idclinica');
@@ -98,7 +105,8 @@ class ClinicasController extends CI_Controller {
 		redirect('view-clinica');
 	}
 
-	public function getpagination(){
+	public function getpagination()
+	{
 		$psicologo = $this->session->userdata('psicologo');
 		$this->load->model("ClinicasModel","clinicas");
 

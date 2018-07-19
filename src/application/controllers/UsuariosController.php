@@ -1,14 +1,13 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class UsuariosController extends CI_Controller {
+class UsuariosController extends CI_Controller 
+{
 
-	function __construct(){
-		parent::__construct();
-	}
-
-	public function index(){
-		if ($this->session->userdata('psicologo') == NULL) {
+	public function index()
+	{
+		if ($this->session->userdata('psicologo') == NULL) 
+		{
 			redirect('/');
 		}
 		$this->load->view('Home/menu');
@@ -19,7 +18,8 @@ class UsuariosController extends CI_Controller {
 		));
 	}
 
-	public function get(){
+	public function get()
+	{
 		return array(
 			'idusuario' => $this->input->post('idusuario'),
 			'username' 	=> $this->input->post('username'),
@@ -27,7 +27,8 @@ class UsuariosController extends CI_Controller {
 		);
 	}
 
-	public function create(){
+	public function create()
+	{
 		$this->load->view('Usuarios/create',
 		array(
 			'erro_senha'	=> $this->session->flashdata('erro_senha'), 
@@ -35,19 +36,22 @@ class UsuariosController extends CI_Controller {
 		));
 	}
 
-	public function add(){
+	public function add()
+	{
 		$this->load->model('UsuariosModel','usuarios');
 		
 		$user_reg 			= $this->get();
 		$user_reg['senha']  = md5($user_reg['username'].$user_reg['senha']);
 		$users_count 		= count($this->usuarios->duplicate_user($user_reg['username']));
 
-		if($users_count == 1){
+		if($users_count == 1)
+		{
 			$this->session->set_flashdata('erro_user','Nome de usuário já existe');
 			redirect("cadastre");
 		}
 
-		if ($this->input->post('confirm_senha') != $this->input->post('senha')) {
+		if ($this->input->post('confirm_senha') != $this->input->post('senha')) 
+		{
 			$this->session->set_flashdata('erro_senha','Parece que as senhas não são iguais');
 			redirect("cadastre");
 		}
@@ -64,15 +68,19 @@ class UsuariosController extends CI_Controller {
 	}
 
 	//Primeiro: Ativação do código
-	public function confirm_code(){
+	public function confirm_code()
+	{
 		$code_type = $this->input->post('code');
 		$code_auth = $this->session->userdata('code_access');
 		$usuario   = $this->session->userdata('usuario_data_confirm'); 
 
-		if ($code_type != $code_auth){
+		if ($code_type != $code_auth)
+		{
 			$this->session->set_flashdata('erro_code','Código inválido ou já foi utilizado');
 			redirect('auth-code');
-		}else{
+		}
+		else
+		{
 			$code_auth = md5(rand());
 			$this->edit_password($usuario[0]->idusuario);
 		}
@@ -80,17 +88,21 @@ class UsuariosController extends CI_Controller {
 	}
 
 
-	public function edit_password($id){
+	public function edit_password($id)
+	{
 		$this->session->set_userdata('id_user_password',$id);
 		$this->load->view('Usuarios/edit_pass', array('erro_senha'=>$this->session->flashdata('erro_senha')));
 	}
 
-	public function update_method_password(){
-		if($this->input->post('senha') != $this->input->post('confirm_senha')){
+	public function update_method_password()
+	{
+		if($this->input->post('senha') != $this->input->post('confirm_senha'))
+		{
 			$this->session->set_flashdata('erro_senha','As senhas não coincidem!');
 			$this->edit_password($this->session->userdata('id_user_password'));
 		}
-		else{
+		else
+		{
 			$id_usuario = $this->session->userdata('id_user_password');
 
 			$this->load->model('UsuariosModel','usuarios');

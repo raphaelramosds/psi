@@ -1,22 +1,22 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class LoginController extends CI_Controller {
-	function __construct(){
-		parent::__construct();
-	}
-
+class LoginController extends CI_Controller 
+{
 	//Carregar a tela de login e após autenticar, criar uma sessão para direcionar à tela incial
-  public function index(){
+	public function index()
+	{
 		$this->load->view('Usuarios/login', array(
-			'success' => $this->session->flashdata('success'),
-			'erro'    => $this->session->flashdata('erro_autenticacao'),
-			'success_update_password' => $this->session->flashdata('success_update_password')
+			'success' 					=> $this->session->flashdata('success'),
+			'erro'    					=> $this->session->flashdata('erro_autenticacao'),
+			'success_update_password' 	=> $this->session->flashdata('success_update_password'),
+			'user_noexists'				=> $this->session->flashdata('user_noexists')
 		));
-  }
+  	}
 
   //Criar uma sessão para colocar os dados do usuário
-  public function auth(){
+	public function auth()
+	{
 		$user_reg = array(
 			'nome'  => $this->input->post('username'),
 			'senha' => $this->input->post("senha")
@@ -27,30 +27,46 @@ class LoginController extends CI_Controller {
 		$this->db->where('username', $user_reg["nome"]);
 		$this->db->where('senha', $senha);
 
-		$query = $this->db->get('usuario')->result();
+		$usuario_found = $this->db->get('usuario')->result_array();
 
-		if (count($query) == 1){
+		if(count($usuario_found) == 1)
+		{
 			$this->db->select('*');
 			$this->db->from('psicologo');
-			$this->db->where('psicologo.usuario_idusuario', $query[0]->idusuario);
-			$psicologo = $this->db->get()->result();
-			$this->session->set_userdata('psicologo',$psicologo);
+			$this->db->where('psicologo.usuario_idusuario', $usuario_found[0]['idusuario']);
 
-			redirect('home');
+			$psicologo_found = $this->db->get()->result();
+
+			if(count($psicologo_found) == 0)
+			{
+				$this->load->model('UsuariosModel','usuarios');
+				$this->usuarios->delete($usuario_found[0]['idusuario']);
+
+				$this->session->set_flashdata('user_noexists','O usuário não corresponde a nenhum psicólogo. Faça novamente o cadastro');
+				redirect('/');
+			}
+			else if(count($psicologo_found) == 1 )
+			{
+				$this->session->set_userdata('psicologo',$psicologo_found);
+				redirect('home');
+			}
 		}
-		else{
+		else
+		{
 			$this->session->set_flashdata('erro_autenticacao', 'Usuário ou senha incorretos');
 			redirect('login');
 		}
   	}
 
-  	public function auth_code(){
+	public function auth_code()
+	{
 	  $this->load->view('Usuarios/confirm_code', array(
 		  'erro_code' => $this->session->flashdata('erro_code')
 	  ));
   	}
 
-  	public function forgotPassword(){
+	public function forgotPassword()
+	{
 		$this->load->view('Usuarios/recovery', array(
 			'invalid_email'      => $this->session->flashdata('invalid_email'),
 			'success_send_email' => $this->session->flashdata('success_send_email'),
@@ -59,12 +75,14 @@ class LoginController extends CI_Controller {
   	}
 
   
-  	public function recoveryPass(){
+	public function recoveryPass()
+	{
 		$this->load->model('UsuariosModel','usuarios');
 		$email   = $this->input->post('email');
 		$request = $this->usuarios->verify_email($email);
 
-		if (count($request) == 0){
+		if (count($request) == 0)
+		{
 			$this->session->set_flashdata('invalid_email','Nenhum e-mail foi encontrado');
 			redirect('forgot-password');
 		}
@@ -72,7 +90,8 @@ class LoginController extends CI_Controller {
 		$this->send_email($request);
 	}
 
-	public function send_email($object){
+	public function send_email($object)
+	{
 		$this->load->model('UsuariosModel','usuarios');
 
 		//Gera um código aleatório para trocar a senha e colocar na sessão
@@ -108,11 +127,13 @@ class LoginController extends CI_Controller {
 		$this->email->subject('Psi - Redefinição de senha');
 		$this->email->message($this->load->view('Usuarios/email_template', array('usuario'=>$usuario_data,'code_access'=>$code),TRUE));
 
-		if ($this->email->send()){
+		if ($this->email->send())
+		{
 			$this->session->set_flashdata('success_send_email','Email enviado com sucesso!');
 			redirect('auth-code');
 		}
-		else{
+		else
+		{
 			$this->session->set_flashdata('erro_send_email',$this->email->print_debugger());
 			redirect('forgot-password');
 		}

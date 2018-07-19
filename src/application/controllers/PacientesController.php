@@ -1,20 +1,19 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class PacientesController extends CI_Controller {
+class PacientesController extends CI_Controller 
+{
 
-	function __construct(){
-		parent::__construct();
-	}
-
-	public function index(){
+	public function index()
+	{
 		//
 		$this->load->model("ClinicasModel","clinicas");
 
 		$config = $this->getpagination();
 		$this->pagination->initialize($config);
 
-		if ($this->session->userdata('psicologo') == NULL) {
+		if ($this->session->userdata('psicologo') == NULL) 
+		{
 			redirect('/');
 		}
 
@@ -41,7 +40,8 @@ class PacientesController extends CI_Controller {
 		));
 	}
 
-	public function search(){
+	public function search()
+	{
 		$paciente = $this->input->post('paciente');
 		$psicologo = $this->session->userdata('psicologo');
 		$user['nomepsicologo'] = $this->session->userdata('nomepsicologo');
@@ -57,7 +57,8 @@ class PacientesController extends CI_Controller {
 		$this->load->view('Pacientes/index', $data);
 	}
 
-	public function get(){
+	public function get()
+	{
 		return array(
 			'cartaosaude' 		=> $this->input->post('cartaosaude'),
 			'emailpaciente' 	=> $this->input->post('email'),
@@ -70,14 +71,16 @@ class PacientesController extends CI_Controller {
 		);
 	}
 
-	public function create(){
+	public function create()
+	{
 		$psicologo = $this->session->userdata('psicologo');
 
 		$this->load->view('Home/menu',array('nomepsicologo'=>$this->session->userdata('nomepsicologo')));
 		$this->load->view('Pacientes/create', array('psicologo_id'=>$psicologo[0]->idpsicologo));
 	}
 
-	public function add(){
+	public function add()
+	{
 		$paciente_reg = $this->get();
 
 		$this->load->model('PacientesModel');
@@ -87,8 +90,10 @@ class PacientesController extends CI_Controller {
 		redirect('view-paciente');
 	}
 
-	public function delete($id){
-		if ($id != NULL) {
+	public function delete($id)
+	{
+		if ($id != NULL) 
+		{
 			$this->load->model('PacientesModel','pacientes');
 			$this->pacientes->delete($id);
 			$this->session->set_flashdata("delete_paciente",'Deletado com sucesso!');
@@ -97,14 +102,16 @@ class PacientesController extends CI_Controller {
 		}
 	}
 
-	public function edit($id){
+	public function edit($id)
+	{
 		$this->load->model('PacientesModel','pacientes');
 		
 		$this->load->view('Home/menu', array('nomepsicologo'=>$this->session->userdata('nomepsicologo')));
 		$this->load->view('Pacientes/update', array('pacientes'=>$this->pacientes->view_id($id)));
 	}
 
-	public function update(){
+	public function update()
+	{
 		$paciente_reg = $this->get();
 
 		$this->load->model('PacientesModel','pacientes');
@@ -114,7 +121,8 @@ class PacientesController extends CI_Controller {
 		redirect('view-paciente');
 	}
 
-	public function getpagination(){
+	public function getpagination()
+	{
 		$this->load->model('PacientesModel','pacientes');
 		$psicologo = $this->session->userdata("psicologo");
 

@@ -26,7 +26,7 @@
 
 					<div class="ls-action-btn">
 				   	 	<button class="ls-btn">Salvar dados da sessão</button>
-					 	<a href="<?=base_url()?>SessoesController/view" class="ls-btn-danger">Voltar</a>
+					 	<a href="<?=base_url()?>view-sessao" class="ls-btn-danger">Voltar</a>
 					</div>
 				</form>
 			</div>

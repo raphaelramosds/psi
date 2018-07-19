@@ -1,14 +1,13 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class SessoesController extends CI_Controller {
+class SessoesController extends CI_Controller 
+{
 
-	function __construct(){
-		parent::__construct();
-	}
-
-	public function index($numeroprontuario){
-		if ($this->session->userdata('psicologo') == NULL) {
+	public function index($numeroprontuario)
+	{
+		if ($this->session->userdata('psicologo') == NULL) 
+		{
 			redirect('/');
 		}
 		$this->session->set_userdata('prontuario', $numeroprontuario);
@@ -16,7 +15,8 @@ class SessoesController extends CI_Controller {
 
 	}
 
-	public function view(){
+	public function view()
+	{
 		$prontuario = $this->session->userdata('prontuario');
 
 		$this->load->view('Home/menu',array('nomepsicologo'=>$this->session->userdata('nomepsicologo')));
@@ -30,7 +30,8 @@ class SessoesController extends CI_Controller {
 		));
 	}
 
-	public function get(){
+	public function get()
+	{
 		return array(
 			'data' 				=> $this->input->post('data'),
 			'descricao' 		=> $this->input->post('descricao'),
@@ -39,12 +40,14 @@ class SessoesController extends CI_Controller {
 		);
 	}
 
-	public function create(){
+	public function create()
+	{
 		$this->load->view('Home/menu',array('nomepsicologo'=>$this->session->userdata('nomepsicologo')));
 		$this->load->view('Sessoes/create', array('prontuario'=>$this->session->userdata('prontuario')));
 	}
 
-	public function add(){
+	public function add()
+	{
 		$ses_reg = $this->get();
 
 		$this->load->model('SessoesModel','sessoes');
@@ -52,7 +55,9 @@ class SessoesController extends CI_Controller {
 		$this->session->set_flashdata("add_sessao",'Adcionada com sucesso!');
 		redirect("view-sessao");
 	}
-	public function delete($id){
+
+	public function delete($id)
+	{
 		$this->load->model('SessoesModel','sessoes');
 		$this->sessoes->delete($id);
 
@@ -61,14 +66,16 @@ class SessoesController extends CI_Controller {
 		redirect('view-sessao');
 	}
 
-	public function edit($id){
+	public function edit($id)
+	{
 		$this->load->model('SessoesModel', 'sessoes');
 
 		$this->load->view('Home/menu',array('nomepsicologo'=>$this->session->userdata('nomepsicologo')));
 		$this->load->view('Sessoes/update', array('sessao'=>$this->sessoes->view_id($id)));
 	}
 
-	public function update(){
+	public function update()
+	{
 		$this->load->model('SessoesModel','sessoes');
 		$this->sessoes->idsessao = $this->input->post('idsessao');
 		$ses_reg = $this->get();

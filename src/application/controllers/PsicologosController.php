@@ -1,14 +1,12 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class PsicologosController extends CI_Controller {
-
-	function __construct(){
-		parent::__construct();
-	}
+class PsicologosController extends CI_Controller 
+{
 
 	public function index(){
-		if ($this->session->userdata('psicologo') == NULL) {
+		if ($this->session->userdata('psicologo') == NULL) 
+		{
 			redirect('/');
 		}
 	
@@ -26,7 +24,8 @@ class PsicologosController extends CI_Controller {
 		));
 	}
 
-	public function get(){
+	public function get()
+	{
 		return array(
 			'crp' 				=> $this->input->post('crp'),
 			'datanascimento' 	=> $this->input->post('datanasc'),
@@ -37,12 +36,14 @@ class PsicologosController extends CI_Controller {
 		);
 	}
 
-	public function create(){
+	public function create()
+	{
 		//Receba o id do usuário que foi enviado do cadastro pela query do model usuário...
 		$this->load->view('Psicologos/create', array('id_user'=> $this->session->userdata("id_user")));
 	}
 
-	public function add(){
+	public function add()
+	{
 		$id_user 	= $this->session->userdata("id_user");
 		$pycho_reg 	= $this->get();
 
@@ -54,24 +55,29 @@ class PsicologosController extends CI_Controller {
 		redirect('login');
 	}
 
-	public function delete($id=NULL){
-		if($id == NULL){
+	public function delete($id=NULL)
+	{
+		if($id == NULL)
+		{
 			redirect('view-psycho');
 		}
+
 		$this->load->model('PsicologosModel');
 		$this->PsicologosModel->delete($id);
 
 		redirect('view-psycho');
 	}
 
-	public function edit($id){
+	public function edit($id)
+	{
 		$this->load->model('PsicologosModel', 'psicologos');
 
 		$this->load->view('Home/menu',array('nomepsicologo'=>$this->session->userdata('nomepsicologo')));
 		$this->load->view('Psicologos/update', array('psicologos'=>$this->psicologos->view_id($id)));
 	}
 
-	public function update(){
+	public function update()
+	{
 		$psycho_reg = $this->get();
 
 		$this->load->model('PsicologosModel','psicologos');

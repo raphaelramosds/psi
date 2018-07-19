@@ -25,6 +25,8 @@
               <div class='ls-sm-space ls-txt-center ls-color-success' style='font-size:20px;'><?=$success_update_password?></div>
               <?php elseif(isset($erro_update_password)):?>
               <div class='ls-sm-space ls-txt-center ls-color-success' style='font-size:20px;'><?=$erro_update_password?></div>
+              <?php elseif(isset($user_noexists)):?>
+              <div class='ls-sm-space ls-txt-center ls-color-info' style='font-size:20px;'><?=$user_noexists?></div>
               <?php endif;?>
               <label class="ls-label">
                 <b class="ls-label-text ls-hidden-accessible">Usuário</b>
