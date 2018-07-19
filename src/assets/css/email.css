@@ -1,0 +1,17 @@
+*{
+    font-family:Arial;	
+}
+
+.title{
+    color: #1c1c1c;
+}
+.box_message{
+    border-left:4px solid #1c1c1c;
+    padding:2em;
+}
+
+.acces_code{
+    background-color: #1dd1a4;
+    padding:.5em;
+    color: white;
+}

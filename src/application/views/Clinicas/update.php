@@ -49,12 +49,12 @@
 				</label>
 				<label class="ls-label col-md-4 col-xs-12">
 					<b class="ls-label-text">Cidade</b>
-					<input type="text" name="cidade" required="required" value="<?=$clinicas->cidade; ?>">
+					<input type="text" name="cidade" value="<?=$clinicas->cidade; ?>">
 				</label>
 				<label class="ls-label col-md-4 col-xs-12">
 					<b class="ls-label-text">Telefone</b>
 					<p class="ls-labe-info">Para um contato...</p>
-					<input type="text" name="telefone" required="required" value="<?=$clinicas->telefone;?>" class="ls-mask-phone8_with_ddd" placeholder="(99) 9999-9999">
+					<input type="text" name="telefone" value="<?=$clinicas->telefone;?>" class="ls-mask-phone8_with_ddd" placeholder="(99) 9999-9999">
 				</label>
 				<input type="hidden" name="id_psicologo" required="required" value="<?=$clinicas->id_psicologo;?>">
 				<input type="hidden" name="idclinica" value="<?=$clinicas->idclinica;?>">

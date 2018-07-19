@@ -1,7 +1,19 @@
 <?php
-if($dataprontuarios == NULL){
+$url = base_url("assets/xml/doencas.xml");
+$xml = simplexml_load_file($url);
+
+if($dataprontuarios == NULL)
+{
 	redirect("view-paciente");
 }
+
+$this->db->select('nomepaciente');
+$this->db->from('paciente');
+$this->db->where('idpaciente = '.$dataprontuarios[0]->paciente_id);
+$this->db->order_by("nomepaciente", "asc");
+
+$paciente = $this->db->get()->row_array();
+
 ?>
 
 <div class="ls-main">
@@ -10,25 +22,18 @@ if($dataprontuarios == NULL){
 			<header class="ls-info-header ls-no-border">
 				<h2 class="ls-title-3 ls-ico-folder">
 					Prontuário de
-					<b>
-					<?php
-						$this->db->select('nomepaciente');
-						$this->db->from('paciente');
-						$this->db->where('idpaciente = '.$dataprontuarios[0]->paciente_id);
-						$this->db->order_by("nomepaciente", "asc");
-						$result = $this->db->get()->result();
-						echo $result[0]->nomepaciente;
-					?>
-					</b>
+					<b><?=$paciente['nomepaciente']?></b>
 				</h2>
 			</header>
+			
 			<?php if(isset($add_prontuario)):?>
-			<div class='ls-background-primary ls-sm-space ls-sm-margin-bottom ls-text-md ls-ico-checkmark'><?=$add_prontuario?></div>
+				<div class='ls-background-primary ls-sm-space ls-sm-margin-bottom ls-text-md ls-ico-checkmark'><?=$add_prontuario?></div>
 			<?php elseif(isset($delete_prontuario)):?>
-			<div class='ls-background-primary ls-sm-space ls-sm-margin-bottom ls-text-md ls-ico-checkmark'><?=$delete_prontuario?></div>
+				<div class='ls-background-primary ls-sm-space ls-sm-margin-bottom ls-text-md ls-ico-checkmark'><?=$delete_prontuario?></div>
 			<?php elseif(isset($update_prontuario)):?>
-			<div class='ls-background-primary ls-sm-space ls-sm-margin-bottom ls-text-md ls-ico-checkmark'><?=$update_prontuario?></div>
+				<div class='ls-background-primary ls-sm-space ls-sm-margin-bottom ls-text-md ls-ico-checkmark'><?=$update_prontuario?></div>
 			<?php endif;?>
+
 			<table class="ls-table">
 				<tr>
 					<th>Número da ficha</th>
@@ -38,46 +43,40 @@ if($dataprontuarios == NULL){
 					<th>Alta</th>
 					<th></th>
 				</tr>
-				<?php
-					$url = base_url("assets/xml/doencas.xml");
-					$xml = simplexml_load_file($url);
-				?>
+
 				<?php foreach ($dataprontuarios as $value): ?>
 					<tr>
 						<td>
 							<?=$value->numeroprontuario ?>
 						</td>
-						<td>
-							<?php
-							$this->db->select('nomeclinica');
-							$this->db->from('clinica');
-							$this->db->where('idclinica = '.$value->clinica_id);
-							$this->db->order_by("nomeclinica", "asc");
-							$query = $this->db->get()->result();
-							echo $query[0]->nomeclinica;
-							?>
-						</td>
-						<td>
-							<?php 
-							$find = FALSE;
 
-							foreach($xml->doenca as $line){
-								if($line->codigo == $value->cid10){
-									echo $line->nome;
-									$find = TRUE;
-								}
-							}
-							if($find == FALSE){
-								echo "<span style='color:red'>Essa doença não existe</span>";
-							}
-							?>
-						</td>
+						<?php
+						$this->db->select('nomeclinica');
+						$this->db->from('clinica');
+						$this->db->where('idclinica = '.$value->clinica_id);
+						$this->db->order_by("nomeclinica", "asc");
+
+						$clinica = $this->db->get()->row_array();
+						?>
+
+						<td><?=$clinica['nomeclinica']?></td>
+
 						<td>
-							<?=$value->encaminhado ?>
+							<?php $find = FALSE; ?>
+							<?php foreach($xml->doenca as $line): ?>
+								<?php if($line->codigo == $value->cid10): ?>
+									<?=$line->nome?>
+									<?=$find = TRUE; ?>
+								<?php endif;?>
+							<?php endforeach;?>
+							<?php if($find == FALSE): ?>
+								<span class="ls-color-danger"><?="Essa doença não existe"?></span>
+							<?php endif; ?>
 						</td>
-						<td>
-							<?=$value->alta ?>
-						</td>
+
+						<td><?=$value->encaminhado ?></td>
+						<td><?=$value->alta ?></td>
+
 						<td class="ls-text-center">
 							<div data-ls-module='dropdown' class='ls-dropdown'>
 								<a href='#' class='ls-btn'>Ação</a>
@@ -170,7 +169,8 @@ if($dataprontuarios == NULL){
 			<input type="hidden" name="id_psicologo" required="required" value="<?=$psicologo?>">
 			<input type="hidden" name="paciente_id" required="required" id="paciente_id" value="">
 			<script type="text/javascript">
-				function paciente(idpaciente){
+				function paciente(idpaciente)
+				{
 					document.getElementById('paciente_id').value = idpaciente;
 				}
 			</script>

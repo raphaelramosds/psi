@@ -1,5 +1,3 @@
-<link rel="stylesheet" href="<?=base_url()?>assets/css/cronometro.css">
-
 <div class="ls-main">
 	<div class="container-fluid">
 		<div class="ls-box ls-board-box ls-no-border">
@@ -48,16 +46,20 @@ var hora    = document.getElementById("hora")
 var segundo = document.getElementById("segundo")
 var minuto  = document.getElementById("minuto")
 
-function tempo(op) {
-	if (op == 1) {
+function tempo(op) 
+{
+	if (op == 1) 
+	{
 		document.getElementById('parar').style.display  = "block"
 		document.getElementById('comeca').style.display = "none"
 	}
+
 	var s = 1
 	var m = 0
     var h = 0
     
-	intervalo = window.setInterval(function() {
+	intervalo = window.setInterval(function() 
+	{
 		if (s == 60) { m++; s = 0; }
 		if (m == 60) { h++; s = 0; m = 0; }
 		if (h < 10) hora.innerHTML = "0" + h + ":"; else hora.innerHTML = h + ":"
@@ -67,7 +69,8 @@ function tempo(op) {
 	},1000);
 }
 
-function stop_time() {
+function stop_time() 
+{
 	window.clearInterval(intervalo)
 	document.getElementById('parar').style.display  = "none"
     document.getElementById('comeca').style.display = "block"

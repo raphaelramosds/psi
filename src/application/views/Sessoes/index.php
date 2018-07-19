@@ -4,16 +4,17 @@
 		<header class="ls-info-header ls-no-border">
 			<h2 class="ls-title-3 ls-ico-stats">Sessões cadastradas</h2>
 		</header>
+		
 		<?php if(isset($add_sessao)):?>
 			<div class='ls-background-primary ls-sm-space ls-sm-margin-bottom ls-text-md ls-ico-checkmark'><?=$add_sessao?></div>
-			<?php elseif(isset($delete_sessao)):?>
+		<?php elseif(isset($delete_sessao)):?>
 			<div class='ls-background-primary ls-sm-space ls-sm-margin-bottom ls-text-md ls-ico-checkmark'><?=$delete_sessao?></div>
-			<?php elseif(isset($update_sessao)):?>
+		<?php elseif(isset($update_sessao)):?>
 			<div class='ls-background-primary ls-sm-space ls-sm-margin-bottom ls-text-md ls-ico-checkmark'><?=$update_sessao?></div>
-			<?php endif;?>
+		<?php endif;?>
+
 		<table class="ls-table">
-			<tr><!--
-				<th>Id</th> -->
+			<tr>
 				<th>Título</th>
 				<th>Data</th>
 				<th>Descricao</th>

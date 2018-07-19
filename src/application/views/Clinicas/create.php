@@ -12,7 +12,6 @@
 					</label>
 					<label class="ls-label col-md-4 col-xs-12">
 						<b class="ls-label-text">Estado</b>
-						<!-- <input type="text" name="estado" required="required"> -->
 						<div class="ls-custom-select">
 							<?php
 							$options = array(
@@ -50,12 +49,12 @@
 					</label>
 					<label class="ls-label col-md-4 col-xs-12">
 						<b class="ls-label-text">Cidade</b>
-						<input type="text" name="cidade" required="required">
+						<input type="text" name="cidade">
 					</label>
 					<label class="ls-label col-md-4 col-xs-12">
 						<b class="ls-label-text">Telefone</b>
 						<p class="ls-labe-info">Para um contato...</p>
-						<input type="text" name="telefone" required="required" class="ls-mask-phone8_with_ddd" placeholder="(99) 9999-9999">
+						<input type="text" name="telefone" class="ls-mask-phone8_with_ddd" placeholder="(99) 9999-9999">
 					</label>
 					<input type="hidden" name="id_psicologo" required="required" value="<?php echo $psicologo; ?>">
 					<button type="submit" class="ls-btn">Salvar dados da clínica</button>
