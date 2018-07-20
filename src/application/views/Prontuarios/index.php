@@ -81,9 +81,9 @@ $paciente = $this->db->get()->row_array();
 							<div data-ls-module='dropdown' class='ls-dropdown'>
 								<a href='#' class='ls-btn'>Ação</a>
 								<ul class="ls-dropdown-nav">
-									<li><a href="<?=base_url()?>index-sessao/<?=$value->numeroprontuario?>" class='ls-ico-docs ls-color-black ls-no-bghover' title='Ver sessões'>Ver sessões</a></li>
-									<li><a href="<?=base_url()?>update-prontuario/<?=$value->numeroprontuario?>" class='ls-ico-search ls-color-black ls-no-bghover' title='Detalhar'>Ver informações</a></li>		
-									<li><a href="<?=base_url()?>delete-prontuario/<?=$value->numeroprontuario?>" class='ls-ico-remove ls-color-danger' title='Excluir'>Excluir</a></li>									
+									<li><a href="<?=base_url('index-sessao')?>/<?=$value->numeroprontuario?>" class='ls-ico-docs ls-color-black ls-no-bghover' title='Ver sessões'>Ver sessões</a></li>
+									<li><a href="<?=base_url('update-prontuario')?>/<?=$value->numeroprontuario?>" class='ls-ico-search ls-color-black ls-no-bghover' title='Detalhar'>Ver informações</a></li>		
+									<li><a href="<?=base_url('delete-prontuario')?>/<?=$value->numeroprontuario?>" class='ls-ico-remove ls-color-danger' title='Excluir'>Excluir</a></li>									
 								</ul>
 							</div>
 						</td>
@@ -91,7 +91,7 @@ $paciente = $this->db->get()->row_array();
 				<?php endforeach; ?>
 			 </table>
 			 <a  data-ls-module="modal" data-target="#ficha" onClick="paciente(<?=$dataprontuarios[0]->paciente_id?>)" class='ls-btn'> Adcionar nova ficha</a>
-			 <a href="<?=base_url()?>view-paciente" class="ls-btn-danger">Voltar</a>
+			 <a href="<?=base_url('view-paciente')?>" class="ls-btn-danger">Voltar</a>
 		</div>
 	</div>
 </div>
@@ -105,7 +105,7 @@ $paciente = $this->db->get()->row_array();
     </div>
 
     <div class="ls-modal-body" id="myModalBody">
-      <form action="<?=base_url()?>ProntuariosController/add" method="POST" class="ls-form ls-form-horizontal row" data-ls-module="form">
+      <form action="<?=base_url('ProntuariosController/add')?>" method="POST" class="ls-form ls-form-horizontal row" data-ls-module="form">
 			<!-- Clínica -->
 			<label for="clinica" class="ls-label">
 				<b class="ls-label-text">Clínica</b>

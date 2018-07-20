@@ -4,7 +4,7 @@
 			<header class="ls-info-header ls-no-border">
 				<h2 class="ls-title-3 ls-ico-accessibility">Registre um novo paciente</h2>
 			</header>
-			<form action="<?=base_url()?>PacientesController/add" method="POST" class="ls-form ls-form-horizontal row" data-ls-module="form">
+			<form action="<?=base_url('PacientesController/add')?>" method="POST" class="ls-form ls-form-horizontal row" data-ls-module="form">
 				<fieldset>
 					<label class="ls-label col-md-12">
 						<b class="ls-label-text">Nome do paciente</b>
@@ -52,7 +52,7 @@
 
 				</fieldset>
 			   <button type="submit" class="ls-btn">Salvar dados do paciente</button>
-				 <a href="<?=base_url()?>view-paciente" class="ls-btn-danger">Voltar</a>
+				 <a href="<?=base_url('view-paciente')?>" class="ls-btn-danger">Voltar</a>
 			</form>
 		</div>
 	</div>

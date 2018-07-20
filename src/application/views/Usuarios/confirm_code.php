@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<?php defined('BASEPATH') OR exit('No direct script access allowed');?>
 <html>
 	<head>
 		<title>Psi</title>

@@ -4,7 +4,7 @@
 			<header class="ls-info-header ls-no-border">
 				<h2 class="ls-title-3 ls-ico-pencil">Editar paciente</h2>
 			</header>
-			<form action="<?=base_url()?>PacientesController/update" method="POST" class="ls-form ls-form-horizontal row" data-ls-module="form">
+			<form action="<?=base_url('PacientesController/update')?>" method="POST" class="ls-form ls-form-horizontal row" data-ls-module="form">
 				<fieldset>
 					<label class="ls-label col-md-12">
 						<b class="ls-label-text">Nome do paciente</b>
@@ -53,7 +53,7 @@
 				</fieldset>
 					<input type="hidden" name="idpaciente" value="<?=$pacientes->idpaciente ?>">
 					<button type="submit" class="ls-btn">Salvar dados do paciente</button>
-				<a href="<?=base_url()?>PacientesController" class="ls-btn-danger">Voltar</a>
+				<a href="<?=base_url('view-paciente')?>" class="ls-btn-danger">Voltar</a>
 			</form>
 		</div>		
 	</div>

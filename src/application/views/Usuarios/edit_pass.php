@@ -1,14 +1,14 @@
-<!DOCTYPE>
+<?php defined('BASEPATH') OR exit('No direct script access allowed');?>
 <html>
 	<head>
 		<title>Psi</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-		<link href="<?=base_url()?>assets/css/locastyle.css" rel="stylesheet" type="text/css">
-		<link rel="icon" sizes="192x192" href="<?=base_url()?>assets/images/ico-boilerplate.png">
-		<link rel="apple-touch-icon" href="<?=base_url()?>assets/images/ico-boilerplate.png">
-		<link rel="stylesheet" href="<?=base_url()?>assets/css/links_style.css" type="text/css">
-		<script type="text/javascript" src="<?=base_url()?>assets/js/jquery.js"></script>
-		<script src="<?=base_url()?>assets/js/locastyle.js" type="text/javascript"></script>
+		<link href="<?=base_url('assets/css/locastyle.css')?>" rel="stylesheet" type="text/css">
+		<link rel="icon" sizes="192x192" href="<?=base_url('assets/images/ico-boilerplate.png')?>">
+		<link rel="apple-touch-icon" href="<?=base_url('assets/images/ico-boilerplate.png')?>">
+		<link rel="stylesheet" href="<?=base_url('assets/css/links_style.css')?>" type="text/css">
+		<script type="text/javascript" src="<?=base_url('assets/js/jquery.js')?>"></script>
+		<script src="<?=base_url('assets/js/locastyle.js')?>" type="text/javascript"></script>
 	</head>
 	<body>
 		<div class="container" style="margin-top: 200px;max-width:900px;">

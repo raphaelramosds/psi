@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+<?php defined('BASEPATH') OR exit('No direct script access allowed');?>
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 		<title>Requisição de senha</title>
-		<link rel="stylesheet" href="<?=base_url()?>assets/css/>email.css">
+		<link rel="stylesheet" href="<?=base_url('assets/css/email.css')?>">
 	</head>
 	<body>
 		<div class="box_message">

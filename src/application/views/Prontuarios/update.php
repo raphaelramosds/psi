@@ -4,7 +4,7 @@
 		<header class="ls-info-header ls-no-border">
 			<h2 class="ls-title-3 ls-ico-search">Detalhes</h2>
 		</header>
-		<form action="<?=base_url()?>ProntuariosController/update" method="POST" class="ls-form ls-form-horizontal row" data-ls-module="form">
+		<form action="<?=base_url('ProntuariosController/update')?>" method="POST" class="ls-form ls-form-horizontal row" data-ls-module="form">
 			<fieldset>
 				<label for="" class="ls-label col-md-4 col-xs-12">
 					<b class="ls-label-text">Clínica</b>
@@ -80,7 +80,7 @@
 			<input type="hidden" name="id_psicologo" required="required" value='<?=$prontuarios->id_psicologo;?>'>
 			<input type="hidden" name="numeroprontuario" value="<?=$prontuarios->numeroprontuario ?>">
 			<button type="submit" class="ls-btn">Salvar todos os dados</button>
-			<a href="<?=base_url()?>ProntuariosController/view" class="ls-btn-danger">Voltar</a>	
+			<a href="<?=base_url('view-prontuario')?>" class="ls-btn-danger">Voltar</a>	
 		</form>
 		</div>	
 	</div>

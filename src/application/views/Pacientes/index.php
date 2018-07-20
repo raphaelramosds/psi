@@ -13,12 +13,12 @@
 				<div class='ls-background-primary ls-sm-space ls-sm-margin-bottom ls-text-md ls-ico-checkmark'><?=$update_paciente?></div>
 			<?php endif;?>
 			
-			<form  action="<?=base_url()?>PacientesController/search" class="ls-form ls-form-inline" method="POST">
+			<form  action="<?=base_url('PacientesController/search')?>" class="ls-form ls-form-inline" method="POST">
 				<label class="ls-label" role="search">
 					<input type="text" id="q" name="paciente" aria-label="Faça sua busca pelo paciente" placeholder="Nome do paciente" required="" class="ls-field">
 				</label>
 				<input type="submit" value="Buscar" class="ls-btn" title="Buscar">
-				<a href="<?=base_url()?>create-paciente" class="ls-ico-plus ls-btn	">Adcionar um paciente</a>
+				<a href="<?=base_url('create-paciente')?>" class="ls-ico-plus ls-btn	">Adcionar um paciente</a>
 			</form>
 			<table class="ls-table">
 			<tr>
@@ -45,31 +45,31 @@
 					<td><?=$value->sexopaciente?></td>
 					<td>
 						<?php if($value->cartaosaude == 0):?>
-						<?="Não registrado"?>
+							<?="Não registrado"?>
 						<?php else:?>
-						<?=$value->cartaosaude?>
+							<?=$value->cartaosaude?>
 						<?php endif;?>
 					</td>
 					<td>
 						<?php if($value->numerosus == 0):?>
-						<?="Não registrado"?>
+							<?="Não registrado"?>
 						<?php else:?>
-						<?=$value->numerosus?>
+							<?=$value->numerosus?>
 						<?php endif;?>
 					</td>
 					<td class='ls-txt-left'>
 						<div data-ls-module='dropdown' class='ls-dropdown'>
 							<a href='#' class='ls-btn'>Ação</a>
 							<ul class='ls-dropdown-nav'>
-								<li><a href="<?=base_url()?>update-paciente/<?=$value->idpaciente?>" class='ls-ico-pencil ls-color-black ls-no-bghover' title='Editar'>Editar</a></li>
+								<li><a href="<?=base_url('update-paciente')?>/<?=$value->idpaciente?>" class='ls-ico-pencil ls-color-black ls-no-bghover' title='Editar'>Editar</a></li>
 								<li>
 									<?php if (count($paciente_prontuario) > 0): ?>
-									<a href="<?=base_url()?>index-prontuario/<?=$value->idpaciente?>" class='ls-ico-search ls-color-black ls-no-bghover' title='Ver prontuário'>Ver prontuário</a>
+										<a href="<?=base_url('index-prontuario')?>/<?=$value->idpaciente?>" class='ls-ico-search ls-color-black ls-no-bghover' title='Ver prontuário'>Ver prontuário</a>
 									<?php else: ?>
-									<a class='ls-ico-plus ls-color-black ls-no-bghover ls-cursor-pointer' title='Adcionar prontuário' data-ls-module="modal" data-target="#prontuario" onClick="paciente(<?=$value->idpaciente?>)">Adcionar prontuário</a>
+										<a class='ls-ico-plus ls-color-black ls-no-bghover ls-cursor-pointer' title='Adcionar prontuário' data-ls-module="modal" data-target="#prontuario" onClick="paciente(<?=$value->idpaciente?>)">Adcionar prontuário</a>
 									<?php endif ?>
 								</li>
-								<li><a href="<?=base_url()?>delete-paciente/<?=$value->idpaciente?>" class='ls-ico-remove ls-color-danger' title='Excluir'>Excluir</a></li>
+								<li><a href="<?=base_url('delete-paciente')?>/<?=$value->idpaciente?>" class='ls-ico-remove ls-color-danger' title='Excluir'>Excluir</a></li>
 							</ul>
 						</div>
 					</td>
@@ -93,7 +93,7 @@
     </div>
 
     <div class="ls-modal-body" id="myModalBody">
-      <form action="<?=base_url()?>ProntuariosController/add" method="POST" class="ls-form ls-form-horizontal row" data-ls-module="form">
+      <form action="<?=base_url('ProntuariosController/add')?>" method="POST" class="ls-form ls-form-horizontal row" data-ls-module="form">
 			<!-- Clínica -->
 			<label for="clinica" class="ls-label">
 				<b class="ls-label-text">Clínica</b>

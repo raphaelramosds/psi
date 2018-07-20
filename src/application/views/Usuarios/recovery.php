@@ -1,14 +1,14 @@
-<!DOCTYPE html>
+<?php defined('BASEPATH') OR exit('No direct script access allowed');?>
 <html>
 	<head>
 		<title>Psi</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-		<link href="<?=base_url()?>assets/css/locastyle.css" rel="stylesheet" type="text/css">
-		<link rel="icon" sizes="192x192" href="<?=base_url()?>assets/images/ico-boilerplate.png">
-		<link rel="apple-touch-icon" href="<?=base_url()?>assets/images/ico-boilerplate.png">
-		<link rel="stylesheet" href="<?=base_url()?>assets/css/links_style.css" type="text/css">
-		<script type="text/javascript" src="<?=base_url()?>assets/js/jquery.js"></script>
-		<script src="<?=base_url()?>assets/js/locastyle.js" type="text/javascript"></script>
+		<link href="<?=base_url('assets/css/locastyle.css')?>" rel="stylesheet" type="text/css">
+		<link rel="icon" sizes="192x192" href="<?=base_url('assets/images/ico-boilerplate.png')?>">
+		<link rel="apple-touch-icon" href="<?=base_url('assets/images/ico-boilerplate.png')?>">
+		<link rel="stylesheet" href="<?=base_url('assets/css/links_style.css')?>" type="text/css">
+		<script type="text/javascript" src="<?=base_url('assets/js/jquery.js')?>"></script>
+		<script src="<?=base_url('assets/js/locastyle.js')?>" type="text/javascript"></script>
 	</head>
 	<body>
 		<div class="ls-box ls-board-box" style="border:none;margin-top:25vh;">
@@ -16,7 +16,7 @@
 				<h2 class="ls-title-3" >Recupere sua <span style="background:#1DD1A4;padding:10px;color:white;display:inline-block;">senha</span></h2>
 			</header>
 			<div>
-				<form action="<?=base_url()?>LoginController/recoveryPass" role="form" method="POST">
+				<form action="<?=base_url('LoginController/recoveryPass')?>" role="form" method="POST">
 					<fieldset style="text-align:center">
 						<label for="" class="ls-label col-md-4" style="margin: 0 auto;">
 							<b class="ls-label-text">Email</b>
@@ -33,7 +33,7 @@
 					</fieldset>
 					<div class="ls-actions-btn" style="text-align:center;border:none;line-height:50px;">
 						<button class="ls-btn"  style="background-color:#1DD1A4;color:white;">Submeter</button><br>
-						<a href="<?=base_url()?>login" class="link_direct">Voltar</a>
+						<a href="<?=base_url('login')?>" class="link_direct">Voltar</a>
 					</div>
 				</form>
 			</div>
