@@ -13,7 +13,7 @@
 	<body>
 		<div class="ls-box ls-board-box" style="border:none;margin-top:25vh;">
 			<header class="ls-info-header" style="text-align:center;border:none">
-				<h2 class="ls-title-3" >Recupere sua <span style="background:#1DD1A4;padding:10px;color:white;display:inline-block;">senha</span></h2>
+				<h2 class="ls-title-3" >Recupere sua senha</h2>
 			</header>
 			<div>
 				<form action="<?=base_url('UsuariosController/recoveryPass')?>" role="form" method="POST">
@@ -32,7 +32,7 @@
 						<?php endif;?>
 					</fieldset>
 					<div class="ls-actions-btn" style="text-align:center;border:none;line-height:50px;">
-						<button class="ls-btn"  style="background-color:#1DD1A4;color:white;">Submeter</button><br>
+						<button class="ls-btn" >Submeter</button><br>
 						<a href="<?=base_url('login')?>" class="link_direct">Voltar</a>
 					</div>
 				</form>
