@@ -19,18 +19,18 @@
           </div>
           <div class="ls-login-box ls-md-margin-top"  style="background-color:white;color:white;">
               <style>.headerlogo{margin-bottom:20px;}.input-style{border-bottom:3px solid white;}</style>
-              <form role="form" class="ls-form ls-login-form" action="LoginController/auth" method="POST">
+              <form role="form" class="ls-form ls-login-form" action="UsuariosController/auth" method="POST">
                 <fieldset>
                   <?php if(isset($success)):?>
-                  <div class='ls-sm-space ls-txt-center ls-color-success' style='font-size:20px;'><?=$success?></div>
+                    <div class='ls-sm-space ls-txt-center ls-color-success' style='font-size:20px;'><?=$success?></div>
                   <?php elseif(isset($erro)):?>
-                  <div class='ls-sm-space ls-txt-center' style='font-size:20px; color:red;'><?=$erro?></div>
+                    <div class='ls-sm-space ls-txt-center' style='font-size:20px; color:red;'><?=$erro?></div>
                   <?php elseif(isset($success_update_password)):?>
-                  <div class='ls-sm-space ls-txt-center ls-color-success' style='font-size:20px;'><?=$success_update_password?></div>
+                    <div class='ls-sm-space ls-txt-center ls-color-success' style='font-size:20px;'><?=$success_update_password?></div>
                   <?php elseif(isset($erro_update_password)):?>
-                  <div class='ls-sm-space ls-txt-center ls-color-success' style='font-size:20px;'><?=$erro_update_password?></div>
+                    <div class='ls-sm-space ls-txt-center ls-color-success' style='font-size:20px;'><?=$erro_update_password?></div>
                   <?php elseif(isset($user_noexists)):?>
-                  <div class='ls-sm-space ls-txt-center ls-color-info' style='font-size:20px;'><?=$user_noexists?></div>
+                    <div class='ls-sm-space ls-txt-center ls-color-info' style='font-size:20px;'><?=$user_noexists?></div>
                   <?php endif;?>
                   <label class="ls-label">
                     <b class="ls-label-text ls-hidden-accessible">Usuário</b>

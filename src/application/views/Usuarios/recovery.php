@@ -16,7 +16,7 @@
 				<h2 class="ls-title-3" >Recupere sua <span style="background:#1DD1A4;padding:10px;color:white;display:inline-block;">senha</span></h2>
 			</header>
 			<div>
-				<form action="<?=base_url('LoginController/recoveryPass')?>" role="form" method="POST">
+				<form action="<?=base_url('UsuariosController/recoveryPass')?>" role="form" method="POST">
 					<fieldset style="text-align:center">
 						<label for="" class="ls-label col-md-4" style="margin: 0 auto;">
 							<b class="ls-label-text">Email</b>

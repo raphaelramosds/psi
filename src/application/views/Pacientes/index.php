@@ -157,7 +157,8 @@
 			<input type="hidden" name="id_psicologo" required="required" value="<?=$psicologo?>">
 			<input type="hidden" name="paciente_id" required="required" id="paciente_id" value="">
 			<script>
-				function paciente(idpaciente){
+				function paciente(idpaciente)
+				{
 					document.getElementById('paciente_id').value = idpaciente;
 				}
 			</script>

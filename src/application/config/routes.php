@@ -2,16 +2,16 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 
-$route['default_controller']   = 'LoginController';
+$route['default_controller']   = 'UsuariosController/login';
 $route['404_override']         = '';
 $route['translate_uri_dashes'] = FALSE;
 
 //Login
 $route['home']            = 'HomeController';
-$route['login']           = 'LoginController';
+$route['login']           = 'UsuariosController/login';
 $route['cadastre']        = 'UsuariosController/create';
-$route['forgot-password'] = 'LoginController/forgotPassword';
-$route['auth-code']       = 'LoginController/auth_code';
+$route['forgot-password'] = 'UsuariosController/forgotPassword';
+$route['auth-code']       = 'UsuariosController/auth_code';
 
 //Psicólogo
 $route['create-psycho']         = 'PsicologosController/create';

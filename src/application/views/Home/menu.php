@@ -18,7 +18,7 @@
       <div class="ls-notification-topbar">
         <div data-ls-module="dropdown" class="ls-dropdown ls-user-account">
           <a href="#" class="ls-ico-user">
-            <img src="assets/images/locastyle/avatar-example.jpg" alt="" />
+            <!-- Adcionar uma imagem de perfil: <img src="<?=base_url('')?>" alt="" /> -->
             <span class="ls-name">
               <?=$nomepsicologo?>
             </span>
@@ -32,7 +32,7 @@
         </div>
       </div>
       <span class="ls-show-sidebar ls-ico-menu"></span>
-      <h1 class="ls-brand-name"><a href="<?=base_url('home')?>" class="ls-ico"><img src="<?= base_url('assets/images/logo.png')?>" height="30px" width="60px"></a></h1>
+      <h1 class="ls-brand-name"><a href="<?=base_url('home')?>" class="ls-ico"><img src="<?=base_url('assets/images/logo.png')?>" height="30px" width="60px"></a></h1>
     </div>
     <aside class="ls-sidebar">
       <div class="ls-sidebar-inner">

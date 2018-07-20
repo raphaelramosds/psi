@@ -51,8 +51,8 @@
 						<input type="text" name="telefonepaciente" required="required" value="<?=$pacientes->telefonepaciente ?>" class="ls-mask-phone8_with_ddd" placeholder="(99) 9999-9999">
 					</label>
 				</fieldset>
-					<input type="hidden" name="idpaciente" value="<?=$pacientes->idpaciente ?>">
-					<button type="submit" class="ls-btn">Salvar dados do paciente</button>
+				<input type="hidden" name="idpaciente" value="<?=$pacientes->idpaciente ?>">
+				<button type="submit" class="ls-btn">Salvar dados do paciente</button>
 				<a href="<?=base_url('view-paciente')?>" class="ls-btn-danger">Voltar</a>
 			</form>
 		</div>		
