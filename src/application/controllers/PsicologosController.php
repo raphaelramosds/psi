@@ -32,27 +32,8 @@ class PsicologosController extends CI_Controller
 			'emailpsicologo' 	=> $this->input->post('emailpsicologo'),
 			'nomepsicologo' 	=> $this->input->post('nomepsicologo'),
 			'sexopsicologo' 	=> $this->input->post('sexopsicologo'),
-			'usuario_idusuario' =>  $this->input->post('idusuario'),
+			'usuario_idusuario' =>  $this->input->post('idusuario')
 		);
-	}
-
-	public function create()
-	{
-		//Receba o id do usuário que foi enviado do cadastro pela query do model usuário...
-		$this->load->view('Psicologos/create', array('id_user'=> $this->session->userdata("id_user")));
-	}
-
-	public function add()
-	{
-		$id_user 	= $this->session->userdata("id_user");
-		$pycho_reg 	= $this->get();
-
-		$this->load->model('PsicologosModel','psicologos');
-
-		$this->psicologos->add($pycho_reg);
-		$this->session->set_flashdata('success','Sucesso ao se cadastrar');
-		
-		redirect('login');
 	}
 
 	public function delete($id=NULL)

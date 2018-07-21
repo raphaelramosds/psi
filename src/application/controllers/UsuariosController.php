@@ -72,25 +72,57 @@ class UsuariosController extends CI_Controller
 		$this->load->view('Usuarios/create',
 		array(
 			'erro_senha'	=> $this->session->flashdata('erro_senha'), 
-			'erro_user'		=> $this->session->flashdata('erro_user')
+			'erro_user'		=> $this->session->flashdata('erro_user'),
+			'erro_email'    => $this->session->flashdata('erro_email'),
+			'erro_crp'      => $this->session->flashdata('erro_crp')
 		));
 	}
 
 	public function add()
 	{
 		$this->load->model('UsuariosModel','usuarios');
+		$this->load->model('PsicologosModel','psicologos');
 		
 		$user_reg 			= $this->get();
+		$psicologo_reg		= array(
+			'crp' 				=> $this->input->post('crp'),
+			'datanascimento' 	=> $this->input->post('datanasc'),
+			'emailpsicologo' 	=> $this->input->post('emailpsicologo'),
+			'nomepsicologo' 	=> $this->input->post('nomepsicologo'),
+			'sexopsicologo' 	=> $this->input->post('sexopsicologo'),
+			'usuario_idusuario' =>  $this->input->post('idusuario') //Até agora vazio
+		);
+
+		//Faça criptografia da senha
+
 		$user_reg['senha']  = md5($user_reg['username'].$user_reg['senha']);
+
+		//Validações
+
 		$users_count 		= count($this->usuarios->duplicate_user($user_reg['username']));
+		$email_count		= count($this->usuarios->verify_email($psicologo_reg['emailpsicologo']));
+		$crp_count			= count($this->db->query("SELECT * FROM psicologo WHERE crp = '".$psicologo_reg['crp']."'")->result());
 
 		if($users_count == 1)
 		{
-			$this->session->set_flashdata('erro_user','Nome de usuário já existe');
+			$this->session->set_flashdata('erro_user','Nome de usuário já existe no sistema');
+			redirect("cadastre");
+		}
+		
+		if($crp_count == 1)
+		{
+			$this->session->set_flashdata('erro_crp','CRP já existe no sistema');
 			redirect("cadastre");
 		}
 
-		if ($this->input->post('confirm_senha') != $this->input->post('senha')) 
+		if($email_count == 1)
+		{
+			$this->session->set_flashdata('erro_email','Este e-mail já existe no sistema');
+			redirect("cadastre");
+		}
+
+
+		if($this->input->post('confirm_senha') != $this->input->post('senha')) 
 		{
 			$this->session->set_flashdata('erro_senha','Parece que as senhas não são iguais');
 			redirect("cadastre");
@@ -98,13 +130,18 @@ class UsuariosController extends CI_Controller
 
 		$this->usuarios->add($user_reg);
 
-		$this->db->select('idusuario');
-		$this->db->where('username',$user_reg['username']);
-		$usuario = $this->db->get('usuario')->result();
+		$query = $this->db->query("SELECT * FROM usuario WHERE username = '".$user_reg['username']."'");
+		$find_usuario = $query->result();
+		$id = $find_usuario[0]->idusuario;
 
-		//Informa o nome do usuário para a query poder retornar o seu id
-		$this->session->set_userdata('id_user', $usuario);
-		redirect("create-psycho");
+		//Colocar id do usuário na Foreign Key do psicologo:
+		$psicologo_reg['usuario_idusuario'] = $id;
+
+		//Finalmente, insere os dados do psicólogo:
+		$this->psicologos->add($psicologo_reg);
+
+		$this->session->set_flashdata('success','Sucesso ao se cadastrar');
+		redirect("login");
 	}
 
 

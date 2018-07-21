@@ -14,7 +14,6 @@ $route['forgot-password'] = 'UsuariosController/forgotPassword';
 $route['auth-code']       = 'UsuariosController/auth_code';
 
 //Psicólogo
-$route['create-psycho']         = 'PsicologosController/create';
 $route['update-psycho/(:num)']  = 'PsicologosController/edit/$1';
 $route['view-psycho']           = 'PsicologosController';
 
