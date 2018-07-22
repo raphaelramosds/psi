@@ -24,7 +24,7 @@ class ProntuariosController extends CI_Controller
 		$psicologo	= $this->session->userdata('psicologo');
 		$idpsicologo = $psicologo[0]->idpsicologo;
 
-		$this->load->view('Home/menu', array('nomepsicologo'=>$this->session->userdata('nomepsicologo')));
+		$this->load->view('Home/menu', array('nomepsicologo'=>$psicologo[0]->nomepsicologo));
 		$this->load->model('ProntuariosModel','prontuarios');
 
 		$this->load->view('Prontuarios/index', array(
@@ -81,11 +81,11 @@ class ProntuariosController extends CI_Controller
 		$this->load->model('PacientesModel','pacientes');
 		$this->load->model('ProntuariosModel','prontuarios');
 
+		$psicologo 		= $this->session->userdata('psicologo');
+		$psicologo_id 	= $psicologo[0]->idpsicologo;
 
-		$psicologo_id = $this->session->userdata('psicologo')[0]->idpsicologo;
 
-
-		$this->load->view('Home/menu',array('nomepsicologo'=>$this->session->userdata('nomepsicologo')));
+		$this->load->view('Home/menu',array('nomepsicologo'=>$psicologo[0]->nomepsicologo));
 		$this->load->view('Prontuarios/update', array(
 			'prontuarios' 	=> $this->prontuarios->view_id($id),
 			'clinicas' 		=> $this->clinicas->view($psicologo_id),

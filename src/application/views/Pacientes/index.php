@@ -141,17 +141,17 @@
 			<!-- Tratamento -->
 			<label class="ls-label">
 			    <b class="ls-label-text">Tratamento adotado</b>
-			    <textarea rows="10" name="tratamentoadotado" required="required"></textarea>
+			    <textarea rows="10" name="tratamentoadotado" ></textarea>
 		  	</label>
 
 			<label class="ls-label">
 			    <b class="ls-label-text">Diagnóstico</b>
-			    <textarea rows="10" name="diagnostico" required="required"></textarea>
+			    <textarea rows="10" name="diagnostico" ></textarea>
 		  	</label>
 
 		  	<label class="ls-label">
 			    <b class="ls-label-text">Evolução</b>
-			    <textarea rows="10" name="evolucao" required="required"></textarea>
+			    <textarea rows="10" name="evolucao" ></textarea>
 		  	</label>
 			<!-- id do psicologo -->
 			<input type="hidden" name="id_psicologo" required="required" value="<?=$psicologo?>">

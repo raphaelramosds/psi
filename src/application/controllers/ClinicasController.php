@@ -17,7 +17,7 @@ class ClinicasController extends CI_Controller
 
 		$psicologo = $this->session->userdata('psicologo');
 		
-		$this->load->view('Home/menu',array('nomepsicologo'=>$this->session->userdata('nomepsicologo')));
+		$this->load->view('Home/menu',array('nomepsicologo'=>$psicologo[0]->nomepsicologo));
 		$this->load->model('ClinicasModel','clinicas');
 
 		$this->load->view('Clinicas/index', array(
@@ -34,7 +34,7 @@ class ClinicasController extends CI_Controller
 		$psicologo = $this->session->userdata('psicologo');
 		$nomeclinica = $this->input->post('clinica');
 
-		$this->load->view('Home/menu',array('nomepsicologo'=>$this->session->userdata('nomepsicologo')));
+		$this->load->view('Home/menu',array('nomepsicologo'=>$psicologo[0]->nomepsicologo));
 		$this->load->model('ClinicasModel','clinicas');
 
 		$this->load->view('Clinicas/index', array(
@@ -58,7 +58,7 @@ class ClinicasController extends CI_Controller
 	{
 		$psicologo = $this->session->userdata('psicologo');
 
-		$this->load->view('Home/menu',array('nomepsicologo'=>$this->session->userdata('nomepsicologo')));
+		$this->load->view('Home/menu',array('nomepsicologo'=>$psicologo[0]->nomepsicologo));
 		$this->load->view('Clinicas/create',array('psicologo'=>$psicologo[0]->idpsicologo));
 	}
 
@@ -88,7 +88,9 @@ class ClinicasController extends CI_Controller
 
 	public function edit($id)
 	{
-		$this->load->view('Home/menu',array('nomepsicologo'=>$this->session->userdata('nomepsicologo')));
+		$psicologo = $this->session->userdata('psicologo');
+		
+		$this->load->view('Home/menu',array('nomepsicologo'=>$psicologo[0]->nomepsicologo));
 		$this->load->model('ClinicasModel','clinicas');
 	
 		$this->load->view('Clinicas/update', array('clinicas'=>$this->clinicas->view_id($id)));

@@ -18,8 +18,9 @@ class SessoesController extends CI_Controller
 	public function view()
 	{
 		$prontuario = $this->session->userdata('prontuario');
+		$psicologo	= $this->session->userdata('psicologo');
 
-		$this->load->view('Home/menu',array('nomepsicologo'=>$this->session->userdata('nomepsicologo')));
+		$this->load->view('Home/menu',array('nomepsicologo'=>$psicologo[0]->nomepsicologo));
 		$this->load->model('SessoesModel','sessoes');
 
 		$this->load->view('Sessoes/index',array(
@@ -42,7 +43,7 @@ class SessoesController extends CI_Controller
 
 	public function create()
 	{
-		$this->load->view('Home/menu',array('nomepsicologo'=>$this->session->userdata('nomepsicologo')));
+		$this->load->view('Home/menu',array('nomepsicologo'=>$psicologo[0]->nomepsicologo));
 		$this->load->view('Sessoes/create', array('prontuario'=>$this->session->userdata('prontuario')));
 	}
 
@@ -68,9 +69,11 @@ class SessoesController extends CI_Controller
 
 	public function edit($id)
 	{
+		$psicologo = $this->session->userdata('psicologo');
+
 		$this->load->model('SessoesModel', 'sessoes');
 
-		$this->load->view('Home/menu',array('nomepsicologo'=>$this->session->userdata('nomepsicologo')));
+		$this->load->view('Home/menu',array('nomepsicologo'=>$psicologo[0]->nomepsicologo));
 		$this->load->view('Sessoes/update', array('sessao'=>$this->sessoes->view_id($id)));
 	}
 

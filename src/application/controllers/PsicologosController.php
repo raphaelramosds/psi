@@ -14,7 +14,7 @@ class PsicologosController extends CI_Controller
 
 		//Em cada controlador, chamar a sessão nomepsicologo (userdata)
 		//Para recuperar a query no controlador de Home e, assim, retornar o nome do psicólgo
-		$this->load->view('Home/menu', array('nomepsicologo'=>$this->session->userdata('nomepsicologo')));
+		$this->load->view('Home/menu', array('nomepsicologo'=>$psicologo[0]->nomepsicologo));
 
 		$this->load->model('PsicologosModel','psicologos');
 
@@ -51,9 +51,11 @@ class PsicologosController extends CI_Controller
 
 	public function edit($id)
 	{
+		$psicologo = $this->session->userdata('psicologo');
+
 		$this->load->model('PsicologosModel', 'psicologos');
 
-		$this->load->view('Home/menu',array('nomepsicologo'=>$this->session->userdata('nomepsicologo')));
+		$this->load->view('Home/menu',array('nomepsicologo'=>$psicologo[0]->nomepsicologo));
 		$this->load->view('Psicologos/update', array('psicologos'=>$this->psicologos->view_id($id)));
 	}
 

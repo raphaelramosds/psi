@@ -64,16 +64,16 @@
 				</label>
 				<label class="ls-label col-md-4">
 					<b class="ls-label-text">Tratamento adotado</b>
-					<textarea rows="10"  name="tratamentoadotado" required="required"><?=$prontuarios->tratamentoadotado?>
+					<textarea rows="10"  name="tratamentoadotado"><?=$prontuarios->tratamentoadotado?>
 					</textarea>
 				</label>
 				<label class="ls-label col-md-4">
 					<b class="ls-label-text">Diagnóstico</b>
-					<textarea rows="10" name="diagnostico" required="required"><?=$prontuarios->diagnostico?></textarea>
+					<textarea rows="10" name="diagnostico"><?=$prontuarios->diagnostico?></textarea>
 				</label>
 				<label class="ls-label col-md-4">
 					<b class="ls-label-text">Evolucao</b>
-					<textarea rows="10" name="evolucao" required="required"><?=$prontuarios->evolucao?></textarea>
+					<textarea rows="10" name="evolucao"><?=$prontuarios->evolucao?></textarea>
 				</label>
 			</fieldset>
 			<input type="hidden" name="paciente_id" required="required" value="<?=$prontuarios->paciente_id;?>">
