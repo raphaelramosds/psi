@@ -3,24 +3,30 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class PsicologosController extends CI_Controller 
 {
+	public $psicologo;
+
+	public function __construct()
+	{
+		parent::__construct();
+		$this->psicologo = $this->session->userdata('psicologo');
+	}
+
 
 	public function index(){
-		if ($this->session->userdata('psicologo') == NULL) 
+		if ($this->psicologo == NULL) 
 		{
 			redirect('/');
 		}
 	
-		$psicologo = $this->session->userdata('psicologo');
-
 		//Em cada controlador, chamar a sessão nomepsicologo (userdata)
 		//Para recuperar a query no controlador de Home e, assim, retornar o nome do psicólgo
-		$this->load->view('Home/menu', array('nomepsicologo'=>$psicologo[0]->nomepsicologo));
+		$this->load->view('Home/menu', array('nomepsicologo'=>$this->psicologo[0]->nomepsicologo));
 
 		$this->load->model('PsicologosModel','psicologos');
 
 		$this->load->view('Psicologos/index', array(
 			//Enviar o CRP do psicólogo para a cláusula WHERE dentro do Model
-			'datapsicologos' => $this->psicologos->view($psicologo[0]->idpsicologo),
+			'datapsicologos' => $this->psicologos->view($this->psicologo[0]->idpsicologo),
 		));
 	}
 
@@ -51,11 +57,10 @@ class PsicologosController extends CI_Controller
 
 	public function edit($id)
 	{
-		$psicologo = $this->session->userdata('psicologo');
 
 		$this->load->model('PsicologosModel', 'psicologos');
 
-		$this->load->view('Home/menu',array('nomepsicologo'=>$psicologo[0]->nomepsicologo));
+		$this->load->view('Home/menu',array('nomepsicologo'=>$this->psicologo[0]->nomepsicologo));
 		$this->load->view('Psicologos/update', array('psicologos'=>$this->psicologos->view_id($id)));
 	}
 

@@ -3,25 +3,30 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class ClinicasController extends CI_Controller 
 {
-	
+	public $psicologo;
+
+	public function __construct()
+	{
+		parent::__construct();
+		$this->psicologo = $this->session->userdata('psicologo');
+	}
+
 	public function index()
 	{
 		$config = $this->getpagination();
 		$this->pagination->initialize($config);
 		$offset = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
 
-		if ($this->session->userdata('psicologo') == NULL) 
+		if ($this->psicologo == NULL) 
 		{
 			redirect('/');
 		}
-
-		$psicologo = $this->session->userdata('psicologo');
 		
-		$this->load->view('Home/menu',array('nomepsicologo'=>$psicologo[0]->nomepsicologo));
+		$this->load->view('Home/menu',array('nomepsicologo'=>$this->psicologo[0]->nomepsicologo));
 		$this->load->model('ClinicasModel','clinicas');
 
 		$this->load->view('Clinicas/index', array(
-			'dataclinica'	 => $this->clinicas->view($psicologo[0]->idpsicologo, $config['per_page'],$offset),
+			'dataclinica'	 => $this->clinicas->view($this->psicologo[0]->idpsicologo, $config['per_page'],$offset),
 			'pagination' 	 => $this->pagination->create_links(),
 			"add_clinica"    => $this->session->flashdata('add_clinica'),
 			"update_clinica" => $this->session->flashdata('update_clinica'),
@@ -30,15 +35,14 @@ class ClinicasController extends CI_Controller
 	}
 
 	public function search()
-	{
-		$psicologo = $this->session->userdata('psicologo');
+	{;
 		$nomeclinica = $this->input->post('clinica');
 
-		$this->load->view('Home/menu',array('nomepsicologo'=>$psicologo[0]->nomepsicologo));
+		$this->load->view('Home/menu',array('nomepsicologo'=>$this->psicologo[0]->nomepsicologo));
 		$this->load->model('ClinicasModel','clinicas');
 
 		$this->load->view('Clinicas/index', array(
-			'dataclinica'=> $this->clinicas->search($psicologo[0]->idpsicologo, $nomeclinica),
+			'dataclinica'=> $this->clinicas->search($this->psicologo[0]->idpsicologo, $nomeclinica),
 			'delete'     => $this->session->flashdata('delete')
 		));
 	}
@@ -56,10 +60,9 @@ class ClinicasController extends CI_Controller
 
 	public function create()
 	{
-		$psicologo = $this->session->userdata('psicologo');
 
-		$this->load->view('Home/menu',array('nomepsicologo'=>$psicologo[0]->nomepsicologo));
-		$this->load->view('Clinicas/create',array('psicologo'=>$psicologo[0]->idpsicologo));
+		$this->load->view('Home/menu',array('nomepsicologo'=>$this->psicologo[0]->nomepsicologo));
+		$this->load->view('Clinicas/create',array('psicologo'=>$this->psicologo[0]->idpsicologo));
 	}
 
 	public function add()
@@ -88,9 +91,8 @@ class ClinicasController extends CI_Controller
 
 	public function edit($id)
 	{
-		$psicologo = $this->session->userdata('psicologo');
 		
-		$this->load->view('Home/menu',array('nomepsicologo'=>$psicologo[0]->nomepsicologo));
+		$this->load->view('Home/menu',array('nomepsicologo'=>$this->psicologo[0]->nomepsicologo));
 		$this->load->model('ClinicasModel','clinicas');
 	
 		$this->load->view('Clinicas/update', array('clinicas'=>$this->clinicas->view_id($id)));
@@ -109,7 +111,6 @@ class ClinicasController extends CI_Controller
 
 	public function getpagination()
 	{
-		$psicologo = $this->session->userdata('psicologo');
 		$this->load->model("ClinicasModel","clinicas");
 
 		$config = array(
@@ -117,7 +118,7 @@ class ClinicasController extends CI_Controller
 			'per_page' 			=> 4,
 			'num_links' 		=> 10,
 			'uri_segment' 		=> 3,
-			'total_rows' 		=> $this->clinicas->count_results($psicologo[0]->idpsicologo),
+			'total_rows' 		=> $this->clinicas->count_results($this->psicologo[0]->idpsicologo),
 
 			'full_tag_open' 	=> "<ul class = 'ls-pagination-filter'>",
 			'full_tag_close' 	=> "</ul>",

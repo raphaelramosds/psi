@@ -3,6 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class UsuariosController extends CI_Controller 
 {
+
 	//Carregar a tela de login e após autenticar, criar uma sessão para direcionar à tela incial
 	public function login()
 	{
@@ -27,20 +28,20 @@ class UsuariosController extends CI_Controller
 		$this->db->where('username', $user_reg["nome"]);
 		$this->db->where('senha', $senha);
 
-		$usuario_found = $this->db->get('usuario')->result_array();
+		$usuario_found = $this->db->get('usuario')->result();
 
 		if(count($usuario_found) == 1)
 		{
 			$this->db->select('*');
 			$this->db->from('psicologo');
-			$this->db->where('psicologo.usuario_idusuario', $usuario_found[0]['idusuario']);
+			$this->db->where('psicologo.usuario_idusuario', $usuario_found[0]->idusuario);
 
 			$psicologo_found = $this->db->get()->result();
 
 			if(count($psicologo_found) == 0)
 			{
 				$this->load->model('UsuariosModel','usuarios');
-				$this->usuarios->delete($usuario_found[0]['idusuario']);
+				$this->usuarios->delete($usuario_found[0]->idusuario);
 
 				$this->session->set_flashdata('user_noexists','O usuário não corresponde a nenhum psicólogo. Faça novamente o cadastro');
 				redirect('/');

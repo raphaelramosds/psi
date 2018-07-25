@@ -3,10 +3,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class ProntuariosController extends CI_Controller 
 {
+	public $psicologo;
+
+	public function __construct()
+	{
+		parent::__construct();
+		$this->psicologo = $this->session->userdata('psicologo');
+	}
 
 	public function index($idpaciente)
 	{
-		if ($this->session->userdata('psicologo') == NULL) 
+		if ($this->psicologo == NULL) 
 		{
 			redirect('/');
 		}
@@ -21,10 +28,9 @@ class ProntuariosController extends CI_Controller
 
 		$this->load->model("ClinicasModel","clinicas");
 
-		$psicologo	= $this->session->userdata('psicologo');
-		$idpsicologo = $psicologo[0]->idpsicologo;
+		$idpsicologo = $this->psicologo[0]->idpsicologo;
 
-		$this->load->view('Home/menu', array('nomepsicologo'=>$psicologo[0]->nomepsicologo));
+		$this->load->view('Home/menu', array('nomepsicologo'=>$this->psicologo[0]->nomepsicologo));
 		$this->load->model('ProntuariosModel','prontuarios');
 
 		$this->load->view('Prontuarios/index', array(
@@ -81,11 +87,9 @@ class ProntuariosController extends CI_Controller
 		$this->load->model('PacientesModel','pacientes');
 		$this->load->model('ProntuariosModel','prontuarios');
 
-		$psicologo 		= $this->session->userdata('psicologo');
-		$psicologo_id 	= $psicologo[0]->idpsicologo;
+		$psicologo_id 	= $this->psicologo[0]->idpsicologo;
 
-
-		$this->load->view('Home/menu',array('nomepsicologo'=>$psicologo[0]->nomepsicologo));
+		$this->load->view('Home/menu',array('nomepsicologo'=>$this->psicologo[0]->nomepsicologo));
 		$this->load->view('Prontuarios/update', array(
 			'prontuarios' 	=> $this->prontuarios->view_id($id),
 			'clinicas' 		=> $this->clinicas->view($psicologo_id),
