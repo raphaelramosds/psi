@@ -3,24 +3,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class SessoesController extends CI_Controller 
 {
+	public $psicologo;
 
-	public function index($numeroprontuario)
+	public function __construct()
 	{
-		if ($this->session->userdata('psicologo') == NULL) 
-		{
-			redirect('/');
-		}
-		$this->session->set_userdata('prontuario', $numeroprontuario);
-		redirect('view-sessao');
-
+		parent::__construct();
+		$this->psicologo = $this->session->userdata('usuario');
 	}
 
 	public function view()
 	{
 		$prontuario = $this->session->userdata('prontuario');
-		$psicologo	= $this->session->userdata('psicologo');
 
-		$this->load->view('Home/menu',array('nomepsicologo'=>$psicologo[0]->nomepsicologo));
+		$this->load->view('Home/menu',array('nomepsicologo'=>$this->psicologo[0]->nomepsicologo));
 		$this->load->model('SessoesModel','sessoes');
 
 		$this->load->view('Sessoes/index',array(
@@ -43,7 +38,7 @@ class SessoesController extends CI_Controller
 
 	public function create()
 	{
-		$this->load->view('Home/menu',array('nomepsicologo'=>$psicologo[0]->nomepsicologo));
+		$this->load->view('Home/menu',array('nomepsicologo'=>$this->psicologo[0]->nomepsicologo));
 		$this->load->view('Sessoes/create', array('prontuario'=>$this->session->userdata('prontuario')));
 	}
 
@@ -69,11 +64,9 @@ class SessoesController extends CI_Controller
 
 	public function edit($id)
 	{
-		$psicologo = $this->session->userdata('psicologo');
-
 		$this->load->model('SessoesModel', 'sessoes');
 
-		$this->load->view('Home/menu',array('nomepsicologo'=>$psicologo[0]->nomepsicologo));
+		$this->load->view('Home/menu',array('nomepsicologo'=>$this->psicologo[0]->nomepsicologo));
 		$this->load->view('Sessoes/update', array('sessao'=>$this->sessoes->view_id($id)));
 	}
 

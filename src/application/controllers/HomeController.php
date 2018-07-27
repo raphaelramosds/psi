@@ -8,7 +8,7 @@ class HomeController extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
-		$this->psicologo = $this->session->userdata('psicologo');
+		$this->psicologo = $this->session->userdata('usuario');
 	}
 
 	public function index()

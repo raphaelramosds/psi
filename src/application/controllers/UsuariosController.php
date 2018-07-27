@@ -3,8 +3,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class UsuariosController extends CI_Controller 
 {
+	public function __construct()
+	{
+		parent::__construct();
+		$this->load->library('Role');
+	}
 
-	//Carregar a tela de login e após autenticar, criar uma sessão para direcionar à tela incial
 	public function login()
 	{
 		$this->load->view('Usuarios/login', array(
@@ -20,7 +24,7 @@ class UsuariosController extends CI_Controller
 	{
 		$user_reg = array(
 			'nome'  => $this->input->post('username'),
-			'senha' => $this->input->post("senha")
+			'senha' => $this->input->post("senha"),
 		);
 
 		$senha = md5($user_reg["nome"].$user_reg["senha"]);
@@ -30,25 +34,23 @@ class UsuariosController extends CI_Controller
 
 		$usuario_found = $this->db->get('usuario')->result();
 
+		// Verificar se o usuário existe
 		if(count($usuario_found) == 1)
 		{
-			$this->db->select('*');
-			$this->db->from('psicologo');
-			$this->db->where('psicologo.usuario_idusuario', $usuario_found[0]->idusuario);
+			//Recuperar todos os dados do usuário a partir da sua Role e o seu id
+			$request_data = $this->role->identifyUser($usuario_found[0]->role, $usuario_found[0]->idusuario);
 
-			$psicologo_found = $this->db->get()->result();
-
-			if(count($psicologo_found) == 0)
+			//Verificar se o usuário se atribui à algum Psicologo ou Secretário
+			if(count($request_data) == 0)
 			{
 				$this->load->model('UsuariosModel','usuarios');
 				$this->usuarios->delete($usuario_found[0]->idusuario);
-
-				$this->session->set_flashdata('user_noexists','O usuário não corresponde a nenhum psicólogo. Faça novamente o cadastro');
+				$this->session->set_flashdata('user_noexists','O usuário não corresponde a nenhum psicólogo ou secretária. Faça novamente o cadastro');
 				redirect('/');
 			}
-			else if(count($psicologo_found) == 1 )
+			else if(count($request_data) == 1 )
 			{
-				$this->session->set_userdata('psicologo',$psicologo_found);
+				$this->session->set_userdata('usuario',$request_data);
 				redirect('home');
 			}
 		}

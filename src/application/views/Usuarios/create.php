@@ -82,7 +82,6 @@
 							<p class="ls-label-info">CRP</p>
 							<input type="text" name="crp" >
 						</label>
-
 						<input type="hidden" value="" name="idusuario" >
 					</fieldset>
 					<div class="ls-actions-btn" style="text-align:center;border:none;line-height:50px;">

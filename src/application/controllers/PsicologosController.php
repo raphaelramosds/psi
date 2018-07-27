@@ -8,7 +8,7 @@ class PsicologosController extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
-		$this->psicologo = $this->session->userdata('psicologo');
+		$this->psicologo = $this->session->userdata('usuario');
 	}
 
 
@@ -38,7 +38,7 @@ class PsicologosController extends CI_Controller
 			'emailpsicologo' 	=> $this->input->post('emailpsicologo'),
 			'nomepsicologo' 	=> $this->input->post('nomepsicologo'),
 			'sexopsicologo' 	=> $this->input->post('sexopsicologo'),
-			'usuario_idusuario' =>  $this->input->post('idusuario')
+			'usuario_idusuario' =>  $this->input->post('idusuario'),
 		);
 	}
 

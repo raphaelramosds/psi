@@ -8,7 +8,7 @@ class ClinicasController extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
-		$this->psicologo = $this->session->userdata('psicologo');
+		$this->psicologo = $this->session->userdata('usuario');
 	}
 
 	public function index()
@@ -17,11 +17,6 @@ class ClinicasController extends CI_Controller
 		$this->pagination->initialize($config);
 		$offset = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
 
-		if ($this->psicologo == NULL) 
-		{
-			redirect('/');
-		}
-		
 		$this->load->view('Home/menu',array('nomepsicologo'=>$this->psicologo[0]->nomepsicologo));
 		$this->load->model('ClinicasModel','clinicas');
 
@@ -35,7 +30,7 @@ class ClinicasController extends CI_Controller
 	}
 
 	public function search()
-	{;
+	{
 		$nomeclinica = $this->input->post('clinica');
 
 		$this->load->view('Home/menu',array('nomepsicologo'=>$this->psicologo[0]->nomepsicologo));
