@@ -8,7 +8,7 @@
 				<fieldset>
 					<label class="ls-label col-md-12">
 						<b class="ls-label-text">Nome da clínica</b>
-						<input type="text" name="nomeclinica" required="required">
+						<input type="text" name="nome" required="required">
 					</label>
 					<label class="ls-label col-md-4 col-xs-12">
 						<b class="ls-label-text">Estado</b>

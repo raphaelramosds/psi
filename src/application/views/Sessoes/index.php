@@ -26,8 +26,8 @@
 					<td><?=$value->data?></td>
 					<td><?=$value->descricao?></td>
 					<td class='ls-txt-center'>
-						<a href="<?=base_url()?>delete-sessao/<?=$value->idsessao?>" class='ls-ico-remove ls-btn-danger' title='Excluir'>Excluir</a>
-						<a href="<?=base_url()?>update-sessao/<?=$value->idsessao?>" class='ls-ico-search ls-btn' title='Editar'>Ver/Editar</a>
+						<a href="<?=base_url()?>delete-sessao/<?=$value->id?>" class='ls-ico-remove ls-btn-danger' title='Excluir'>Excluir</a>
+						<a href="<?=base_url()?>update-sessao/<?=$value->id?>" class='ls-ico-search ls-btn' title='Editar'>Ver/Editar</a>
 					</td>
 				</tr>
 			<?php endforeach ?>

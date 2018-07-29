@@ -3,35 +3,36 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class HomeController extends CI_Controller 
 {
-	public $psicologo;
+	public $usr;
 
 	public function __construct()
 	{
 		parent::__construct();
-		$this->psicologo = $this->session->userdata('usuario');
+		$this->usr = $this->session->userdata('usuario');
+		$this->load->model('ClinicasModel',"clinicas");
+		$this->load->model('PacientesModel',"pacientes");
+		$this->load->library('Role');	
 	}
 
 	public function index()
 	{
-		if ($this->psicologo == NULL) {
+		if ($this->usr == NULL) {
 			redirect('/');
 		}
-		print_r($this->psicologo);
 
-		$this->load->model('ClinicasModel',"clinicas");
-		$this->load->model('PacientesModel',"pacientes");
+		$request_view = $this->role->menuView($this->usr[0]->usuario_idusuario);
 
-		$this->load->view('Home/menu', array('nomepsicologo'=>$this->psicologo[0]->nomepsicologo));
-		$this->load->view('Home/index', array(
-			'countersclinica' => $this->clinicas->count_results($this->psicologo[0]->idpsicologo),
-			'counterpaciente' => $this->pacientes->count_results($this->psicologo[0]->idpsicologo),
-			'titulo' 		  => 'Início',
+		$this->load->view($request_view['menu'], array('nome'=>$this->usr[0]->nome));
+		$this->load->view($request_view['index'], array(
+			'countersclinica' => $this->clinicas->count_results($this->usr[0]->id),
+			'counterpaciente' => $this->pacientes->count_results($this->usr[0]->id),
+			'titulo' 		  => 'Início'
 		));
 	}
 
 	public function loggout()
 	{
-		$this->session->unset_userdata('psicologo');
+		$this->session->sess_destroy();
 		redirect('/');
 	}
 

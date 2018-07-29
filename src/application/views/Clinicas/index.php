@@ -15,7 +15,7 @@
 
 			<form  action="<?=base_url('ClinicasController/search')?>" class="ls-form ls-form-inline" method="POST">
 				<label class="ls-label" role="search">
-					<input type="text" id="q" name="clinica" aria-label="Faça sua busca pela clínica" placeholder="Nome da clínica" required="" class="ls-field">
+					<input type="text" id="q" name="nome" aria-label="Faça sua busca pela clínica" placeholder="Nome da clínica" required="" class="ls-field">
 				</label>
 				<input type="submit" value="Buscar" class="ls-btn" title="Buscar">
 				<a href="<?=base_url()?>create-clinica" class="ls-ico-plus ls-btn">Adcionar uma clínica</a>
@@ -30,7 +30,7 @@
 				</tr>
 				<?php foreach ($dataclinica as $value): ?>
 				<tr>
-					<td><?=$value->nomeclinica?></td>
+					<td><?=$value->nome?></td>
 					<td><?=$value->telefone?></td>
 					<td><?=$value->estado?></td>
 					<td><?=$value->cidade?></td>
@@ -38,8 +38,8 @@
 						<div data-ls-module='dropdown' class='ls-dropdown'>
 							<a href="$" class="ls-btn">Ação</a>
 							<ul class="ls-dropdown-nav">
-								<li><a href="<?=base_url('update-clinica')?>/<?=$value->idclinica?>" class='ls-ico-pencil ls-color-black ls-no-bghover' title='Editar'>Editar</a></li>
-								<li><a href="<?=base_url('delete-clinica')?>/<?=$value->idclinica?>" class='ls-ico-remove ls-color-danger' title='Excluir'>Excluir</a></li>								
+								<li><a href="<?=base_url('update-clinica')?>/<?=$value->id?>" class='ls-ico-pencil ls-color-black ls-no-bghover' title='Editar'>Editar</a></li>
+								<li><a href="<?=base_url('delete-clinica')?>/<?=$value->id?>" class='ls-ico-remove ls-color-danger' title='Excluir'>Excluir</a></li>								
 							</ul>
 						</div>
 					</td>

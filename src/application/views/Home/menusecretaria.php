@@ -20,12 +20,12 @@
           <a href="#" class="ls-ico-user">
             <!-- Adcionar uma imagem de perfil: <img src="<?=base_url('')?>" alt="" /> -->
             <span class="ls-name">
-              <?=$nomepsicologo?>
+              <?=$nome?>
             </span>
           </a>
           <nav class="ls-dropdown-nav ls-user-menu">
             <ul>
-              <li><a href = "<?=base_url('view-psycho')?>">Meu Perfil</a></li>
+              <li><a href = "<?=base_url('')?>">Meu Perfil</a></li>
               <li><a href = "<?=base_url('HomeController/loggout')?>">Encerrar sessão</a></li>
             </ul>
           </nav>
@@ -39,13 +39,8 @@
           <nav class="ls-menu">
             <ul>
                 <li><a href = "<?=base_url('home')?>" class="ls-ico-home">Início</a></li>
-                <li><a href = "<?=base_url('view-psycho')?>" class="ls-ico-user">Meu perfil</a></li>
-                <li><a href = "#" class="ls-ico-bukets">Cadastro</a>
-                  <ul>
-                    <li><a href = "<?=base_url('view-clinica')?>" class="ls-ico-location">Clínicas</a></li>
-                    <li><a href = "<?=base_url('view-paciente')?>" class="ls-ico-accessibility">Pacientes</a></li>
-                  </ul>
-                </li>
+                <li><a href = "<?=base_url('')?>" class="ls-ico-user">Meu perfil</a></li>
+                <li><a href = "<?=base_url('')?>" class="ls-ico-calendar">Agenda</a></li>
                 <li><a href = "<?=base_url('HomeController/loggout')?>" class="ls-ico-export" style="color:#1DD1A4;">Sair</a></li>
             </ul>
           </nav>

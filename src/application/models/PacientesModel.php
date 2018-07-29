@@ -15,9 +15,9 @@ class PacientesModel extends CI_Model
 		}
 
 		$this->db->from('psicologo, paciente');
-		$this->db->where('psicologo.idpsicologo = paciente.id_psicologo');
+		$this->db->where('psicologo.id = paciente.id_psicologo');
 		$this->db->where('id_psicologo', $id);
-		$this->db->order_by("nomepaciente", "asc");
+		$this->db->order_by("paciente.nome", "asc");
 		$query = $this->db->get();
 		return $query->result();
 	}
@@ -32,7 +32,7 @@ class PacientesModel extends CI_Model
 		}
 		$this->db->from('paciente');
 		$this->db->where('id_psicologo', $id);
-		$this->db->like('nomepaciente', $nomepaciente);
+		$this->db->like('paciente.nome', $nomepaciente);
 		return $this->db->get()->result();
 	}
 
@@ -43,13 +43,13 @@ class PacientesModel extends CI_Model
 
 	public function delete($id)
 	{
-		$this->db->where('idpaciente',$id);
+		$this->db->where('id',$id);
 		$this->db->delete('paciente');
 	}
 
 	public function view_id($id)
 	{
-		$this->db->where('idpaciente', $id);
+		$this->db->where('id', $id);
 		$query = $this->db->get('paciente');
 		return $query->row();
 	}
@@ -57,13 +57,13 @@ class PacientesModel extends CI_Model
 	public function update($dados)
 	{
 		$this->db->set($dados);
-		$this->db->where('idpaciente',$this->id);
+		$this->db->where('id',$this->id);
 		$this->db->update('paciente');
 	}
 
 	public function count_results($id_psicologo)
 	{
-		$this->db->select('idpaciente');
+		$this->db->select('id');
 		$this->db->from('paciente');
 		$this->db->where('id_psicologo',$id_psicologo);
 		$num_results = $this->db->count_all_results();

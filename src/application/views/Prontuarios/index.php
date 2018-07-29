@@ -7,10 +7,10 @@ if($dataprontuarios == NULL)
 	redirect("view-paciente");
 }
 
-$this->db->select('nomepaciente');
+$this->db->select('nome');
 $this->db->from('paciente');
-$this->db->where('idpaciente = '.$dataprontuarios[0]->paciente_id);
-$this->db->order_by("nomepaciente", "asc");
+$this->db->where('id = '.$dataprontuarios[0]->paciente_id);
+$this->db->order_by("nome", "asc");
 
 $paciente = $this->db->get()->row_array();
 
@@ -22,7 +22,7 @@ $paciente = $this->db->get()->row_array();
 			<header class="ls-info-header ls-no-border">
 				<h2 class="ls-title-3 ls-ico-folder">
 					Prontuário de
-					<b><?=$paciente['nomepaciente']?></b>
+					<b><?=$paciente['nome']?></b>
 				</h2>
 			</header>
 			
@@ -51,15 +51,15 @@ $paciente = $this->db->get()->row_array();
 						</td>
 
 						<?php
-						$this->db->select('nomeclinica');
+						$this->db->select('nome');
 						$this->db->from('clinica');
-						$this->db->where('idclinica = '.$value->clinica_id);
-						$this->db->order_by("nomeclinica", "asc");
+						$this->db->where('id = '.$value->clinica_id);
+						$this->db->order_by("nome", "asc");
 
 						$clinica = $this->db->get()->row_array();
 						?>
 
-						<td><?=$clinica['nomeclinica']?></td>
+						<td><?=$clinica['nome']?></td>
 
 						<td>
 							<?php $find = FALSE; ?>
@@ -82,7 +82,7 @@ $paciente = $this->db->get()->row_array();
 								<a href='#' class='ls-btn'>Ação</a>
 								<ul class="ls-dropdown-nav">
 									<li><a href="<?=base_url('index-sessao')?>/<?=$value->numeroprontuario?>" class='ls-ico-docs ls-color-black ls-no-bghover' title='Ver sessões'>Ver sessões</a></li>
-									<li><a href="<?=base_url('update-prontuario')?>/<?=$value->numeroprontuario?>" class='ls-ico-search ls-color-black ls-no-bghover' title='Detalhar'>Ver informações</a></li>		
+									<li><a href="<?=base_url('update-prontuario')?>/<?=$value->numeroprontuario?>" class='ls-ico-search ls-color-black ls-no-bghover' title='Detalhar'>Ver/Editar informações</a></li>		
 									<li><a href="<?=base_url('delete-prontuario')?>/<?=$value->numeroprontuario?>" class='ls-ico-remove ls-color-danger' title='Excluir'>Excluir</a></li>									
 								</ul>
 							</div>
@@ -111,10 +111,10 @@ $paciente = $this->db->get()->row_array();
 				<b class="ls-label-text">Clínica</b>
 				<p class="ls-label-info">Nome da clínica</p>
 				<div class="ls-custom-select">
-					<select class="ls-select" name="clinicaid">
+					<select class="ls-select" name="clinica_id">
 						<option value=""></option>
 						<?php foreach ($clinicas as $value):?>
-							<option value="<?=$value->idclinica?>"><?=$value->nomeclinica?></option>
+							<option value="<?=$value->id?>"><?=$value->nome?></option>
 						<?php endforeach;?>
 					</select>
 				</div>
@@ -143,7 +143,7 @@ $paciente = $this->db->get()->row_array();
 			<label for="" class="ls-label">
 				<b class="ls-label-text">Encaminhado</b>
 				<div class="ls-custom-select">
-					<select class="ls-select" name="encaminhado" required="required">
+					<select class="ls-select" name="encaminhado">
 						<option value="S">Sim</option>
 						<option value="N">Não</option>
 					</select>
@@ -153,17 +153,17 @@ $paciente = $this->db->get()->row_array();
 			<!-- Tratamento -->
 			<label class="ls-label">
 			    <b class="ls-label-text">Tratamento adotado</b>
-			    <textarea rows="10" name="tratamentoadotado" required="required"></textarea>
+			    <textarea rows="10" name="tratamentoadotado" ></textarea>
 		  	</label>
 
 			<label class="ls-label">
 			    <b class="ls-label-text">Diagnóstico</b>
-			    <textarea rows="10" name="diagnostico" required="required"></textarea>
+			    <textarea rows="10" name="diagnostico"></textarea>
 		  	</label>
 
 		  	<label class="ls-label">
 			    <b class="ls-label-text">Evolução</b>
-			    <textarea rows="10" name="evolucao" required="required"></textarea>
+			    <textarea rows="10" name="evolucao" ></textarea>
 		  	</label>
 			<!-- id do psicologo -->
 			<input type="hidden" name="id_psicologo" required="required" value="<?=$psicologo?>">

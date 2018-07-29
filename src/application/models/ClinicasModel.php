@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class ClinicasModel extends CI_Model 
 {
 	
-	public $idclinica;
+	public $id;
 
 	public function view($id,$limit = NULL, $offset = NULL)
 	{
@@ -15,9 +15,9 @@ class ClinicasModel extends CI_Model
 		}
 
 		$this->db->from('psicologo, clinica');
-		$this->db->where('psicologo.idpsicologo = clinica.id_psicologo');
+		$this->db->where('psicologo.id = clinica.id_psicologo');
 		$this->db->where('id_psicologo',$id);
-		$this->db->order_by("nomeclinica", "asc");
+		$this->db->order_by("clinica.nome", "asc");
 		$query = $this->db->get();
 		return $query->result();
 	}
@@ -26,7 +26,7 @@ class ClinicasModel extends CI_Model
 	{
 		$this->db->from('clinica');
 		$this->db->where('clinica.id_psicologo = '.$id);
-		$this->db->like('nomeclinica', $nomeclinica);
+		$this->db->like('clinica.nome', $nomeclinica);
 		return $this->db->get()->result();
 	}
 
@@ -37,13 +37,13 @@ class ClinicasModel extends CI_Model
 
 	public function delete($id)
 	{
-		$this->db->where('idclinica', $id);
+		$this->db->where('id', $id);
 		$this->db->delete('clinica');
 	}
 
 	public function view_id($id)
 	{
-		$this->db->where('idclinica', $id);
+		$this->db->where('id', $id);
 		$query = $this->db->get('clinica');
 		return $query->row();
 	}
@@ -51,13 +51,13 @@ class ClinicasModel extends CI_Model
 	public function update($dados)
 	{
 		$this->db->set($dados);
-		$this->db->where('idclinica', $this->idclinica);
+		$this->db->where('id', $this->id);
 		$this->db->update('clinica');
 	}
 
 	public function count_results($id_psicologo)
 	{
-		$this->db->select('idclinica');
+		$this->db->select('id');
 		$this->db->from('clinica');
 		$this->db->where('id_psicologo',$id_psicologo);
 		$num_results = $this->db->count_all_results();

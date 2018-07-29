@@ -3,43 +3,32 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class PsicologosController extends CI_Controller 
 {
-	public $psicologo;
+	public $usr;
 
 	public function __construct()
 	{
 		parent::__construct();
-		$this->psicologo = $this->session->userdata('usuario');
+		$this->usr = $this->session->userdata('usuario');
+		$this->load->library('Role');	
+		$this->load->model('PsicologosModel','psicologos');
 	}
 
 
 	public function index(){
-		if ($this->psicologo == NULL) 
+		if ($this->usr == NULL) 
 		{
 			redirect('/');
 		}
-	
-		//Em cada controlador, chamar a sessão nomepsicologo (userdata)
-		//Para recuperar a query no controlador de Home e, assim, retornar o nome do psicólgo
-		$this->load->view('Home/menu', array('nomepsicologo'=>$this->psicologo[0]->nomepsicologo));
 
-		$this->load->model('PsicologosModel','psicologos');
+		$request_view = $this->role->menuView($this->usr[0]->usuario_idusuario);
+
+		$this->load->view($request_view['menu'], array('nome'=>$this->usr[0]->nome));
+
 
 		$this->load->view('Psicologos/index', array(
 			//Enviar o CRP do psicólogo para a cláusula WHERE dentro do Model
-			'datapsicologos' => $this->psicologos->view($this->psicologo[0]->idpsicologo),
+			'datapsicologos' => $this->psicologos->view($this->usr[0]->id),
 		));
-	}
-
-	public function get()
-	{
-		return array(
-			'crp' 				=> $this->input->post('crp'),
-			'datanascimento' 	=> $this->input->post('datanasc'),
-			'emailpsicologo' 	=> $this->input->post('emailpsicologo'),
-			'nomepsicologo' 	=> $this->input->post('nomepsicologo'),
-			'sexopsicologo' 	=> $this->input->post('sexopsicologo'),
-			'usuario_idusuario' =>  $this->input->post('idusuario'),
-		);
 	}
 
 	public function delete($id=NULL)
@@ -49,8 +38,7 @@ class PsicologosController extends CI_Controller
 			redirect('view-psycho');
 		}
 
-		$this->load->model('PsicologosModel');
-		$this->PsicologosModel->delete($id);
+		$this->psicologos->delete($id);
 
 		redirect('view-psycho');
 	}
@@ -58,18 +46,17 @@ class PsicologosController extends CI_Controller
 	public function edit($id)
 	{
 
-		$this->load->model('PsicologosModel', 'psicologos');
+		$request_view = $this->role->menuView($this->usr[0]->usuario_idusuario);
 
-		$this->load->view('Home/menu',array('nomepsicologo'=>$this->psicologo[0]->nomepsicologo));
+		$this->load->view($request_view['menu'],array('nome'=>$this->usr[0]->nome));
 		$this->load->view('Psicologos/update', array('psicologos'=>$this->psicologos->view_id($id)));
 	}
 
 	public function update()
 	{
-		$psycho_reg = $this->get();
+		$psycho_reg = $this->input->post();
 
-		$this->load->model('PsicologosModel','psicologos');
-		$this->psicologos->idpsicologo = $this->input->post('idpsicologo');
+		$this->psicologos->id = $this->input->post('id');
 		$this->psicologos->update($psycho_reg);
 		
 		redirect('view-psycho');

@@ -3,7 +3,7 @@
 class SessoesModel extends CI_Model
 {
 	
-	public $idsessao;
+	public $id;
 
 	public function view($numeroprontuario)
 	{
@@ -16,7 +16,7 @@ class SessoesModel extends CI_Model
 
 	public function view_id($id)
 	{
-		$this->db->where('idsessao', $id);
+		$this->db->where('id', $id);
 		$query = $this->db->get('sessao');
 		return $query->row();
 	}
@@ -28,13 +28,13 @@ class SessoesModel extends CI_Model
 	
 	public function delete($id)
 	{
-		$this->db->where('idsessao',$id);
+		$this->db->where('id',$id);
 		$this->db->delete('sessao');
 	}
 
 	public function update($dados)
 	{
-		$this->db->where('idsessao', $this->idsessao);
+		$this->db->where('id', $this->id);
 		$this->db->set($dados);
 		$this->db->update('sessao');
 	}

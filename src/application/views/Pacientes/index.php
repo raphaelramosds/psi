@@ -34,15 +34,15 @@
 			<?php foreach ($datapacientes as $value): ?>
 				<?php
 				$this->db->from('prontuario, paciente');
-				$this->db->where('prontuario.paciente_id = '.$value->idpaciente);
+				$this->db->where('prontuario.paciente_id = '.$value->id);
 				$paciente_prontuario = $this->db->get()->result();
 				?>
 				<tr>
-					<td><?=$value->nomepaciente?></td>
-					<td><?=$value->emailpaciente?></td>
-					<td><?=$value->telefonepaciente?></td>
+					<td><?=$value->nome?></td>
+					<td><?=$value->email?></td>
+					<td><?=$value->telefone?></td>
 					<td><?=$value->profissao?></td>
-					<td><?=$value->sexopaciente?></td>
+					<td><?=$value->sexo?></td>
 					<td>
 						<?php if($value->cartaosaude == 0):?>
 							<?="Não registrado"?>
@@ -61,15 +61,15 @@
 						<div data-ls-module='dropdown' class='ls-dropdown'>
 							<a href='#' class='ls-btn'>Ação</a>
 							<ul class='ls-dropdown-nav'>
-								<li><a href="<?=base_url('update-paciente')?>/<?=$value->idpaciente?>" class='ls-ico-pencil ls-color-black ls-no-bghover' title='Editar'>Editar</a></li>
+								<li><a href="<?=base_url('update-paciente')?>/<?=$value->id?>" class='ls-ico-pencil ls-color-black ls-no-bghover' title='Editar'>Editar</a></li>
 								<li>
 									<?php if (count($paciente_prontuario) > 0): ?>
-										<a href="<?=base_url('index-prontuario')?>/<?=$value->idpaciente?>" class='ls-ico-search ls-color-black ls-no-bghover' title='Ver prontuário'>Ver prontuário</a>
+										<a href="<?=base_url('index-prontuario')?>/<?=$value->id?>" class='ls-ico-search ls-color-black ls-no-bghover' title='Ver prontuário'>Ver prontuário</a>
 									<?php else: ?>
-										<a class='ls-ico-plus ls-color-black ls-no-bghover ls-cursor-pointer' title='Adcionar prontuário' data-ls-module="modal" data-target="#prontuario" onClick="paciente(<?=$value->idpaciente?>)">Adcionar prontuário</a>
+										<a class='ls-ico-plus ls-color-black ls-no-bghover ls-cursor-pointer' title='Adcionar prontuário' data-ls-module="modal" data-target="#prontuario" onClick="paciente(<?=$value->id?>)">Adcionar prontuário</a>
 									<?php endif ?>
 								</li>
-								<li><a href="<?=base_url('delete-paciente')?>/<?=$value->idpaciente?>" class='ls-ico-remove ls-color-danger' title='Excluir'>Excluir</a></li>
+								<li><a href="<?=base_url('delete-paciente')?>/<?=$value->id?>" class='ls-ico-remove ls-color-danger' title='Excluir'>Excluir</a></li>
 							</ul>
 						</div>
 					</td>
@@ -99,10 +99,10 @@
 				<b class="ls-label-text">Clínica</b>
 				<p class="ls-label-info">Nome da clínica</p>
 				<div class="ls-custom-select">
-					<select class="ls-select" name="clinicaid">
+					<select class="ls-select" name="clinica_id">
 						<option value=""></option>
 						<?php foreach ($clinicas as $value):?>
-							<option value="<?=$value->idclinica?>"><?=$value->nomeclinica?></option>
+							<option value="<?=$value->id?>"><?=$value->nome?></option>
 						<?php endforeach;?>
 					</select>
 				</div>

@@ -8,12 +8,12 @@
 				<fieldset>
 					<label class="ls-label col-md-12">
 						<b class="ls-label-text">Nome do paciente</b>
-						<input type="text" name="nomepaciente" required="required">
+						<input type="text" name="nome" required="required">
 					</label>
 					<label class="ls-label col-md-4">
 					  <b class="ls-label-text">Sexo</b>
 					  <div class="ls-custom-select">
-					    <select class="ls-custom" name="sexopaciente" required="required">
+					    <select class="ls-custom" name="sexo" required="required">
 					      <option value="M">Masculino</option>
 					      <option value="F">Feminino</option>
 					    </select>
@@ -47,7 +47,7 @@
 
 					<label class="ls-label col-md-4 col-xs-12">
 						<b class='ls-label-text'>Telefone</b>
-						<input type="text" name="telefonepaciente" required="required" class="ls-mask-phone8_with_ddd" placeholder="(99) 9999-9999">
+						<input type="text" name="telefone" required="required" class="ls-mask-phone8_with_ddd" placeholder="(99) 9999-9999">
 					</label>
 
 				</fieldset>

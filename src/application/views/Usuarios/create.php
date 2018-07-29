@@ -50,14 +50,14 @@
 						<label class="ls-label">
 							<b class="ls-label-text">Informações do psicólogo</b>
 							<p class="ls-label-info">Algumas informações não são obrigadas</p>
-							<input type="text" name="nomepsicologo" required="required" placeholder="Seu nome completo">
+							<input type="text" name="nome" required="required" placeholder="Seu nome completo">
 						</label>
 
 						<label class="ls-label">
 							<?php if(isset($erro_email)): ?>
 								<div class='ls-sm-space' style='font-size:20px; color:red;'><?=$erro_email?></div>
 							<?php endif ?>
-							<input type="text" name="emailpsicologo" required="required" placeholder="Email">
+							<input type="text" name="email" required="required" placeholder="Email">
 						</label>
 
 						<label class="ls-label">
@@ -68,7 +68,7 @@
 						<label class="ls-label">
 							<p class="ls-label-info">Sexo</p>
 							<div class="ls-custom-select">
-								<select class="ls-custom" name="sexopsicologo">
+								<select class="ls-custom" name="sexo">
 									<option value="M">Masculino</option>
 									<option value="F">Feminino</option>
 								</select>
@@ -82,7 +82,7 @@
 							<p class="ls-label-info">CRP</p>
 							<input type="text" name="crp" >
 						</label>
-						<input type="hidden" value="" name="idusuario" >
+						<input type="hidden" name="id" >
 					</fieldset>
 					<div class="ls-actions-btn" style="text-align:center;border:none;line-height:50px;">
 						<button class="ls-btn"  style="background-color:#1DD1A4;color:white;padding:1em;width:250px;">Terminar</button>

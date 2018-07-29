@@ -16,7 +16,7 @@
 					<p class="ls-label-information">Quando ocorreu?</p>
 					<input type="date" required name="data" class="ls-field">
 				</label>
-				<input type="hidden" required name="numeroprontuario" class="ls-field" value="<?=$prontuario ?>">
+				<input type="hidden" required name="numero_prontuario" class="ls-field" value="<?=$prontuario ?>">
 				<label class="ls-label col-md-12">
 					<b class="ls-label-text">Descrição da sessão</b>
 					<textarea rows="4" name="descricao"></textarea>

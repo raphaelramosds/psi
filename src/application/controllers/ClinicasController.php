@@ -3,12 +3,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class ClinicasController extends CI_Controller 
 {
-	public $psicologo;
+	public $usr;
 
 	public function __construct()
 	{
 		parent::__construct();
-		$this->psicologo = $this->session->userdata('usuario');
+		$this->load->model('ClinicasModel','clinicas');
+		$this->usr = $this->session->userdata('usuario');
 	}
 
 	public function index()
@@ -17,11 +18,10 @@ class ClinicasController extends CI_Controller
 		$this->pagination->initialize($config);
 		$offset = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
 
-		$this->load->view('Home/menu',array('nomepsicologo'=>$this->psicologo[0]->nomepsicologo));
-		$this->load->model('ClinicasModel','clinicas');
+		$this->load->view('Home/menupsicologo',array('nome'=>$this->usr[0]->nome));
 
 		$this->load->view('Clinicas/index', array(
-			'dataclinica'	 => $this->clinicas->view($this->psicologo[0]->idpsicologo, $config['per_page'],$offset),
+			'dataclinica'	 => $this->clinicas->view($this->usr[0]->id, $config['per_page'],$offset),
 			'pagination' 	 => $this->pagination->create_links(),
 			"add_clinica"    => $this->session->flashdata('add_clinica'),
 			"update_clinica" => $this->session->flashdata('update_clinica'),
@@ -31,40 +31,28 @@ class ClinicasController extends CI_Controller
 
 	public function search()
 	{
-		$nomeclinica = $this->input->post('clinica');
+		$nomeclinica = $this->input->post('nome');
 
-		$this->load->view('Home/menu',array('nomepsicologo'=>$this->psicologo[0]->nomepsicologo));
-		$this->load->model('ClinicasModel','clinicas');
+		$this->load->view('Home/menupsicologo',array('nome'=>$this->usr[0]->nome));
 
 		$this->load->view('Clinicas/index', array(
-			'dataclinica'=> $this->clinicas->search($this->psicologo[0]->idpsicologo, $nomeclinica),
+			'dataclinica'=> $this->clinicas->search($this->usr[0]->id, $nomeclinica),
 			'delete'     => $this->session->flashdata('delete')
 		));
-	}
-
-	public function get()
-	{
-		return array(
-			'nomeclinica' 	=> $this->input->post('nomeclinica'),
-			'telefone' 		=> $this->input->post('telefone'),
-			'estado' 		=> $this->input->post('estado'),
-			'cidade' 		=> $this->input->post('cidade'),
-			'id_psicologo' 	=> $this->input->post('id_psicologo')
-		);
 	}
 
 	public function create()
 	{
 
-		$this->load->view('Home/menu',array('nomepsicologo'=>$this->psicologo[0]->nomepsicologo));
-		$this->load->view('Clinicas/create',array('psicologo'=>$this->psicologo[0]->idpsicologo));
+		$this->load->view('Home/menupsicologo',array('nome'=>$this->usr[0]->nome));
+		$this->load->view('Clinicas/create',array('psicologo'=>$this->usr[0]->id));
 	}
 
 	public function add()
 	{
 		$this->load->model('ClinicasModel');
 
-		$clinica_reg = $this->get();	
+		$clinica_reg = $this->input->post();	
 
 		$this->ClinicasModel->add($clinica_reg);
 		$this->session->set_flashdata("add_clinica","Adcionada com sucesso!");
@@ -87,17 +75,15 @@ class ClinicasController extends CI_Controller
 	public function edit($id)
 	{
 		
-		$this->load->view('Home/menu',array('nomepsicologo'=>$this->psicologo[0]->nomepsicologo));
-		$this->load->model('ClinicasModel','clinicas');
+		$this->load->view('Home/menupsicologo',array('nome'=>$this->usr[0]->nome));
 	
 		$this->load->view('Clinicas/update', array('clinicas'=>$this->clinicas->view_id($id)));
 	}
 
 	public function update()
 	{
-		$clinica_reg = $this->get();
-		$this->load->model('ClinicasModel','clinicas');
-		$this->clinicas->idclinica = $this->input->post('idclinica');
+		$clinica_reg = $this->input->post();
+		$this->clinicas->id = $this->input->post('id');
 		$this->clinicas->update($clinica_reg);
 		$this->session->set_flashdata("update_clinica",'Atualizada com sucesso!');
 
@@ -106,14 +92,13 @@ class ClinicasController extends CI_Controller
 
 	public function getpagination()
 	{
-		$this->load->model("ClinicasModel","clinicas");
-
+		
 		$config = array(
 			'base_url' 			=> base_url('ClinicasController/index'),
 			'per_page' 			=> 4,
 			'num_links' 		=> 10,
 			'uri_segment' 		=> 3,
-			'total_rows' 		=> $this->clinicas->count_results($this->psicologo[0]->idpsicologo),
+			'total_rows' 		=> $this->clinicas->count_results($this->usr[0]->id),
 
 			'full_tag_open' 	=> "<ul class = 'ls-pagination-filter'>",
 			'full_tag_close' 	=> "</ul>",

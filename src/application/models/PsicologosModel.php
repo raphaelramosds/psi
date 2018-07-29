@@ -3,18 +3,18 @@
 class PsicologosModel extends CI_Model
 {
 	
-	public $idpsicologo;
+	public $id;
 
 	public function view($id)
 	{
-		$this->db->where('idpsicologo', $id);
+		$this->db->where('id', $id);
 		$query = $this->db->get('psicologo');
-		return $query->result();
+		return $query->row_array();
 	}
 
 	public function view_id($id)
 	{
-		$this->db->where('idpsicologo',$id);
+		$this->db->where('id',$id);
 		$query = $this->db->get('psicologo');
 		return $query->row();
 	}
@@ -26,15 +26,16 @@ class PsicologosModel extends CI_Model
 
 	public function delete($id)
 	{
-		$this->db->where('idpsicologo',$id);
+		$this->db->where('id',$id);
 		$this->db->delete('psicologo');
 	}
 
 	public function update($dados)
 	{
 		$this->db->set($dados);
-		$this->db->where('idpsicologo', $this->idpsicologo);
+		$this->db->where('id', $this->id);
 		$this->db->update('psicologo');
+		//return $dados;
 	}
 
 }

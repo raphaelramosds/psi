@@ -24,7 +24,7 @@ class UsuariosController extends CI_Controller
 	{
 		$user_reg = array(
 			'nome'  => $this->input->post('username'),
-			'senha' => $this->input->post("senha"),
+			'senha' => $this->input->post("senha")
 		);
 
 		$senha = md5($user_reg["nome"].$user_reg["senha"]);
@@ -38,13 +38,13 @@ class UsuariosController extends CI_Controller
 		if(count($usuario_found) == 1)
 		{
 			//Recuperar todos os dados do usuário a partir da sua Role e o seu id
-			$request_data = $this->role->identifyUser($usuario_found[0]->role, $usuario_found[0]->idusuario);
+			$request_data = $this->role->identifyUser($usuario_found[0]->role, $usuario_found[0]->id);
 
 			//Verificar se o usuário se atribui à algum Psicologo ou Secretário
 			if(count($request_data) == 0)
 			{
 				$this->load->model('UsuariosModel','usuarios');
-				$this->usuarios->delete($usuario_found[0]->idusuario);
+				$this->usuarios->delete($usuario_found[0]->id);
 				$this->session->set_flashdata('user_noexists','O usuário não corresponde a nenhum psicólogo ou secretária. Faça novamente o cadastro');
 				redirect('/');
 			}
@@ -64,9 +64,9 @@ class UsuariosController extends CI_Controller
 	public function get()
 	{
 		return array(
-			'idusuario' => $this->input->post('idusuario'),
+			'id' => $this->input->post('id'),
 			'username' 	=> $this->input->post('username'),
-			'senha' 	=> $this->input->post('senha')
+			'senha' 	=> $this->input->post('senha'),
 		);
 	}
 
@@ -90,9 +90,9 @@ class UsuariosController extends CI_Controller
 		$psicologo_reg		= array(
 			'crp' 				=> $this->input->post('crp'),
 			'datanascimento' 	=> $this->input->post('datanasc'),
-			'emailpsicologo' 	=> $this->input->post('emailpsicologo'),
-			'nomepsicologo' 	=> $this->input->post('nomepsicologo'),
-			'sexopsicologo' 	=> $this->input->post('sexopsicologo'),
+			'email' 	=> $this->input->post('email'),
+			'nome' 	=> $this->input->post('nome'),
+			'sexo' 	=> $this->input->post('sexo'),
 			'usuario_idusuario' =>  $this->input->post('idusuario') //Até agora vazio
 		);
 
@@ -103,7 +103,7 @@ class UsuariosController extends CI_Controller
 		//Validações
 
 		$users_count 		= count($this->usuarios->duplicate_user($user_reg['username']));
-		$email_count		= count($this->usuarios->verify_email($psicologo_reg['emailpsicologo']));
+		$email_count		= count($this->usuarios->verify_email($psicologo_reg['email']));
 		$crp_count			= count($this->db->query("SELECT * FROM psicologo WHERE crp = '".$psicologo_reg['crp']."'")->result());
 
 		if($users_count == 1)
@@ -135,7 +135,7 @@ class UsuariosController extends CI_Controller
 
 		$query = $this->db->query("SELECT * FROM usuario WHERE username = '".$user_reg['username']."'");
 		$find_usuario = $query->result();
-		$id = $find_usuario[0]->idusuario;
+		$id = $find_usuario[0]->id;
 
 		//Colocar id do usuário na Foreign Key do psicologo:
 		$psicologo_reg['usuario_idusuario'] = $id;
@@ -207,12 +207,12 @@ class UsuariosController extends CI_Controller
 		$this->email->set_newline("\r\n");
 
 		$this->email->from('naoresponder@email.com','Sistema de Prontuários de Psicologia');
-		$this->email->to($object[0]->emailpsicologo, $object[0]->nomepsicologo);
+		$this->email->to($object[0]->email, $object[0]->nome);
 
 		$this->email->subject('Psi - Redefinição de senha');
 		$this->email->message($this->load->view('Usuarios/email_template', array('usuario'=>$usuario_data,'code_access'=>$code),TRUE));
 
-		if ($this->email->send())
+		if ($this->email->send())	
 		{
 			$this->session->set_flashdata('success_send_email','Email enviado com sucesso!');
 			redirect('auth-code');
@@ -246,7 +246,7 @@ class UsuariosController extends CI_Controller
 		else
 		{
 			$code_auth = md5(rand());
-			$this->edit_password($usuario[0]->idusuario);
+			$this->edit_password($usuario[0]->id);
 		}
 
 	}

@@ -3,17 +3,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class ProntuariosController extends CI_Controller 
 {
-	public $psicologo;
+	public $usr;
 
 	public function __construct()
 	{
 		parent::__construct();
-		$this->psicologo = $this->session->userdata('usuario');
+		$this->usr = $this->session->userdata('usuario');
+		$this->load->model('ProntuariosModel','prontuarios');
+		$this->load->model("ClinicasModel","clinicas");
+		$this->load->model('PacientesModel','pacientes');
 	}
 
 	public function index($idpaciente)
 	{
-		if ($this->psicologo == NULL) 
+		if ($this->usr == NULL) 
 		{
 			redirect('/');
 		}
@@ -26,46 +29,26 @@ class ProntuariosController extends CI_Controller
 	{
 		$paciente = $this->session->userdata('paciente');
 
-		$this->load->model("ClinicasModel","clinicas");
 
-		$idpsicologo = $this->psicologo[0]->idpsicologo;
+		$id = $this->usr[0]->id;
 
-		$this->load->view('Home/menu', array('nomepsicologo'=>$this->psicologo[0]->nomepsicologo));
-		$this->load->model('ProntuariosModel','prontuarios');
+		$this->load->view('Home/menupsicologo', array('nome'=>$this->usr[0]->nome));
 
 		$this->load->view('Prontuarios/index', array(
-			//Mostre os prontuários relacionados ao psicologo e ao paciente...
-			'dataprontuarios' 	=> $this->prontuarios->view($idpsicologo, $paciente),
+			'dataprontuarios' 	=> $this->prontuarios->view($id, $paciente),
 			'delete' 			=> $this->session->flashdata('delete'),
-			'clinicas' 			=> $this->clinicas->view($idpsicologo),
-			"psicologo" 		=> $idpsicologo,
+			'clinicas' 			=> $this->clinicas->view($id),
+			"psicologo" 		=> $id,
 			"add_prontuario" 	=> $this->session->flashdata('add_prontuario'),
 			"delete_prontuario" => $this->session->flashdata('delete_prontuario'),
 			"update_prontuario" => $this->session->flashdata('update_prontuario'),
 		));
 	}
 
-	public function get()
-	{
-		return array(
-			'alta' 		 		=> $this->input->post('alta'),
-			'cid10' 	 		=> $this->input->post('cid10'),
-			'clinica_id' 		=> $this->input->post('clinicaid'),
-			'diagnostico'		=> $this->input->post('diagnostico'),
-			'encaminhado'		=> $this->input->post('encaminhado'),
-			'numeroprontuario'	=> $this->input->post('numeroprontuario'),
-			'paciente_id' 		=> $this->input->post('paciente_id'),
-			'id_psicologo' 		=> $this->input->post('id_psicologo'),
-			'tratamentoadotado'	=> $this->input->post('tratamentoadotado'),
-			'evolucao' 			=> $this->input->post('evolucao')
-		);
-	}
-
 	public function add()
 	{
-		$this->load->model('ProntuariosModel','prontuarios');
 
-		$prontuario_reg = $this->get();
+		$prontuario_reg = $this->input->post();
 
 		$this->prontuarios->add($prontuario_reg);
 
@@ -76,33 +59,29 @@ class ProntuariosController extends CI_Controller
 
 	public function delete($idprontuario = NULL)
 	{
-		$this->load->model('ProntuariosModel','prontuarios');
+
 		$this->prontuarios->delete($idprontuario);
 		$this->session->set_flashdata("delete_prontuario","Deletado com sucesso!");
 		redirect('view-prontuario');
 	}
 
 	public function edit($id){
-		$this->load->model('ClinicasModel', 'clinicas');
-		$this->load->model('PacientesModel','pacientes');
-		$this->load->model('ProntuariosModel','prontuarios');
 
-		$psicologo_id 	= $this->psicologo[0]->idpsicologo;
+		$id_psicologo = $this->usr[0]->id;
 
-		$this->load->view('Home/menu',array('nomepsicologo'=>$this->psicologo[0]->nomepsicologo));
+		$this->load->view('Home/menupsicologo',array('nome'=>$this->usr[0]->nome));
 		$this->load->view('Prontuarios/update', array(
 			'prontuarios' 	=> $this->prontuarios->view_id($id),
-			'clinicas' 		=> $this->clinicas->view($psicologo_id),
-			'pacientes'	    => $this->pacientes->view($psicologo_id)
+			'clinicas' 		=> $this->clinicas->view($id_psicologo),
+			'pacientes'	    => $this->pacientes->view($id_psicologo)
 		));
 	}
 
 	public function update()
 	{
 
-		$prontuario_reg = $this->get();	
+		$prontuario_reg = $this->input->post();	
 
-		$this->load->model('ProntuariosModel','prontuarios');
 		$this->prontuarios->numeroprontuario = $this->input->post('numeroprontuario');
 		$this->prontuarios->update($prontuario_reg);
 		$this->session->set_flashdata("update_prontuario",'Atualizado com sucesso');

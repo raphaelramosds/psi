@@ -21,8 +21,8 @@ class ProntuariosModel extends CI_Model
 		//select * from prontuario, paciente where prontuario.psicologo_crp=500 and prontuario.paciente_id = paciente.idpaciente and nomepaciente like '_inicial_%'
 		$this->db->from('prontuario, paciente');
 		$this->db->where('prontuario.id_psicologo',$id);
-		$this->db->where('prontuario.paciente_id = paciente.idpaciente');
-		$this->db->like('nomepaciente', $nomepaciente);
+		$this->db->where('prontuario.paciente_id = paciente.id');
+		$this->db->like('nome', $nomepaciente);
 		$query = $this->db->get()->result();
 		return $query;
 	}

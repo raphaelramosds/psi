@@ -8,16 +8,16 @@
 				<fieldset>
 					<label class="ls-label col-md-12">
 						<b class="ls-label-text">Nome do paciente</b>
-						<input type="text" name="nomepaciente" value ="<?=$pacientes->nomepaciente; ?>" required="required">
+						<input type="text" name="nome" value ="<?=$pacientes->nome; ?>" required="required">
 					</label>
 					<label class="ls-label col-md-4">
 					<b class="ls-label-text">Sexo</b>
 					<div class="ls-custom-select">
-						<select class="ls-custom" name="sexopaciente" required="required">
-							<option value="<?=$pacientes->sexopaciente ?>">
-								<?php if($pacientes->sexopaciente == 'F'):?> 
+						<select class="ls-custom" name="sexo" required="required">
+							<option value="<?=$pacientes->sexo ?>">
+								<?php if($pacientes->sexo == 'F'):?> 
 								<?="Feminino"?>
-								<?php elseif($pacientes->sexopaciente == 'M'):?>
+								<?php elseif($pacientes->sexo == 'M'):?>
 								<?="Masculino"?>
 								<?php endif;?>
 							</option>
@@ -44,14 +44,14 @@
 					<label class="ls-label col-md-4 col-xs-12">
 						<b class="ls-label-text">Email</b>
 						<p class="ls-labe-info">Para melhor contato</p>
-						<input type="email" name="email" required="required" value="<?=$pacientes->emailpaciente ?>">
+						<input type="email" name="email" required="required" value="<?=$pacientes->email ?>">
 					</label>
 					<label class="ls-label col-md-4 col-xs-12">
 						<b class='ls-label-text'>Telefone</b>
-						<input type="text" name="telefonepaciente" required="required" value="<?=$pacientes->telefonepaciente ?>" class="ls-mask-phone8_with_ddd" placeholder="(99) 9999-9999">
+						<input type="text" name="telefone" required="required" value="<?=$pacientes->telefone ?>" class="ls-mask-phone8_with_ddd" placeholder="(99) 9999-9999">
 					</label>
 				</fieldset>
-				<input type="hidden" name="idpaciente" value="<?=$pacientes->idpaciente ?>">
+				<input type="hidden" name="id" value="<?=$pacientes->id ?>">
 				<button type="submit" class="ls-btn">Salvar dados do paciente</button>
 				<a href="<?=base_url('view-paciente')?>" class="ls-btn-danger">Voltar</a>
 			</form>
