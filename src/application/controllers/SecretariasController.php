@@ -22,9 +22,9 @@ class SecretariasController extends CI_Controller
 	public function create()
 	{
 		$data_form_secretaria = array(
-			'psicologo_id' => $this->usr[0]->id,
-			'clinicas'	   => $this->clinicas->view($this->usr[0]->id),
-			'erro_senha'	=> $this->session->flashdata('erro_senha'), 
+			'psicologo_id' 		=> $this->usr[0]->id,
+			'clinicas'	   	=> $this->clinicas->view($this->usr[0]->id),
+			'erro_senha'		=> $this->session->flashdata('erro_senha'), 
 			'erro_user'		=> $this->session->flashdata('erro_user')
 		); 
 
