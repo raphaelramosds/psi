@@ -44,7 +44,7 @@
                   <ul>
                     <li><a href = "<?=base_url('view-clinica')?>" class="ls-ico-location">Clínicas</a></li>
                     <li><a href = "<?=base_url('view-paciente')?>" class="ls-ico-accessibility">Pacientes</a></li>
-                    <li><a href = "<?=base_url('')?>" class="ls-ico-panel-pabx">Secretária</a></li>
+                    <li><a href = "<?=base_url('view-secretaria')?>" class="ls-ico-panel-pabx">Secretária</a></li>
                   </ul>
                 </li>
                 <li><a href = "<?=base_url('HomeController/loggout')?>" class="ls-ico-export" style="color:#1DD1A4;">Sair</a></li>

@@ -43,3 +43,7 @@ $route['delete-sessao/(:num)'] = 'SessoesController/delete/$1';
 $route['index-sessao/(:num)']  = 'SessoesController/index/$1';
 $route['view-sessao']          = 'SessoesController/view';
 
+//Secretarias
+$route['create-secretaria']    = 'SecretariasController/create';
+$route['view-secretaria']    = 'SecretariasController/view';
+

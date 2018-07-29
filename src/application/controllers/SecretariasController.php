@@ -3,12 +3,30 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class SecretariasController extends CI_Controller 
 {
-	public $secretaria;
+	public $usr;
 
 	public function __construct()
 	{
 		parent::__construct();
-		$this->secretaria = $this->session->userdata('usuario');
+		$this->usr = $this->session->userdata('usuario');
+		$this->load->model('ClinicasModel', 'clinicas');
+	}
+
+	public function view()
+	{	
+		$this->load->view('Home/menupsicologo', array('nome' => $this->usr[0]->nome));
+		$this->load->view('Secretarias/index');
+	}
+
+	public function create()
+	{
+		$data_form_secretaria = array(
+			'psicologo_id' => $this->usr[0]->id,
+			'clinicas'	   => $this->clinicas->view($this->usr[0]->id)
+		); 
+
+		$this->load->view('Home/menupsicologo', array('nome' => $this->usr[0]->nome));
+		$this->load->view('Secretarias/create', $data_form_secretaria);
 	}
 
 }

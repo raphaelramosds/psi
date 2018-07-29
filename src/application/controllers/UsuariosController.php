@@ -68,9 +68,8 @@ class UsuariosController extends CI_Controller
 	public function get()
 	{
 		return array(
-			'id' => $this->input->post('id'),
 			'username' 	=> $this->input->post('username'),
-			'senha' 	=> $this->input->post('senha'),
+			'senha' 	=> $this->input->post('senha')
 		);
 	}
 
