@@ -16,7 +16,7 @@
 				<header class="ls-info-header" style="text-align:center;border:none">
 					<h2 class="ls-title-3" >Cadastre-se</span></h2>
 				</header>
-				<form action="<?=base_url()?>UsuariosController/add" role="form" method="POST">
+				<form action="<?=base_url('UsuariosController/add')?>" role="form" method="POST">
 					<fieldset>
 						<label for="" class="ls-label">
 							<b class="ls-label-text">Informações do usuário</b>
@@ -82,7 +82,7 @@
 							<p class="ls-label-info">CRP</p>
 							<input type="text" name="crp" >
 						</label>
-						<input type="hidden" name="id" >
+						<input type="hidden" name="role" value="1" >
 					</fieldset>
 					<div class="ls-actions-btn" style="text-align:center;border:none;line-height:50px;">
 						<button class="ls-btn"  style="background-color:#1DD1A4;color:white;padding:1em;width:250px;">Terminar</button>

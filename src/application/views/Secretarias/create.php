@@ -4,7 +4,7 @@
             <header class="ls-info-header ls-no-border">
                 <h2 class="ls-title-3 ls-ico-panel-pabx">Cadastro de Secretária</h2>
             </header>
-            <form action="<?=base_url('')?>">
+            <form action="<?=base_url('UsuariosController/add')?>" method="POST">
                 <fieldset>
                     <label for="" class="ls-label">
                         <b class="ls-label-text">Informações do usuário</b>

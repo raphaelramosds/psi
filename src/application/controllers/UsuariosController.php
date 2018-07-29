@@ -9,6 +9,7 @@ class UsuariosController extends CI_Controller
 		$this->load->library('Role');
 		$this->load->model('UsuariosModel','usuarios');
 		$this->load->model('PsicologosModel','psicologos');
+		$this->load->model('SecretariasModel','secretarias');
 	}
 
 	public function login()
@@ -69,7 +70,8 @@ class UsuariosController extends CI_Controller
 	{
 		return array(
 			'username' 	=> $this->input->post('username'),
-			'senha' 	=> $this->input->post('senha')
+			'senha' 	=> $this->input->post('senha'),
+			'role'		=> $this->input->post('role')
 		);
 	}
 
@@ -98,6 +100,16 @@ class UsuariosController extends CI_Controller
 			'usuario_idusuario' =>  $this->input->post('idusuario') //Até agora vazio
 		);
 
+		$secretaria_reg		= array(
+			'nome' 				=> $this->input->post('nome'),
+			'telefone' 			=> $this->input->post('telefone'),
+			'sexo' 				=> $this->input->post('sexo'),
+			'endereco' 			=> $this->input->post('endereco'),
+			'usuario_idusuario' => $this->input->post('usuario_idusuario'),
+			'psicologo_id' 		=> $this->input->post('psicologo_id'),
+			'clinica_id' 		=> $this->input->post('clinica_id'),
+		);
+
 		//Faça criptografia da senha
 
 		$user_reg['senha']  = md5($user_reg['username'].$user_reg['senha']);
@@ -107,46 +119,58 @@ class UsuariosController extends CI_Controller
 		$users_count 		= count($this->usuarios->duplicate_user($user_reg['username']));
 		$email_count		= count($this->usuarios->verify_email($psicologo_reg['email']));
 		$crp_count			= count($this->db->query("SELECT * FROM psicologo WHERE crp = '".$psicologo_reg['crp']."'")->result());
+		$view_redirect		= ($psicologo_reg['crp'] == NULL) ? 'create-secretaria' : 'cadastre';
 
 		if($users_count == 1)
 		{
 			$this->session->set_flashdata('erro_user','Nome de usuário já existe no sistema');
-			redirect("cadastre");
+			redirect($view_redirect);
 		}
 		
 		if($crp_count == 1)
 		{
 			$this->session->set_flashdata('erro_crp','CRP já existe no sistema');
-			redirect("cadastre");
+			redirect($view_redirect);
 		}
 
 		if($email_count == 1)
 		{
 			$this->session->set_flashdata('erro_email','Este e-mail já existe no sistema');
-			redirect("cadastre");
+			redirect($view_redirect);
 		}
 
 
 		if($this->input->post('confirm_senha') != $this->input->post('senha')) 
 		{
 			$this->session->set_flashdata('erro_senha','Parece que as senhas não são iguais');
-			redirect("cadastre");
+			redirect($view_redirect);
 		}
+
 
 		$this->usuarios->add($user_reg);
 
-		$query = $this->db->query("SELECT * FROM usuario WHERE username = '".$user_reg['username']."'");
-		$find_usuario = $query->result();
-		$id = $find_usuario[0]->id;
+		$query 			= $this->db->query("SELECT * FROM usuario WHERE username = '".$user_reg['username']."'");
+		$find_usuario 	= $query->result();
+		$id 			= $find_usuario[0]->id;
+		$role 			= $find_usuario[0]->role;
 
-		//Colocar id do usuário na Foreign Key do psicologo:
-		$psicologo_reg['usuario_idusuario'] = $id;
+		if ($role == 2)
+		{
+			$secretaria_reg['usuario_idusuario'] = $id;
+			$this->secretarias->add($secretaria_reg);
+		}
 
-		//Finalmente, insere os dados do psicólogo:
-		$this->psicologos->add($psicologo_reg);
+		else if ($role == 1)
+		{
+			$psicologo_reg['usuario_idusuario'] = $id;
+			$this->psicologos->add($psicologo_reg);
+		}
 
 		$this->session->set_flashdata('success','Sucesso ao se cadastrar');
-		redirect("login");
+
+		$view_success_cadastre = ($role == 1) ? 'login' : 'view-secretaria';
+
+		redirect($view_success_cadastre);
 	}
 
 
