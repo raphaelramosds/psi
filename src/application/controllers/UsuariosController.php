@@ -7,16 +7,20 @@ class UsuariosController extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->library('Role');
+		$this->load->model('UsuariosModel','usuarios');
+		$this->load->model('PsicologosModel','psicologos');
 	}
 
 	public function login()
 	{
-		$this->load->view('Usuarios/login', array(
+		$data_flash = array(
 			'success' 					=> $this->session->flashdata('success'),
 			'erro'    					=> $this->session->flashdata('erro_autenticacao'),
 			'success_update_password' 	=> $this->session->flashdata('success_update_password'),
 			'user_noexists'				=> $this->session->flashdata('user_noexists')
-		));
+		);
+
+		$this->load->view('Usuarios/login',$data_flash);
   	}
 
   	//Criar uma sessão para colocar os dados do usuário
@@ -43,7 +47,7 @@ class UsuariosController extends CI_Controller
 			//Verificar se o usuário se atribui à algum Psicologo ou Secretário
 			if(count($request_data) == 0)
 			{
-				$this->load->model('UsuariosModel','usuarios');
+
 				$this->usuarios->delete($usuario_found[0]->id);
 				$this->session->set_flashdata('user_noexists','O usuário não corresponde a nenhum psicólogo ou secretária. Faça novamente o cadastro');
 				redirect('/');
@@ -72,27 +76,26 @@ class UsuariosController extends CI_Controller
 
 	public function create()
 	{
-		$this->load->view('Usuarios/create',
-		array(
+		$data_flash = array(
 			'erro_senha'	=> $this->session->flashdata('erro_senha'), 
 			'erro_user'		=> $this->session->flashdata('erro_user'),
 			'erro_email'    => $this->session->flashdata('erro_email'),
 			'erro_crp'      => $this->session->flashdata('erro_crp')
-		));
+		);
+
+		$this->load->view('Usuarios/create', $data_flash);
 	}
 
 	public function add()
 	{
-		$this->load->model('UsuariosModel','usuarios');
-		$this->load->model('PsicologosModel','psicologos');
-		
+	
 		$user_reg 			= $this->get();
 		$psicologo_reg		= array(
 			'crp' 				=> $this->input->post('crp'),
 			'datanascimento' 	=> $this->input->post('datanasc'),
-			'email' 	=> $this->input->post('email'),
-			'nome' 	=> $this->input->post('nome'),
-			'sexo' 	=> $this->input->post('sexo'),
+			'email' 			=> $this->input->post('email'),
+			'nome' 				=> $this->input->post('nome'),
+			'sexo' 				=> $this->input->post('sexo'),
 			'usuario_idusuario' =>  $this->input->post('idusuario') //Até agora vazio
 		);
 
@@ -151,17 +154,19 @@ class UsuariosController extends CI_Controller
 	//Primeiro: Exibir tela para informar email
 	public function forgotPassword()
 	{
-		$this->load->view('Usuarios/recovery', array(
+		$data_flash = array(
 			'invalid_email'      => $this->session->flashdata('invalid_email'),
 			'success_send_email' => $this->session->flashdata('success_send_email'),
 			'erro_send_email'    => $this->session->flashdata('erro_send_email')
-		));
+		);
+
+		$this->load->view('Usuarios/recovery', $data_flash);
 	}
 
 	//Verificar se o email existe
 	public function recoveryPass()
 	{
-		$this->load->model('UsuariosModel','usuarios');
+
 		$email   = $this->input->post('email');
 		$request = $this->usuarios->verify_email($email);
 
@@ -177,7 +182,6 @@ class UsuariosController extends CI_Controller
 	//Enviar email para o usuário
 	public function send_email($object)
 	{
-		$this->load->model('UsuariosModel','usuarios');
 
 		//Gera um código aleatório para trocar a senha e colocar na sessão
 		$code = md5(rand());

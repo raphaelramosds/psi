@@ -20,21 +20,15 @@ class PacientesController extends CI_Controller
 
 		$config = $this->getpagination();
 		$this->pagination->initialize($config);
+		$id = $this->usr[0]->id;
 
 		if ($this->usr == NULL) 
 		{
 			redirect('/');
 		}
 
-		//Se o valor via URL foi informado, $offset vai receber esse valor. Caso não for informado, offset receberá zero
 		$offset = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
-
-
-		$id = $this->usr[0]->id;
-
-		$this->load->view('Home/menupsicologo', array('nome'=>$this->usr[0]->nome));
-
-		$this->load->view('Pacientes/index', array(
+		$data_pagination_paciente = array(
 			'datapacientes'		=> $this->pacientes->view($id, $config['per_page'], $offset),
 			'delete' 			=> $this->session->flashdata('delete'),
 			'pagination' 		=> $this->pagination->create_links(),
@@ -45,7 +39,10 @@ class PacientesController extends CI_Controller
 			'psicologo' 		=> $id,
 			//Exibir Clínicas cadastradas pelo psicologo
 			'clinicas' 			=> $this->clinicas->view($id)
-		));
+		);
+
+		$this->load->view('Home/menupsicologo', array('nome'=>$this->usr[0]->nome));
+		$this->load->view('Pacientes/index', $data_pagination_paciente);
 	}
 
 	public function search()
@@ -55,13 +52,13 @@ class PacientesController extends CI_Controller
 
 		$this->load->view('Home/menupsicologo',$user);
 
-		$data = array(
+		$data_pacientes_search = array(
 			'datapacientes'	=> $this->pacientes->search($this->usr[0]->id, $paciente),
 			'delete' 		=> $this->session->flashdata('delete'),
 			'pagination' 	=> NULL
 		);
 
-		$this->load->view('Pacientes/index', $data);
+		$this->load->view('Pacientes/index', $data_pacientes_search);
 	}
 
 	public function create()

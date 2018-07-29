@@ -27,14 +27,10 @@ class ProntuariosController extends CI_Controller
 
 	public function view()
 	{
-		$paciente = $this->session->userdata('paciente');
-
-
 		$id = $this->usr[0]->id;
 
-		$this->load->view('Home/menupsicologo', array('nome'=>$this->usr[0]->nome));
-
-		$this->load->view('Prontuarios/index', array(
+		$paciente = $this->session->userdata('paciente');
+		$data_flash_inf = array(
 			'dataprontuarios' 	=> $this->prontuarios->view($id, $paciente),
 			'delete' 			=> $this->session->flashdata('delete'),
 			'clinicas' 			=> $this->clinicas->view($id),
@@ -42,7 +38,12 @@ class ProntuariosController extends CI_Controller
 			"add_prontuario" 	=> $this->session->flashdata('add_prontuario'),
 			"delete_prontuario" => $this->session->flashdata('delete_prontuario'),
 			"update_prontuario" => $this->session->flashdata('update_prontuario'),
-		));
+		); 
+
+
+		$this->load->view('Home/menupsicologo', array('nome'=>$this->usr[0]->nome));
+
+		$this->load->view('Prontuarios/index', $data_flash_inf);
 	}
 
 	public function add()
@@ -66,15 +67,16 @@ class ProntuariosController extends CI_Controller
 	}
 
 	public function edit($id){
-
 		$id_psicologo = $this->usr[0]->id;
 
-		$this->load->view('Home/menupsicologo',array('nome'=>$this->usr[0]->nome));
-		$this->load->view('Prontuarios/update', array(
+		$data_prontuarios = array(
 			'prontuarios' 	=> $this->prontuarios->view_id($id),
 			'clinicas' 		=> $this->clinicas->view($id_psicologo),
 			'pacientes'	    => $this->pacientes->view($id_psicologo)
-		));
+		);
+
+		$this->load->view('Home/menupsicologo',array('nome' => $this->usr[0]->nome));
+		$this->load->view('Prontuarios/update', $data_prontuarios);
 	}
 
 	public function update()

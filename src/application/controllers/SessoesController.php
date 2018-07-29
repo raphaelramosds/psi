@@ -9,6 +9,7 @@ class SessoesController extends CI_Controller
 	{
 		parent::__construct();
 		$this->usr = $this->session->userdata('usuario');
+		$this->load->model('SessoesModel','sessoes');
 	}
 
 	public function index($numero_prontuario)
@@ -20,16 +21,15 @@ class SessoesController extends CI_Controller
 	public function view()
 	{
 		$prontuario = $this->session->userdata('prontuario');
-
-		$this->load->view('Home/menupsicologo',array('nome'=>$this->usr[0]->nome));
-		$this->load->model('SessoesModel','sessoes');
-
-		$this->load->view('Sessoes/index',array(
+		$data_flash = array(
 			'datasessoes' 	=> $this->sessoes->view($prontuario),
 			'update_sessao' => $this->session->flashdata('update_sessao'),
 			'add_sessao' 	=> $this->session->flashdata('add_sessao'),
 			'delete_sessao' => $this->session->flashdata('delete_sessao')
-		));
+		);
+
+		$this->load->view('Home/menupsicologo',array('nome'=>$this->usr[0]->nome));
+		$this->load->view('Sessoes/index', $data_flash);
 	}
 
 	public function create()
@@ -42,7 +42,6 @@ class SessoesController extends CI_Controller
 	{
 		$ses_reg = $this->input->post();
 
-		$this->load->model('SessoesModel','sessoes');
 		$this->sessoes->add($ses_reg);
 		$this->session->set_flashdata("add_sessao",'Adcionada com sucesso!');
 		redirect("view-sessao");
@@ -50,7 +49,6 @@ class SessoesController extends CI_Controller
 
 	public function delete($id)
 	{
-		$this->load->model('SessoesModel','sessoes');
 		$this->sessoes->delete($id);
 
 		$this->session->set_flashdata("delete_sessao","Deletada com sucesso!");
@@ -60,7 +58,6 @@ class SessoesController extends CI_Controller
 
 	public function edit($id)
 	{
-		$this->load->model('SessoesModel', 'sessoes');
 
 		$this->load->view('Home/menupsicologo',array('nome'=>$this->usr[0]->nome));
 		$this->load->view('Sessoes/update', array('sessao'=>$this->sessoes->view_id($id)));
@@ -68,7 +65,6 @@ class SessoesController extends CI_Controller
 
 	public function update()
 	{
-		$this->load->model('SessoesModel','sessoes');
 		
 		$ses_reg = $this->input->post();
 

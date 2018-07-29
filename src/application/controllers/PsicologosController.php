@@ -14,21 +14,13 @@ class PsicologosController extends CI_Controller
 	}
 
 
-	public function index(){
-		if ($this->usr == NULL) 
-		{
-			redirect('/');
-		}
-
+	public function index()
+	{
 		$request_view = $this->role->menuView($this->usr[0]->usuario_idusuario);
 
-		$this->load->view($request_view['menu'], array('nome'=>$this->usr[0]->nome));
+		$this->load->view($request_view['menu'], array('nome' => $this->usr[0]->nome));
+		$this->load->view('Psicologos/index', array('datapsicologos' => $this->psicologos->view($this->usr[0]->id)));
 
-
-		$this->load->view('Psicologos/index', array(
-			//Enviar o CRP do psicólogo para a cláusula WHERE dentro do Model
-			'datapsicologos' => $this->psicologos->view($this->usr[0]->id),
-		));
 	}
 
 	public function delete($id=NULL)
@@ -48,8 +40,8 @@ class PsicologosController extends CI_Controller
 
 		$request_view = $this->role->menuView($this->usr[0]->usuario_idusuario);
 
-		$this->load->view($request_view['menu'],array('nome'=>$this->usr[0]->nome));
-		$this->load->view('Psicologos/update', array('psicologos'=>$this->psicologos->view_id($id)));
+		$this->load->view($request_view['menu'],array('nome' => $this->usr[0]->nome));
+		$this->load->view('Psicologos/update', array('psicologos' => $this->psicologos->view_id($id)));
 	}
 
 	public function update()
