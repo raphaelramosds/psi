@@ -1,2 +1,2 @@
 # psi
-Prontuários em um Sistema inteligente para auxiliar os psicólogos
+Prontuários Eletrônicos em um Sistema inteligente para auxiliar os psicólogos
