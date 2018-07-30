@@ -7,8 +7,6 @@
 		<link rel="icon" sizes="192x192" href="<?=base_url('assets/images/ico-boilerplate.png')?>">
 		<link rel="apple-touch-icon" href="<?=base_url('assets/images/ico-boilerplate.png')?>">
 		<link rel="stylesheet" href="<?=base_url('assets/css/links_style.css')?>" type="text/css">
-		<script type="text/javascript" src="<?=base_url('assets/js/jquery.js')?>"></script>
-		<script src="<?=base_url('assets/js/locastyle.js')?>" type="text/javascript"></script>
 	</head>
 	<body>
 		<div class="container" style="margin-top: 200px;max-width:900px;">
@@ -44,5 +42,8 @@
 				</form>
 			</div>
 		</div>	
+		
+		<script type="text/javascript" src="<?=base_url('assets/js/jquery.js')?>"></script>
+		<script src="<?=base_url('assets/js/locastyle.js')?>" type="text/javascript"></script>
 	</body>
 </html>

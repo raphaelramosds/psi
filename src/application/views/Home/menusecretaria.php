@@ -9,9 +9,6 @@
     <link rel     = "apple-touch-icon"      href  = "<?=base_url('assets/images/ico-boilerplate.png')?>">
     <link rel     = "stylesheet"            href  = "<?=base_url('assets/css/list.css')?>">
     <link rel     = "stylesheet"            href  = "<?=base_url('assets/css/cronometro.css')?>">
-    <!-- Scripts -->
-    <script type  = "text/javascript"    src   = "<?=base_url('assets/js/jquery.js')?>"></script>
-    <script type  = "text/javascript"    src   = "<?=base_url('assets/js/locastyle.js')?>"></script>
   </head>
   <body>
     <div class="ls-topbar ">
@@ -44,3 +41,6 @@
           </nav>
       </div>
     </aside>
+
+    <script type  = "text/javascript"    src   = "<?=base_url('assets/js/jquery.js')?>"></script>
+    <script type  = "text/javascript"    src   = "<?=base_url('assets/js/locastyle.js')?>"></script>
