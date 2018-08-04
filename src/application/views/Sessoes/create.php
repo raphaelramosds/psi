@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="<?=base_url('assets/css/cronometro.css')?>">
 <div class="ls-main">
 	<div class="container-fluid">
 		<div class="ls-box ls-board-box ls-no-border">
@@ -32,7 +33,8 @@
 	</div>
 	<div class="cronometro_box">
 		<form name="form">	
-			<span class = "in_box ls-ico-history " id="hora">00:</span><span class = "in_box" id="minuto">00:</span><span class = "in_box" id="segundo">00</span>
+			<i class="ls-ico-history ic_box"></i>
+			<span class = "in_box" id="hora">00:</span><span class = "in_box" id="minuto">00:</span><span class = "in_box" id="segundo">00</span>
 			<br>
 			<button id = "comeca" onClick = "tempo(1)" class="btn_box" type="button"> INICIAR </button>
 			<button id = "parar"  onClick="stop_time()" class="btn_box" type="button" style="display:none"> PARAR </button>

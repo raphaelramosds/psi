@@ -8,7 +8,6 @@
     <link rel     = "icon" sizes="192x192"  href  = "<?=base_url('assets/images/ico-boilerplate.png')?>">
     <link rel     = "apple-touch-icon"      href  = "<?=base_url('assets/images/ico-boilerplate.png')?>">
     <link rel     = "stylesheet"            href  = "<?=base_url('assets/css/list.css')?>">
-    <link rel     = "stylesheet"            href  = "<?=base_url('assets/css/cronometro.css')?>">
   </head>
   <body>
     <div class="ls-topbar ">
