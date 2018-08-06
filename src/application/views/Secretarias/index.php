@@ -4,6 +4,24 @@
 			<header class="ls-info-header ls-no-border" >
 			    <h2 class="ls-title-3 ls-ico-panel-pabx">Secretárias cadastradas</h2>
             </header>
+            <table class="ls-table">
+            	<tr>
+            		<th>Nome</th>
+            		<th>Sexo</th>
+            		<th>Endereco</th>
+            		<th>Telefone</th>
+            		<th>Ação</th>
+            	</tr>
+            	<?php foreach ($data_secretaria as $row):?>
+				<tr>
+					<td><?=$row->nome?></td>			
+					<td><?=$row->sexo?></td>
+					<td><?=$row->endereco?></td>
+					<td><?=$row->telefone?></td>
+				</tr>
+            	<?php endforeach;?>
+            </table>
+            <hr>
             <a href="<?=base_url('create-secretaria')?>" class="ls-ico-plus ls-btn	">Adcionar uma secretária</a>
         </div>
     </div>

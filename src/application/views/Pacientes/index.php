@@ -2,7 +2,7 @@
 	<div class="container-fluid">
 		<div class="ls-box ls-board-box ls-no-border">
 			<header class="ls-info-header ls-no-border" >
-			<h2 class="ls-title-3 ls-ico-accessibility">Pacientes cadastrados</h2>
+				<h2 class="ls-title-3 ls-ico-accessibility">Pacientes cadastrados</h2>
 			</header>
 
 			<?php if(isset($add_paciente)):?>

@@ -17,6 +17,15 @@ class SecretariasModel extends CI_Model
 		$this->db->update('secretaria');
 	}
 
+	public function count_results($id)
+	{
+		$this->db->select('id');
+		$this->db->from('secretaria');
+		$this->db->where('secretaria.psicologo_id', $id);
+		$num_results = $this->db->count_all_results();
+		return $num_results;
+	}
+
 	public function view($id)
 	{
 		$this->db->from('secretaria');

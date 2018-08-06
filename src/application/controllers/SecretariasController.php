@@ -15,8 +15,11 @@ class SecretariasController extends CI_Controller
 
 	public function view()
 	{	
+		$data_secretaria = $this->secretarias->view($this->usr[0]->id);
+
 		$this->load->view('Home/menupsicologo', array('nome' => $this->usr[0]->nome));
-		$this->load->view('Secretarias/index');
+		$this->load->view('Secretarias/index', array('data_secretaria' => $data_secretaria));
+
 	}
 
 	public function create()

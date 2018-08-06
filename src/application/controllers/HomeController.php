@@ -11,6 +11,7 @@ class HomeController extends CI_Controller
 		$this->usr = $this->session->userdata('usuario');
 		$this->load->model('ClinicasModel',"clinicas");
 		$this->load->model('PacientesModel',"pacientes");
+		$this->load->model('SecretariasModel','secretarias');
 		$this->load->library('Role');	
 	}
 
@@ -22,7 +23,8 @@ class HomeController extends CI_Controller
 		}
 
 		$count_registers = array(
-			'countersclinica' => $this->clinicas->count_results($this->usr[0]->id),
+			'countersecretaria' => $this->secretarias->count_results($this->usr[0]->id),
+			'counterclinica' => $this->clinicas->count_results($this->usr[0]->id),
 			'counterpaciente' => $this->pacientes->count_results($this->usr[0]->id),
 			'titulo' 		  => 'Início'
 		);
@@ -31,6 +33,15 @@ class HomeController extends CI_Controller
 
 		$this->load->view($request_view['menu'], array('nome'=>$this->usr[0]->nome));
 		$this->load->view($request_view['index'], $count_registers);
+	}
+
+	public function viewcid()
+	{	
+		$url = base_url("assets/xml/doencas.xml");
+		$xml = simplexml_load_file($url);
+
+		$this->load->view('Home/menupsicologo', array('nome' => $this->usr[0]->nome));
+		$this->load->view('Home/viewcid', array('cid' => $xml));
 	}
 
 	public function loggout()

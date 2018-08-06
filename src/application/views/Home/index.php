@@ -1,13 +1,10 @@
     <main class="ls-main ">
       <div class="container-fluid">
-        <h1 class="ls-title-intro ls-ico-home ls-txt-center"><?=$titulo?></h1>
-        <div class="ls-box ls-board-box">
-          <header class="ls-info-header ls-txt-center">
-            <h2 class="ls-title-3 ls-ico-docs">Relatórios</h2>
-            <p class="ls-float-none-xs ls-small-info">Quantidade de registros no sistema</p>
-          </header>
+        <h1 class="ls-title-intro ls-ico-home ls-txt-center ls-color-theme" style="font-size:55px"></h1>
+        <div class="ls-box ls-board-box ls-no-border">
           <div id="sending-stats" class="row">
-            <div class="col-sm-6 col-md-3">
+
+            <div class="col-sm-4 col-md-3">
               <div class="ls-box">
                 <div class="ls-box-head">
                   <h6 class="ls-title-4">Pacientes</h6>
@@ -22,14 +19,15 @@
                 </div>
               </div>
             </div>
-            <div class="col-sm-6 col-md-3">
+
+            <div class="col-sm-4 col-md-3">
               <div class="ls-box">
                 <div class="ls-box-head">
                   <h6 class="ls-title-4">CLÍNICAS</h6>
                 </div>
                 <div class="ls-box-body">
                   <span class="ls-board-data">
-                    <strong><?=$countersclinica; ?></strong>
+                    <strong><?=$counterclinica; ?></strong>
                   </span>
                 </div>
                 <div class="ls-box-footer">
@@ -37,6 +35,23 @@
                 </div>
               </div>
             </div>
+
+            <div class="col-sm-4 col-md-3">
+              <div class="ls-box">
+                <div class="ls-box-head">
+                  <h6 class="ls-title-4">Secretárias</h6>
+                </div>
+                <div class="ls-box-body">
+                  <span class="ls-board-data">
+                    <strong><?=$countersecretaria?></strong>
+                  </span>
+                </div>
+                <div class="ls-box-footer">
+                  <a href="<?=base_url('SecretariasController/view')?>" class="ls-btn ls-btn-xs">Ver secretárias</a>
+                </div>
+              </div>
+            </div>
+
           </div>
           <hr>
         </div>
