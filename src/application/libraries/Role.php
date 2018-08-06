@@ -4,13 +4,13 @@ class Role
 {
     public $CI;
     public $tela_psicologo  = array(
-        'menu' => 'home/menupsicologo',
-        'index'=> 'home/index'
+        'menu' => 'Home/menupsicologo',
+        'index'=> 'Home/index'
     );
 
     public $tela_secretaria = array(
-        'menu'  => 'home/menusecretaria',
-        'index' => 'home/secretaria'
+        'menu'  => 'Home/menusecretaria',
+        'index' => 'Home/secretaria'
     );
 
     public function __construct()
