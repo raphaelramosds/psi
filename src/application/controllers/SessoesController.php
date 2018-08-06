@@ -28,14 +28,14 @@ class SessoesController extends CI_Controller
 			'delete_sessao' => $this->session->flashdata('delete_sessao')
 		);
 
-		$this->load->view('Home/menupsicologo',array('nome'=>$this->usr[0]->nome));
+		$this->load->view('Home/menupsicologo',array('nome' => $this->usr[0]->nome));
 		$this->load->view('Sessoes/index', $data_flash);
 	}
 
 	public function create()
 	{
-		$this->load->view('Home/menupsicologo',array('nome'=>$this->usr[0]->nome));
-		$this->load->view('Sessoes/create', array('prontuario'=>$this->session->userdata('prontuario')));
+		$this->load->view('Home/menupsicologo',array('nome' => $this->usr[0]->nome));
+		$this->load->view('Sessoes/create', array('prontuario' => $this->session->userdata('prontuario')));
 	}
 
 	public function add()

@@ -41,7 +41,7 @@ class ProntuariosController extends CI_Controller
 		); 
 
 
-		$this->load->view('Home/menupsicologo', array('nome'=>$this->usr[0]->nome));
+		$this->load->view('Home/menupsicologo', array('nome' => $this->usr[0]->nome));
 
 		$this->load->view('Prontuarios/index', $data_flash_inf);
 	}

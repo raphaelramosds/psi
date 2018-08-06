@@ -18,7 +18,7 @@ class AgendaController extends CI_Controller
     {
     	$request_view = $this->role->menuView($this->usr[0]->usuario_idusuario);
 
-		$this->load->view($request_view['menu'], array('nome'=>$this->usr[0]->nome));
+		$this->load->view($request_view['menu'], array('nome' => $this->usr[0]->nome));
 
 
     }
