@@ -6,6 +6,9 @@ $route['default_controller']   = 'UsuariosController/login';
 $route['404_override']         = '';
 $route['translate_uri_dashes'] = FALSE;
 
+//Home
+$route['cid'] = 'HomeController/viewcid';
+
 //Login
 $route['home']            = 'HomeController';
 $route['login']           = 'UsuariosController/login';
@@ -47,4 +50,7 @@ $route['view-sessao']          = 'SessoesController/view';
 $route['create-secretaria']         = 'SecretariasController/create';
 $route['view-secretaria']           = 'SecretariasController/view';
 $route['update-secretaria/(:num)']  = 'SecretariasController/edit/$1';
+
+//Agenda
+$route['view-agenda'] = 'AgendaController/index';
 

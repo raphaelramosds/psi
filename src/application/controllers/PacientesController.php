@@ -11,6 +11,10 @@ class PacientesController extends CI_Controller
 		$this->usr = $this->session->userdata('usuario');
 		$this->load->model('PacientesModel','pacientes');
 		$this->load->model('ClinicasModel','clinicas');
+		if ($this->usr == NULL) 
+		{
+			redirect('/');
+		}
 	}
 
 
@@ -21,11 +25,6 @@ class PacientesController extends CI_Controller
 		$config = $this->getpagination();
 		$this->pagination->initialize($config);
 		$id = $this->usr[0]->id;
-
-		if ($this->usr == NULL) 
-		{
-			redirect('/');
-		}
 
 		$offset = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
 		$data_pagination_paciente = array(

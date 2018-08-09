@@ -11,6 +11,10 @@ class PsicologosController extends CI_Controller
 		$this->usr = $this->session->userdata('usuario');
 		$this->load->library('Role');	
 		$this->load->model('PsicologosModel','psicologos');
+		if ($this->usr == NULL) 
+		{
+			redirect('/');
+		}
 	}
 
 

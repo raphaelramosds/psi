@@ -13,15 +13,15 @@ class HomeController extends CI_Controller
 		$this->load->model('PacientesModel',"pacientes");
 		$this->load->model('SecretariasModel','secretarias');
 		$this->load->library('Role');	
-	}
-
-	public function index()
-	{
 		if ($this->usr == NULL) 
 		{
 			redirect('/');
 		}
 
+	}
+
+	public function index()
+	{
 		$count_registers = array(
 			'countersecretaria' => $this->secretarias->count_results($this->usr[0]->id),
 			'counterclinica' => $this->clinicas->count_results($this->usr[0]->id),

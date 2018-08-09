@@ -11,6 +11,10 @@ class SecretariasController extends CI_Controller
 		$this->usr = $this->session->userdata('usuario');
 		$this->load->model('ClinicasModel', 'clinicas');
 		$this->load->model('SecretariasModel','secretarias');
+		if ($this->usr == NULL) 
+		{
+			redirect('/');
+		}
 	}
 
 	public function view()

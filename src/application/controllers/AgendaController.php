@@ -12,6 +12,10 @@ class AgendaController extends CI_Controller
 		$this->load->model('ClinicasModel', 'clinicas');
 		$this->load->model('SecretariasModel','secretarias');
 		$this->load->library('Role');	
+		if ($this->usr == NULL) 
+		{
+			redirect('/');
+		}
     }
 
     public function index()

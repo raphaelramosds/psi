@@ -10,17 +10,16 @@ class ProntuariosController extends CI_Controller
 		parent::__construct();
 		$this->usr = $this->session->userdata('usuario');
 		$this->load->model('ProntuariosModel','prontuarios');
-		$this->load->model("ClinicasModel","clinicas");
+		$this->load->model('ClinicasModel','clinicas');
 		$this->load->model('PacientesModel','pacientes');
-	}
-
-	public function index($idpaciente)
-	{
 		if ($this->usr == NULL) 
 		{
 			redirect('/');
 		}
+	}
 
+	public function index($idpaciente)
+	{
 		$this->session->set_userdata('paciente', $idpaciente);
 		redirect('view-prontuario');
 	}
@@ -34,10 +33,10 @@ class ProntuariosController extends CI_Controller
 			'dataprontuarios' 	=> $this->prontuarios->view($id, $paciente),
 			'delete' 			=> $this->session->flashdata('delete'),
 			'clinicas' 			=> $this->clinicas->view($id),
-			"psicologo" 		=> $id,
-			"add_prontuario" 	=> $this->session->flashdata('add_prontuario'),
-			"delete_prontuario" => $this->session->flashdata('delete_prontuario'),
-			"update_prontuario" => $this->session->flashdata('update_prontuario'),
+			'psicologo' 		=> $id,
+			'add_prontuario' 	=> $this->session->flashdata('add_prontuario'),
+			'delete_prontuario' => $this->session->flashdata('delete_prontuario'),
+			'update_prontuario' => $this->session->flashdata('update_prontuario'),
 		); 
 
 

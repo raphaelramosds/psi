@@ -10,6 +10,10 @@ class SessoesController extends CI_Controller
 		parent::__construct();
 		$this->usr = $this->session->userdata('usuario');
 		$this->load->model('SessoesModel','sessoes');
+		if ($this->usr == NULL) 
+		{
+			redirect('/');
+		}
 	}
 
 	public function index($numero_prontuario)
