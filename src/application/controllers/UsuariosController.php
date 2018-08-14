@@ -104,10 +104,11 @@ class UsuariosController extends CI_Controller
 			'nome' 				=> $this->input->post('nome'),
 			'telefone' 			=> $this->input->post('telefone'),
 			'sexo' 				=> $this->input->post('sexo'),
+			'email'				=> $this->input->post('email'),
 			'endereco' 			=> $this->input->post('endereco'),
 			'usuario_idusuario' => $this->input->post('usuario_idusuario'),
 			'psicologo_id' 		=> $this->input->post('psicologo_id'),
-			'clinica_id' 		=> $this->input->post('clinica_id'),
+			'clinica_id' 		=> $this->input->post('clinica_id')
 		);
 
 		//Faça criptografia da senha
@@ -173,6 +174,17 @@ class UsuariosController extends CI_Controller
 		redirect($view_success_cadastre);
 	}
 
+	public function update()
+	{
+		$usuario_reg = $this->input->post();
+		$usuario_reg['senha'] = md5($usuario_reg['username'].$usuario_reg['senha']);
+		
+		$this->usuarios->id = $usuario_reg['id'];
+		$this->usuarios->update($usuario_reg);
+
+		$this->session->set_flashdata('update_info', 'Suas informações foram alterada com sucesso!');
+		redirect('home');
+	}
 
 	//Primeiro: Exibir tela para informar email
 	public function forgotPassword()

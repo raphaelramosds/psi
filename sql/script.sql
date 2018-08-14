@@ -27,6 +27,7 @@ create table secretaria(
 	nome varchar(50),
 	endereco text,
 	telefone varchar(50),
+	email varchar(50),
 	sexo char,
 	clinica_id int,
 	psicologo_id int,

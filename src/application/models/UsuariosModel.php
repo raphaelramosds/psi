@@ -31,13 +31,19 @@ class UsuariosModel extends CI_Model
 
 	function view_user($id_usuario)
 	{
-		//Retornar todo o usuário através do fk_id no Psicólogo
 		$this->db->where('id',$id_usuario);
 		$query = $this->db->get('usuario')->result();
 
 		return $query;
 	}
 	
+	function update($dados)
+	{
+		$this->db->where('id', $this->id);
+		$this->db->set($dados);
+		$this->db->update('usuario');
+	}
+
 	function update_pass($new_pass, $id_usuario)
 	{
 		$this->db->set('senha',$new_pass);

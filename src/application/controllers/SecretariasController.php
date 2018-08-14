@@ -11,6 +11,8 @@ class SecretariasController extends CI_Controller
 		$this->usr = $this->session->userdata('usuario');
 		$this->load->model('ClinicasModel', 'clinicas');
 		$this->load->model('SecretariasModel','secretarias');
+		$this->load->model('UsuariosModel','usuarios');
+
 		if ($this->usr == NULL) 
 		{
 			redirect('/');
@@ -41,8 +43,15 @@ class SecretariasController extends CI_Controller
 
 	public function edit($id)
 	{
+
+		$data_update = array(
+			'secretaria' 	=> $this->secretarias->view_id($id),
+			'clinicas'	   	=> $this->clinicas->view($this->usr[0]->id),
+		);
+
 		$this->load->view('Home/menupsicologo', array('nome' => $this->usr[0]->nome));
-		$this->load->view('Secretarias/update', array('secretaria' => $this->secretarias->view_id($id), 'psicologo_id' => $this->usr[0]->id));
+		// Exiba dois opção para dois Formulários: Informações da Secretária e Informações Usuário
+		$this->load->view('Secretarias/update', $data_update);
 	}
 
 	public function update()

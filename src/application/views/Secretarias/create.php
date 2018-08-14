@@ -4,7 +4,7 @@
             <header class="ls-info-header ls-no-border">
                 <h2 class="ls-title-3 ls-ico-panel-pabx">Cadastro de Secretária</h2>
             </header>
-            <form action="<?=base_url('UsuariosController/add')?>" method="POST">
+            <form action="<?=base_url('UsuariosController/add')?>" method="POST"  data-ls-module="form">
                 <fieldset>
                     <label for="" class="ls-label">
                         <b class="ls-label-text">Informações do usuário</b>
@@ -54,12 +54,17 @@
 
                     <label for="" class="ls-label">
                         <p class="ls-label-info">Telefone</p>
-                        <input type="text" name="telefone">
+                        <input type="text" name="telefone" class="ls-mask-phone8_with_ddd">
                     </label>
 
                     <label for="" class="ls-label">
                         <p class="ls-label-info">Endereço</p>
                         <input type="text" name="endereco">
+                    </label>
+
+                  <label for="" class="ls-label">
+                        <p class="ls-label-info">Email</p>
+                        <input type="email" name="email">
                     </label>
                     
                     <!-- Foreign Keys -->
@@ -77,10 +82,10 @@
                     <input type="hidden" name="role" value="2">
                     <input type="hidden" name="usuario_idusuario">
                     <input type="hidden" name="psicologo_id" value="<?=$psicologo_id?>">
-                    
-                    <button type="submit" class="ls-btn">Salvar dados</button>
-                    <a href="<?=base_url('view-secretaria')?>" class="ls-btn-danger">Voltar</a>
+                    <hr>
                 </fieldset>
+                <button type="submit" class="ls-btn">Salvar dados</button>
+                <a href="<?=base_url('view-secretaria')?>" class="ls-btn-danger">Voltar</a>
             </form>
         </div>
     </div>

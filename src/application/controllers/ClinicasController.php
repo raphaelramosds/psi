@@ -77,7 +77,6 @@ class ClinicasController extends CI_Controller
 	{
 		
 		$this->load->view('Home/menupsicologo',array('nome' => $this->usr[0]->nome));
-	
 		$this->load->view('Clinicas/update', array('clinicas' => $this->clinicas->view_id($id)));
 	}
 

@@ -13,7 +13,7 @@ class SecretariasModel extends CI_Model
 	public function update($dados)
 	{ 
 		$this->db->set($dados);
-		$this->db->where('id', $id);	
+		$this->db->where('id', $this->id);	
 		$this->db->update('secretaria');
 	}
 
@@ -39,6 +39,12 @@ class SecretariasModel extends CI_Model
 		$this->db->where('id', $id);
 		$query = $this->db->get('secretaria');
 		return $query->row();
+	}
+
+	public function delete($id)
+	{
+		$this->db->where('id',$id);
+		$this->db->delete('secretaria');
 	}
 
 
