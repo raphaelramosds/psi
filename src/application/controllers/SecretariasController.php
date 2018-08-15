@@ -43,10 +43,12 @@ class SecretariasController extends CI_Controller
 
 	public function edit($id)
 	{
+		$usuario = $this->db->query("SELECT u.id FROM usuario as u INNER JOIN secretaria as e ON (e.usuario_idusuario = u.id)")->row();
 
 		$data_update = array(
 			'secretaria' 	=> $this->secretarias->view_id($id),
 			'clinicas'	   	=> $this->clinicas->view($this->usr[0]->id),
+			'usuario'		=> $this->usuarios->view_user($usuario->id)
 		);
 
 		$this->load->view('Home/menupsicologo', array('nome' => $this->usr[0]->nome));

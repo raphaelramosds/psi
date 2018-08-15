@@ -11,6 +11,7 @@ class PsicologosController extends CI_Controller
 		$this->usr = $this->session->userdata('usuario');
 		$this->load->library('Role');	
 		$this->load->model('PsicologosModel','psicologos');
+		$this->load->model('UsuariosModel','usuarios');
 		if ($this->usr == NULL) 
 		{
 			redirect('/');
@@ -20,9 +21,15 @@ class PsicologosController extends CI_Controller
 
 	public function index()
 	{
-		$request_view = $this->role->menuView($this->usr[0]->usuario_idusuario);
+		$view_info = array(
+			'nome' 		=> $this->usr[0]->nome,
+			'usuario'	=> $this->usuarios->view_user($this->usr[0]->id)
 
-		$this->load->view($request_view['menu'], array('nome' => $this->usr[0]->nome));
+		);
+
+		$request_view = $this->role->menuView($this->usr[0]->usuario_idusuario);
+		$this->load->view($request_view['menu'], $view_info);
+
 		$this->load->view('Psicologos/index', array('datapsicologos' => $this->psicologos->view($this->usr[0]->id)));
 
 	}

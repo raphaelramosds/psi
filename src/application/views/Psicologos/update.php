@@ -29,11 +29,6 @@
 				</label>
 
 				<label class="ls-label col-md-6 col-xs-12">
-					<b class="ls-label-text">Email</b>
-					<input type="text" name="email" required="required" value="<?=$psicologos->email ?>">
-				</label>
-
-				<label class="ls-label col-md-6 col-xs-12">
 					<b class="ls-label-text">CRP</b>
 					<p class="ls-labe-info">Só você tem um...</p>
 					<input type="text" name="crp" required="required" value="<?=$psicologos->crp ?>">

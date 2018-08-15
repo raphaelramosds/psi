@@ -10,7 +10,6 @@
             		<th>Sexo</th>
             		<th>Endereco</th>
             		<th>Telefone</th>
-                    <th>Email</th>
             		<th>Ação</th>
             	</tr>
             	<?php foreach ($data_secretaria as $row):?>
@@ -19,12 +18,11 @@
 					<td><?=$row->sexo?></td>
 					<td><?=$row->endereco?></td>
 					<td><?=$row->telefone?></td>
-                    <td><?=$row->email?></td>
                     <td class="ls-txt-left">
                         <div class="ls-dropdown" data-ls-module="dropdown">
                             <a href="#" class="ls-btn">Ação</a>
                             <ul class="ls-dropdown-nav">
-                                <li><a href="<?=base_url('update-secretaria')?>/<?=$row->id?>" class="ls-ico-pencil ls-color-black ls-no-bghover">Editar</a></li>
+                                <li><a href="<?=base_url('update-secretaria')?>/<?=$row->id?>" class="ls-ico-search ls-color-black ls-no-bghover">Ver mais informações</a></li>
                                 <li><a href="<?=base_url('delete-secretaria')?>/<?=$row->id?>" class="ls-ico-remove ls-color-danger" title="Excluir">Excluir</a></li>
                             </ul>
                         </div>

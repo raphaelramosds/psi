@@ -44,18 +44,19 @@
 								<a class="ls-label-text-prefix ls-toggle-pass ls-ico-eye" data-toggle-class="ls-ico-eye, ls-ico-eye-blocked" data-target="#password_confirm" href="#"></a>
 							</div>
 						</label>
-						<hr>
-						<label class="ls-label">
-							<b class="ls-label-text">Informações do psicólogo</b>
-							<p class="ls-label-info">Algumas informações não são obrigadas</p>
-							<input type="text" name="nome" required="required" placeholder="Seu nome completo">
-						</label>
 
 						<label class="ls-label">
 							<?php if(isset($erro_email)): ?>
 								<div class='ls-sm-space' style='font-size:20px; color:red;'><?=$erro_email?></div>
 							<?php endif ?>
-							<input type="text" name="email" required="required" placeholder="Email">
+							<input type="email" name="email" required="required" placeholder="Email">
+						</label>
+
+						<hr>
+						<label class="ls-label">
+							<b class="ls-label-text">Informações do psicólogo</b>
+							<p class="ls-label-info">Algumas informações não são obrigadas</p>
+							<input type="text" name="nome" required="required" placeholder="Seu nome completo">
 						</label>
 
 						<label class="ls-label">
@@ -78,7 +79,7 @@
 								<div class='ls-sm-space' style='font-size:20px; color:red;'><?=$erro_crp?></div>
 							<?php endif ?>
 							<p class="ls-label-info">CRP</p>
-							<input type="text" name="crp" >
+							<input type="text" name="crp" required="required">
 						</label>
 						<input type="hidden" name="role" value="1" >
 					</fieldset>

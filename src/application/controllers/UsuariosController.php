@@ -71,6 +71,7 @@ class UsuariosController extends CI_Controller
 		return array(
 			'username' 	=> $this->input->post('username'),
 			'senha' 	=> $this->input->post('senha'),
+			'email'		=> $this->input->post('email'),
 			'role'		=> $this->input->post('role')
 		);
 	}
@@ -94,7 +95,6 @@ class UsuariosController extends CI_Controller
 		$psicologo_reg		= array(
 			'crp' 				=> $this->input->post('crp'),
 			'datanascimento' 	=> $this->input->post('datanasc'),
-			'email' 			=> $this->input->post('email'),
 			'nome' 				=> $this->input->post('nome'),
 			'sexo' 				=> $this->input->post('sexo'),
 			'usuario_idusuario' =>  $this->input->post('idusuario') //Até agora vazio
@@ -104,7 +104,6 @@ class UsuariosController extends CI_Controller
 			'nome' 				=> $this->input->post('nome'),
 			'telefone' 			=> $this->input->post('telefone'),
 			'sexo' 				=> $this->input->post('sexo'),
-			'email'				=> $this->input->post('email'),
 			'endereco' 			=> $this->input->post('endereco'),
 			'usuario_idusuario' => $this->input->post('usuario_idusuario'),
 			'psicologo_id' 		=> $this->input->post('psicologo_id'),
@@ -115,10 +114,10 @@ class UsuariosController extends CI_Controller
 
 		$user_reg['senha']  = md5($user_reg['username'].$user_reg['senha']);
 
-		//Validações
+		//Validações para Redirect
 
 		$users_count 		= count($this->usuarios->duplicate_user($user_reg['username']));
-		$email_count		= count($this->usuarios->verify_email($psicologo_reg['email']));
+		$email_count		= count($this->usuarios->verify_email($user_reg['email']));
 		$crp_count			= count($this->db->query("SELECT * FROM psicologo WHERE crp = '".$psicologo_reg['crp']."'")->result());
 		$view_redirect		= ($psicologo_reg['crp'] == NULL) ? 'create-secretaria' : 'cadastre';
 
@@ -128,24 +127,26 @@ class UsuariosController extends CI_Controller
 			redirect($view_redirect);
 		}
 		
-		if($crp_count == 1)
+		else if($crp_count == 1)
 		{
 			$this->session->set_flashdata('erro_crp','CRP já existe no sistema');
 			redirect($view_redirect);
 		}
 
-		if($email_count == 1)
+		else if($email_count == 1)
 		{
 			$this->session->set_flashdata('erro_email','Este e-mail já existe no sistema');
 			redirect($view_redirect);
 		}
 
 
-		if($this->input->post('confirm_senha') != $this->input->post('senha')) 
+		else if($this->input->post('confirm_senha') != $this->input->post('senha')) 
 		{
 			$this->session->set_flashdata('erro_senha','Parece que as senhas não são iguais');
 			redirect($view_redirect);
 		}
+
+		// Adcionar dados no banco
 
 
 		$this->usuarios->add($user_reg);
@@ -223,7 +224,7 @@ class UsuariosController extends CI_Controller
 		$this->session->set_userdata('code_access', $code);
 
 
-		$usuario_data = $this->usuarios->view_user($object[0]->usuario_idusuario);
+		$usuario_data = $this->usuarios->view_user($object[0]->id);
 
 		$this->session->set_userdata('usuario_data_confirm',$usuario_data);
 

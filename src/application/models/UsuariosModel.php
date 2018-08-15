@@ -18,7 +18,7 @@ class UsuariosModel extends CI_Model
 	function verify_email($email)
 	{
 		$this->db->where('email',$email);
-		$query = $this->db->get('psicologo')->result();
+		$query = $this->db->get('usuario')->result();
 		
 		return $query;
 	}

@@ -7,7 +7,7 @@
 	<body>
 		<div class="box_message">
 			<div class="header_box">
-				<h1 class="title">Olá, <?=$usuario[0]->username?></h1>
+				<h1 class="title">Olá, <?php print_r($usuario)?></h1>
 			</div>
 			<div class="body_box">
 				<p>Vimos que você solicitou uma alteração de senha.</p>
