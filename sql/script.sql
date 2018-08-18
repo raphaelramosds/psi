@@ -9,13 +9,6 @@ create table usuario(
 	senha varchar(80) not null
 );
 
-alter table usuario
-add constraint uq_username unique(username);
-
-alter table usuario
-add constraint uq_email unique(email);
-
-
 create table psicologo(
 	id int primary key not null auto_increment,
 	crp varchar(50) not null,
@@ -88,6 +81,13 @@ create table sessao(
 	numero_prontuario int
 );
 
+-- FK Usuário
+
+alter table usuario
+add constraint uq_username unique(username);
+
+alter table usuario
+add constraint uq_email unique(email);
 
 -- FK Clinica
 
