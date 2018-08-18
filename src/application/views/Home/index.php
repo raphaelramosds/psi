@@ -1,5 +1,10 @@
     <main class="ls-main ">
       <div class="container-fluid">
+
+        <?php if (isset($update_info)):?>
+          <div class='ls-background-primary ls-sm-space ls-sm-margin-bottom ls-text-md ls-ico-checkmark'><?=$update_info?></div>
+        <?php endif;?>
+        
         <h1 class="ls-title-intro ls-ico-home ls-txt-center ls-color-theme" style="font-size:55px"></h1>
         <div class="ls-box ls-board-box ls-no-border">
           <div id="sending-stats" class="row">

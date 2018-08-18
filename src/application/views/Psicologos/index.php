@@ -37,7 +37,6 @@
 			  	<hr>
 			  </div>
 			</div>
-
 			<a href="<?=base_url()?>home" class="ls-btn-danger" >Voltar</a>
 		</div>
 	</div>

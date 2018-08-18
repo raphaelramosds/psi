@@ -9,7 +9,7 @@
 
             <div class="ls-tabs-container" id="awesome-tab-content">
                 <div id="tab6" class="ls-tab-content ls-active">
-                    <form action="<?=base_url()?>" method="post" data-ls-module="form">
+                    <form action="<?=base_url('UsuariosController/update')?>" method="post" data-ls-module="form">
                         <fieldset>
                             <label class="ls-label">
                                 <p class="ls-label-info">Nome de usuário</p>
@@ -20,6 +20,9 @@
                                 <p class="ls-label-info">Email</p>
                                 <input type="email" name="email" value="<?=$usuario[0]->email?>" >
                             </label>
+
+                            <input type="hidden" name="id" value="<?=$usuario[0]->id?>">
+                            <input type="hidden" name="role" value="<?=$usuario[0]->role?>">
                         </fieldset>
                         <button type="submit"  class='ls-ico-pencil ls-btn' title='Editar' >Salvar informações de usuário</button>
                     </form>
@@ -29,6 +32,7 @@
                     <form action="<?=base_url('SecretariasController/update')?>" method="post" data-ls-module="form">
                         <fieldset>
                             <label class="ls-label">
+                                <p class="ls-label-info">Nome</p>
                                 <input type="text" name="nome" required="required" value="<?=$secretaria->nome?>">
                             </label>
 

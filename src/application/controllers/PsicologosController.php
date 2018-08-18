@@ -21,10 +21,12 @@ class PsicologosController extends CI_Controller
 
 	public function index()
 	{
+
+		$usuario = $this->db->query("SELECT usuario_idusuario FROM psicologo WHERE id = ".$this->usr[0]->id)->result();
+
 		$view_info = array(
 			'nome' 		=> $this->usr[0]->nome,
-			'usuario'	=> $this->usuarios->view_user($this->usr[0]->id)
-
+			'usuario'	=> $this->usuarios->view_user($usuario[0]->usuario_idusuario)
 		);
 
 		$request_view = $this->role->menuView($this->usr[0]->usuario_idusuario);

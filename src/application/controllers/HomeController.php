@@ -24,9 +24,9 @@ class HomeController extends CI_Controller
 	{
 		$count_registers = array(
 			'countersecretaria' => $this->secretarias->count_results($this->usr[0]->id),
-			'counterclinica' => $this->clinicas->count_results($this->usr[0]->id),
-			'counterpaciente' => $this->pacientes->count_results($this->usr[0]->id),
-			'titulo' 		  => 'Início'
+			'counterclinica' 	=> $this->clinicas->count_results($this->usr[0]->id),
+			'counterpaciente' 	=> $this->pacientes->count_results($this->usr[0]->id),
+			'update_info'		=> $this->session->flashdata('update_info'),
 		);
 
 		$request_view = $this->role->menuView($this->usr[0]->usuario_idusuario);

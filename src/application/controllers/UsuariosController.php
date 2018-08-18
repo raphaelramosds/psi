@@ -178,12 +178,11 @@ class UsuariosController extends CI_Controller
 	public function update()
 	{
 		$usuario_reg = $this->input->post();
-		$usuario_reg['senha'] = md5($usuario_reg['username'].$usuario_reg['senha']);
 		
 		$this->usuarios->id = $usuario_reg['id'];
 		$this->usuarios->update($usuario_reg);
 
-		$this->session->set_flashdata('update_info', 'Suas informações foram alterada com sucesso!');
+		$this->session->set_flashdata('update_info', 'Informações foram alterada com sucesso!');
 		redirect('home');
 	}
 
