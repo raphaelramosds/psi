@@ -6,7 +6,9 @@
               <li class="ls-active"><a data-ls-module="tabs" href="#tab6">Informações de Usuário</a></li>
               <li><a data-ls-module="tabs" href="#tab7">Informações da Secretária</a></li>
             </ul>
-
+            <pre>
+            </pre>
+            
             <div class="ls-tabs-container" id="awesome-tab-content">
                 <div id="tab6" class="ls-tab-content ls-active">
                     <form action="<?=base_url('UsuariosController/update')?>" method="post" data-ls-module="form">

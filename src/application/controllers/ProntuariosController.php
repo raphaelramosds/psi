@@ -12,7 +12,7 @@ class ProntuariosController extends CI_Controller
 		$this->load->model('ProntuariosModel','prontuarios');
 		$this->load->model('ClinicasModel','clinicas');
 		$this->load->model('PacientesModel','pacientes');
-		if ($this->usr == NULL) 
+		if ($this->usr == NULL || $this->usr[1]['role'] == 2) 
 		{
 			redirect('/');
 		}
@@ -26,7 +26,7 @@ class ProntuariosController extends CI_Controller
 
 	public function view()
 	{
-		$id = $this->usr[0]->id;
+		$id = $this->usr[0]['id'];
 
 		$paciente = $this->session->userdata('paciente');
 		$data_flash_inf = array(
@@ -40,7 +40,7 @@ class ProntuariosController extends CI_Controller
 		); 
 
 
-		$this->load->view('Home/menupsicologo', array('nome' => $this->usr[0]->nome));
+		$this->load->view('Home/menu', array('nome' => $this->usr[0]['nome']));
 
 		$this->load->view('Prontuarios/index', $data_flash_inf);
 	}
@@ -66,7 +66,7 @@ class ProntuariosController extends CI_Controller
 	}
 
 	public function edit($id){
-		$id_psicologo = $this->usr[0]->id;
+		$id_psicologo = $this->usr[0]['id'];
 
 		$data_prontuarios = array(
 			'prontuarios' 	=> $this->prontuarios->view_id($id),
@@ -74,7 +74,7 @@ class ProntuariosController extends CI_Controller
 			'pacientes'	    => $this->pacientes->view($id_psicologo)
 		);
 
-		$this->load->view('Home/menupsicologo',array('nome' => $this->usr[0]->nome));
+		$this->load->view('Home/menu',array('nome' => $this->usr[0]['nome']));
 		$this->load->view('Prontuarios/update', $data_prontuarios);
 	}
 

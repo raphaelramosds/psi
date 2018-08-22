@@ -11,7 +11,7 @@ class PacientesController extends CI_Controller
 		$this->usr = $this->session->userdata('usuario');
 		$this->load->model('PacientesModel','pacientes');
 		$this->load->model('ClinicasModel','clinicas');
-		if ($this->usr == NULL) 
+		if ($this->usr == NULL || $this->usr[1]['role'] == 2) 
 		{
 			redirect('/');
 		}
@@ -24,7 +24,7 @@ class PacientesController extends CI_Controller
 
 		$config = $this->getpagination();
 		$this->pagination->initialize($config);
-		$id = $this->usr[0]->id;
+		$id = $this->usr[0]['id'];
 
 		$offset = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
 		$data_pagination_paciente = array(
@@ -40,19 +40,19 @@ class PacientesController extends CI_Controller
 			'clinicas' 			=> $this->clinicas->view($id)
 		);
 
-		$this->load->view('Home/menupsicologo', array('nome'=>$this->usr[0]->nome));
+		$this->load->view('Home/menu', array('nome'=>$this->usr[0]['nome']));
 		$this->load->view('Pacientes/index', $data_pagination_paciente);
 	}
 
 	public function search()
 	{
 		$paciente = $this->input->post('paciente');
-		$user['nome'] = $this->usr[0]->nome;
+		$user['nome'] = $this->usr[0]['nome'];
 
-		$this->load->view('Home/menupsicologo',$user);
+		$this->load->view('Home/menu',$user);
 
 		$data_pacientes_search = array(
-			'datapacientes'	=> $this->pacientes->search($this->usr[0]->id, $paciente),
+			'datapacientes'	=> $this->pacientes->search($this->usr[0]['id'], $paciente),
 			'delete' 		=> $this->session->flashdata('delete'),
 			'pagination' 	=> NULL
 		);
@@ -62,18 +62,21 @@ class PacientesController extends CI_Controller
 
 	public function create()
 	{
-		$this->load->view('Home/menupsicologo',array('nome'=>$this->usr[0]->nome));
-		$this->load->view('Pacientes/create', array('psicologo_id'=>$this->usr[0]->id));
+		$this->load->view('Home/menu',array('nome'=>$this->usr[0]['nome']));
+		$this->load->view('Pacientes/create', array('psicologo_id'=>$this->usr[0]['id']));
 	}
 
 	public function add()
 	{
-		$paciente_reg = $this->input->post();
+		if ($this->usr[1]['role'] == 1 || $this->usr[1]['role'] == 2)
+		{
+			$paciente_reg = $this->input->post();
 
-		$this->pacientes->add($paciente_reg);
-		$this->session->set_flashdata("add_paciente",'Adcionado com sucesso!');
+			$this->pacientes->add($paciente_reg);
+			$this->session->set_flashdata("add_paciente",'Adcionado com sucesso!');
 
-		redirect('view-paciente');
+			redirect('view-paciente');
+		}
 	}
 
 	public function delete($id)
@@ -91,7 +94,7 @@ class PacientesController extends CI_Controller
 	public function edit($id)
 	{	
 		
-		$this->load->view('Home/menupsicologo', array('nome'=>$this->usr[0]->nome));
+		$this->load->view('Home/menu', array('nome'=>$this->usr[0]['nome']));
 		$this->load->view('Pacientes/update', array('pacientes'=>$this->pacientes->view_id($id)));
 	}
 
@@ -114,7 +117,7 @@ class PacientesController extends CI_Controller
 			'per_page' 			=> 4,
 			'num_links' 		=> 10,
 			'uri_segment' 		=> 3,
-			'total_rows' 		=> $this->pacientes->count_results($this->usr[0]->id),
+			'total_rows' 		=> $this->pacientes->count_results($this->usr[0]['id']),
 
 			'full_tag_open' 	=> "<ul class = 'ls-pagination-filter'>",
 			'full_tag_close' 	=> "</ul>",

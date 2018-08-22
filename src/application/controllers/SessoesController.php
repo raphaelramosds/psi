@@ -10,7 +10,7 @@ class SessoesController extends CI_Controller
 		parent::__construct();
 		$this->usr = $this->session->userdata('usuario');
 		$this->load->model('SessoesModel','sessoes');
-		if ($this->usr == NULL) 
+		if ($this->usr == NULL || $this->usr[1]['role'] == 2) 
 		{
 			redirect('/');
 		}
@@ -32,13 +32,13 @@ class SessoesController extends CI_Controller
 			'delete_sessao' => $this->session->flashdata('delete_sessao')
 		);
 
-		$this->load->view('Home/menupsicologo',array('nome' => $this->usr[0]->nome));
+		$this->load->view('Home/menu',array('nome' => $this->usr[0]['nome']));
 		$this->load->view('Sessoes/index', $data_flash);
 	}
 
 	public function create()
 	{
-		$this->load->view('Home/menupsicologo',array('nome' => $this->usr[0]->nome));
+		$this->load->view('Home/menu',array('nome' => $this->usr[0]['nome']));
 		$this->load->view('Sessoes/create', array('prontuario' => $this->session->userdata('prontuario')));
 	}
 
@@ -63,7 +63,7 @@ class SessoesController extends CI_Controller
 	public function edit($id)
 	{
 
-		$this->load->view('Home/menupsicologo',array('nome'=>$this->usr[0]->nome));
+		$this->load->view('Home/menu',array('nome'=>$this->usr[0]['nome']));
 		$this->load->view('Sessoes/update', array('sessao'=>$this->sessoes->view_id($id)));
 	}
 

@@ -1,4 +1,4 @@
-<?php
+	<?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class UsuariosController extends CI_Controller 
@@ -37,23 +37,28 @@ class UsuariosController extends CI_Controller
 		$this->db->where('username', $user_reg["nome"]);
 		$this->db->where('senha', $senha);
 
-		$usuario_found = $this->db->get('usuario')->result();
+		$usuario_found = $this->db->get('usuario')->row_array();
 
 		// Verificar se o usuário existe
-		if(count($usuario_found) == 1)
+		print_r($usuario_found);
+
+		if($usuario_found != NULL)
 		{
-			//Recuperar todos os dados do usuário a partir da sua Role e o seu id
-			$request_data = $this->role->identifyUser($usuario_found[0]->role, $usuario_found[0]->id);
+			// Colocar todos os dados do usuário em uma Matriz
+			$request_data = [
+				$this->role->identifyUser($usuario_found['role'], $usuario_found['id']),
+				$usuario_found
+			];
 
 			//Verificar se o usuário se atribui à algum Psicologo ou Secretário
-			if(count($request_data) == 0)
+			if($request_data == NULL)
 			{
 
-				$this->usuarios->delete($usuario_found[0]->id);
+				$this->usuarios->delete($usuario_found['id']);
 				$this->session->set_flashdata('user_noexists','O usuário não corresponde a nenhum psicólogo ou secretária. Faça novamente o cadastro');
 				redirect('/');
 			}
-			else if(count($request_data) == 1 )
+			else if(count($request_data) != NULL)
 			{
 				$this->session->set_userdata('usuario',$request_data);
 				redirect('home');
@@ -119,7 +124,7 @@ class UsuariosController extends CI_Controller
 		$users_count 		= count($this->usuarios->duplicate_user($user_reg['username']));
 		$email_count		= count($this->usuarios->verify_email($user_reg['email']));
 		$crp_count			= count($this->db->query("SELECT * FROM psicologo WHERE crp = '".$psicologo_reg['crp']."'")->result());
-		$view_redirect		= ($psicologo_reg['crp'] == NULL) ? 'create-secretaria' : 'cadastre';
+		$view_redirect		= ($user_reg['role'] == 2) ? 'create-secretaria' : 'cadastre';
 
 		if($users_count == 1)
 		{
@@ -152,9 +157,9 @@ class UsuariosController extends CI_Controller
 		$this->usuarios->add($user_reg);
 
 		$query 			= $this->db->query("SELECT * FROM usuario WHERE username = '".$user_reg['username']."'");
-		$find_usuario 	= $query->result();
-		$id 			= $find_usuario[0]->id;
-		$role 			= $find_usuario[0]->role;
+		$find_usuario 	= $query->row();
+		$id 			= $find_usuario->id;
+		$role 			= $find_usuario->role;
 
 		if ($role == 2)
 		{
@@ -174,6 +179,7 @@ class UsuariosController extends CI_Controller
 
 		redirect($view_success_cadastre);
 	}
+
 
 	public function update()
 	{

@@ -33,6 +33,11 @@ class SecretariasModel extends CI_Model
 		return $this->db->get()->result();
 	}
 
+	public function view_user_by_secretaria($id_secretaria)
+	{
+		$q = $this->db->query("SELECT u.id FROM usuario as u INNER JOIN secretaria as e ON (e.usuario_idusuario = u.id) WHERE e.id = ".$id_secretaria)->row();
+		return $q;
+	}
 	
 	public function view_id($id)
 	{

@@ -8,11 +8,10 @@ class PsicologosController extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
-		$this->usr = $this->session->userdata('usuario');
-		$this->load->library('Role');	
+		$this->usr = $this->session->userdata('usuario');	
 		$this->load->model('PsicologosModel','psicologos');
 		$this->load->model('UsuariosModel','usuarios');
-		if ($this->usr == NULL) 
+		if ($this->usr == NULL || $this->usr[1]['role'] == 2) 
 		{
 			redirect('/');
 		}
@@ -21,18 +20,13 @@ class PsicologosController extends CI_Controller
 
 	public function index()
 	{
-
-		$usuario = $this->db->query("SELECT usuario_idusuario FROM psicologo WHERE id = ".$this->usr[0]->id)->result();
-
 		$view_info = array(
-			'nome' 		=> $this->usr[0]->nome,
-			'usuario'	=> $this->usuarios->view_user($usuario[0]->usuario_idusuario)
+			'nome' 		=> $this->usr[0]['nome'],
+			'usuario'	=> $this->usuarios->view_user($this->usr[1]['id'])
 		);
 
-		$request_view = $this->role->menuView($this->usr[0]->usuario_idusuario);
-		$this->load->view($request_view['menu'], $view_info);
-
-		$this->load->view('Psicologos/index', array('datapsicologos' => $this->psicologos->view($this->usr[0]->id)));
+		$this->load->view('Home/menu', $view_info);
+		$this->load->view('Psicologos/index', array('datapsicologos' => $this->psicologos->view($this->usr[0]['id'])));
 
 	}
 
@@ -51,9 +45,7 @@ class PsicologosController extends CI_Controller
 	public function edit($id)
 	{
 
-		$request_view = $this->role->menuView($this->usr[0]->usuario_idusuario);
-
-		$this->load->view($request_view['menu'],array('nome' => $this->usr[0]->nome));
+		$this->load->view('Home/menu',array('nome' => $this->usr[0]['nome']));
 		$this->load->view('Psicologos/update', array('psicologos' => $this->psicologos->view_id($id)));
 	}
 

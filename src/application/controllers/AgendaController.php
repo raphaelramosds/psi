@@ -10,8 +10,7 @@ class AgendaController extends CI_Controller
 		parent::__construct();
 		$this->usr = $this->session->userdata('usuario');
 		$this->load->model('ClinicasModel', 'clinicas');
-		$this->load->model('SecretariasModel','secretarias');
-		$this->load->library('Role');	
+		$this->load->model('SecretariasModel','secretarias');	
 		if ($this->usr == NULL) 
 		{
 			redirect('/');
@@ -20,11 +19,7 @@ class AgendaController extends CI_Controller
 
     public function index()
     {
-    	$request_view = $this->role->menuView($this->usr[0]->usuario_idusuario);
-
-		$this->load->view($request_view['menu'], array('nome' => $this->usr[0]->nome));
-
-
+		$this->load->view('Home/menu', array('nome' => $this->usr[0]['nome']));
     }
     
 }

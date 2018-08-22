@@ -21,9 +21,9 @@ class SecretariasController extends CI_Controller
 
 	public function view()
 	{	
-		$data_secretaria = $this->secretarias->view($this->usr[0]->id);
+		$data_secretaria = $this->secretarias->view($this->usr[0]['id']);
 
-		$this->load->view('Home/menupsicologo', array('nome' => $this->usr[0]->nome));
+		$this->load->view('Home/menu', array('nome' => $this->usr[0]['nome']));
 		$this->load->view('Secretarias/index', array('data_secretaria' => $data_secretaria));
 
 	}
@@ -31,27 +31,28 @@ class SecretariasController extends CI_Controller
 	public function create()
 	{
 		$data_form_secretaria = array(
-			'psicologo_id' 		=> $this->usr[0]->id,
-			'clinicas'	   		=> $this->clinicas->view($this->usr[0]->id),
+			'psicologo_id' 		=> $this->usr[0]['id'],
+			'clinicas'	   		=> $this->clinicas->view($this->usr[0]['id']),
 			'erro_senha'		=> $this->session->flashdata('erro_senha'), 
 			'erro_user'			=> $this->session->flashdata('erro_user')
 		); 
 
-		$this->load->view('Home/menupsicologo', array('nome' => $this->usr[0]->nome));
+		$this->load->view('Home/menu', array('nome' => $this->usr[0]['nome']));
 		$this->load->view('Secretarias/create', $data_form_secretaria);
 	}
 
 	public function edit($id)
 	{
-		$usuario = $this->db->query("SELECT u.id FROM usuario as u INNER JOIN secretaria as e ON (e.usuario_idusuario = u.id)")->row();
+		// Selecionar id do usuário relacionado à Secretária
+		$q = $this->secretarias->view_user_by_secretaria($id);
 
 		$data_update = array(
 			'secretaria' 	=> $this->secretarias->view_id($id),
-			'clinicas'	   	=> $this->clinicas->view($this->usr[0]->id),
-			'usuario'		=> $this->usuarios->view_user($usuario->id)
+			'clinicas'	   	=> $this->clinicas->view($this->usr[0]['id']),
+			'usuario'		=> $this->usuarios->view_user($q->id)
 		);
 
-		$this->load->view('Home/menupsicologo', array('nome' => $this->usr[0]->nome));
+		$this->load->view('Home/menu', array('nome' => $this->usr[0]['nome']));
 		// Exiba dois opção para dois Formulários: Informações da Secretária e Informações Usuário
 		$this->load->view('Secretarias/update', $data_update);
 	}
@@ -66,7 +67,10 @@ class SecretariasController extends CI_Controller
 
 	public function delete($id)
 	{
+		$q = $this->secretarias->view_user_by_secretaria($id);
+
 		$this->secretarias->delete($id);
+		$this->usuarios->delete($q->id);
 		redirect('view-secretaria');
 	}
 }

@@ -65,7 +65,7 @@
 
                     <label for="" class="ls-label">
                         <p class="ls-label-info">Telefone</p>
-                        <input type="text" name="telefone" class="ls-mask-phone8_with_ddd">
+                        <input type="text" name="telefone" class="ls-mask-phone8_with_ddd" placeholder="(99) 9999-9999">
                     </label>
 
                     <label for="" class="ls-label">
