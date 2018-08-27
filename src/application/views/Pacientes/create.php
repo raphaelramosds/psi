@@ -6,10 +6,12 @@
 			</header>
 			<form action="<?=base_url('PacientesController/add')?>" method="POST" class="ls-form ls-form-horizontal row" data-ls-module="form">
 				<fieldset>
+
 					<label class="ls-label col-md-12">
 						<b class="ls-label-text">Nome do paciente</b>
 						<input type="text" name="nome" required="required">
 					</label>
+
 					<label class="ls-label col-md-4">
 					  <b class="ls-label-text">Sexo</b>
 					  <div class="ls-custom-select">
@@ -25,7 +27,6 @@
 						<input type="text" name="profissao" required="required">
 					</label>
 
-					<input type="hidden" name="id_psicologo" required="required" value="<?=$psicologo_id?>">
 
 					<label class="ls-label col-md-4 col-xs-12">
 						<b class="ls-label-text">Cartão de saúde</b>
@@ -50,9 +51,13 @@
 						<input type="text" name="telefone" required="required" class="ls-mask-phone8_with_ddd" placeholder="(99) 9999-9999">
 					</label>
 
+					<div class="ls-actions-btn">
+						<input type="hidden" name="id_psicologo" required="required" value="<?=$psicologo_id?>">
+				   		<button class="ls-btn">Salvar dados do paciente</button>
+					 	<a href="<?=base_url('view-paciente')?>" class="ls-btn-danger">Voltar</a>
+					</div>
+
 				</fieldset>
-			   	<button type="submit" class="ls-btn">Salvar dados do paciente</button>
-				 <a href="<?=base_url('view-paciente')?>" class="ls-btn-danger">Voltar</a>
 			</form>
 		</div>
 	</div>

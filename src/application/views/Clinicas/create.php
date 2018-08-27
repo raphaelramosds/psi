@@ -49,16 +49,20 @@
 					</label>
 					<label class="ls-label col-md-4 col-xs-12">
 						<b class="ls-label-text">Cidade</b>
-						<input type="text" name="cidade">
+						<input type="text" name="cidade">	
 					</label>
 					<label class="ls-label col-md-4 col-xs-12">
 						<b class="ls-label-text">Telefone</b>
 						<p class="ls-labe-info">Para um contato...</p>
 						<input type="text" name="telefone" class="ls-mask-phone8_with_ddd" placeholder="(99) 9999-9999">
 					</label>
-					<input type="hidden" name="id_psicologo" required="required" value="<?php echo $psicologo; ?>">
-					<button type="submit" class="ls-btn">Salvar dados da clínica</button>
-					<a href="<?=base_url('view-clinica')?>" class="ls-btn-danger">Voltar</a>
+					
+					<div class="ls-actions-btn">
+						<input type="hidden" name="id_psicologo" required="required" value="<?php echo $psicologo; ?>">
+						<button type="submit" class="ls-btn">Salvar dados da clínica</button>
+						<a href="<?=base_url('view-clinica')?>" class="ls-btn-danger">Voltar</a>						
+					</div>
+
 				</fieldset>
 			</form>
 		</div>

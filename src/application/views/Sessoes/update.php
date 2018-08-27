@@ -6,13 +6,14 @@
 				</header>
 				<form action="<?=base_url()?>SessoesController/update" method="POST" class="ls-form ls-form-horizontal row">
 					<fieldset>
-					<label class="ls-label col-md-4 col-xs-12">
+					<input type="hidden" name="id" value="<?=$sessao->id ?>">
+					<label class="ls-label col-md-6 col-xs-12">
 						<b class="ls-label-text">Título da sessão</b>
 						<p class="ls-label-information">Seja claro e direto</p>
 						<input type="text" required name="titulo" class="ls-field" value="<?=$sessao->titulo ?>">
 					</label>
-					<label class="ls-label col-md-4 col-xs-12">
-						<b class="ls-label-text">Data da sessao</b>
+					<label class="ls-label col-md-6 col-xs-12">
+						<b class="ls-label-text">Data da sessão</b>
 						<p class="ls-label-information">Quando ocorreu?</p>
 						<input type="date" required name="data" class="ls-field" value="<?=$sessao->data ?>">
 					</label>
@@ -21,13 +22,12 @@
 						<b class="ls-label-text">Descrição da sessão</b>
 						<textarea rows="4" name="descricao"><?=$sessao->descricao ?></textarea>
 					</label>
-					</fieldset>
-					<input type="hidden" name="id" value="<?=$sessao->id ?>">
 
-					<div class="ls-action-btn">
+					<div class="ls-actions-btn" >
 				   	 	<button class="ls-btn">Salvar dados da sessão</button>
 					 	<a href="<?=base_url()?>view-sessao" class="ls-btn-danger">Voltar</a>
 					</div>
+					</fieldset>
 				</form>
 			</div>
 	</div>

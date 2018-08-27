@@ -17,7 +17,7 @@
 					<div class="ls-custom-select">
 						<?php
 						$options = array(
-							'empty' => $clinicas->estado,
+							'empty' => '',
 							'AL' => 'Alagoas',
 							'AP' => 'Amapá',
 							'AM' => 'Amazonas',
@@ -60,12 +60,14 @@
 					<p class="ls-labe-info">Para um contato...</p>
 					<input type="text" name="telefone" value="<?=$clinicas->telefone;?>" class="ls-mask-phone8_with_ddd" placeholder="(99) 9999-9999">
 				</label>
-
-				<input type="hidden" name="id_psicologo" required="required" value="<?=$clinicas->id_psicologo;?>">
-				<input type="hidden" name="id" value="<?=$clinicas->id;?>">
 				
-				<button type="submit" class="ls-btn">Salvar dados da clínica</button>
-				<a href="<?=base_url()?>ClinicasController" class="ls-btn-danger">Voltar</a>
+				<div class="ls-actions-btn">
+					<input type="hidden" name="id_psicologo" required="required" value="<?=$clinicas->id_psicologo;?>">
+					<input type="hidden" name="id" value="<?=$clinicas->id;?>">
+					<button type="submit" class="ls-btn">Salvar dados da clínica</button>
+					<a href="<?=base_url()?>ClinicasController" class="ls-btn-danger">Voltar</a>
+				</div>
+				
 			</fieldset>
 		</form>
 	</div>

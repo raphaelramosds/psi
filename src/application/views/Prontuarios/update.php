@@ -35,62 +35,51 @@
 					<input type="text" name="cid10" required="required" value="<?=$prontuarios->cid10; ?>">
 				</label>
 
-				<label for="" class="ls-label col-md-6 col-xs-12">
+				<label for="" class="ls-label col-md-12 col-xs-12">
 					<b class="ls-label-text">Alta</b>
 					<div class="ls-custom-select">
 						<select class="ls-select" name="alta" required="required">
-							<option value="<?=$prontuarios->alta; ?>">
-								<?php if ($prontuarios->alta == 'S'):?> 
-								<?="Sim"?> 
-								<?php else: ?>
-								<?="Não"?>
-								<?php endif;?>
-							</option>
 							<option value="S">Sim</option>
 							<option value="N">Não</option>
 						</select>
 					</div>
 				</label>
 
-				<label for="" class="ls-label col-md-6 col-xs-12">
+				<label for="" class="ls-label col-md-12 col-xs-12">
 					<b class="ls-label-text">Encaminhado</b>
 					<div class="ls-custom-select">
 						<select class="ls-select" name="encaminhado" required="required">
-							<option value="<?=$prontuarios->encaminhado; ?>">
-								<?php if ($prontuarios->encaminhado == 'S'):?> 
-								<?="Sim"?> 
-								<?php else: ?>
-								<?="Não"?>
-								<?php endif;?>
-							</option>
 							<option value="S">Sim</option>
 							<option value="N">Não</option>
 						</select>
 					</div>
 				</label>
 
-				<label class="ls-label col-md-4">
+				<label class="ls-label col-md-4 col-lg-4 col-xs-12">
 					<b class="ls-label-text">Tratamento adotado</b>
 					<textarea rows="10"  name="tratamentoadotado"><?=$prontuarios->tratamentoadotado?>
 					</textarea>
 				</label>
 
-				<label class="ls-label col-md-4">
+				<label class="ls-label col-md-4 col-lg-4 col-xs-12">
 					<b class="ls-label-text">Diagnóstico</b>
 					<textarea rows="10" name="diagnostico"><?=$prontuarios->diagnostico?></textarea>
 				</label>
 
-				<label class="ls-label col-md-4">
+				<label class="ls-label col-md-4 col-lg-4 col-xs-12">
 					<b class="ls-label-text">Evolucao</b>
 					<textarea rows="10" name="evolucao"><?=$prontuarios->evolucao?></textarea>
 				</label>
+				
+				<div class="ls-actions-btn">
+					<input type="hidden" name="paciente_id" required="required" value="<?=$prontuarios->paciente_id;?>">
+					<input type="hidden" name="id_psicologo" required="required" value='<?=$prontuarios->id_psicologo;?>'>
+					<input type="hidden" name="numeroprontuario" value="<?=$prontuarios->numeroprontuario ?>">
+					<button type="submit" class="ls-btn">Salvar todos os dados</button>
+					<a href="<?=base_url('view-prontuario')?>" class="ls-btn-danger">Voltar</a>	
+				</div>
 
 			</fieldset>
-			<input type="hidden" name="paciente_id" required="required" value="<?=$prontuarios->paciente_id;?>">
-			<input type="hidden" name="id_psicologo" required="required" value='<?=$prontuarios->id_psicologo;?>'>
-			<input type="hidden" name="numeroprontuario" value="<?=$prontuarios->numeroprontuario ?>">
-			<button type="submit" class="ls-btn">Salvar todos os dados</button>
-			<a href="<?=base_url('view-prontuario')?>" class="ls-btn-danger">Voltar</a>	
 		</form>
 		</div>	
 	</div>

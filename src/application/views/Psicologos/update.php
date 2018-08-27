@@ -34,13 +34,12 @@
 					<input type="text" name="crp" required="required" value="<?=$psicologos->crp ?>">
 				</label>
 				
-				<input type="hidden" name="usuario_idusuario" required="required" value="<?=$psicologos->usuario_idusuario ?>">
-				<input name="id" type="hidden" value="<?=$psicologos->id?>">
-				
+				<div class="ls-actions-btn">
+					<input type="hidden" name="usuario_idusuario" required="required" value="<?=$psicologos->usuario_idusuario ?>">
+					<input name="id" type="hidden" value="<?=$psicologos->id?>">
+			   		<button class="ls-btn">Salvar dados do psicólogo</button>
+			 	</div>
 			</fieldset>
-			<div class="ls-actions-btn">
-			   <button class="ls-btn">Salvar dados do psicólogo</button>
-			 </div>
 		</form>
 	</div>
 </div>

@@ -14,15 +14,8 @@
 					<b class="ls-label-text">Sexo</b>
 					<div class="ls-custom-select">
 						<select class="ls-custom" name="sexo" required="required">
-							<option value="<?=$pacientes->sexo ?>">
-								<?php if($pacientes->sexo == 'F'):?> 
-								<?="Feminino"?>
-								<?php elseif($pacientes->sexo == 'M'):?>
-								<?="Masculino"?>
-								<?php endif;?>
-							</option>
-						<option value="M">Masculino</option>
-						<option value="F">Feminino</option>
+							<option value="M">Masculino</option>
+							<option value="F">Feminino</option>
 						</select>
 					</div>
 					</label>
@@ -50,10 +43,12 @@
 						<b class='ls-label-text'>Telefone</b>
 						<input type="text" name="telefone" required="required" value="<?=$pacientes->telefone ?>" class="ls-mask-phone8_with_ddd" placeholder="(99) 9999-9999">
 					</label>
+					<div class="ls-actions-btn">
+						<input type="hidden" name="id" value="<?=$pacientes->id ?>">
+						<button type="submit" class="ls-btn">Salvar dados do paciente</button>
+						<a href="<?=base_url('view-paciente')?>" class="ls-btn-danger">Voltar</a>
+					</div>
 				</fieldset>
-				<input type="hidden" name="id" value="<?=$pacientes->id ?>">
-				<button type="submit" class="ls-btn">Salvar dados do paciente</button>
-				<a href="<?=base_url('view-paciente')?>" class="ls-btn-danger">Voltar</a>
 			</form>
 		</div>		
 	</div>
