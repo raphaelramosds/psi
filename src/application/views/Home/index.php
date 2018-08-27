@@ -4,7 +4,7 @@
         <?php if (isset($update_info)):?>
           <div class='ls-background-primary ls-sm-space ls-sm-margin-bottom ls-text-md ls-ico-checkmark'><?=$update_info?></div>
         <?php endif;?>
-        <h1 class="ls-title-intro ls-ico-home ls-txt-center ls-color-theme" style="font-size:55px"></h1>
+        <h1 class="ls-title-intro ls-ico-home ls-txt-center " style="font-size:55px"></h1>
         <?php if ($this->session->userdata('usuario')[1]['role'] == 1): ?>
           <div class="ls-box ls-board-box ls-no-border">
             <div id="sending-stats" class="row">
@@ -56,11 +56,33 @@
                   </div>
                 </div>
               </div>
-
             </div>
             <hr>
           </div>
         <?php endif ?>
+
+        <?php if ($this->session->userdata('usuario')[1]['role'] == 2): ?>
+        <div class="ls-box ls-board-box ls-no-border">
+          <div id="sending-stats" class="row">
+            <div class="col-sm-12">
+              <div class="ls-box">
+                  <div class="ls-box-head">
+                  <h6 class="ls-title-4">HORÁRIOS VAGOS NA AGENDA</h6>
+                </div>
+                <div class="ls-box-body">
+                  <span class="ls-board-data">
+                    <strong>0</strong>
+                  </span>
+                </div>
+                <div class="ls-box-footer">
+                  <a href="<?=base_url('view-agenda')?>" class="ls-btn ls-btn-xs">Ver Agenda</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <?php endif ?>
+
       </div>
     </main>
   </body>
