@@ -53,5 +53,6 @@ $route['update-secretaria/(:num)']  = 'SecretariasController/edit/$1';
 $route['delete-secretaria/(:num)']	= 'SecretariasController/delete/$1';
 
 //Agenda
-$route['view-agenda'] = 'AgendaController/index';
+$route['view-agenda'] 	= 'AgendaController/index';
+$route['create-agenda'] = 'AgendaController/create';	
 

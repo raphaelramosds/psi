@@ -48,7 +48,7 @@
                 </li>
                 <li><a href="<?=base_url('cid')?>" class="ls-ico-eye">Consultar doença</a></li>
                 <?php endif ?>
-                <li><a href="<?=base_url('view-agenda')?>" class="ls-ico-calendar">Agenda</a></li>
+                <li><a href="<?=base_url('view-agenda')?>" class="ls-ico-calendar">Minha Agenda</a></li>
                 <li><a href = "<?=base_url('HomeController/loggout')?>" class="ls-ico-export" style="color:#1DD1A4;">Sair</a></li>
             </ul>
           </nav>

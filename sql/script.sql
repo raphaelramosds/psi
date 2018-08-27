@@ -65,9 +65,9 @@ create table prontuario(
 
 create table agenda(
 	id int primary key not null auto_increment,
-	dia int,
-	mes int,
-	ano int,
+	dia varchar(20),
+	mes varchar(20),
+	ano varchar(20),
 	hinicial varchar(20),
 	hfinal varchar(20),
 	paciente_id int,

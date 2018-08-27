@@ -1,9 +1,7 @@
 <div class="ls-main">
 	<div class="container-fluid">
+		<h1 class="ls-title-intro ls-ico-location">Clínicas cadastradas</h1>
 		<div class="ls-box ls-board-box ls-no-border">
-			<header class="ls-info-header ls-no-border">
-				<h2 class="ls-title-3 ls-ico-location">Clínicas cadastradas</h2>
-			</header>
 			
 			<?php if(isset($add_clinica)):?>
 				<div class='ls-background-primary ls-sm-space ls-sm-margin-bottom ls-text-md ls-ico-checkmark'><?=$add_clinica?></div>
