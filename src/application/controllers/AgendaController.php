@@ -50,16 +50,11 @@ class AgendaController extends CI_Controller
     	$this->load->view('Agenda/create', $data_create);
     }
 
-    public function search()
-    {
-
-    }
 
     public function add()
     {
         $this->agendas->add($this->input->post());
         redirect('view-agenda');
-
     }
     
 }

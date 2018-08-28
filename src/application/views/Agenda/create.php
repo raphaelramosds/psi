@@ -11,29 +11,6 @@
 
 			<form action="<?=base_url('AgendaController/add')?>" method="POST" class="ls-form ls-form-horizontal row" data-ls-module="form">
 				<fieldset>
-					<label class="ls-label col-md-6 col-xs-12">
-						<p class="ls-label-info">Clínica</p>
-						<div class="ls-custom-select">
-							<select name="clinica_id" class="ls-select">
-								<option value="<?=null?>"></option>
-								<?php foreach ($clinicas as $c): ?>
-									<option value="<?=$c->id?>"><?=$c->nome?></option>
-								<?php endforeach; ?>
-							</select>
-						</div>
-					</label>
-
-					<label class="ls-label col-md-6 col-xs-12">
-						<p class="ls-label-info">Paciente ou <a data-ls-module="modal" data-target="#paciente">Cadastre um paciente</a></p>
-						<div class="ls-custom-select">
-							<select name="paciente_id" class="ls-select">
-								<option value="<?=null?>"></option>
-								<?php foreach ($pacientes as $p): ?>
-									<option value="<?=$p->id?>"><?=$p->nome?></option>
-								<?php endforeach;?>
-							</select>
-						</div>
-					</label>
 					
 					<label class="ls-label col-md-6 col-xs-12">
 						<p class="label-info">Mês</p>
@@ -72,7 +49,7 @@
 
 					<div class="ls-actions-btn">
 						<input type="hidden" name="psicologo_id" value="<?=$psicologo?>">
-						<button type="submit" class="ls-btn">Salvar dados</button>
+						<button type="submit" class="ls-btn">Salvar dados e registrar horários</button>
 					</div>
 			
 				</fieldset>
