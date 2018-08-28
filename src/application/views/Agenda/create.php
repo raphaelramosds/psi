@@ -35,7 +35,7 @@
 						</div>
 					</label>
 					
-					<label class="ls-label col-md-4 col-xs-12">
+					<label class="ls-label col-md-6 col-xs-12">
 						<p class="label-info">Mês</p>
 						<div class="ls-custom-select">
 							<select name="mes" class='ls-select'>
@@ -56,23 +56,8 @@
 						</div>
 					</label>
 
-					<label for="" class="ls-label col-md-4 col-xs-12">
-						<p class="label-info">Dia</p>
-						<div class="ls-custom-select">
-							<select name="dia">
-								<option value=""></option>
-								<option value="Seg">Segunda-feira</option>
-								<option value="Ter">Terça-feira</option>
-								<option value="Qua">Quarta-feira</option>
-								<option value="Qui">Quinta-feira</option>
-								<option value="Sex">Sexta-feira</option>
-								<option value="Sáb">Sábado</option>
-								<option value="Dom">Domingo</option>
-							</select>
-						</div>
-					</label>
 
-					<label class="ls-label col-md-4 col-xs-12">
+					<label class="ls-label col-md-6 col-xs-12">
 						<p class="ls-label-info">Ano</p>
 						<div class="ls-custom-select">
 							<select name="ano" class="ls-select" required=''>
@@ -84,20 +69,7 @@
 						</div>
 					</label>
 
-					<label class="ls-label col-md-6 col-xs-12">
-						<p class="ls-label-info">
-							Estou disponível das 
-							<input type="time" name="hinicial" required=''>
-						</p>
-					</label>
 
-					<lavbel class="ls-label col-md-6 col-xs-12">
-						<p class="ls-label-info">
-							Até às
-							<input type="time" name="hfinal" required="">
-						</p>
-					</lavbel>
-					
 					<div class="ls-actions-btn">
 						<input type="hidden" name="psicologo_id" value="<?=$psicologo?>">
 						<button type="submit" class="ls-btn">Salvar dados</button>

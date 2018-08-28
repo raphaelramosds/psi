@@ -65,14 +65,19 @@ create table prontuario(
 
 create table agenda(
 	id int primary key not null auto_increment,
-	dia varchar(20),
 	mes varchar(20),
 	ano varchar(20),
+	paciente_id int,
+	psicologo_id int,
+	horario_id int
+);
+
+create table horario(
+	id int primary key not null auto_increment,
+	dia varchar(30),
 	hinicial varchar(20),
 	hfinal varchar(20),
-	paciente_id int,
-	clinica_id int,
-	psicologo_id int
+	clinica_id int
 );
 
 create table sessao(
@@ -108,7 +113,6 @@ add constraint fk_psicologo_paciente foreign key (id_psicologo) references psico
 
 -- FK Psicologo
 
-
 alter table psicologo
 add constraint uq_crp unique(crp);
 
@@ -132,7 +136,7 @@ alter table agenda
 add constraint fk_paciente_agenda foreign key (paciente_id) references paciente(id);
 
 alter table agenda
-add constraint fk_clinica_agenda foreign key (clinica_id) references clinica(id);
+add constraint fk_horario foreign key (horario_id) references horario(id);
 
 alter table agenda
 add constraint fk_psicologo_agenda foreign key (psicologo_id) references psicologo(id);
@@ -150,3 +154,8 @@ add constraint fk_paciente_prontuario foreign key (paciente_id) references pacie
 
 alter table sessao
 add constraint fk_prontuario_sessao foreign key (numero_prontuario) references prontuario(numeroprontuario);
+
+
+-- FK Horário
+alter table horario
+add constraint fk_paciente_horario foreign key (paciente_id) references paciente(id);
