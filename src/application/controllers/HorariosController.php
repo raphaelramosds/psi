@@ -35,6 +35,6 @@ class HorariosController extends CI_Controller
 	public function add()
 	{
 		$reg = $this->input->post();
-		print_r($reg);
+		echo "<pre>".print_r($reg)."</pre>";
 	}
 }
