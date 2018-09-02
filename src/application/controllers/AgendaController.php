@@ -10,23 +10,11 @@ class AgendaController extends CI_Controller
 		parent::__construct();
 		$this->usr = $this->session->userdata('usuario');
 		$this->load->model('ClinicasModel', 'clinicas');
-		$this->load->model('SecretariasModel','secretarias');	
-		$this->load->model('PacientesModel','pacientes');
 		$this->load->model('AgendasModel','agendas');
 		if ($this->usr == NULL) 
 		{
 			redirect('/');
 		}
-    }
-
-    public function addPaciente()
-    {
-        $paciente_reg = $this->input->post();
-
-        $this->pacientes->add($paciente_reg);
-        $this->session->set_flashdata("add_paciente",'Adcionado com sucesso!');
-
-        redirect('create-agenda');
     }
 
     public function index()
@@ -41,7 +29,6 @@ class AgendaController extends CI_Controller
     public function create()
     {
     	$data_create = array(
-    		'pacientes' => $this->pacientes->view($this->usr[0]['id']),
     		'clinicas'	=> $this->clinicas->view($this->usr[0]['id']),
     		'psicologo' => $this->usr[0]['id']
     	);
