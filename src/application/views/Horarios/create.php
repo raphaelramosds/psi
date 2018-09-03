@@ -29,56 +29,25 @@
 
 	$('#more').click(function(){
 		var content = "<div class='col-md-12' id='content"+ c +"'>" +
-							"<label class='ls-label col-md-3 col-xs-12'>" +
+							"<label class='ls-label col-md-4 col-xs-12'>" +
 								"<p class='ls-label-info'>Estou disponível das</p>"+ 
 								"<input type='time' name='hinicial[]'>" +
 							"</label>" +
 
-							"<label class='ls-label col-md-3 col-xs-12'>" +
+							"<label class='ls-label col-md-4 col-xs-12'>" +
 								"<p class='ls-label-info'>Áté as</p>"+ 
 								"<input type='time' name='hfinal[]'>" +
 							"</label>" +
 
-							"<label class='ls-label col-md-3 col-xs-12'>" + 
-								"<p class='ls-label-info'>Selecione quais dias para essse horário:</p>" +
-
-								"<label class='ls-label-text'>" +
-									"<input type='checkbox' name='dias[]' value='1' class='ls-field'> Dom" +
-								"</label>" +
-
-								"<label class='ls-label-text'>" +
-									"<input type='checkbox' name='dias[]' value='2' class='ls-field'> Seg" +
-								"</label>" +
-
-								"<label class='ls-label-text'>" +
-									"<input type='checkbox' name='dias[]' value='3' class='ls-field'> Ter" +
-								"</label>" +
-
-								"<label class='ls-label-text'>" +
-									"<input type='checkbox' name='dias[]' value='4' class='ls-field'> Qua" +
-								"</label>" +
-
-								"<label class='ls-label-text'>" +
-									"<input type='checkbox' name='dias[]' value='5' class='ls-field'> Qui" +
-								"</label>" +
-
-								"<label class='ls-label-text'>" +
-									"<input type='checkbox' name='dias[]' value='6' class='ls-field'> Sex" +
-								"</label>" +
-
-								"<label class='ls-label-text'>" +
-									"<input type='checkbox' name='dias[]' value='7' class='ls-field'> Sáb" +
-								"</label>" +
-							"</label>" + 
-
-							"<label class='ls-label col-md-3 col-xs-12'>" + 
-								"<p class='ls-label-info'>Paciente</p>" +
+							"<label class='ls-label col-md-4 col-xs-12'>" + 
+								"<p class='ls-label-info'>Selecione qual dia para essse horário:</p>" +
 								"<div class='ls-custom-select'>" +
-									"<select name='paciente_id[]' class='ls-select' required='required'>" +
-										"<?php foreach ($paciente as $c): ?>" +
-										"<option value='<?=$c->id?>'><?=$c->nome?></option>"+
-										"<?php endforeach ?>"+
+									"<select name='dias' class='ls-custom'>" +
+										"<?php for($i = 0; $i <= 31; $i++):?>" +
+										"<option value='<?=$i?>'><?=$i?></option>" + 
+										"<?php endforeach;?>" +
 									"</select>" +
+								"</div>" +
 							"</label>" +
 					  "</div>";
 

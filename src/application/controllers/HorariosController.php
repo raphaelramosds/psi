@@ -23,7 +23,6 @@ class HorariosController extends CI_Controller
 		$q 		= "SELECT * FROM agenda as a WHERE a.mes = $mes AND a.ano = $ano";
 		$r      = $this->db->query($q)->row_array();
 		$d		= array(
-			'paciente' 	=> $this->pacientes->view($this->usr[0]['id']),
 			'agenda'	=> $r['id']
 		);
 		
