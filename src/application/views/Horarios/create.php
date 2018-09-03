@@ -32,18 +32,18 @@
 		var content = "<div class='col-md-12' id='content"+ c +"'>" +
 							"<label class='ls-label col-md-4 col-xs-12'>" +
 								"<p class='ls-label-info'>Disponível das</p>"+ 
-								"<input type='time' name='hinicial[]'>" +
+								"<input type='time' name='hinicial[]' required='required'>" +
 							"</label>" +
 
 							"<label class='ls-label col-md-4 col-xs-12'>" +
 								"<p class='ls-label-info'>Áté as</p>"+ 
-								"<input type='time' name='hfinal[]'>" +
+								"<input type='time' name='hfinal[]' required='required'>" +
 							"</label>" +
 
 							"<label class='ls-label col-md-4 col-xs-12'>" + 
-								"<p class='ls-label-info'>Selecione o dia:</p>" +
+								"<p class='ls-label-info'>Selecione o dia desse mês:</p>" +
 								"<div class='ls-custom-select'>" +
-									"<select name='dias[]' class='ls-custom'>" +
+									"<select name='dia[]' class='ls-custom' required='required'>" +
 										"<?php for($i = 1; $i <= 31; $i++):?>" +
 										"<option value='<?=$i?>'><?=$i?></option>" + 
 										"<?php endfor;?>" +

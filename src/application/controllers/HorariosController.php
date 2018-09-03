@@ -11,6 +11,7 @@ class HorariosController extends CI_Controller
 		$this->usr = $this->session->userdata('usuario');
 		$this->load->model('AgendasModel','agendas');
 		$this->load->model('PacientesModel','pacientes');
+		$this->load->model('HorariosModel', 'horarios');
 	}
 
 	public function create()
@@ -34,9 +35,21 @@ class HorariosController extends CI_Controller
 	public function add()
 	{
 		$reg = $this->input->post();
-		$dados['horarios'] = $reg;
-		$this->load->view('Home/menu', array('nome' => $this->usr[0]['nome']));
-		$this->load->view('Agenda/index', $dados);
 
+		$length = sizeof($reg['hinicial']);
+
+		for($count = 0; $count < $length; $count++)
+		{	
+			$data = array(
+				'hinicial' 		=> $reg['hinicial'][$count],
+				'hfinal'		=> $reg['hfinal'][$count],
+				'dia'			=> $reg['dia'][$count],
+				'paciente_id' 	=> null,
+				'agenda_id'		=> $reg['agenda_id']
+			);
+			
+			$this->horarios->add($data);
+		}
+		redirect('view-agenda');
 	}
 }

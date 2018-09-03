@@ -12,7 +12,7 @@
 					<label class="ls-label col-md-6 col-xs-12">
 						<p class="label-info">Mês</p>
 						<div class="ls-custom-select">
-							<select name="mes" class='ls-select'>
+							<select name="mes" class='ls-select' required='required'>
 								<option value=""></option>
 								<option value="1">Janeiro</option>
 								<option value="2">Fevereiro</option>
@@ -34,7 +34,7 @@
 					<label class="ls-label col-md-6 col-xs-12">
 						<p class="ls-label-info">Ano</p>
 						<div class="ls-custom-select">
-							<select name="ano" class="ls-select">
+							<select name="ano" class="ls-select" required='required'>
 								<option value=""></option>
 								<?php for ($i=2018; $i < 2040; $i++): ?>
 								<option value="<?=$i?>"><?=$i?></option>

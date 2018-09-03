@@ -3,12 +3,7 @@
 		<h1 class="ls-title-intro ls-ico-calendar">Minha Agenda</h1>
 
 		<div class="ls-box ls-board-box ls-no-border">
-			<?php if (isset($horarios)): ?>
-				<pre>
-					<?php print_r($horarios) ?>
-				</pre>
-				
-			<?php endif ?>
+
 			<hr />
 			<?php if ($this->session->userdata('usuario')[1]['role'] == 1): ?>
 			<a href="<?=base_url('create-agenda')?>" class="ls-btn">Abrir uma agenda</a>
