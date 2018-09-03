@@ -34,6 +34,9 @@ class HorariosController extends CI_Controller
 	public function add()
 	{
 		$reg = $this->input->post();
-		echo "<pre>".print_r($reg)."</pre>";
+		$dados['horarios'] = $reg;
+		$this->load->view('Home/menu', array('nome' => $this->usr[0]['nome']));
+		$this->load->view('Agenda/index', $dados);
+
 	}
 }

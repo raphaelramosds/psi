@@ -28,9 +28,10 @@
 	var c = 1;
 
 	$('#more').click(function(){
+		// Tove Lo - Habits (Stay High)
 		var content = "<div class='col-md-12' id='content"+ c +"'>" +
 							"<label class='ls-label col-md-4 col-xs-12'>" +
-								"<p class='ls-label-info'>Estou disponível das</p>"+ 
+								"<p class='ls-label-info'>Disponível das</p>"+ 
 								"<input type='time' name='hinicial[]'>" +
 							"</label>" +
 
@@ -40,12 +41,12 @@
 							"</label>" +
 
 							"<label class='ls-label col-md-4 col-xs-12'>" + 
-								"<p class='ls-label-info'>Selecione qual dia para essse horário:</p>" +
+								"<p class='ls-label-info'>Selecione o dia:</p>" +
 								"<div class='ls-custom-select'>" +
-									"<select name='dias' class='ls-custom'>" +
-										"<?php for($i = 0; $i <= 31; $i++):?>" +
+									"<select name='dias[]' class='ls-custom'>" +
+										"<?php for($i = 1; $i <= 31; $i++):?>" +
 										"<option value='<?=$i?>'><?=$i?></option>" + 
-										"<?php endforeach;?>" +
+										"<?php endfor;?>" +
 									"</select>" +
 								"</div>" +
 							"</label>" +
