@@ -1,9 +1,7 @@
 <div class="ls-main">
     <div class="container-fluid">
+        <h1 class="ls-title-intro ls-ico-panel-pabx">Cadastro de secretária</h1>
         <div class="ls-box ls-board-box ls-no-border">
-            <header class="ls-info-header ls-no-border">
-                <h2 class="ls-title-3 ls-ico-panel-pabx">Cadastro de Secretária</h2>
-            </header>
             <?php if (isset($erro_user)):?>
                 <div class='ls-sm-space' style='font-size:20px; color:red;'><?=$erro_user?></div>
             <?php endif;?>

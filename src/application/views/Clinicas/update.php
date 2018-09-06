@@ -1,9 +1,7 @@
 <div class="ls-main">
 	<div class="container-fluid">
 <div class="ls-box ls-board-box ls-no-border">
-		<header class="ls-info-header ls-no-border">
-			<h2 class="ls-title-3 ls-ico-pencil">Editar clínica</h2>
-		</header>
+		<h1 class="ls-title-intro ls-ico-pencil">Editar clínica</h1>
 		<form action="<?=base_url()?>ClinicasController/update" method="POST" class="ls-form ls-form-horizontal row" data-ls-module="form">
 			<fieldset>
 

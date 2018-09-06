@@ -1,10 +1,8 @@
 <link rel="stylesheet" href="<?=base_url('assets/css/cronometro.css')?>">
 <div class="ls-main">
 	<div class="container-fluid">
+		<h1 class="ls-title-intro ls-ico-stats">Registre uma nova sessão</h1>
 		<div class="ls-box ls-board-box ls-no-border">
-			<header class="ls-info-header ls-no-border">
-				<h2 class="ls-title-3 ls-ico-stats">Registre um uma nova sessão</h2>
-			</header>
 			<form action="<?=base_url()?>SessoesController/add" method="POST" class="ls-form ls-form-horizontal row">
 				<fieldset>
 				<label class="ls-label col-md-4 col-xs-12">

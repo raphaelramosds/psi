@@ -1,9 +1,7 @@
 <div class="ls-main">
 	<div class="container-fluid">
 		<div class="ls-box ls-board-box ls-no-border">
-			<header class="ls-info-header ls-no-border">
-				<h2 class="ls-title-3">Registre uma nova clínica</h2>
-			</header>
+			<h1 class="ls-title-intro ls-ico-location">Registre uma nova clínica</h1>
 			<form action="<?=base_url('ClinicasController/add')?>" method="POST" class="ls-form ls-form-horizontal row" data-ls-module="form">
 				<fieldset>
 					<label class="ls-label col-md-12">

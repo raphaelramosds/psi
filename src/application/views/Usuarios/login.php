@@ -53,8 +53,10 @@
         </div>
     </div>
 
+
     <script type="text/javascript" src="<?=base_url('assets/js/jquery.js')?>"></script>
     <script src="<?=base_url('assets/js/locastyle.js')?>" type="text/javascript"></script>
+   
   </body>
 </html>
 

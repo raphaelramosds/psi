@@ -82,6 +82,12 @@
 							<input type="text" name="crp" required="required">
 						</label>
 						<input type="hidden" name="role" value="1" >
+						<?php if($this->session->flashdata('err_cap')):?>
+						<div class='ls-sm-space' style='font-size:20px; color:red;'><?=$this->session->flashdata('err_cap')?></div>
+						<?php endif;?>
+						<label class="ls-label">
+							<div class="g-recaptcha" data-sitekey="6LfUpWsUAAAAAHTjz0QVa3bvIbjEkLh6xhQ6kHW6"></div><br>
+						</label>
 					</fieldset>
 					<div class="ls-actions-btn" style="text-align:center;border:none;line-height:50px;">
 						<button class="ls-btn"  style="background-color:#1DD1A4;color:white;padding:1em;width:250px;">Terminar</button>
@@ -94,5 +100,6 @@
 		
 		<script type="text/javascript" src="<?=base_url('assets/js/jquery.js')?>"></script>
 		<script src="<?=base_url('assets/js/locastyle.js')?>" type="text/javascript"></script>
+		<script type="text/javascript" src="<?=base_url('assets/js/api.js')?>"></script>
 	</body>
 </html>
