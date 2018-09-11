@@ -1,10 +1,7 @@
 <div class="ls-main">
 	<div class="container-fluid">
+		<h1 class="ls-title-intro ls-ico-hours">Meus horários</h1>
 		<div class="ls-box ls-board-box ls-no-border">
-			<header class="ls-info-header ls-no-border">
-				<h2 class="ls-title-3">Meus horários</h2>
-			</header>
-
 			<form action="<?=base_url('HorariosController/add')?>" method="POST" class="ls-form ls-form-horizontal row" data-ls-module="form">
 				<fieldset>
 					<div class='col-md-12' id='field'>

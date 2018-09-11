@@ -11,6 +11,16 @@ class AgendaController extends CI_Controller
 		$this->usr = $this->session->userdata('usuario');
 		$this->load->model('ClinicasModel', 'clinicas');
 		$this->load->model('AgendasModel','agendas');
+		
+		$preferences = array(
+			'show_next_prev' 	=> TRUE,
+			'start_day'    		=> 'saturday',
+			'month_type'   		=> 'long',
+			'day_type'     		=> 'short'
+		);
+
+		$this->load->library('calendar', $preferences);
+
 		if ($this->usr == NULL) 
 		{
 			redirect('/');
@@ -19,10 +29,14 @@ class AgendaController extends CI_Controller
 
     public function index()
     {
-    	$data_agenda = $this->agendas->view($this->usr[0]['id']);
+		$data_agenda = $this->agendas->view($this->usr[0]['id']);
+		$data = array(
+			'calendario' 	=> $this->calendar->generate($this->uri->segment(3),$this->uri->segment(4)),
+			'agendas'		=> $data_agenda
+		);
 
 		$this->load->view('Home/menu', array('nome' => $this->usr[0]['nome']));
-		$this->load->view('Agenda/index', array('agendas' => $data_agenda));
+		$this->load->view('Agenda/index', $data);
 
     }
 

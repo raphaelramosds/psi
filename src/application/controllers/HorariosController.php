@@ -37,7 +37,7 @@ class HorariosController extends CI_Controller
 		$reg = $this->input->post();
 
 		$length = sizeof($reg['hinicial']);
-
+		
 		for($count = 0; $count < $length; $count++)
 		{	
 			$data = array(
