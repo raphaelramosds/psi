@@ -125,27 +125,6 @@ class UsuariosController extends CI_Controller
 		$email_count		= count($this->usuarios->verify_email($user_reg['email']));
 		$crp_count			= count($this->db->query("SELECT * FROM psicologo WHERE crp = '".$psicologo_reg['crp']."'")->result());
 		$view_redirect		= ($user_reg['role'] == 2) ? 'create-secretaria' : 'cadastre';
-		$secret 			= "6LfUpWsUAAAAAPCqNHmD0cAOeWBAfBE3snPrze0o";
-		$url				= "https://www.google.com/recaptcha/api/siteverify";
-		$key				= $this->input->post('g-recaptcha-response');
-
-		$data_captcha = array(
-			'secret' 	=> $secret,
-			'response'	=> $key
-		);
-
-		$ch = curl_init();
-
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $data_captcha);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-		curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
-		
-		$resposta = curl_exec($ch);
-		curl_close($ch);	
-		$status = json_decode($resposta, true);
 
 		if($users_count == 1)
 		{
@@ -169,12 +148,6 @@ class UsuariosController extends CI_Controller
 		{
 			$this->session->set_flashdata('erro_senha','Parece que as senhas não são iguais');
 			redirect($view_redirect);
-		}
-
-		else if (!$status['success'])
-		{
-			$this->session->set_flashdata('err_cap', 'Parece que o catpcha não foi preenchido ou está incorreto');
-			redirect('cadastre');
 		}
 		// Adcionar dados no banco
 

@@ -40,16 +40,15 @@ class PacientesController extends CI_Controller
 			'clinicas' 			=> $this->clinicas->view($id)
 		);
 
-		$this->load->view('Home/menu', array('nome'=>$this->usr[0]['nome']));
+		$this->load->view('Home/menu');
 		$this->load->view('Pacientes/index', $data_pagination_paciente);
 	}
 
 	public function search()
 	{
 		$paciente = $this->input->post('paciente');
-		$user['nome'] = $this->usr[0]['nome'];
 
-		$this->load->view('Home/menu',$user);
+		$this->load->view('Home/menu');
 
 		$data_pacientes_search = array(
 			'datapacientes'	=> $this->pacientes->search($this->usr[0]['id'], $paciente),
@@ -62,7 +61,7 @@ class PacientesController extends CI_Controller
 
 	public function create()
 	{
-		$this->load->view('Home/menu',array('nome'=>$this->usr[0]['nome']));
+		$this->load->view('Home/menu');
 		$this->load->view('Pacientes/create', array('psicologo_id'=>$this->usr[0]['id']));
 	}
 
@@ -94,7 +93,7 @@ class PacientesController extends CI_Controller
 	public function edit($id)
 	{	
 		
-		$this->load->view('Home/menu', array('nome'=>$this->usr[0]['nome']));
+		$this->load->view('Home/menu');
 		$this->load->view('Pacientes/update', array('pacientes'=>$this->pacientes->view_id($id)));
 	}
 

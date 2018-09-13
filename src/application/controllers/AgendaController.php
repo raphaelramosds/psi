@@ -35,7 +35,7 @@ class AgendaController extends CI_Controller
 			'agendas'		=> $data_agenda
 		);
 
-		$this->load->view('Home/menu', array('nome' => $this->usr[0]['nome']));
+		$this->load->view('Home/menu');
 		$this->load->view('Agenda/index', $data);
 
     }
@@ -47,7 +47,7 @@ class AgendaController extends CI_Controller
     		'psicologo' => $this->usr[0]['id']
     	);
 
-    	$this->load->view('Home/menu', array('nome' => $this->usr[0]['nome']));
+    	$this->load->view('Home/menu');
     	$this->load->view('Agenda/create', $data_create);
     }
 

@@ -27,7 +27,7 @@ class HorariosController extends CI_Controller
 			'agenda'	=> $r['id']
 		);
 		
-		$this->load->view('Home/menu',array('nome' => $this->usr[0]['nome']));
+		$this->load->view('Home/menu');
 		$this->load->view('Horarios/create', $d);
 
 	}

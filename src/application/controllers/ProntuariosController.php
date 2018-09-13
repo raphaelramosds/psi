@@ -40,7 +40,7 @@ class ProntuariosController extends CI_Controller
 		); 
 
 
-		$this->load->view('Home/menu', array('nome' => $this->usr[0]['nome']));
+		$this->load->view('Home/menu');
 
 		$this->load->view('Prontuarios/index', $data_flash_inf);
 	}
@@ -74,7 +74,7 @@ class ProntuariosController extends CI_Controller
 			'pacientes'	    => $this->pacientes->view($id_psicologo)
 		);
 
-		$this->load->view('Home/menu',array('nome' => $this->usr[0]['nome']));
+		$this->load->view('Home/menu');
 		$this->load->view('Prontuarios/update', $data_prontuarios);
 	}
 

@@ -23,7 +23,7 @@ class SecretariasController extends CI_Controller
 	{	
 		$data_secretaria = $this->secretarias->view($this->usr[0]['id']);
 
-		$this->load->view('Home/menu', array('nome' => $this->usr[0]['nome']));
+		$this->load->view('Home/menu');
 		$this->load->view('Secretarias/index', array('data_secretaria' => $data_secretaria));
 
 	}
@@ -37,7 +37,7 @@ class SecretariasController extends CI_Controller
 			'erro_user'			=> $this->session->flashdata('erro_user')
 		); 
 
-		$this->load->view('Home/menu', array('nome' => $this->usr[0]['nome']));
+		$this->load->view('Home/menu');
 		$this->load->view('Secretarias/create', $data_form_secretaria);
 	}
 
@@ -52,7 +52,7 @@ class SecretariasController extends CI_Controller
 			'usuario'		=> $this->usuarios->view_user($q->id)
 		);
 
-		$this->load->view('Home/menu', array('nome' => $this->usr[0]['nome']));
+		$this->load->view('Home/menu');
 		// Exiba dois opção para dois Formulários: Informações da Secretária e Informações Usuário
 		$this->load->view('Secretarias/update', $data_update);
 	}

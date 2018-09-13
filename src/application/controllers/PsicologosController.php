@@ -21,7 +21,6 @@ class PsicologosController extends CI_Controller
 	public function index()
 	{
 		$view_info = array(
-			'nome' 		=> $this->usr[0]['nome'],
 			'usuario'	=> $this->usuarios->view_user($this->usr[1]['id'])
 		);
 
@@ -45,7 +44,7 @@ class PsicologosController extends CI_Controller
 	public function edit($id)
 	{
 
-		$this->load->view('Home/menu',array('nome' => $this->usr[0]['nome']));
+		$this->load->view('Home/menu');
 		$this->load->view('Psicologos/update', array('psicologos' => $this->psicologos->view_id($id)));
 	}
 

@@ -28,7 +28,7 @@ class HomeController extends CI_Controller
 			'update_info'		=> $this->session->flashdata('update_info'),
 		);
 
-		$this->load->view('Home/menu', array('nome'=>$this->usr[0]['nome']));
+		$this->load->view('Home/menu');
 		$this->load->view('Home/index', $count_registers);
 	}
 
