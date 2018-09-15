@@ -18,7 +18,7 @@
 				<input type="submit" value="Buscar" class="ls-btn" title="Buscar">
 				<a href="<?=base_url('create-paciente')?>" class="ls-ico-plus ls-btn	">Adcionar um paciente</a>
 			</form>
-			<table class="ls-table">
+				
 			<tr>
 				<th>Nome</th>
 				<th>Email</th>

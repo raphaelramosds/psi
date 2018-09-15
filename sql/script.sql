@@ -76,8 +76,8 @@ create table horario(
 	dia int,
 	hinicial time,
 	hfinal time,
-	paciente_id int,
-	agenda_id int
+	agenda_id int,
+	anotacao text
 );
 
 create table sessao(
@@ -155,8 +155,6 @@ add constraint fk_prontuario_sessao foreign key (numero_prontuario) references p
 
 -- FK Horário
 
-alter table horario
-add constraint fk_paciente_horario foreign key (paciente_id) references paciente(id);
 
 alter table horario
 add constraint fk_agenda_horario foreign key (agenda_id) references agenda(id);
