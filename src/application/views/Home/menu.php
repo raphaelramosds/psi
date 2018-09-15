@@ -15,7 +15,7 @@
           <a href="#" class="ls-ico-user">
             <!-- Adcionar uma imagem de perfil: <img src="<?=base_url('')?>" alt="" /> -->
             <span class="ls-name">
-              <?=$nome?>
+              <?=$this->session->userdata('usuario')[0]['nome']?>
             </span>
           </a>
           <nav class="ls-dropdown-nav ls-user-menu">

@@ -32,13 +32,13 @@ class SessoesController extends CI_Controller
 			'delete_sessao' => $this->session->flashdata('delete_sessao')
 		);
 
-		$this->load->view('Home/menu',array('nome' => $this->usr[0]['nome']));
+		$this->load->view('Home/menu');
 		$this->load->view('Sessoes/index', $data_flash);
 	}
 
 	public function create()
 	{
-		$this->load->view('Home/menu',array('nome' => $this->usr[0]['nome']));
+		$this->load->view('Home/menu');
 		$this->load->view('Sessoes/create', array('prontuario' => $this->session->userdata('prontuario')));
 	}
 
@@ -63,7 +63,7 @@ class SessoesController extends CI_Controller
 	public function edit($id)
 	{
 
-		$this->load->view('Home/menu',array('nome'=>$this->usr[0]['nome']));
+		$this->load->view('Home/menu');
 		$this->load->view('Sessoes/update', array('sessao'=>$this->sessoes->view_id($id)));
 	}
 

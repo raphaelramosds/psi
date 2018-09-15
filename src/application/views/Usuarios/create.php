@@ -17,17 +17,19 @@
 				<form action="<?=base_url('UsuariosController/add')?>" role="form" method="POST">
 					<fieldset>
 						<label for="" class="ls-label">
-							<b class="ls-label-text">Informações do usuário</b>
+							<b class="ls-label-text">Informações do usuário <span class="ls-color-danger">*</span></b>
 							<p class="ls-label-info">Digite o nome de usuário. Ex.: usuario123</p>
 							<?php if (isset($erro_user)):?>
 							<div class='ls-sm-space' style='font-size:20px; color:red;'><?=$erro_user?></div>
 							<?php endif;?>
+							
 							<input type="text" name ="username" required="required">
 						</label>
 
 						<label for="" class="ls-label">
-							<b class="ls-label-text">Senha</b>
+							<b class="ls-label-text">Senha <span class="ls-color-danger">*</span></b>
 							<p class="ls-label-info">Para sua segurança use letras e números</p>
+							
 							<div class="ls-prefix-group">
 								<input id="password_field" class="ls-login-bg-password" name="senha" type="password" placeholder="Senha" required >
 								<a class="ls-label-text-prefix ls-toggle-pass ls-ico-eye" data-toggle-class="ls-ico-eye, ls-ico-eye-blocked" data-target="#password_field" href="#"></a>
@@ -49,23 +51,23 @@
 							<?php if(isset($erro_email)): ?>
 								<div class='ls-sm-space' style='font-size:20px; color:red;'><?=$erro_email?></div>
 							<?php endif ?>
+							<b class="ls-label-text">Email <span class="ls-color-danger">*</span></b>
 							<input type="email" name="email" required="required" placeholder="Email">
 						</label>
 
 						<hr>
-						<label class="ls-label">
-							<b class="ls-label-text">Informações do psicólogo</b>
-							<p class="ls-label-info">Algumas informações não são obrigadas</p>
+						<label class="ls-label">	
+							<b class="ls-label-text">Nome <span class="ls-color-danger">*</span></b>
 							<input type="text" name="nome" required="required" placeholder="Seu nome completo">
 						</label>
 
 						<label class="ls-label">
-							<p class="ls-label-info">Data nascimento</p>
+							<b class="ls-label-text">Data nascimento</b>
 							<input type="date" name="datanasc" placeholder="Digite nesse formato: ano/mês/dia">
 						</label>
 
 						<label class="ls-label">
-							<p class="ls-label-info">Sexo</p>
+							<b class="ls-label-text">Sexo</b>
 							<div class="ls-custom-select">
 								<select class="ls-custom" name="sexo">
 									<option value="M">Masculino</option>
@@ -78,16 +80,13 @@
 							<?php if (isset($erro_crp)): ?>
 								<div class='ls-sm-space' style='font-size:20px; color:red;'><?=$erro_crp?></div>
 							<?php endif ?>
-							<p class="ls-label-info">CRP</p>
+							<b class="ls-label-text">CRP <span class="ls-color-danger">*</span></b>
 							<input type="text" name="crp" required="required">
 						</label>
 						<input type="hidden" name="role" value="1" >
 						<?php if($this->session->flashdata('err_cap')):?>
 						<div class='ls-sm-space' style='font-size:20px; color:red;'><?=$this->session->flashdata('err_cap')?></div>
 						<?php endif;?>
-						<label class="ls-label">
-							<div class="g-recaptcha" data-sitekey="6LfUpWsUAAAAAHTjz0QVa3bvIbjEkLh6xhQ6kHW6"></div><br>
-						</label>
 					</fieldset>
 					<div class="ls-actions-btn" style="text-align:center;border:none;line-height:50px;">
 						<button class="ls-btn"  style="background-color:#1DD1A4;color:white;padding:1em;width:250px;">Terminar</button>

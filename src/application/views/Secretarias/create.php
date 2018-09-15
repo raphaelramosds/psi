@@ -8,13 +8,13 @@
             <form action="<?=base_url('UsuariosController/add')?>" method="POST"  data-ls-module="form" class="ls-form ls-form-horizontal row">
                 <fieldset>
                     <label class="ls-label col-md-12">
-                        <b class="ls-label-text">Informações do usuário</b>
+                        <b class="ls-label-text">Informações do usuário <span class="ls-color-danger">*</span></b>
                         <p class="ls-label-info">Digite o nome de usuário. Ex.: usuario123</p>
                         <input type="text" name ="username" required="required" placeholder="Nome de usuário">
                     </label>
 
-                    <label class="ls-label col-md-6 col-xs-12">
-                        <div class="ls-prefix-group">
+                    <label class="ls-label col-md-6 col-xs-12"> 
+                        <div class="ls-prefix-group">   
                             <input id="password_field" class="ls-login-bg-password" name="senha" type="password" placeholder="Senha" required >
                             <a class="ls-label-text-prefix ls-toggle-pass ls-ico-eye" data-toggle-class="ls-ico-eye, ls-ico-eye-blocked" data-target="#password_field" href="#"></a>
                         </div>
@@ -33,19 +33,17 @@
 
 
                     <label class="ls-label col-md-12">
-                        <b class="ls-label-text">Email</b>
+                        <b class="ls-label-text">Email <span class="ls-color-danger">*</span></b>
                         <input type="email" name="email" placeholder="exemplo@dominio.com">
                     </label>    
 
-
                     <label class="ls-label col-md-12">
-                        <b class="ls-label-text">Informações da Secretária</b>
-                        <p class="ls-label-info">Algumas informações não são obrigadas</p>
+                        <b class="ls-label-text">Nome <span class="ls-color-danger">*</span></b>
                         <input type="text" name="nome" required="required" placeholder="Seu nome completo">
                     </label>
 
                     <label class="ls-label col-md-4 cpl-xs-12">
-                        <p class="ls-label-info ">Sexo</p>
+                        <b class="ls-label-text">Sexo</b>
                         <div class="ls-custom-select">
                             <select class="ls-custom" name="sexo">
                                 <option value="M">Masculino</option>
@@ -55,18 +53,18 @@
                     </label>
 
                     <label class="ls-label col-md-4 cpl-xs-12">
-                        <p class="ls-label-info ">Telefone</p>
+                        <b class="ls-label-text">Telefone</b>
                         <input type="text" name="telefone" class="ls-mask-phone8_with_ddd" placeholder="(99) 9999-9999">
                     </label>
 
                     <label class="ls-label col-md-4 cpl-xs-12">
-                        <p class="ls-label-info ">Endereço</p>
+                        <b class="ls-label-text">Endereço</b>
                         <input type="text" name="endereco">
                     </label>
                     
                     <!-- Foreign Keys -->
                     <label class="ls-label col-md-12">
-                        <p class="ls-label-info">Clinica</p>
+                        <b class="ls-label-text">Clinica <span class="ls-color-danger">*</span></p>
                         <div class="ls-custom-select">
                             <select name="clinica_id" class="ls-custom" required="required">
                                 <?php foreach ($clinicas as $row): ?>
