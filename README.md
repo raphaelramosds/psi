@@ -1,6 +1,6 @@
 # Prontuário Eletrônico para Psicólogos
 O sistema é referente a um Ambiente de Gestão para **Prontuários Eletrônicos** da área de Psicologia.
-> PSI é um acrônimo para Prontuário em um Sistema Inteligente
+> PSI é um acrônimo para Prontuários em um Sistema Inteligente
 
 Atualmente, as funcionalidades que cabem a este sistema são: <br/>
 * Cadastro de fichas presentes em um Prontuário .
