@@ -5,8 +5,7 @@
     <meta name    = "viewport" content  = "width=device-width, initial-scale=1, user-scalable=no">
     <!-- Styles -->
     <link href    = "<?=base_url('assets/css/locastyle.css')?>" rel="stylesheet" type="text/css">
-    <link rel     = "icon" sizes="192x192"  href  = "<?=base_url('assets/images/ico-boilerplate.png')?>">
-    <link rel     = "apple-touch-icon"      href  = "<?=base_url('assets/images/ico-boilerplate.png')?>">
+    <link rel="icon" sizes="10x5" href="<?=base_url('assets/images/logo.png')?>">
   </head>
   <body>
     <div class="ls-topbar ">
@@ -29,7 +28,9 @@
         </div>
       </div>
       <span class="ls-show-sidebar ls-ico-menu"></span>
-      <h1 class="ls-brand-name"><a href="<?=base_url('home')?>" class="ls-ico"><img src="<?=base_url('assets/images/logo.png')?>" height="30px" width="60px"></a></h1>
+      <h1 class="ls-brand-name"><a href="<?=base_url('home')?>" class="ls-ico">
+      <img src="<?=base_url('assets/images/logo2.png')?>" height="30px" width="60px"></a>
+      </h1>
     </div>
     <aside class="ls-sidebar">
       <div class="ls-sidebar-inner">

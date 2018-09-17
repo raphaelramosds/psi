@@ -4,7 +4,7 @@
 		<title>Psi</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 		<link href="<?=base_url()?>assets/css/locastyle.css" rel="stylesheet" type="text/css">
-		<link rel="icon" sizes="192x192" href="<?=base_url()?>assets/images/ico-boilerplate.png">
+		<link rel="icon" sizes="10x5" href="<?=base_url('assets/images/logo.png')?>">
 		<link rel="apple-touch-icon" href="<?=base_url()?>assets/images/ico-boilerplate.png">
 		<link rel="stylesheet" href="<?=base_url()?>assets/css/links_style.css" type="text/css">
 	</head>

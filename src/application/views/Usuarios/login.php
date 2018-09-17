@@ -4,7 +4,7 @@
     <title>Tela de Login </title>
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 		<link href="<?=base_url('assets/css/locastyle.css')?>" rel="stylesheet" type="text/css">
-		<link rel="icon" sizes="192x192" href="<?=base_url('assets/images/ico-boilerplate.png')?>">
+		<link rel="icon" sizes="10x5" href="<?=base_url('assets/images/logo.png')?>">
 		<link rel="apple-touch-icon" href="<?=base_url('assets/images/ico-boilerplate.png')?>">
 		<link rel="stylesheet" href="<?=base_url('assets/css/links_style.css')?>" type="text/css">
   </head>
@@ -13,7 +13,7 @@
       <div class="ls-login-inner">
         <div class="ls-login-container">
           <div class="headerlogo">
-            <center><img src="<?=base_url()?>assets/images/logo.png" width="90px" height="50px"></center>
+            <img src="<?=base_url('assets/images/logo2.png')?>" width="90px" height="50px">
           </div>
           <div class="ls-login-box ls-md-margin-top"  style="background-color:white;color:white;">
               <style>.headerlogo{margin-bottom:20px;}.input-style{border-bottom:3px solid white;}</style>
