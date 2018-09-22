@@ -3,7 +3,8 @@
 	table.calendar{ margin: auto; border-collapse:collapse; }
 	.calendar .days td{ width:150px; height:120px; padding:4px; border: 1px solid #999; vertical-align:top; background-color: white; }
 	.calendar .days td:hover{ background-color: lightgrey; }
-	.calendar .highlight { background: #E84855; color:white; padding: 0.5em;}
+	.calendar .highlight { background: #E84855; color:white; padding: 0.5em; }
+	.calendar .today_highlight {  background: lightgreen; color:#1c1c1c; padding: 0.5em; }
 	.calendar .title { text-transform: uppercase;  font-size:20px; line-height:80px;}
 </style>
 

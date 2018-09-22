@@ -64,8 +64,8 @@ class AgendaController extends CI_Controller
 			{/cal_cell_content}
 			
 			{cal_cell_content_today}
-				<div class="day_num">{day}</div>
-				<div class="content">{content}</div>
+				<div class="day_num today_highlight">{day}</div>
+				<div class="content today_highlight">{content}</div>
 			{/cal_cell_content_today}
 	
 			{cal_cell_no_content}
@@ -93,7 +93,7 @@ class AgendaController extends CI_Controller
 		$cal_data = $this->getCalendarData($ano, $mes);
 
 		$data = array(
-			'calendario' 	=> $this->calendar->generate($ano, $mes, $cal_data),
+			'calendario' => $this->calendar->generate($ano, $mes, $cal_data),
 		);
 
 		$this->load->view('Home/menu');
@@ -103,16 +103,21 @@ class AgendaController extends CI_Controller
 
 	public function getCalendarData($ano, $mes)
 	{
+		// Se for uma secretária logando, então o id do psicólogo vai ser sua chave estrangeira.
+		// Caso não seja, vai ser o id do próprio psicólogo
+
+		$id = $this->usr[1]['role'] == 2 ? $this->usr[0]['psicologo_id'] : $this->usr[0]['id'];
+
 		// A partir do ano e mês, recuperar horário e trazer ela para a query para retornar anotações
 		$_ = $this->db->select('data, hinicial, hfinal')->from('horario')
-			->like('data', "$ano-$mes",'after')->where('psicologo_id', $this->usr[0]['id'])->get();
+			->like('data', "$ano-$mes",'after')->where('psicologo_id', $id)->get();
 
 		$cal_data = array();
 
 		// Essa função vai retornar as anotações existentes no mês e ano
 
 		foreach ($_->result() as $row) {
-			$cal_data[substr($row->data,8,2)] = "Dia agendado";
+			$cal_data[substr($row->data,8,2)] = "Dia reservado pelo psicólogo";
 		}
 
 		return $cal_data;
