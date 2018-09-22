@@ -3,7 +3,7 @@
 	table.calendar{ margin: auto; border-collapse:collapse; }
 	.calendar .days td{ width:150px; height:120px; padding:4px; border: 1px solid #999; vertical-align:top; background-color: white; }
 	.calendar .days td:hover{ background-color: lightgrey; }
-	.calendar .highlight { font-weight: bold; color: #00f;	 }
+	.calendar .highlight { background: #E84855; color:white; padding: 0.5em;}
 	.calendar .title { text-transform: uppercase;  font-size:20px; line-height:80px;}
 </style>
 
@@ -15,7 +15,7 @@
 			<?=$calendario?>
 			<div class="ls-actions-btn">
 				<?php if ($this->session->userdata('usuario')[1]['role'] == 1): ?>
-				<a href="<?=base_url('create-agenda')?>" class="ls-btn">Abrir uma nova agenda</a>
+				<a href="<?=base_url('create-horario')?>" class="ls-btn">Adcionar um horário</a>
 				<?php endif ?>
 			</div>
 		</div>

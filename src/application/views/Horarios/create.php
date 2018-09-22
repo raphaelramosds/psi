@@ -8,7 +8,7 @@
 
 					</div>
 					<div class="ls-actions-btn">
-						<input type="hidden" value="<?=$agenda?>" name="agenda_id">
+						<input type="hidden" value="<?=$psicologo?>" name="psicologo_id">
 						<span id="more" class="ls-btn ls-ico-plus" style="cursor:pointer;">Adcionar horário</span>
 						<span id="remover" class="ls-btn ls-btn-danger ls-ico-minus" style="cursor:pointer;">Remover horário</span>
 						<button type="submit" class="ls-btn">Salvar</button>
@@ -38,14 +38,8 @@
 							"</label>" +
 
 							"<label class='ls-label col-md-4 col-xs-12'>" + 
-								"<p class='ls-label-info'>Selecione o dia desse mês:</p>" +
-								"<div class='ls-custom-select'>" +
-									"<select name='dia[]' class='ls-custom' required='required'>" +
-										"<?php for($i = 1; $i <= 31; $i++):?>" +
-										"<option value='<?=$i?>'><?=$i?></option>" + 
-										"<?php endfor;?>" +
-									"</select>" +
-								"</div>" +
+								"<p class='ls-label-info'>Data:</p>" +
+								"<input type='date' name='data[]' required='required'>"
 							"</label>" +
 					  "</div>";
 

@@ -10,7 +10,6 @@ class AgendaController extends CI_Controller
 		parent::__construct();
 		$this->usr = $this->session->userdata('usuario');
 		$this->load->model('ClinicasModel', 'clinicas');
-		$this->load->model('AgendasModel','agendas');
 		
 		if ($this->usr == NULL) 
 		{
@@ -60,12 +59,12 @@ class AgendaController extends CI_Controller
 			{cal_cell_start_other}<td class="other-month">{/cal_cell_start_other}
 	
 			{cal_cell_content}
-				<div class="day_num">{day}</div>
-				<div class="content">{content}</div>
+				<div class="day_num highlight">{day}</div>
+				<div class="content highlight">{content}</div>
 			{/cal_cell_content}
 			
 			{cal_cell_content_today}
-				<div class="day_num highlight">{day}</div>
+				<div class="day_num">{day}</div>
 				<div class="content">{content}</div>
 			{/cal_cell_content_today}
 	
@@ -74,7 +73,7 @@ class AgendaController extends CI_Controller
 			{/cal_cell_no_content}
 	
 			{cal_cell_no_content_today}
-				<div class="day_num highlight">{day}</div>
+				<div class="day_num">{day}</div>
 			{/cal_cell_no_content_today}
 	
 			{cal_cell_blank}&nbsp;{/cal_cell_blank}
@@ -91,13 +90,10 @@ class AgendaController extends CI_Controller
 
 		$this->load->library('calendar', $p);
 		
-		$cal_data = array(
-			15 => 'foo'
-		);
-		$data_agenda = $this->agendas->view($this->usr[0]['id']);
+		$cal_data = $this->getCalendarData($ano, $mes);
+
 		$data = array(
-			'agendas'		=> $data_agenda,
-			'calendario' 	=> $this->calendar->generate($ano,$mes, $cal_data),
+			'calendario' 	=> $this->calendar->generate($ano, $mes, $cal_data),
 		);
 
 		$this->load->view('Home/menu');
@@ -105,23 +101,24 @@ class AgendaController extends CI_Controller
 
 	}
 
+	public function getCalendarData($ano, $mes)
+	{
+		// A partir do ano e mês, recuperar horário e trazer ela para a query para retornar anotações
+		$_ = $this->db->select('data, hinicial, hfinal')->from('horario')
+			->like('data', "$ano-$mes",'after')->where('psicologo_id', $this->usr[0]['id'])->get();
 
-    public function create()
-    {
-    	$data_create = array(
-    		'clinicas'	=> $this->clinicas->view($this->usr[0]['id']),
-    		'psicologo' => $this->usr[0]['id']
-    	);
+		$cal_data = array();
 
-    	$this->load->view('Home/menu');
-    	$this->load->view('Agenda/create', $data_create);
-    }
+		// Essa função vai retornar as anotações existentes no mês e ano
+
+		foreach ($_->result() as $row) {
+			$cal_data[substr($row->data,8,2)] = "Dia agendado";
+		}
+
+		return $cal_data;
+
+	}
 
 
-    public function add()
-    {
-        $this->agendas->add($this->input->post());
-        redirect('view-agenda');
-    }
     
 }

@@ -9,26 +9,19 @@ class HorariosController extends CI_Controller
 	{
 		parent::__construct();
 		$this->usr = $this->session->userdata('usuario');
-		$this->load->model('AgendasModel','agendas');
 		$this->load->model('PacientesModel','pacientes');
 		$this->load->model('HorariosModel', 'horarios');
 	}
 
 	public function create()
 	{
-		$reg 	= $this->input->post();
-		$this->agendas->add($reg);
-
-		$mes 	= $reg['mes'];
-		$ano    = $reg['ano'];
-		$q 		= "SELECT * FROM agenda as a WHERE a.mes = $mes AND a.ano = $ano";
-		$r      = $this->db->query($q)->row_array();
-		$d		= array(
-			'agenda'	=> $r['id']
-		);
 		
+		$data = array(
+			'psicologo' => $this->usr[0]['id']
+		);
+
 		$this->load->view('Home/menu');
-		$this->load->view('Horarios/create', $d);
+		$this->load->view('Horarios/create', $data);
 
 	}
 
@@ -43,9 +36,9 @@ class HorariosController extends CI_Controller
 			$data = array(
 				'hinicial' 		=> $reg['hinicial'][$count],
 				'hfinal'		=> $reg['hfinal'][$count],
-				'dia'			=> $reg['dia'][$count],
-				'paciente_id' 	=> null,
-				'agenda_id'		=> $reg['agenda_id']
+				'data'			=> $reg['data'][$count],
+				'psicologo_id' 	=> $reg['psicologo_id'],
+				'paciente_id'	=> NULL
 			);
 			
 			$this->horarios->add($data);
