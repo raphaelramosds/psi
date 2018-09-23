@@ -1,4 +1,4 @@
-<?php
+	<?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class AgendaController extends CI_Controller 
@@ -9,7 +9,6 @@ class AgendaController extends CI_Controller
 	{
 		parent::__construct();
 		$this->usr = $this->session->userdata('usuario');
-		$this->load->model('ClinicasModel', 'clinicas');
 		
 		if ($this->usr == NULL) 
 		{
@@ -54,8 +53,11 @@ class AgendaController extends CI_Controller
 			{week_row_end}</tr>{/week_row_end}
 	
 			{cal_row_start}<tr class="days">{/cal_row_start}
-			{cal_cell_start}<td>{/cal_cell_start}
+
+			{cal_cell_start}<td class="day" data-ls-module="modal" data-target="#description">{/cal_cell_start}
+
 			{cal_cell_start_today}<td>{/cal_cell_start_today}
+
 			{cal_cell_start_other}<td class="other-month">{/cal_cell_start_other}
 	
 			{cal_cell_content}
@@ -88,18 +90,37 @@ class AgendaController extends CI_Controller
 			{table_close}</table>{/table_close}'
 		);
 
+		if(!$mes):
+			$mes = date('m');	
+		endif;
+
+		if(!$ano):
+			$ano = date('Y');
+		endif;
+
+
 		$this->load->library('calendar', $p);
-		
+
+		$id = $this->usr[1]['role'] == 2 ? $this->usr[0]['psicologo_id'] : $this->usr[0]['id'];
 		$cal_data = $this->getCalendarData($ano, $mes);
 
-		$data = array(
-			'calendario' => $this->calendar->generate($ano, $mes, $cal_data),
-		);
+		$data['calendario'] = $this->calendar->generate($ano, $mes, $cal_data);
+		$day = $this->input->post('diaEscolhido');
+
+		// Recupere os horários disponíveis do psicólogo para a secretária poder encaixar os pacientes
+
+		// SELECT hinicial, hfinal 
+
+		$request = $this->db->select('hinicial, hfinal')->from('horario')->where("data","$ano-$mes-$day")
+				->where('psicologo_id', $id)->get()->result();
+
+		$data['request'] = $request;
 
 		$this->load->view('Home/menu');
 		$this->load->view('Agenda/index', $data);
 
 	}
+
 
 	public function getCalendarData($ano, $mes)
 	{
@@ -109,6 +130,7 @@ class AgendaController extends CI_Controller
 		$id = $this->usr[1]['role'] == 2 ? $this->usr[0]['psicologo_id'] : $this->usr[0]['id'];
 
 		// A partir do ano e mês, recuperar horário e trazer ela para a query para retornar anotações
+
 		$_ = $this->db->select('data, hinicial, hfinal')->from('horario')
 			->like('data', "$ano-$mes",'after')->where('psicologo_id', $id)->get();
 
@@ -123,7 +145,5 @@ class AgendaController extends CI_Controller
 		return $cal_data;
 
 	}
-
-
     
 }

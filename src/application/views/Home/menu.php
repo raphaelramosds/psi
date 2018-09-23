@@ -2,9 +2,9 @@
 <html class="ls-theme-light-green">
   <head>
     <title>Prontuários em um Sistema inteligente</title>
-    <meta name    = "viewport" content  = "width=device-width, initial-scale=1, user-scalable=no">
+    <meta name = "viewport" content = "width=device-width, initial-scale=1, user-scalable=no">
     <!-- Styles -->
-    <link href    = "<?=base_url('assets/css/locastyle.css')?>" rel="stylesheet" type="text/css">
+    <link href = "<?=base_url('assets/css/locastyle.css')?>" rel="stylesheet" type="text/css">
     <link rel="icon" sizes="10x5" href="<?=base_url('assets/images/logo.png')?>">
   </head>
   <body>
@@ -54,5 +54,6 @@
           </nav>
       </div>
     </aside>
-    <script type  = "text/javascript"    src   = "<?=base_url('assets/js/jquery.js')?>"></script>
-    <script type  = "text/javascript"    src   = "<?=base_url('assets/js/locastyle.js')?>"></script>
+    
+    <script type = "text/javascript" src = "<?=base_url('assets/js/jquery.js')?>"></script>
+    <script type = "text/javascript" src = "<?=base_url('assets/js/locastyle.js')?>"></script>
