@@ -3,6 +3,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class AgendasModel extends CI_Model 
 {
+    public $id;
+
     public function get_events($start, $end)
     {
         return $this->db->where("start >=", $start)->where("end <=", $end)->get("horario");
@@ -18,13 +20,11 @@ class AgendasModel extends CI_Model
         return $this->db->where("id", $id)->get("horario");
     }
 
-    public function update_event($id, $dados)
+    public function update_event( $dados)
     {
-        $this->db->where("id", $id)->update("horario", $dados);
+        $this->db->where('id', $this->id);
+        $this->db->set($dados);
+        $this->db->update('horario');
     }
 
-    public function delete_event($id)
-    {
-        $this->db->where("id", $id)->delete("horario");
-    }
 }

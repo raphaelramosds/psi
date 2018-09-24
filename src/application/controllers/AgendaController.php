@@ -49,5 +49,27 @@ class AgendaController extends CI_Controller
 	    redirect('view-agenda');
 	}
 
+	public function update()
+	{
+		$dados = $this->input->post();
+
+		$data = explode(" ", $dados['start']);
+		list($date, $hora) = $data;
+		$data_sem_barra = array_reverse(explode("/", $date));
+		$data_sem_barra = implode("-", $data_sem_barra);
+		$start_sem_barra = $data_sem_barra . " " . $hora;
+		$dados['start'] = $start_sem_barra;
+
+		$data = explode(" ", $dados['end']);
+		list($date, $hora) = $data;
+		$data_sem_barra = array_reverse(explode("/", $date));
+		$data_sem_barra = implode("-", $data_sem_barra);
+		$end_sem_barra = $data_sem_barra . " " . $hora;
+		$dados['end'] = $end_sem_barra;
+
+		$this->agendas->id = $dados['id'];
+		$this->agendas->update_event($dados);
+		redirect('view-agenda');
+	}
     
 }
