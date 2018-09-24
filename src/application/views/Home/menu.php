@@ -2,10 +2,12 @@
 <html class="ls-theme-light-green">
   <head>
     <title>Prontuários em um Sistema inteligente</title>
-    <meta name = "viewport" content = "width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="viewport" content = "width=device-width, initial-scale=1, user-scalable=no">
     <!-- Styles -->
-    <link href = "<?=base_url('assets/css/locastyle.css')?>" rel="stylesheet" type="text/css">
+    <link href="<?=base_url('assets/css/locastyle.css')?>" rel="stylesheet" type="text/css">
     <link rel="icon" sizes="10x5" href="<?=base_url('assets/images/logo.png')?>">
+    <link rel="stylesheet" type="text/css" href="<?=base_url('assets/fullcalendar/css/bootstrap.min.css')?>" />
+    <link rel="stylesheet" href="<?=base_url('assets/fullcalendar/css/fullcalendar.min.css')?>">
   </head>
   <body>
     <div class="ls-topbar ">
@@ -54,6 +56,13 @@
           </nav>
       </div>
     </aside>
-    
+
     <script type = "text/javascript" src = "<?=base_url('assets/js/jquery.js')?>"></script>
     <script type = "text/javascript" src = "<?=base_url('assets/js/locastyle.js')?>"></script>
+
+    <script src='<?php echo base_url()?>assets/fullcalendar/js/jquery.min.js'></script>
+    <script src='<?php echo base_url()?>assets/fullcalendar/js/bootstrap.min.js'></script>
+    <script src='<?php echo base_url()?>assets/fullcalendar/js/moment.min.js'></script>
+    <script src='<?php echo base_url()?>assets/fullcalendar/js/fullcalendar.min.js'></script>
+    <script src='<?php echo base_url()?>assets/fullcalendar/locale/pt-br.js'></script>
+

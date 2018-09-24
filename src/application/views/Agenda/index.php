@@ -1,69 +1,115 @@
-<style type="text/css">
-	.calendar{ font-family: Arial; font-size: 12px; }
-	table.calendar{ margin: auto; border-collapse:collapse; }
-	.calendar .days td{ width:150px; height:120px; padding:4px; border: 1px solid #999; vertical-align:top; background-color: white; }
-	.calendar .days td:hover{ background-color: lightgrey; cursor: pointer;}
-	.calendar .highlight { background: #E84855; color:white; padding: 0.5em; }
-	.calendar .today_highlight {  background: lightgreen; color:#1c1c1c; padding: 0.5em; }
-	.calendar .title { text-transform: uppercase;  font-size:20px; line-height:80px;}
-</style>
-
+ 
 <div class="ls-main">
 	<div class="container-fluid">
 		<div class="ls-box ls-board-box ls-no-border">
+			
 
-			<?=$calendario?>
-			<div class="ls-actions-btn">
-				<?php if ($this->session->userdata('usuario')[1]['role'] == 1): ?>
-				<a href="<?=base_url('create-horario')?>" class="ls-btn">Adcionar um horário</a>
-				<?php endif ?>
-			</div>
+			<div id="calendar"></div>
+
 		</div>
-
 	</div>
 </div>
 
-<script type="text/javascript">
+<div class="modal fade" id="cadastrar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" data-backdrop="static">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title text-center">Cadastrar horário</h4>
+				</div>
+				<div class="modal-body">
+					<form class="form-horizontal" method="POST" action="<?=base_url('AgendaController/add')?>">
+						<div class="form-group">
+							<label for="inputEmail3" class="col-sm-2 control-label">Nome do paciente (opcional)</label>
+							<div class="col-sm-10">
+								<input type="text" class="form-control" name="title" placeholder="Nome">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="inputEmail3" class="col-sm-2 control-label">Data/Hora Inicial</label>
+							<div class="col-sm-10">
+								<input type="text" class="form-control" name="start" id="start" onKeyPress="DataHora(event, this)">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="inputEmail3" class="col-sm-2 control-label">Data/Hora Final</label>
+							<div class="col-sm-10">
+								<input type="text" class="form-control" name="end" id="end" onKeyPress="DataHora(event, this)">
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-sm-offset-2 col-sm-10">
+								<input type="hidden" value="<?=$id?>" name="psicologo_id">
+								<button type="submit" class="btn btn-success">Cadastrar</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
 
-	var url = "<?php echo base_url()?>AgendaController"
+	<div class="modal fade" id="visualizar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" data-backdrop="static">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title text-center">Dados da consulta</h4>
+				</div>
+				<div class="modal-body">
+					<dl class="dl-horizontal">
+						<dt>Paciente Cadastrado</dt>
+						<dd id="title"></dd>
+						<dt>Horário inicial</dt>
+						<dd id="start"></dd>
+						<dt>Horário final</dt>
+						<dd id="end"></dd>
+					</dl>
+				</div>
+			</div>
+		</div>
+	</div>
 
+
+<?php $data = $this->db->where('psicologo_id', $id)->get('horario'); ?>
+
+<script>
 	$(document).ready(function(){
-		$('.calendar .day').click(function(){
-			
-			day_num = $(this).find('.day_num').html()
-
-			$.ajax({
-				url : window.location,
-				type : "POST",
-				data : {diaEscolhido : day_num}
-
-			}).done(function(content){ console.log("Data saved: " + content) })
+		$('#calendar').fullCalendar({
+			selectable :true,
+			defaultDate : Date(),
+			editable : true,
+			eventLimit : true,
+			select: function(start, end){
+				// Passar dias selecionados para a janela Modal
+				$('#cadastrar #start').val(moment(start).format('DD/MM/YYYY HH:mm:ss'))
+				$('#cadastrar #end').val(moment(end).format('DD/MM/YYYY HH:mm:ss'))
+				$('#cadastrar').modal('show')
+			},
+			eventClick : function(event){
+				$('#visualizar #title').text(event.title);
+				$('#visualizar #start').text(event.start.format('DD/MM/YYYY HH:mm:ss'));
+				$('#visualizar #end').text(event.end.format('DD/MM/YYYY HH:mm:ss'));
+				$('#visualizar').modal('show')
+				return false;
+			},
+			events : [
+				<?php foreach ($data->result() as $row): ?>
+				{
+					id : "<?php echo $row->id; ?>",
+					title : "<?php echo $row->title; ?>",
+					start : "<?php echo $row->start; ?>",
+					end : "<?php echo $row->end; ?>",
+					description : "<?php echo $row->end; ?>"
+				},
+				<?php endforeach; ?>
+			]
 
 		})
 	})
 
+
 </script>
 
 
-<div class="ls-modal" id="description">
-  <div class="ls-modal-box">
-    <div class="ls-modal-header">
-      <button data-dismiss="modal">&times;</button>
-      <h4 class="ls-modal-title">Horários disponiveis</h4>
-    </div>
-    <div class="ls-modal-body" id="myModalBody">
-    	<!-- Recuperar horários referentes a esse dia -->
-		<?php if(isset($request)): ?>
- 			<?php foreach ($request as $row): ?>
- 				<ul>
- 					<li><?=$row->hinicial?> até as <?=$row->hfinal?></li>
- 				</ul>
- 			<?php endforeach ?>
- 		<?php endif;?>
-    </div>
-    <div class="ls-modal-footer">
-      <button class="ls-btn ls-float-right" data-dismiss="modal">Fechar</button>
-      <button type="submit" class="ls-btn-primary">Salvar</button>
-    </div>
-  </div>
-</div>
+	
