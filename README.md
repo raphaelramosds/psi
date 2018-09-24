@@ -7,7 +7,7 @@ Atualmente, as funcionalidades que cabem a este sistema são: <br/>
 * Consulta de CID10/DSM.
 * Acompanhamento do tratamento adotado de um paciente (caso tenha um retorno).
 * Sistema de Secretária para controlar Agenda do psicólogo.
-* Gerar Atestados médicos
+* Gerar Atestados médicos (Andamento)
 
 Funcionalidades futuras: <br/>
 * Sugestões programadas de incidência de enfermidades 
