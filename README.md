@@ -6,8 +6,11 @@ Atualmente, as funcionalidades que cabem a este sistema são: <br/>
 * Cadastro de fichas presentes em um Prontuário .
 * Consulta de CID10/DSM.
 * Acompanhamento do tratamento adotado de um paciente (caso tenha um retorno).
-* Sistema de Secretária para controlar Agenda do psicólogo (*Em desenvolvimento*).
+* Sistema de Secretária para controlar Agenda do psicólogo.
 * Gerar Atestados médicos
+
+Funcionalidades futuras: <br/>
+* Sugestões programadas de incidência de enfermidades 
 
 Link do site hospedado [Prontuário Eletrônico](http://prontuariospsi.000webhostapp.com/)
 
