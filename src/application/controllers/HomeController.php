@@ -12,6 +12,7 @@ class HomeController extends CI_Controller
 		$this->load->model('ClinicasModel',"clinicas");
 		$this->load->model('PacientesModel',"pacientes");
 		$this->load->model('SecretariasModel','secretarias');
+		$this->load->model('AgendasModel','agenda');
 		if ($this->usr == NULL) 
 		{
 			redirect('/');
@@ -21,11 +22,14 @@ class HomeController extends CI_Controller
 
 	public function index()
 	{
+		$h = ($this->usr[1]['role'] == 2)?$this->agenda->get_event_by_psi($this->usr[0]['psicologo_id']):NULL;
+
 		$count_registers = array(
+			'counterhorarios' => $h,
 			'countersecretaria' => $this->secretarias->count_results($this->usr[0]['id']),
-			'counterclinica' 	=> $this->clinicas->count_results($this->usr[0]['id']),
-			'counterpaciente' 	=> $this->pacientes->count_results($this->usr[0]['id']),
-			'update_info'		=> $this->session->flashdata('update_info'),
+			'counterclinica' => $this->clinicas->count_results($this->usr[0]['id']),
+			'counterpaciente'=> $this->pacientes->count_results($this->usr[0]['id']),
+			'update_info' => $this->session->flashdata('update_info'),
 		);
 
 		$this->load->view('Home/menu');

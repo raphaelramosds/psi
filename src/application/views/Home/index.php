@@ -67,15 +67,22 @@
             <div class="col-sm-12">
               <div class="ls-box">
                   <div class="ls-box-head">
-                  <h6 class="ls-title-4">HORÁRIOS VAGOS NA AGENDA</h6>
+                  <h6 class="ls-title-4">HORÁRIOS REGISTRADOS NA AGENDA</h6>
                 </div>
                 <div class="ls-box-body">
                   <span class="ls-board-data">
-                    <strong>0</strong>
+                    <strong>
+                      <?php
+                      if(isset($counterhorarios)):  
+                        echo count($counterhorarios); 
+                      endif;
+                      ?>
+                        
+                      </strong>
                   </span>
                 </div>
                 <div class="ls-box-footer">
-                  <a href="<?=base_url('view-agenda')?>" class="ls-btn ls-btn-xs">Ver Agenda</a>
+                  <a href="<?=base_url('view-agenda')?>" class="ls-btn ls-btn-xs">Veja quais são</a>
                 </div>
               </div>
             </div>

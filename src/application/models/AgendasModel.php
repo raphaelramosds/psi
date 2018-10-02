@@ -27,4 +27,9 @@ class AgendasModel extends CI_Model
         $this->db->update('horario');
     }
 
+    public function get_event_by_psi($id)
+    {
+        return $this->db->where('psicologo_id', $id)->get('horario')->result();
+    }
+
 }
