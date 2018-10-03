@@ -52,7 +52,7 @@ create table paciente(
 
 create table prontuario(
 	numeroprontuario int primary key not null auto_increment,
-	cid10 varchar(50), 
+	cid10 varchar(50),
 	diagnostico text,
 	encaminhado char,
 	alta char,
