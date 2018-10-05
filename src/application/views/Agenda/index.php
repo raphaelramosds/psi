@@ -10,37 +10,76 @@
 	</div>
 </div>
 
-<div class="modal fade" id="cadastrar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" data-backdrop="static">
-		<div class="modal-dialog" role="document">
+<div class="modal fade " id="cadastrar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" data-backdrop="static">
+		<div class="modal-dialog modal-lg" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title text-center">Cadastrar horário</h4>
+					<h4 class="modal-title text-center">Cadastrar horários para pacientes</h4>
 				</div>
 				<div class="modal-body">
 					<form class="form-horizontal" method="POST" action="<?=base_url('AgendaController/add')?>">
 						<div class="form-group">
-							<label for="inputEmail3" class="col-sm-2 control-label">Nome do paciente (opcional)</label>
+							<label for="inputEmail3" class="col-sm-2 control-label">Paciente</label>
 							<div class="col-sm-10">
-								<input type="text" class="form-control" name="title" placeholder="Nome">
+								<input type="text" class="form-control" name="title[]" placeholder="Nome do paciente">
 							</div>
 						</div>
+
+						<!-- start: 2018-09-03 08:00:00 -->
+						<!-- end: 	2018-09-03 12:00:00 -->
+
 						<div class="form-group">
-							<label for="inputEmail3" class="col-sm-2 control-label">Data/Hora Inicial</label>
-							<div class="col-sm-10">
-								<input type="text" class="form-control" name="start" id="start" onKeyPress="DataHora(event, this)">
+							<label class="col-sm-2 control-label">Do dia:</label>
+							<div class="col-sm-3">
+								<input type="date" class="form-control" name="dinicial[]">
 							</div>
+							<label class="col-sm-2 control-label">Até:</label>
+							<div class="col-sm-3">
+								<input type="date" class="form-control" name="dfinal[]">
+							</div>
+
 						</div>
+
 						<div class="form-group">
-							<label for="inputEmail3" class="col-sm-2 control-label">Data/Hora Final</label>
-							<div class="col-sm-10">
-								<input type="text" class="form-control" name="end" id="end" onKeyPress="DataHora(event, this)">
+							<label class="col-sm-2 control-label">Das:</label>
+							<div class="col-sm-3">
+								<input type="time" class="form-control" name="ihora[]">
 							</div>
-						</div>
+							<label class="col-sm-2 control-label">Até às:</label>
+							<div class="col-sm-3">
+								<input type="time" class="form-control" name="fhora[]">
+							</div>
+						</div>	
+
+						<div id="dynamic_fields">
+							
+						</div>						
+
 						<div class="form-group">
 							<div class="col-sm-offset-2 col-sm-10">
+
+								<script>
+								function fazerHorario(){
+									idata = document.getElementById('dinicial')
+									ihora = document.getElementById('ihora')
+									fdata = document.getElementById('dfinal')
+									fhora = document.getElementById('fhora')
+									inicio = document.getElementById('inicio')
+									fim = document.getElementById('fim')
+
+									// start: idata ihora
+									inicio.value = idata.value + " " + ihora.value
+
+									// end: fdata fhora
+									fim.value = fdata.value + " " + fhora.value
+
+								}
+								</script>
+
 								<input type="hidden" value="<?=$id?>" name="psicologo_id">
-								<button type="submit" class="btn btn-success">Cadastrar</button>
+								<button type="submit" onclick="fazerHorario()" class="btn btn-success">Cadastrar</button>
+								<button type="button" id="maishorarios" class="btn btn-primary">Adcionar outro horário</button>
 							</div>
 						</div>
 					</form>
@@ -48,9 +87,57 @@
 			</div>
 		</div>
 	</div>
+	
+	<script>
+		i = 1;
+		$("#maishorarios").on("click", function(event){
+			$('#dynamic_fields').append(
+				"<div id='fields"+i+"'>" +
+					"<hr>" +
+					"<div class='form-group'>" +
+						"<label for='inputEmail3' class='col-sm-2 control-label'>Paciente</label>" +
+						"<div class='col-sm-10'>" + 
+							"<input type='text' class='form-control' name='title[]' placeholder='Nome do paciente'>"+
+						"</div>" +
+					"</div>" +
+
+					"<div class='form-group'>" +
+						"<label class='col-sm-2 control-label'>Do dia:</label>" +
+						"<div class='col-sm-3'>" +
+							"<input type='date' class='form-control' name='dinicial[]'>" + 
+						"</div>" + 
+						"<label class='col-sm-2 control-label'>Até:</label>" +
+						"<div class='col-sm-3'>" +
+							"<input type='date' class='form-control' name='dfinal[]'>"+
+						"</div>" +
+					"</div>" +
+
+					"<div class='form-group'>"+
+						"<label class='col-sm-2 control-label'>Das:</label>"+
+						"<div class='col-sm-3'>"+
+							"<input type='time' class='form-control' name='ihora[]'>"+
+						"</div>" +
+						"<label class='col-sm-2 control-label'>Até às:</label>" +
+						"<div class='col-sm-3'>" +
+							"<input type='time' class='form-control' name='fhora[]'>" + 
+						"</div>"+
+						"<button type='button' name='remove' id='"+i+"' class='btn btn-danger btn_remove'>Remover</button>"+
+					"</div>" +
+				"</div>"
+				)
+			i++
+		})
+
+		$(document).on('click', '.btn_remove', function(){
+			button_id = $(this).attr('id')
+			$('#fields'+button_id).remove()
+		})
+
+	</script>
+
 	<style>.form{display:none}</style>
 	<div class="modal fade" id="visualizar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" data-backdrop="static">
-		<div class="modal-dialog" role="document">
+		<div class="modal-dialog modal-lg" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -72,28 +159,62 @@
 				<div class="form">
 					<form class="form-horizontal" method="POST" action="<?=base_url('AgendaController/update')?>">
 						<div class="form-group">
-							<label for="inputEmail3" class="col-sm-2 control-label">Nome do paciente (opcional)</label>
+							<label for="inputEmail3" class="col-sm-2 control-label">Paciente</label>
 							<div class="col-sm-10">
-								<input type="text" class="form-control" name="title" placeholder="Nome" id="title">
+								<input type="text" id="pnome" class="form-control" name="title" placeholder="Nome do paciente">
 							</div>
 						</div>
+
+						<!-- start: 2018-09-03 08:00:00 -->
+						<!-- end: 	2018-09-03 12:00:00 -->
+
 						<div class="form-group">
-							<label for="inputEmail3" class="col-sm-2 control-label">Data/Hora Inicial</label>
-							<div class="col-sm-10">
-								<input type="text" class="form-control" name="start" id="start" onKeyPress="DataHora(event, this)">
+							<label class="col-sm-2 control-label">Do dia:</label>
+							<div class="col-sm-3">
+								<input type="date" class="form-control" id="dini">
 							</div>
+							<label class="col-sm-2 control-label">Até:</label>
+							<div class="col-sm-3">
+								<input type="date" class="form-control" id="dfin">
+							</div>
+							<input type="hidden" name="start" id="inicioO">
+
 						</div>
+
 						<div class="form-group">
-							<label for="inputEmail3" class="col-sm-2 control-label">Data/Hora Final</label>
-							<div class="col-sm-10">
-								<input type="text" class="form-control" name="end" id="end" onKeyPress="DataHora(event, this)">
+							<label class="col-sm-2 control-label">Das:</label>
+							<div class="col-sm-3">
+								<input type="time" class="form-control" id="ih">
 							</div>
+							<label class="col-sm-2 control-label">Até às:</label>
+							<div class="col-sm-3">
+								<input type="time" class="form-control" id="fh">
+							</div>
+
+							<input type="hidden" name="end" id="fimO">
 						</div>
 						<div class="form-group">
 							<div class="col-sm-offset-2 col-sm-10">
+							<script>
+								function outroHorario(){
+									idata = document.getElementById('dini')
+									ihora = document.getElementById('ih')
+									fdata = document.getElementById('dfin')
+									fhora = document.getElementById('fh')
+									inicio = document.getElementById('inicioO')
+									fim = document.getElementById('fimO')
+
+									// start: idata ihora
+									inicio.value = idata.value + " " + ihora.value
+
+									// end: fdata fhora
+									fim.value = fdata.value + " " + fhora.value
+
+								}
+							</script>
 								<input type="hidden" name="id" id="id">
 								<input type="hidden" value="<?=$id?>" name="psicologo_id">
-								<button type="submit" class="btn btn-success">Salvar Dados</button>
+								<button type="submit" onclick="outroHorario()" class="btn btn-success">Salvar Dados</button>
 								<button type="button" class="btn btn-canc-edit btn-primary">Cancelar</button>
 							</div>
 						</div>
@@ -116,19 +237,31 @@
 			eventLimit : true,
 			select: function(start, end){
 				// Passar dias selecionados para a janela Modal
-				$('#cadastrar #start').val(moment(start).format('DD/MM/YYYY HH:mm:ss'))
-				$('#cadastrar #end').val(moment(end).format('DD/MM/YYYY HH:mm:ss'))
 				$('#cadastrar').modal('show')
 			},
 			eventClick : function(event){
+
 				$('#visualizar #id').val(event.id);
+
 				$('#visualizar #title').text(event.title);
-				$('#visualizar #title').val(event.title);
 				$('#visualizar #start').text(event.start.format('DD/MM/YYYY HH:mm:ss'));
-				$('#visualizar #start').val(event.start.format('DD/MM/YYYY HH:mm:ss'));
 				$('#visualizar #end').text(event.end.format('DD/MM/YYYY HH:mm:ss'));
-				$('#visualizar #end').val(event.end.format('DD/MM/YYYY HH:mm:ss'));
+
+				dinicial = event.start.format('YYYY-MM-DD')
+				hinicial = event.start.format('HH:mm:ss')
+				dfinal = event.end.format('YYYY-MM-DD')
+				hfinal = event.end.format('HH:mm:ss')
+
+				$('#visualizar #pnome').val(event.title)
+				$('#visualizar #dini').val(dinicial) 
+				$('#visualizar #dfin').val(dfinal)
+				$('#visualizar #ih').val(hinicial)
+				$('#visualizar #fh').val(hfinal)
+
+
+
 				$('#visualizar').modal('show')
+
 				return false;
 			},
 			events : [
@@ -156,37 +289,6 @@
 		$('.visualizar').slideToggle()
 	})
 
-	function DataHora(evento, objeto){
-		var keypress=(window.event)?event.keyCode:evento.which;
-		campo = eval (objeto);
-		if (campo.value == '00/00/0000 00:00:00'){
-			campo.value=""
-		}
-	 
-		caracteres = '0123456789';
-		separacao1 = '/';
-		separacao2 = ' ';
-		separacao3 = ':';
-		conjunto1 = 2;
-		conjunto2 = 5;
-		conjunto3 = 10;
-		conjunto4 = 13;
-		conjunto5 = 16;
-		if ((caracteres.search(String.fromCharCode (keypress))!=-1) && campo.value.length < (19)){
-			if (campo.value.length == conjunto1 )
-			campo.value = campo.value + separacao1;
-			else if (campo.value.length == conjunto2)
-			campo.value = campo.value + separacao1;
-			else if (campo.value.length == conjunto3)
-			campo.value = campo.value + separacao2;
-			else if (campo.value.length == conjunto4)
-			campo.value = campo.value + separacao3;
-			else if (campo.value.length == conjunto5)
-			campo.value = campo.value + separacao3;
-		}else{
-			event.returnValue = false;
-		}
-	}
 
 </script>
 
