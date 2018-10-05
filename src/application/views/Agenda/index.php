@@ -19,6 +19,13 @@
 				</div>
 				<div class="modal-body">
 					<form class="form-horizontal" method="POST" action="<?=base_url('AgendaController/add')?>">
+						<label for="inputEmail3" class="col-sm-2 control-label">Intervalo de Atendimento</label>
+						<div class="form-group">
+							<div class="col-sm-3">
+								<input type="time" class="form-control" placeholder="Intervalo de atendimento" name="intervalo">
+							</div>
+						</div>
+
 						<div class="form-group">
 							<label for="inputEmail3" class="col-sm-2 control-label">Paciente</label>
 							<div class="col-sm-10">
@@ -46,10 +53,9 @@
 							<div class="col-sm-3">
 								<input type="time" class="form-control" name="ihora[]">
 							</div>
-							<label class="col-sm-2 control-label">Até às:</label>
-							<div class="col-sm-3">
-								<input type="time" class="form-control" name="fhora[]">
-							</div>
+							
+							<input type="hidden" class="form-control" name="fhora[]" value="00:00:00">
+
 						</div>	
 
 						<div id="dynamic_fields">
@@ -59,26 +65,8 @@
 						<div class="form-group">
 							<div class="col-sm-offset-2 col-sm-10">
 
-								<script>
-								function fazerHorario(){
-									idata = document.getElementById('dinicial')
-									ihora = document.getElementById('ihora')
-									fdata = document.getElementById('dfinal')
-									fhora = document.getElementById('fhora')
-									inicio = document.getElementById('inicio')
-									fim = document.getElementById('fim')
-
-									// start: idata ihora
-									inicio.value = idata.value + " " + ihora.value
-
-									// end: fdata fhora
-									fim.value = fdata.value + " " + fhora.value
-
-								}
-								</script>
-
 								<input type="hidden" value="<?=$id?>" name="psicologo_id">
-								<button type="submit" onclick="fazerHorario()" class="btn btn-success">Cadastrar</button>
+								<button type="submit" class="btn btn-success">Cadastrar</button>
 								<button type="button" id="maishorarios" class="btn btn-primary">Adcionar outro horário</button>
 							</div>
 						</div>
@@ -117,11 +105,8 @@
 						"<div class='col-sm-3'>"+
 							"<input type='time' class='form-control' name='ihora[]'>"+
 						"</div>" +
-						"<label class='col-sm-2 control-label'>Até às:</label>" +
-						"<div class='col-sm-3'>" +
-							"<input type='time' class='form-control' name='fhora[]'>" + 
-						"</div>"+
-						"<button type='button' name='remove' id='"+i+"' class='btn btn-danger btn_remove'>Remover</button>"+
+						"<input type='hidden' value='00:00:00' class='form-control' name='fhora[]'>" + 
+						"<button type='button' name='remove' id='"+i+"' class='btn btn-danger btn_remove'>Retirar</button>"+
 					"</div>" +
 				"</div>"
 				)
