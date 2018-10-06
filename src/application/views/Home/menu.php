@@ -57,12 +57,11 @@
       </div>
     </aside>
 
-    <script type = "text/javascript" src = "<?=base_url('assets/js/jquery.js')?>"></script>
-    <script type = "text/javascript" src = "<?=base_url('assets/js/locastyle.js')?>"></script>
+    <script src="<?=base_url('assets/js/jquery.js')?>"></script>
+    <script src="<?=base_url('assets/js/locastyle.js')?>"></script>
 
-    <script src='<?php echo base_url()?>assets/fullcalendar/js/jquery.min.js'></script>
-    <script src='<?php echo base_url()?>assets/fullcalendar/js/bootstrap.min.js'></script>
-    <script src='<?php echo base_url()?>assets/fullcalendar/js/moment.min.js'></script>
-    <script src='<?php echo base_url()?>assets/fullcalendar/js/fullcalendar.min.js'></script>
-    <script src='<?php echo base_url()?>assets/fullcalendar/locale/pt-br.js'></script>
+    <script src="<?=base_url('assets/fullcalendar/js/bootstrap.min.js')?>"></script>
+    <script src="<?=base_url('assets/fullcalendar/js/moment.min.js')?>"></script>
+    <script src="<?=base_url('assets/fullcalendar/fullcalendar.js')?>"></script>
+    <script src="<?=base_url('assets/fullcalendar/locale/pt-br.js')?>"></script>
 
