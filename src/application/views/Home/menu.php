@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="<?=base_url('assets/fullcalendar/css/fullcalendar.min.css')?>">
   </head>
   <body>
+		<style>input, select{ font-weight:normal; }</style>
     <div class="ls-topbar ">
       <div class="ls-notification-topbar">
         <div data-ls-module="dropdown" class="ls-dropdown ls-user-account">
