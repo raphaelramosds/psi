@@ -11,6 +11,8 @@ Atualmente, as funcionalidades que cabem a este sistema são: <br/>
 
 Funcionalidades futuras: <br/>
 * Sugestões programadas de incidência de enfermidades 
+* Exibição de dados estatísticos envolvendo incidência de Doenças
+* Chat box para dúvidas de psicólogos
 
 Link do site hospedado [Prontuário Eletrônico](http://prontuariospsi.000webhostapp.com/)
 
