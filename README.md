@@ -14,11 +14,10 @@ Funcionalidades futuras: <br/>
 * Exibição de dados estatísticos envolvendo incidência de Doenças
 * Chat box para dúvidas de psicólogos
 
-Link do site hospedado [Prontuário Eletrônico](http://psiprontuarios.epizy.com/)
 
-| Login | Senha | 
-|----------|:-------------:|
-| admin | root |
+| Login | Senha | Link do site |
+|----------|:-------------:| :----------------------:|
+| admin | root | [Prontuário Eletrônico](http://psiprontuarios.epizy.com/)|
 
 
 
