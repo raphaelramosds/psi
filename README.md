@@ -16,7 +16,9 @@ Funcionalidades futuras: <br/>
 
 Link do site hospedado [Prontuário Eletrônico](http://psiprontuarios.epizy.com/)
 
-**Login:** admin
-**Senha:** root
+| Login | Senha | 
+|----------|:-------------:|
+| admin | root |
+
 
 
