@@ -14,6 +14,9 @@ Funcionalidades futuras: <br/>
 * Exibição de dados estatísticos envolvendo incidência de Doenças
 * Chat box para dúvidas de psicólogos
 
-Link do site hospedado [Prontuário Eletrônico](http://prontuariospsi.000webhostapp.com/)
+Link do site hospedado [Prontuário Eletrônico](http://psiprontuarios.epizy.com/)
+
+**Login:** admin
+**Senha:** root
 
 
