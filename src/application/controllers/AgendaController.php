@@ -36,52 +36,73 @@ class AgendaController extends CI_Controller
 
 	public function add() 
 	{
-	    $registros = $this->input->post();
-
-	    $intervalo = $registros['intervalo'];
-	    $horainicio = $registros['ihora'];
-	    $horafinal = $registros['fhora'];
-
-	    list($h1,$m1,$s1) = explode(':',$intervalo);
-
-	    $c1 = $h1 * 3600 + $m1 * 60 + $s1;
+		$registros = $this->input->post();
 		
-	    $data = array();
-
-	    // O $data['fhora'] vai ser a soma do intervalo mais a hora inicial
-	    // Depois é só concatenar em $data['end'] 
-
-	    for ($i=0; $i < count($registros['dinicial']); $i++) { 
-	    	$data['start'] = $registros['dinicial'][$i]." ".$horainicio[$i];
-	    	
-	    	// Somar os dois valores
-	    	list($h2,$m2,$s2) = explode(':',$horainicio[$i]);
-
-	    	$c2 = $h2 * 3600 + $m2 * 60 + $s2;
-
-	    	$resultado = $this->segundos_em_tempo($c1 + $c2);
+		$dinicio = $registros['dinicial'];
+		$dfinal = $registors['dfinal'];
 		
+		$timestamp1 = strtotime( $d1 );
+		$timestamp2 = strtotime( $d2 );		
+		
+		$cont = 1;
+		
+		$dias = array();
+		
+		while ( $timestamp1 <= $timestamp2 )
+		{
+			$dia = $cont . ' - ' . date( 'd/m/Y', $timestamp1 ) . PHP_EOL;
+			
+			$dias[] = $dia;
+			
+			$timestamp1 += 86400;
+			$cont++;
+		}
+		
+		$intervalo = $registros['intervalo'];
+		$horainicio = $registros['ihora'];
+		$horafinal = $registros['fhora'];
+
+		list($h1,$m1,$s1) = explode(':',$intervalo);
+
+		$c1 = $h1 * 3600 + $m1 * 60 + $s1;
+
+		$data = array();
+
+		// O $data['fhora'] vai ser a soma do intervalo mais a hora inicial
+		// Depois é só concatenar em $data['end'] 
+
+		for ($i=0; $i < count($registros['dinicial']); $i++) { 
+			
+		$data['start'] = $dias[$i]." ".$horainicio[$i];
+
+		// Somar os dois valores
+		list($h2,$m2,$s2) = explode(':',$horainicio[$i]);
+
+		$c2 = $h2 * 3600 + $m2 * 60 + $s2;
+
+		$resultado = $this->segundos_em_tempo($c1 + $c2);
+
 		if ($registros['title'][$i] == NULL)
 		{
 			$registros['color'][$i] = 'green';
 			$data['color'] = $registros['color'][$i]
 		}
-		
+
 		else
 		{
 			$registros['color'][$i] = 'red';
 			$data['color'] = $registros['color'][$i]
 		}
-			
-		    
-	    	$data['end'] = $registros['dfinal'][$i]." ".$resultado;
 
-	    	$data['title'] = $registros['title'][$i];
-	    	$data['psicologo_id'] = $registros['psicologo_id'];
-	    	$this->agendas->add_event($data);
-	    }
 
-	    redirect('view-agenda');
+		$data['end'] = $dias[$i]." ".$resultado;
+
+		$data['title'] = $registros['title'][$i];
+		$data['psicologo_id'] = $registros['psicologo_id'];
+		$this->agendas->add_event($data);
+		}
+
+		redirect('view-agenda');
 	}
 
 	public function update()
