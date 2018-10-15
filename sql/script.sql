@@ -63,16 +63,6 @@ create table prontuario(
 	paciente_id int
 );
 
-
-create table horario(
-	id int primary key not null auto_increment,
-	title varchar(500),
-	start datetime,
-	color varchar(10),
-	description varchar(1000),
-	psicologo_id int
- );
-
 create table sessao(
 	id int primary key not null auto_increment,
 	titulo varchar(50),
@@ -139,7 +129,3 @@ alter table sessao
 add constraint fk_prontuario_sessao foreign key (numero_prontuario) references prontuario(numeroprontuario);
 
 
--- FK Horário
-
-alter table horario
-add constraint fk_horario_psicologo foreign key (psicologo_id) references psicologo(id);
