@@ -60,7 +60,20 @@ class AgendaController extends CI_Controller
 	    	$c2 = $h2 * 3600 + $m2 * 60 + $s2;
 
 	    	$resultado = $this->segundos_em_tempo($c1 + $c2);
-
+		
+		if ($registros['title'][$i] == NULL)
+		{
+			$registros['color'][$i] = 'green';
+			$data['color'] = $registros['color'][$i]
+		}
+		
+		else
+		{
+			$registros['color'][$i] = 'red';
+			$data['color'] = $registros['color'][$i]
+		}
+			
+		    
 	    	$data['end'] = $registros['dfinal'][$i]." ".$resultado;
 
 	    	$data['title'] = $registros['title'][$i];
@@ -74,6 +87,12 @@ class AgendaController extends CI_Controller
 	public function update()
 	{
 		$dados = $this->input->post();
+		
+		if($dados['title'] != NULL)
+		{
+			$dados['color'] = 'red';	
+		}
+		
 		$this->agendas->id = $dados['id'];
 		$this->agendas->update_event($dados);
 		redirect('view-agenda');
