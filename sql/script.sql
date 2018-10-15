@@ -68,7 +68,7 @@ create table horario(
 	id int primary key not null auto_increment,
 	title varchar(500),
 	start datetime,
-	end datetime,
+	color varchar(10),
 	description varchar(1000),
 	psicologo_id int
  );
