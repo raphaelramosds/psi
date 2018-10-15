@@ -24,7 +24,8 @@ class HomeController extends CI_Controller
 		$h = ($this->usr[1]['role'] == 2)?$this->agenda->get_event_by_psi($this->usr[0]['psicologo_id']):NULL;
 
 		$count_registers = array(
-			'counterhorarios' => $h
+			'counterhorarios' => $h,
+			'countersecretaria' => $this->secretarias->count_results($this->usr[0]['id']),
 			'counterclinica' => $this->clinicas->count_results($this->usr[0]['id']),
 			'counterpaciente'=> $this->pacientes->count_results($this->usr[0]['id']),
 			'update_info' => $this->session->flashdata('update_info'),
