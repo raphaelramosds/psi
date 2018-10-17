@@ -68,6 +68,9 @@ class AgendaController extends CI_Controller
 			}
 		}
 
+		$this->session->set_flashdata("success","Agenda cadastrada! Encontre ela filtrando abaixo pela clínica");
+		redirect('view-agenda');
+
 	}
 
 	public function view()
@@ -79,6 +82,16 @@ class AgendaController extends CI_Controller
 
 		$this->load->view('Home/menu');
 		$this->load->view('Agenda/index', $dados);
+	}
+
+	public function search(){
+		$clinica = $this->input->post('clinica_id');
+		$dia = $this->input->post('dia');
+
+		$dados['agendas'] = $this->agendas->search($this->usr[0]['id'], $clinica, $dia);
+		
+		$this->load->view('Home/menu');
+		$this->load->view('Agenda/index');
 	}
 
 }

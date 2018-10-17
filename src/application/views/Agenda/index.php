@@ -1,23 +1,28 @@
 <div class="ls-main">
 	<div class="container-fluid">
 		<h1 class="ls-title-intro ls-ico-calendar">Agenda</h1>
+		<?php if($this->session->userdata('success')):?>
+		<div class='ls-background-primary ls-sm-space ls-sm-margin-bottom ls-text-md ls-ico-checkmark'><?=$this->session->userdata('success')?></div>
+		<?php endif;?>
 		<div class="ls-box">
 			<h5 class='ls-title-3'>Procurar agenda</h5>	
 			<hr>
-			<form action="" class="ls-form ls-form-horizontal row">
+			<form method="POST" action="<?=base_url('AgendaController/search')?>" class="ls-form ls-form-horizontal row">
 				<fieldset>
 					<label class="ls-label col-md-6">
 						<b class="ls-label-text">Filtrar por Clínica</b>
-						<div class="ls-custom-select">
-	    					<select class="ls-select">
-					
-	    					</select>
-	    				</div>
+                        <div class="ls-custom-select">
+                            <select name="clinica_id" class="ls-select">
+                            <?php foreach($clinica as $d): ?>
+                            <option value="<?=$d->id?>"><?=$d->nome?></option>
+                            <?php endforeach;?>
+                            </select>
+                        </div>
 					</label>
 
 					<label class="ls-label col-md-6">
 						<b class="ls-label-text">Filtrar por Dia da semana</b>	
-						<input type="date">
+						<input type="date" name="dia">
 					</label>
 
 					<button type="submit" class='ls-btn' >Buscar agenda</button>

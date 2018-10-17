@@ -7,5 +7,7 @@ class AgendasModel extends CI_Model
         $this->db->insert('agenda', $dados);
     }
 
+    public function search($id, $clinica=NULL, $dia=NULL){
 
+    }
 }
