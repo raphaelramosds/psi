@@ -71,6 +71,22 @@ create table sessao(
 	numero_prontuario int
 );
 
+create table agenda(
+	id int primary key not null auto_increment,
+	clinica_id int,
+	paciente_id int, 
+	dia date,
+	horario time
+);
+
+-- FK Agenda
+
+alter table agenda
+add constraint fk_agenda_clinica foreign key (clinica_id) references clinica(id);
+
+alter table agenda
+add constraint fk_agenda_paciente foreign key (paciente_id) references paciente(id);
+
 -- FK Usuário
 
 alter table usuario
