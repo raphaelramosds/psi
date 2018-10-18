@@ -40,10 +40,13 @@ class AgendaController extends CI_Controller
 
 		// Calcular intervalo de hora
 
-		list($h1,$m1) = explode(':',$intervalo);
+		// Faça o calculo do intervalo apenas de ele estiver preenchido
+		if(!empty($intervalo)){
 
-		$s1 = $h1 * 3600 + $m1 * 60;
-
+			list($h1,$m1) = explode(':',$intervalo);
+			$s1 = $h1 * 3600 + $m1 * 60;
+		
+		}
 
 		$dados = array(
 			'clinica_id' => $this->input->post('clinica_id'),
@@ -70,6 +73,10 @@ class AgendaController extends CI_Controller
 		// Trazer acréscimo de intervalos nas horas
 
 		$cont2 = 0;
+		$horarios = array();
+
+		$horarios[] = $hora[0];
+
 
 		for($x=0;$x < sizeof($dias); $x++)
 		{
@@ -77,10 +84,11 @@ class AgendaController extends CI_Controller
 			
 			for($i=0; $i < sizeof($hora); $i++)
 			{
-				if($qtde == 0)
-				{
+				if($qtde == 0 ){
 					$dados['horario'] = $hora[$i];
+					$this->agendas->add($dados);
 				}
+
 				else
 				{
 					while ($cont2 < $qtde)
@@ -92,21 +100,27 @@ class AgendaController extends CI_Controller
 						// $s2 é horários informados
 						// $s1 é valor do intervalo
 
+						$horarios[] = $this->segundos_em_tempo($s1 + $s2);
 
-						$dados['horario'] = $this->segundos_em_tempo($s1 + $s2);
-						$this->agendas->add($dados);
-
-						$hora[$i] = $dados['horario'];
+						// Substitua o próximo valor pelo resultado anterior
+						$hora[$i] = $this->segundos_em_tempo($s1 + $s2);
 
 						$cont2++;
+					}	
+
+					for($a=0; $a < sizeof($horarios); $a++)
+					{
+						$dados['horario'] = $horarios[$a];
+						$this->agendas->add($dados);
 					}
-				}	
+				}
 			}
+
 		}
 
 
-		// // $this->session->set_flashdata("success","Agenda cadastrada! Encontre ela filtrando abaixo pela clínica");
-		// // redirect('view-agenda');
+		$this->session->set_flashdata("success","Agenda cadastrada! Encontre ela filtrando abaixo pela clínica");
+		redirect('view-agenda');
 
 	}
 

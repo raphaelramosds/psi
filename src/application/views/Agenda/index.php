@@ -68,18 +68,6 @@
                         <input type="date" name="diafim" required>
                     </label>
 
-                    <label class="ls-label col-md-6 ">
-                        <b class="ls-label-text">Duração das consultas</b>
-                        <p class="ls-label-info">Opcional</p>
-                        <input type="time" name="intervalo">
-                   </label>
-
-                    <label class="ls-label col-md-6 ">
-                        <b class="ls-label-text">Quantas consultas para esses dias?</b>
-                        <p class="ls-label-info">Opcional</p>
-                        <input type="number" name="qtde">
-                   </label>
-
                     <label class="ls-label col-md-12 col-xs-12">
                         <b class="ls-label-text">Horários de atendimento</b>
                     </label>
@@ -93,6 +81,7 @@
                         <input type="hidden" name="paciente_id" value="<?=NULL?>">
                         <input type="hidden" name="psicologo_id" value="<?=$this->session->userdata('usuario')[0]['id']?>">
                         <button type="button" class="ls-btn" id="maishorarios">Adcionar horário</button>
+                        <button type="button" class="ls-btn" data-ls-module="modal" data-target="#dinamic" class="ls-btn-primary" class='ls-btn'> Registrar horários de forma dinâmica</button>
                         <button type="submit" class="ls-btn">Salvar dados da Agenda</button>
                     </div>
 
@@ -123,4 +112,70 @@
       <button class="ls-btn ls-float-right" data-dismiss="modal">Fechar</button>
     </div>
   </div>
+</div>
+
+
+<div class="ls-modal" id="dinamic">
+  <div class="ls-modal-large">
+        <div class="ls-modal-header">
+        <button data-dismiss="modal">&times;</button>
+        <h4 class="ls-modal-title">Cadastrar nova Agenda com Intervalo de horário</h4>
+        </div>
+        <div class="ls-modal-body">
+            <form action="<?=base_url('AgendaController/add')?>" method="POST" class="ls-form ls-form-horizontal row" data-ls-module="form">
+            <fieldset>
+                    <label class="ls-label col-md-12 col-lg-12 col-xs-12">
+                        <b class="ls-label-text">Clínica</b>
+                        <div class="ls-custom-select">
+                            <select name="clinica_id" class="ls-select" required>
+                            <?php foreach($clinica as $d): ?>
+                            <option value="<?=$d->id?>"><?=$d->nome?></option>
+                            <?php endforeach;?>
+                            </select>
+                        </div>
+                    </label>
+
+                    <label class="ls-label col-md-6 col-xs-12">
+                        <b class="ls-label-text">Do dia</b>
+                        <input type="date" name="diainicio" required>
+                    </label>
+
+                    <label class="ls-label col-md-6 col-xs-12">
+                        <b class="ls-label-text">Até</b>
+                        <input type="date" name="diafim" required>
+                    </label>
+
+
+                    <label class="ls-label col-md-6 ">
+                        <b class="ls-label-text">Duração das consultas</b>
+                        <p class="ls-label-info">Opcional</p>
+                        <input type="time" name="intervalo">
+                   </label>
+
+                    <label class="ls-label col-md-6 ">
+                        <b class="ls-label-text">Quantas consultas para esses dias?</b>
+                        <p class="ls-label-info">Opcional</p>
+                        <input type="number" name="qtde">
+                   </label>
+
+                   <label class="ls-label col-md-6">
+                        <b class="ls-label-text">Horário</b>
+                        <input type='time' name='hora[]' required>
+                   </label>
+
+
+                    <div class="ls-actions-btn">
+                        <input type="hidden" name="paciente_id" value="<?=NULL?>">
+                        <input type="hidden" name="psicologo_id" value="<?=$this->session->userdata('usuario')[0]['id']?>">
+                        <button type="submit" class="ls-btn">Salvar dados da Agenda</button>
+                    </div>
+
+
+            </fieldset>     
+            </form>
+            <div class="ls-modal-footer">
+                <button class="ls-btn ls-float-right" data-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
 </div>
