@@ -22,17 +22,28 @@ class AgendaController extends CI_Controller
 
 	}
 
-	// id int primary key not null auto_increment,
-	// clinica_id int,
-	// paciente_id int, 
-	// dia date,
-	// horario time
+	public function segundos_em_tempo($segundos){
+		$horas = floor($segundos/3600);
+		$minutos = floor($segundos%3600/60);
+		$segundo = $segundos%60;
+
+		return sprintf("%d:%02d:%02d", $horas, $minutos, $segundo);
+	}
 
 	public function add()
 	{
 		$datainicio = $this->input->post('diainicio');
 		$datafim = $this->input->post('diafim');
 		$hora = $this->input->post('hora');
+		$qtde = $this->input->post('qtde');
+		$intervalo = $this->input->post('intervalo');
+
+		// Calcular intervalo de hora
+
+		list($h1,$m1) = explode(':',$intervalo);
+
+		$s1 = $h1 * 3600 + $m1 * 60;
+
 
 		$dados = array(
 			'clinica_id' => $this->input->post('clinica_id'),
@@ -57,19 +68,45 @@ class AgendaController extends CI_Controller
 		}
 
 		// Trazer acréscimo de intervalos nas horas
+
+		$cont2 = 0;
+
 		for($x=0;$x < sizeof($dias); $x++)
 		{
 			$dados['dia'] = $dias[$x];
 			
 			for($i=0; $i < sizeof($hora); $i++)
 			{
-				$dados['horario'] = $hora[$i];
-				$this->agendas->add($dados);
+				if($qtde == 0)
+				{
+					$dados['horario'] = $hora[$i];
+				}
+				else
+				{
+					while ($cont2 < $qtde)
+					{
+						list($h2,$m2) = explode(':',$hora[$i]);
+
+						$s2 = $h2 * 3600 + $m2  * 60;
+						
+						// $s2 é horários informados
+						// $s1 é valor do intervalo
+
+
+						$dados['horario'] = $this->segundos_em_tempo($s1 + $s2);
+						$this->agendas->add($dados);
+
+						$hora[$i] = $dados['horario'];
+
+						$cont2++;
+					}
+				}	
 			}
 		}
 
-		$this->session->set_flashdata("success","Agenda cadastrada! Encontre ela filtrando abaixo pela clínica");
-		redirect('view-agenda');
+
+		// // $this->session->set_flashdata("success","Agenda cadastrada! Encontre ela filtrando abaixo pela clínica");
+		// // redirect('view-agenda');
 
 	}
 

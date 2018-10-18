@@ -50,7 +50,7 @@
                     <label class="ls-label col-md-12 col-lg-12 col-xs-12">
                         <b class="ls-label-text">Clínica</b>
                         <div class="ls-custom-select">
-                            <select name="clinica_id" class="ls-select">
+                            <select name="clinica_id" class="ls-select" required>
                             <?php foreach($clinica as $d): ?>
                             <option value="<?=$d->id?>"><?=$d->nome?></option>
                             <?php endforeach;?>
@@ -60,20 +60,34 @@
 
                     <label class="ls-label col-md-6 col-xs-12">
                         <b class="ls-label-text">Do dia</b>
-                        <input type="date" name="diainicio">
+                        <input type="date" name="diainicio" required>
                     </label>
 
                     <label class="ls-label col-md-6 col-xs-12">
                         <b class="ls-label-text">Até</b>
-                        <input type="date" name="diafim">
+                        <input type="date" name="diafim" required>
                     </label>
+
+                    <label class="ls-label col-md-6 ">
+                        <b class="ls-label-text">Duração das consultas</b>
+                        <p class="ls-label-info">Opcional</p>
+                        <input type="time" name="intervalo">
+                   </label>
+
+                    <label class="ls-label col-md-6 ">
+                        <b class="ls-label-text">Quantas consultas para esses dias?</b>
+                        <p class="ls-label-info">Opcional</p>
+                        <input type="number" name="qtde">
+                   </label>
 
                     <label class="ls-label col-md-12 col-xs-12">
                         <b class="ls-label-text">Horários de atendimento</b>
                     </label>
 
+
                    <div id="dynamic_fields" class="col-md-4 col-xs-12">
                    </div>
+
 
                     <div class="ls-actions-btn">
                         <input type="hidden" name="paciente_id" value="<?=NULL?>">
@@ -88,7 +102,7 @@
                     $(document).on('click', '#maishorarios', function(){
                         $('#dynamic_fields').append(
                             "<div id='field"+i+"'>" +
-                                "<input type='time' name='hora[]'>" +
+                                "<input type='time' name='hora[]' required>" +
                                 "<button class='btn_remove' type='button' id='"+i+"'>Remover</button>" +
                             "</div>")
                         i++	
