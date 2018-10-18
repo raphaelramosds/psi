@@ -36,7 +36,8 @@ class AgendaController extends CI_Controller
 
 		$dados = array(
 			'clinica_id' => $this->input->post('clinica_id'),
-			'paciente_id' => NULL
+			'paciente_id' => NULL,
+			'psicologo_id' => $this->input->post('psicologo_id')
 		);
 
 		// Trazer Intervalo de datas
