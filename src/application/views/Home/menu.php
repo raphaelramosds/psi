@@ -6,8 +6,6 @@
     <!-- Styles -->
     <link href="<?=base_url('assets/css/locastyle.css')?>" rel="stylesheet" type="text/css">
     <link rel="icon" sizes="10x5" href="<?=base_url('assets/images/logo.png')?>">
-    <link rel="stylesheet" type="text/css" href="<?=base_url('assets/fullcalendar/css/bootstrap.min.css')?>" />
-    <link rel="stylesheet" href="<?=base_url('assets/fullcalendar/css/fullcalendar.min.css')?>">
   </head>
   <body>
 		<style>input, select{ font-weight:normal; }</style>
@@ -22,15 +20,13 @@
           </a>
           <nav class="ls-dropdown-nav ls-user-menu">
             <ul>
-              <?php if ($this->session->userdata('usuario')[1]['role'] == 1): ?>
-              <li><a href = "<?=base_url('view-psycho')?>">Meu Perfil</a></li>
-              <?php endif ?>
               <li><a href = "<?=base_url('HomeController/loggout')?>">Encerrar sessão</a></li>
             </ul>
           </nav>
         </div>
       </div>
       <span class="ls-show-sidebar ls-ico-menu"></span>
+      <a href="<?=base_url('home')?>"  class="ls-go-next"><span class="ls-text">Tela inicial</span></a>
       <h1 class="ls-brand-name"><a href="<?=base_url('home')?>" class="ls-ico">
       <img src="<?=base_url('assets/images/logo2.png')?>" height="30px" width="60px"></a>
       </h1>
@@ -60,9 +56,4 @@
 
     <script src="<?=base_url('assets/js/jquery.js')?>"></script>
     <script src="<?=base_url('assets/js/locastyle.js')?>"></script>
-
-    <script src="<?=base_url('assets/fullcalendar/js/bootstrap.min.js')?>"></script>
-    <script src="<?=base_url('assets/fullcalendar/js/moment.min.js')?>"></script>
-    <script src="<?=base_url('assets/fullcalendar/fullcalendar.js')?>"></script>
-    <script src="<?=base_url('assets/fullcalendar/locale/pt-br.js')?>"></script>
 

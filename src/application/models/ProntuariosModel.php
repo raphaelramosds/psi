@@ -6,6 +6,14 @@ class ProntuariosModel extends CI_Model
 	
 	public $numeroprontuario;
 
+	public function count_results($id){
+		$this->db->select('id');
+		$this->db->from('prontuario');
+		$this->db->where('id_psicologo',$id);
+		$num_results = $this->db->count_all_results();
+		return $num_results;
+	}
+
 	public function view($id, $paciente)
 	{
 		// SELECT * FROM prontuario WHERE psicologo.crp = prontuario.psicologo_crp AND psicologo.crp = $crp

@@ -24,6 +24,7 @@
                             <input type="hidden" name="role" value="<?=$usuario[0]->role?>">
                         </fieldset>
                         <button type="submit"  class='ls-ico-pencil ls-btn' title='Editar' >Salvar informações de usuário</button>
+                        <button type="button" data-ls-module="modal" data-target="#senha" class="ls-btn ls-ico-edit-admin">Alterar senha</button>
                     </form>
                 </div>
 
@@ -81,4 +82,32 @@
             </div>
 		</div>
 	</div>
+</div>
+
+
+<div class="ls-modal" id="senha">
+  <div class="ls-modal-box">
+    <div class="ls-modal-header">
+      <button data-dismiss="modal">&times;</button>
+      <h4 class="ls-modal-title">Alterar senha</h4>
+    </div>
+    <div class="ls-modal-body" id="myModalBody">
+        <form action="<?=base_url('UsuariosController/update')?>" method="post" data-ls-module="form">
+            <fieldset>
+                <label for="" class="ls-label">
+                    <b class="ls-label-text">Senha <span class="ls-color-danger">*</span></b>
+                    <p class="ls-label-info">Para sua segurança use letras e números</p>
+                    <div class="ls-prefix-group">
+                        <input id="password_field" class="ls-login-bg-password" name="senha" type="password" required >
+                        <a class="ls-label-text-prefix ls-toggle-pass ls-ico-eye" data-toggle-class="ls-ico-eye, ls-ico-eye-blocked" data-target="#password_field" href="#"></a>
+                    </div>
+                </label>
+                <input type="hidden" name="username" value="<?=$usuario[0]->username?>">
+                <input type="hidden" name="id" value="<?=$usuario[0]->id?>">
+                <input type="hidden" name="role" value="<?=$usuario[0]->role?>">
+            </fieldset>
+            <button type="submit"  class='ls-ico-pencil ls-btn' title='Editar' >Salvar alteração </button>
+        </form>
+    </div>
+  </div>
 </div>

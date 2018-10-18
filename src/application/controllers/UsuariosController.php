@@ -182,6 +182,10 @@ class UsuariosController extends CI_Controller
 	public function update()
 	{
 		$usuario_reg = $this->input->post();
+
+		if(!empty($usuario_reg['senha'])){
+			$usuario_reg['senha'] =  md5($usuario_reg["username"].$usuario_reg["senha"]);
+		}
 		
 		$this->usuarios->id = $usuario_reg['id'];
 		$this->usuarios->update($usuario_reg);
