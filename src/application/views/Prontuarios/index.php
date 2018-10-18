@@ -29,7 +29,7 @@ $paciente = $this->db->get()->row_array();
 				<div class='ls-background-primary ls-sm-space ls-sm-margin-bottom ls-text-md ls-ico-checkmark'><?=$update_prontuario?></div>
 			<?php endif;?>
 
-			<table class="ls-table">
+			<table class="ls-table ls-table-striped">
 				<tr>
 					<th>Número da ficha</th>
 					<th>Clínica</th>

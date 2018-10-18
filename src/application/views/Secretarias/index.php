@@ -2,7 +2,7 @@
 	<div class="container-fluid">
         <h1 class="ls-title-intro ls-ico-panel-pabx">Secretárias cadastradas</h1>
 		<div class="ls-box ls-board-box ls-no-border">
-            <table class="ls-table">
+            <table class="ls-table ls-table-striped">
             	<tr>
             		<th>Nome</th>
             		<th>Sexo</th>

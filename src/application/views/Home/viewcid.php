@@ -2,7 +2,7 @@
 	<div class="container-fluid">
 		<h1 class="ls-title-intro ls-ico-eye">Consultar Doenças</h1>
 			<p><b>Observação:</b> Digite o nome ou código da doença abaixo para filtrá-la</p>
-			<table class="ls-table" id="tabela">
+			<table class="ls-table ls-table-striped" id="tabela">
 				<tr>
 					<th>Código</th>
 					<th>Nome</th>

@@ -12,7 +12,7 @@
 			<div class='ls-background-primary ls-sm-space ls-sm-margin-bottom ls-text-md ls-ico-checkmark'><?=$update_sessao?></div>
 		<?php endif;?>
 
-		<table class="ls-table">
+		<table class="ls-table ls-table-striped">
 			<tr>
 				<th>Título</th>
 				<th>Data</th>
