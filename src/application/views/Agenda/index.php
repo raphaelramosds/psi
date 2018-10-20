@@ -12,7 +12,7 @@
 					<label class="ls-label col-md-6">
 						<b class="ls-label-text">Filtrar por Clínica</b>
                         <div class="ls-custom-select">
-                            <select name="clinica_id" class="ls-select">
+                            <select name="clinica_id" class="ls-select" required>
                             <?php foreach($clinica as $d): ?>
                             <option value="<?=$d->id?>"><?=$d->nome?></option>
                             <?php endforeach;?>
@@ -21,18 +21,64 @@
 					</label>
 
 					<label class="ls-label col-md-6">
-						<b class="ls-label-text">Filtrar por Dia da semana</b>	
-						<input type="date" name="dia">
+						<b class="ls-label-text">Filtrar por mês e ano</b>	
+                        <input type="month" name="mes" required>
+						
 					</label>
 
 					<button type="submit" class='ls-btn' >Buscar agenda</button>
+                    <a data-ls-module="modal" data-target="#modalLarge" class="ls-btn-primary" class='ls-btn'>Abrir nova agenda</a>
 
 				</fieldset>
 			</form>
 		</div>
 
+        <?php if($this->session->flashdata('vazio')):?>
+        <div class="ls-alert-info">
+            <strong class="ls-ico-search"></strong> <?=$this->session->flashdata('vazio')?>
+         </div>
+        <?php endif;?>
 
-		<a data-ls-module="modal" data-target="#modalLarge" class="ls-btn-primary" class='ls-btn'>Abrir nova agenda</a>
+        <?php if(isset($agendas)):?>
+
+        <table class="ls-table">
+        <tr>
+        <?php foreach($agendas as $a):?>
+        
+        <th><?=$a->dia?></th>
+
+    
+        </tr>
+
+        <tr>
+        
+        <!-- Consultar no SQL os horários e pacientes referentes à cada dia -->
+        <?php 
+            $this->db->from('agenda');
+            $this->db->where('dia',$a->dia);
+            $details = $this->db->get()->result();
+        ?>
+
+        <td>
+            
+        <?php foreach($details as $d):?>
+            <br>
+            <?=$d->horario?>
+            <?php if($d->paciente_id == NULL):?>
+            <a href="#" class="ls-tag-success">Horário Livre</a>
+            <?php else:?>
+            <a href="#" class="ls-tag-danger">Horário Ocupado</a>
+            <?php endif;?>
+            <?php endforeach;?>
+        </td>
+        
+        </tr>
+
+
+        <?php endforeach;?>
+        <?php endif;?>
+
+        </table>
 		</div>
 	</div>
 

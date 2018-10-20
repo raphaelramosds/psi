@@ -136,14 +136,28 @@ class AgendaController extends CI_Controller
 		$this->load->view('Agenda/index', $dados);
 	}
 
-	public function search(){
+	public function search()
+	{
 		$clinica = $this->input->post('clinica_id');
-		$dia = $this->input->post('dia');
 
-		$dados['agendas'] = $this->agendas->search($this->usr[0]['id'], $clinica, $dia);
+		list($ano, $mes) = explode("-", $this->input->post('mes'));
 		
+		echo "Mes: ".$mes;
+		echo "Ano: ".$ano;
+		$dados['agendas'] = $this->agendas->search($this->usr[0]['id'], $clinica, $mes, $ano);
+		$dados['clinica'] = $this->clinicas->view($this->usr[0]['id']);
+		
+		if(count($dados['agendas'])==0)
+		{
+			$this->session->set_flashdata('vazio',"Não há nenhum horário nessa clínica ou mês");
+		}
+
+		else{
+			$this->session->set_flashdata('vazio',"");
+		}
+
 		$this->load->view('Home/menu');
-		$this->load->view('Agenda/index');
+		$this->load->view('Agenda/index', $dados);
 	}
 
 }
