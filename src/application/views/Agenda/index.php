@@ -27,13 +27,14 @@
 					</label>
 
 					<button type="submit" class='ls-btn' >Buscar agenda</button>
-                    <a data-ls-module="modal" data-target="#modalLarge" class="ls-btn-primary" class='ls-btn'>Abrir nova agenda</a>
+                    <a data-ls-module="modal" data-target="#modalLarge" class="ls-btn-primary" class='ls-btn' style="color:white;">Abrir nova agenda</a>
 
 				</fieldset>
 			</form>
 		</div>
-
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
         <?php if($this->session->flashdata('vazio')):?>
+
         <div class="ls-alert-info">
             <strong class="ls-ico-search"></strong> <?=$this->session->flashdata('vazio')?>
          </div>
@@ -41,48 +42,78 @@
 
         <?php if(isset($agendas)):?>
 
-        <table class="ls-table">
-        <tr>
-        <?php foreach($agendas as $a):?>
-        
-        <th><?=$a->dia?></th>
+        <?php $diasemana = array('Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb');?>
 
-    
-        </tr>
+        <div class="container">
 
-        <tr>
-        
-        <!-- Consultar no SQL os horários e pacientes referentes à cada dia -->
-        <?php 
-            $this->db->from('agenda');
-            $this->db->where('dia',$a->dia);
-            $details = $this->db->get()->result();
-        ?>
+            <?php foreach($agendas as $a):?>
 
-        <td>
-            
-        <?php foreach($details as $d):?>
-            <br>
-            <?=$d->horario?>
-            <?php if($d->paciente_id == NULL):?>
-            <a href="#" class="ls-tag-success">Horário Livre</a>
-            <?php else:?>
-            <a href="#" class="ls-tag-danger">Horário Ocupado</a>
-            <?php endif;?>
+            <?php 
+                $numero_dia = date('w', strtotime($a->dia));
+            ?>
+
+            <div class="row row-striped">
+                <div class="col-2 text-right">
+                    <h1 class="display-4"><span class="badge badge-secondary"><?=date('d',strtotime($a->dia))?></span></h1>
+                    <h2><?=$diasemana[$numero_dia]?></h2>
+                </div>
+                <div class="col-10">
+                    <ul class="list-inline float-right">
+                        <li class="list-inline-item">
+                            <div class="ls-group-btn">
+                                <a href="#" class="ls-btn-primary-danger ls-ico-remove"></a>
+                            </div>
+                        </li>
+                    </ul>
+                    <?php 
+                        $this->db->from('agenda');
+                        $this->db->where('dia',$a->dia);
+                        $details = $this->db->get()->result();
+                    ?>
+                    
+                    <?php foreach($details as $d):?>
+                        <br>
+                        <?php if($d->paciente_id == NULL):?>
+                            <a class="ls-tag-success" data-ls-module="modal" data-target="#encaixar">Livre</a>
+                        <?php else:?>
+
+                            <a class="ls-tag-danger" data-ls-module="modal" data-target="#encaixar">Ocupado</a>
+                        <?php endif;?>
+
+                        <?=$d->horario?>
+                    <?php endforeach;?>
+                </div>
+            </div>
+
             <?php endforeach;?>
-        </td>
-        
-        </tr>
+        </div>
 
-
-        <?php endforeach;?>
         <?php endif;?>
 
-        </table>
 		</div>
+
 	</div>
 
 </div>
+
+
+
+<style>
+.row-striped:nth-of-type(odd){
+  background-color: #efefef;
+  border-left: 4px #000000 solid;
+}
+
+.row-striped:nth-of-type(even){
+  background-color: #ffffff;
+  border-left: 4px #efefef solid;
+}
+
+.row-striped {
+    padding: 15px 0;
+}
+</style>
+
 
 <div class="ls-modal" id="modalLarge">
   <div class="ls-modal-large">
@@ -222,6 +253,29 @@
             <div class="ls-modal-footer">
                 <button class="ls-btn ls-float-right" data-dismiss="modal">Fechar</button>
             </div>
+        </div>
+    </div>
+</div>
+
+<div class="ls-modal" id="encaixar">
+    <div class="ls-modal-small">
+        <div class="ls-modal-header">
+        <button data-dismiss="modal">&times;</button>
+        <h4 class="ls-modal-title">Informações do horário</h4>
+        </div>
+        <div class="ls-modal-body">
+        <form method="POST" action="<?=base_url('AgendaController/update')?>" class="ls-form ls-form-horizontal row">
+            <fieldset>
+                <label class="ls-label col-12">
+                    <b class="ls-label-text">Paciente</b>
+                    <input type="text" value="<?=''?>">
+                </label>
+            </fieldset>
+        </div>
+        <div class="ls-modal-footer">
+        <!-- Id da Agenda -->
+        <input type="hidden" name="id" value="<?=0?>">
+        <button type="submit" class="ls-btn-primary">Salvar</button>
         </div>
     </div>
 </div>

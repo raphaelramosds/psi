@@ -142,8 +142,6 @@ class AgendaController extends CI_Controller
 
 		list($ano, $mes) = explode("-", $this->input->post('mes'));
 		
-		echo "Mes: ".$mes;
-		echo "Ano: ".$ano;
 		$dados['agendas'] = $this->agendas->search($this->usr[0]['id'], $clinica, $mes, $ano);
 		$dados['clinica'] = $this->clinicas->view($this->usr[0]['id']);
 		
@@ -158,6 +156,16 @@ class AgendaController extends CI_Controller
 
 		$this->load->view('Home/menu');
 		$this->load->view('Agenda/index', $dados);
+	}
+
+	public function delete($id){
+
+		$this->agendas->delete($id);
+
+	}
+
+	public function update(){
+
 	}
 
 }
