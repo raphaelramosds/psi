@@ -29,13 +29,6 @@ create table secretaria(
 	usuario_idusuario int
 );
 
-create table clinica_secretaria(
-	id int primary key not null auto_increment,
-	secretaria_id int, 
-	psicologo_id int,
-	clinica_id int 
-);
-
 
 create table clinica(
 	id int AUTO_INCREMENT primary key,
@@ -46,14 +39,6 @@ create table clinica(
 	id_psicologo int
 );
 
-alter table clinica_secretaria 
-add constraint clinica_secretaria_clinica foreign key (clinica_id) references clinica(id);
-
-alter table clinica_secretaria
-add constraint clinica_secretaria_secretaria foreign key (secretaria_id) references secretaria(id);
-
-alter table clinica_secretaria
-add constraint clinica_secretaria_psicologo foreign key (psicologo_id) references psicologo(id);
 
 create table paciente(
 	id int AUTO_INCREMENT primary key,
