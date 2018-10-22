@@ -39,6 +39,19 @@ create table clinica(
 	id_psicologo int
 );
 
+create table clinica_secretaria(
+	id int auto_increment primary key, 
+	secretaria_id int,
+	clinica_id int
+);
+
+
+alter table clinica_secretaria
+add constraint fk_clinica_secretaria_clinica foreign key (clinica_id) references clinica(id);
+
+alter table clinica_secretaria
+add constraint fk_clinica_secretaria_secretaria foreign key (secretaria_id) references secretaria(id);
+
 
 create table paciente(
 	id int AUTO_INCREMENT primary key,

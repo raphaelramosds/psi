@@ -10,7 +10,7 @@ class AgendasModel extends CI_Model
 
     public function search($id, $clinica=NULL, $mes=NULL, $ano=NULL)
     {
-        $query = "SELECT dia FROM agenda 
+        $query = "SELECT * FROM agenda 
         WHERE clinica_id = $clinica AND 
         psicologo_id = $id AND
         Month(dia) = $mes AND

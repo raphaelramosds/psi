@@ -27,7 +27,7 @@
 					</label>
 
 					<button type="submit" class='ls-btn' >Buscar agenda</button>
-                    <a data-ls-module="modal" data-target="#modalLarge" class="ls-btn-primary" class='ls-btn' style="color:white;">Abrir nova agenda</a>
+                    <a data-ls-module="modal" data-target="#modalLarge" class="ls-btn-primary" class='ls-btn' style="color:white;">Abrir novo horário</a>
 
 				</fieldset>
 			</form>
@@ -44,7 +44,9 @@
 
         <?php $diasemana = array('Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb');?>
 
-        <div class="container">
+
+
+        <div class="container-fluid">
 
             <?php foreach($agendas as $a):?>
 
@@ -52,25 +54,23 @@
                 $numero_dia = date('w', strtotime($a->dia));
             ?>
 
-            <div class="row row-striped">
+            <div class="row row-striped float-left" style="width:270px;">
                 <div class="col-2 text-right">
                     <h1 class="display-4"><span class="badge badge-secondary"><?=date('d',strtotime($a->dia))?></span></h1>
-                    <h2><?=$diasemana[$numero_dia]?></h2>
+                    <h2 ><?=$diasemana[$numero_dia]?></h2>
+                    <div class="ls-actions-btn">
+                        <a href="#" class="ls-btn-primary-danger ls-ico-remove" ></a>
+                        <a href="#" class="ls-btn-primary-success ls-ico-search" onclick="descobrir(<?=$a->?>)"></a>
+                    </div>
+                        
                 </div>
-                <div class="col-10">
-                    <ul class="list-inline float-right">
-                        <li class="list-inline-item">
-                            <div class="ls-group-btn">
-                                <a href="#" class="ls-btn-primary-danger ls-ico-remove"></a>
-                            </div>
-                        </li>
-                    </ul>
+                <div class="col-10" style="position:relative; left:50px;bottom:25px; display:none;" id="horario<?=$a->?>">
+
                     <?php 
                         $this->db->from('agenda');
                         $this->db->where('dia',$a->dia);
                         $details = $this->db->get()->result();
-                    ?>
-                    
+                    ?>                  
                     <?php foreach($details as $d):?>
                         <br>
                         <?php if($d->paciente_id == NULL):?>
@@ -82,6 +82,7 @@
 
                         <?=$d->horario?>
                     <?php endforeach;?>
+                    
                 </div>
             </div>
 
@@ -91,22 +92,31 @@
         <?php endif;?>
 
 		</div>
-
 	</div>
-
 </div>
+
+<script>
+    function descobrir(dia){
+        y = document.getElementById('horario' + dia)  
+
+        if(y.style.display == "none"){
+            y.style.display = "block"
+        }
+        else{
+            y.style.display = "none"
+        }
+    }
+</script>
 
 
 
 <style>
 .row-striped:nth-of-type(odd){
   background-color: #efefef;
-  border-left: 4px #000000 solid;
 }
 
 .row-striped:nth-of-type(even){
   background-color: #ffffff;
-  border-left: 4px #efefef solid;
 }
 
 .row-striped {

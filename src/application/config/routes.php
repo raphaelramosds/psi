@@ -57,4 +57,5 @@ $route['delete-secretaria/(:num)']	= 'SecretariasController/delete/$1';
 $route['view-agenda'] = 'AgendaController/view';
 $route['create-agenda'] = 'AgendaController/create';
 
+$route['clinica-secretaria/(:num)'] = "ClinicaSecretaria/index/$1";
 
