@@ -12,7 +12,7 @@
 		<div class="container">
 			<div class="ls-box ls-board-box col-md-5 col-md-offset-4" style="border:none;">
 				<header class="ls-info-header" style="text-align:center;border:none">
-					<h2 class="ls-title-3" >Cadastre-se</span></h2>
+					<h2 class="ls-title-3" >Cadastro de Psicólogo</span></h2>
 				</header>
 				<form action="<?=base_url('UsuariosController/add')?>" role="form" method="POST">
 					<fieldset>
@@ -83,15 +83,17 @@
 							<b class="ls-label-text">CRP <span class="ls-color-danger">*</span></b>
 							<input type="text" name="crp" required="required">
 						</label>
+						
 						<input type="hidden" name="role" value="1" >
+						<input type="hidden" name="codigo" value="<?=rand()?>">
+
 						<?php if($this->session->flashdata('err_cap')):?>
 						<div class='ls-sm-space' style='font-size:20px; color:red;'><?=$this->session->flashdata('err_cap')?></div>
 						<?php endif;?>
 					</fieldset>
 					<div class="ls-actions-btn" style="text-align:center;border:none;line-height:50px;">
-						<button class="ls-btn"  style="background-color:#1DD1A4;color:white;padding:1em;width:250px;">Terminar</button>
+						<button class="ls-btn" >Terminar</button>
 						<br>
-						<a href="<?=base_url()?>login" class="link_direct" >Voltar</a>
 					</div>
 				</form>
 			</div>

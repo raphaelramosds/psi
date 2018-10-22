@@ -56,20 +56,6 @@
                                 <input type="text" name="endereco" value="<?=$secretaria->endereco?>">
                             </label>
 
-                            
-                            <!-- Foreign Keys -->
-                            <label class="ls-label">
-                                <p class="ls-label-info">Clinica</p>
-                                <div class="ls-custom-select">
-                                    <select name="clinica_id" class="ls-custom" required="required">
-                                        <?php foreach ($clinicas as $row): ?>
-                                        <option value="<?=$row->id?>"><?=$row->nome?></option>
-                                        <?php endforeach;?>
-                                    </select> 
-                                </div>
-                            </label>
-
-                            <input type="hidden" name="clinica_id" value="<?=$secretaria->clinica_id?>">
                             <input type="hidden" name="psicologo_id" value="<?=$secretaria->psicologo_id?>">
                             <input type="hidden" name="usuario_idusuario" value="<?=$secretaria->usuario_idusuario?>">
                             <input type="hidden" name="id" value="<?=$secretaria->id?>">

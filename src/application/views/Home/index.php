@@ -55,32 +55,7 @@
         <?php endif ?>
 
         <?php if ($this->session->userdata('usuario')[1]['role'] == 2): ?>
-        <div class="ls-box ls-board-box ls-no-border">
-          <div id="sending-stats" class="row">
-            <div class="col-sm-12">
-              <div class="ls-box">
-                  <div class="ls-box-head">
-                  <h6 class="ls-title-4">HORÁRIOS REGISTRADOS NA AGENDA</h6>
-                </div>
-                <div class="ls-box-body">
-                  <span class="ls-board-data">
-                    <strong>
-                      <?php
-                      if(isset($counterhorarios)):  
-                        echo count($counterhorarios); 
-                      endif;
-                      ?>
-                        
-                      </strong>
-                  </span>
-                </div>
-                <div class="ls-box-footer">
-                  <a href="<?=base_url('view-agenda')?>" class="ls-btn ls-btn-xs">Veja quais são</a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+
         <?php endif ?>
 
       </div>

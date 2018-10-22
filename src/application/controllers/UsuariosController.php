@@ -81,6 +81,37 @@ class UsuariosController extends CI_Controller
 		);
 	}
 
+	public function escolhercadastro()
+	{
+		$this->load->view('Usuarios/escolhercadastro');
+	}
+
+	public function redirecionarcadastro()
+	{
+		$escolha = $this->input->post('escolha');
+
+		if($escolha == "psicologo")
+		{
+			redirect('cadastre');
+		}
+
+		else if($escolha == "secretaria")
+		{
+			redirect('create-secretaria');
+		}
+	}
+
+	public function createsecretaria()
+	{
+
+		$data_form_secretaria = array(
+			'erro_senha'		=> $this->session->flashdata('erro_senha'), 
+			'erro_user'			=> $this->session->flashdata('erro_user')
+		); 
+
+		$this->load->view('Secretarias/create', $data_form_secretaria);
+	}
+
 	public function create()
 	{
 		$data_flash = array(
@@ -93,6 +124,7 @@ class UsuariosController extends CI_Controller
 		$this->load->view('Usuarios/create', $data_flash);
 	}
 
+
 	public function add()
 	{
 	
@@ -102,7 +134,8 @@ class UsuariosController extends CI_Controller
 			'datanascimento' 	=> $this->input->post('datanasc'),
 			'nome' 				=> $this->input->post('nome'),
 			'sexo' 				=> $this->input->post('sexo'),
-			'usuario_idusuario' =>  $this->input->post('idusuario') //Até agora vazio
+			'usuario_idusuario' =>  $this->input->post('idusuario'), //Até agora vazio,
+			'codigo'			=> $this->input->post('codigo')
 		);
 
 		$secretaria_reg		= array(
@@ -111,9 +144,12 @@ class UsuariosController extends CI_Controller
 			'sexo' 				=> $this->input->post('sexo'),
 			'endereco' 			=> $this->input->post('endereco'),
 			'usuario_idusuario' => $this->input->post('usuario_idusuario'),
-			'psicologo_id' 		=> $this->input->post('psicologo_id'),
-			'clinica_id' 		=> $this->input->post('clinica_id')
 		);
+
+		$codigo = $this->input->post('codigo');
+
+		$request = $this->db->query("SELECT id FROM psicologo as p WHERE p.codigo = $codigo")->result();
+
 
 		//Faça criptografia da senha
 
@@ -125,6 +161,15 @@ class UsuariosController extends CI_Controller
 		$email_count		= count($this->usuarios->verify_email($user_reg['email']));
 		$crp_count			= count($this->db->query("SELECT * FROM psicologo WHERE crp = '".$psicologo_reg['crp']."'")->result());
 		$view_redirect		= ($user_reg['role'] == 2) ? 'create-secretaria' : 'cadastre';
+		$request = $this->db->query("SELECT id FROM psicologo as p WHERE p.codigo = $codigo")->result();
+
+		if(count($request) == 0)
+		{
+			$this->session->set_flashdata('erro_secretaria',"Esse código não envolve nenhum psicólogo");
+			redirect($view_redirect);
+		}
+
+		$secretaria_reg['psicologo_id'] = $request[0]->id;
 
 		if($users_count == 1)
 		{

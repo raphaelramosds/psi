@@ -15,6 +15,7 @@ $route['login']           = 'UsuariosController/login';
 $route['cadastre']        = 'UsuariosController/create';
 $route['forgot-password'] = 'UsuariosController/forgotPassword';
 $route['auth-code']       = 'UsuariosController/auth_code';
+$route['escolher']        = 'UsuariosController/escolhercadastro';
 
 //Psicólogo
 $route['update-psycho/(:num)']  = 'PsicologosController/edit/$1';
@@ -47,7 +48,7 @@ $route['index-sessao/(:num)']  = 'SessoesController/index/$1';
 $route['view-sessao']          = 'SessoesController/view';
 
 //Secretarias
-$route['create-secretaria']         = 'SecretariasController/create';
+$route['create-secretaria']         = 'UsuariosController/createsecretaria';
 $route['view-secretaria']           = 'SecretariasController/view';
 $route['update-secretaria/(:num)']  = 'SecretariasController/edit/$1';
 $route['delete-secretaria/(:num)']	= 'SecretariasController/delete/$1';
@@ -55,4 +56,5 @@ $route['delete-secretaria/(:num)']	= 'SecretariasController/delete/$1';
 //Agenda
 $route['view-agenda'] = 'AgendaController/view';
 $route['create-agenda'] = 'AgendaController/create';
+
 

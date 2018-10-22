@@ -28,18 +28,6 @@ class SecretariasController extends CI_Controller
 
 	}
 
-	public function create()
-	{
-		$data_form_secretaria = array(
-			'psicologo_id' 		=> $this->usr[0]['id'],
-			'clinicas'	   		=> $this->clinicas->view($this->usr[0]['id']),
-			'erro_senha'		=> $this->session->flashdata('erro_senha'), 
-			'erro_user'			=> $this->session->flashdata('erro_user')
-		); 
-
-		$this->load->view('Home/menu');
-		$this->load->view('Secretarias/create', $data_form_secretaria);
-	}
 
 	public function edit($id)
 	{
@@ -48,7 +36,6 @@ class SecretariasController extends CI_Controller
 
 		$data_update = array(
 			'secretaria' 	=> $this->secretarias->view_id($id),
-			'clinicas'	   	=> $this->clinicas->view($this->usr[0]['id']),
 			'usuario'		=> $this->usuarios->view_user($q->id)
 		);
 

@@ -14,6 +14,9 @@
 					<hr>
 					<p>Meu CRP:</p><?=$datapsicologos['crp'] ?>
 					<hr>
+					<p>Meu Código<br><small>Dê esse código à secretária para cadastrá-la</small></p>
+					<?=$datapsicologos['codigo']?>
+					<hr>
 					<p>Data de nascimento: </p><?=$datapsicologos['datanascimento'] ?>
 					<hr>
 					<p>Sexo: </p>
@@ -37,7 +40,6 @@
 			  	<hr>
 			  </div>
 			</div>
-			<a href="<?=base_url()?>home" class="ls-btn-danger" >Voltar</a>
 		</div>
 	</div>
 </div>

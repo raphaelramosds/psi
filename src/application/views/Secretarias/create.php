@@ -1,6 +1,11 @@
-<div class="ls-main">
+<link href="<?=base_url('assets/css/locastyle.css')?>" rel="stylesheet" type="text/css">
+<link rel="icon" sizes="10x5" href="<?=base_url('assets/images/logo.png')?>">
+<link rel="apple-touch-icon" href="<?=base_url('assets/images/ico-boilerplate.png')?>">
+<link rel="stylesheet" href="<?=base_url('assets/css/links_style.css')?>" type="text/css">
+
+<div style="max-width:700px;margin:0 auto;">
     <div class="container-fluid">
-        <h1 class="ls-title-intro ls-ico-panel-pabx">Cadastro de secretária</h1>
+        <h1 class="ls-title-intro ls-txt-center">Cadastro de secretária</h1>
         <div class="ls-box ls-board-box ls-no-border">
             <?php if (isset($erro_user)):?>
                 <div class='ls-sm-space' style='font-size:20px; color:red;'><?=$erro_user?></div>
@@ -62,24 +67,22 @@
                         <input type="text" name="endereco">
                     </label>
                     
-                    <!-- Foreign Keys -->
+
                     <label class="ls-label col-md-12">
-                        <b class="ls-label-text">Clinica <span class="ls-color-danger">*</span></p>
-                        <div class="ls-custom-select">
-                            <select name="clinica_id" class="ls-custom" required="required">
-                                <?php foreach ($clinicas as $row): ?>
-                                <option value="<?=$row->id?>"><?=$row->nome?></option>
-                                <?php endforeach;?>
-                            </select> 
+                        <?php if($this->session->flashdata('erro_secretaria')):?>
+                        <div class='ls-sm-space' style='font-size:20px; color:red;'>
+                            <?=$this->session->flashdata('erro_secretaria')?>
                         </div>
+                        <?php endif;?>
+                        <br>
+                        <b class="ls-label-text">Código do psicólogo</b><span class="ls-color-danger">*</span>
+                        <input type="number" name="codigo" required>
                     </label>
                     
                     <div class="ls-actions-btn">
                         <input type="hidden" name="role" value="2">
                         <input type="hidden" name="usuario_idusuario">
-                        <input type="hidden" name="psicologo_id" value="<?=$psicologo_id?>">
                         <button type="submit" class="ls-btn">Salvar dados</button>
-                        <a href="<?=base_url('view-secretaria')?>" class="ls-btn-danger">Voltar</a>
                     </div>
                 </fieldset>
             </form>

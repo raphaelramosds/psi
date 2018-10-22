@@ -43,7 +43,7 @@
                   </label>
                   <input type="submit" value="Entrar" class="ls-btn ls-btn-block ls-btn-lg foco_input" style="background:#1DD1A4;color:white;">
                   <div style="line-height:25px;">
-                    <a href="<?=base_url()?>cadastre" class="link_direct">Cadastre-se agora</a><br>
+                    <a href="<?=base_url()?>escolher" class="link_direct">Cadastre-se</a><br>
                     <a href="<?=base_url()?>forgot-password" class="link_direct" >Esqueci minha senha</a>
                   </div>
                 </fieldset>

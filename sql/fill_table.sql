@@ -4,10 +4,10 @@ values
 (8025, "monicaalmeida","daa290c0f0ebb8fb26a3600499122af6", "raphael.opensource@gmail.com", 1), -- Senha: 12345
 (3355, "secretaria", "9fb7555bc8a2cbdc4d904ef8839a36fc", "raphael201110@live.com", 2); -- Senha: secretaria123
 
-insert into psicologo(id, crp, datanascimento, nome, sexo, usuario_idusuario)
+insert into psicologo(id, crp, datanascimento, nome, sexo, usuario_idusuario, codigo)
 values 
-(10080,"2222/58","2001/05/25","Administrador do Sistema",'M',1225),
-(20025,"5555/90","1954/03/05","Mônica de Almeida Ferreira",'F',8025);
+(10080,"2222/58","2001/05/25","Administrador do Sistema",'M',1225,58823884),
+(20025,"5555/90","1954/03/05","Mônica de Almeida Ferreira",'F',8025, 1058748);
 
 insert into clinica(id,cidade,estado,nome,telefone,id_psicologo)
 values 
@@ -95,9 +95,9 @@ values
 ("Longo diálogo","O paciente apresentou baixo desempenho quando ao medo","2019/06/10",9804),
 ("Finalização da terapia","O paciente apresentou alto desempenho quando ao medo","2019/06/11",9804);
 
-insert into secretaria(id,nome,endereco,telefone,sexo,clinica_id,psicologo_id,usuario_idusuario)
+insert into secretaria(id,nome,endereco,telefone,sexo,psicologo_id,usuario_idusuario)
 values
-(5401,"Jennifer Willys","Bel Cabral, 1216","8489877544",'F',2021,20025,3355);
+(5401,"Jennifer Willys","Bel Cabral, 1216","8489877544",'F',20025,3355);
 
 insert into agenda(id,clinica_id,paciente_id,dia,horario,psicologo_id)
 values 
