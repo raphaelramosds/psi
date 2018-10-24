@@ -60,11 +60,11 @@
                     <h2 ><?=$diasemana[$numero_dia]?></h2>
                     <div class="ls-actions-btn">
                         <a href="#" class="ls-btn-primary-danger ls-ico-remove" ></a>
-                        <a href="#" class="ls-btn-primary-success ls-ico-search" onclick="descobrir(<?=$a->?>)"></a>
+                        <a href="#" class="ls-btn-primary-success ls-ico-search" onclick="descobrir(<?=$a->id ?>)"></a>
                     </div>
                         
                 </div>
-                <div class="col-10" style="position:relative; left:50px;bottom:25px; display:none;" id="horario<?=$a->?>">
+                <div class="col-10" style="position:relative; left:50px;bottom:25px; display:none;" id="horario<?=$a->id?>">
 
                     <?php 
                         $this->db->from('agenda');
