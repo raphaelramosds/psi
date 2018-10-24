@@ -60,11 +60,11 @@
                     <h2 ><?=$diasemana[$numero_dia]?></h2>
                     <div class="ls-actions-btn">
                         <a href="#" class="ls-btn-primary-danger ls-ico-remove" ></a>
-                        <a href="#" class="ls-btn-primary-success ls-ico-search" onclick="descobrir(<?=$a->?>)"></a>
+                        <a href="#" class="ls-btn-primary-success ls-ico-search" onclick="descobrir(<?=$a->id?>)"></a>
                     </div>
                         
                 </div>
-                <div class="col-10" style="position:relative; left:50px;bottom:25px; display:none;" id="horario<?=$a->?>">
+                <div class="col-10" style="position:relative; left:50px;bottom:25px; display:none;" id="horario<?=$a->id?>">
 
                     <?php 
                         $this->db->from('agenda');
@@ -74,13 +74,15 @@
                     <?php foreach($details as $d):?>
                         <br>
                         <?php if($d->paciente_id == NULL):?>
-                            <a class="ls-tag-success" data-ls-module="modal" data-target="#encaixar">Livre</a>
+                            <a class="ls-tag-success editar" data-ls-module="modal" data-target="#encaixar" data-id="<?=$d->id?>">Livre</a>
                         <?php else:?>
 
-                            <a class="ls-tag-danger" data-ls-module="modal" data-target="#encaixar">Ocupado</a>
+                            <a class="ls-tag-danger editar" data-ls-module="modal" data-target="#encaixar" data-id="<?=$d->id?>">Ocupado</a>
                         <?php endif;?>
 
                         <?=$d->horario?>
+
+                        <!-- Query para recuperar possível nome do paciente que já está cadastrado -->
                     <?php endforeach;?>
                     
                 </div>
@@ -94,6 +96,18 @@
 		</div>
 	</div>
 </div>
+
+<script>
+    // Preencher campos no modal
+
+    $('.editar').click(function(){
+        id = $(this).data('id')
+
+        $('#idagenda').val(id)
+	    
+    })
+
+</script>
 
 <script>
     function descobrir(dia){
@@ -278,13 +292,13 @@
             <fieldset>
                 <label class="ls-label col-12">
                     <b class="ls-label-text">Paciente</b>
-                    <input type="text" value="<?=''?>">
+                    <input type="text">
                 </label>
             </fieldset>
         </div>
         <div class="ls-modal-footer">
         <!-- Id da Agenda -->
-        <input type="hidden" name="id" value="<?=0?>">
+        <input type="hidden" name="id" id="idagenda" value="">
         <button type="submit" class="ls-btn-primary">Salvar</button>
         </div>
     </div>
