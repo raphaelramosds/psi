@@ -64,7 +64,7 @@
 									<?php if (count($paciente_prontuario) > 0): ?>
 										<a href="<?=base_url('index-prontuario')?>/<?=$value->id?>" class='ls-ico-search ls-color-black ls-no-bghover' title='Ver prontuário'>Ver prontuário</a>
 									<?php else: ?>
-										<a class='ls-ico-plus ls-color-black ls-no-bghover ls-cursor-pointer' title='Adcionar prontuário' data-ls-module="modal" data-target="#prontuario" onClick="paciente(<?=$value->id?>)">Adcionar prontuário</a>
+										<a class='ls-ico-plus ls-color-black ls-no-bghover ls-cursor-pointer criarprontuario' title='Adcionar prontuário' data-ls-module="modal" data-target="#prontuario" data-id="<?=$value->id?>">Adcionar prontuário</a>
 									<?php endif ?>
 								</li>
 								<li><a href="<?=base_url('delete-paciente')?>/<?=$value->id?>" class='ls-ico-remove ls-color-danger' title='Excluir'>Excluir</a></li>
@@ -154,7 +154,14 @@
 			<!-- id do psicologo -->
 			<input type="hidden" name="id_psicologo" required="required" value="<?=$psicologo?>">
 			<input type="hidden" name="paciente_id" required="required" id="paciente_id" value="">
-			<script>function paciente(idpaciente){ document.getElementById('paciente_id').value = idpaciente; }</script>
+	  
+			<script>
+				$('.criarprontuario').click(function(){
+					id = (this).data('id')
+					$('#paciente_id').val(id)
+				})
+	  		</script>
+	  
 			<button type="submit" class="ls-btn">Salvar ficha</button>
 	  </form>
     </div>
