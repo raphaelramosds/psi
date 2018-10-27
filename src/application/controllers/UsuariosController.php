@@ -150,7 +150,6 @@ class UsuariosController extends CI_Controller
 
 		$request = $this->db->query("SELECT id FROM psicologo as p WHERE p.codigo = $codigo")->result();
 
-
 		//Faça criptografia da senha
 
 		$user_reg['senha']  = md5($user_reg['username'].$user_reg['senha']);
@@ -170,6 +169,12 @@ class UsuariosController extends CI_Controller
 		}
 
 		$secretaria_reg['psicologo_id'] = $request[0]->id;
+
+		// Atualizar código
+		
+		$codigo = rand();
+
+		$this->psicologos->atualizarcodigo($request[0]->id, $codigo);
 
 		if($users_count == 1)
 		{

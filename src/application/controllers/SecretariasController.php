@@ -11,6 +11,7 @@ class SecretariasController extends CI_Controller
 		$this->usr = $this->session->userdata('usuario');
 		$this->load->model('ClinicasModel', 'clinicas');
 		$this->load->model('SecretariasModel','secretarias');
+		$this->load->model('ClinicaSecretariaModel', 'clinicasecretaria');
 		$this->load->model('UsuariosModel','usuarios');
 
 		if ($this->usr == NULL) 
@@ -21,10 +22,16 @@ class SecretariasController extends CI_Controller
 
 	public function view()
 	{	
+
 		$data_secretaria = $this->secretarias->view($this->usr[0]['id']);
+		
+		$dados = array(
+			'data_secretaria' => $data_secretaria,
+			'psicologo' => $this->usr[0]['id']
+		);
 
 		$this->load->view('Home/menu');
-		$this->load->view('Secretarias/index', array('data_secretaria' => $data_secretaria));
+		$this->load->view('Secretarias/index', $dados);
 
 	}
 

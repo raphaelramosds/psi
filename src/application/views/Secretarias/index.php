@@ -17,14 +17,34 @@
 					<p class="card-text"><?=$row->endereco?></p>
 					<p>Agendas de clínicas que podem ser alteradas:</p>
 					<dt>
-						<dd>Clínica 1 <a href="#" class="ls-ico-remove ls-color-danger" title="Excluir"></a></dd>
-						<dd>Clínica 2 <a href="#" class="ls-ico-remove ls-color-danger" title="Excluir"></a></dd>
+					<?php 
+						$q = "SELECT * FROM clinica as c
+						WHERE c.id IN (SELECT cs.clinica_id FROM clinica_secretaria as cs WHERE cs.secretaria_id = $row->id)
+						AND c.id_psicologo = $psicologo";
+						$clinicas = $this->db->query($q)->result();
+
+					?>
+					<?php foreach($clinicas as $cs):?>
+						<dd style="line-height: 20px;">
+							<small><?=$cs->nome?></small>
+							<?php 
+								// Recuperar id da table clinica_secretaria a partir do ID da agenda
+								$c = "SELECT * FROM clinica_secretaria AS cs WHERE cs.clinica_id = $cs->id AND secretaria_id = $row->id";
+								$result = $this->db->query($c)->row();	
+							?>
+
+							<a href="<?=base_url('ClinicaSecretaria/delete')?>/<?=$result->id?>" style="position:relative;left:5px;" aria-label="Retirar clínica" class="ls-color-danger ls-text-xs" title="Excluir">
+							Retirar
+							</a>
+
+						</dd>
 					</dt >
+					<?php endforeach;?>
 
 					<div class="ls-actions-btn">
 					<a href="<?=base_url('update-secretaria')?>/<?=$row->id?>" class="ls-ico-search ls-btn">Perfil</a>
-					<a href="<?=base_url('clinica-secretaria')?>/<?=$row->id?>" class="ls-btn ls-ico-plus">Clínicas</a>
-					<a href="<?=base_url('delete-secretaria')?>/<?=$row->id?>" class="ls-ico-remove ls-btn" title="Excluir">Excluir</a>
+					<a  href="<?=base_url('clinica-secretaria')?>/<?=$row->id?>" class="ls-btn ls-ico-plus">Clínicas</a>
+					<a href="<?=base_url('delete-secretaria')?>/<?=$row->id?>" class="ls-ico-remove ls-btn" title="Excluir">Desativar conta</a>
 					</div>
 				</div>
 			</div>
@@ -33,4 +53,3 @@
         </div>
     </div>
 </div> 
-

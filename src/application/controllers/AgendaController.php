@@ -15,7 +15,7 @@ class AgendaController extends CI_Controller
 		$this->load->model('ClinicasModel','clinicas');
 		$this->load->model('AgendasModel', 'agendas');
 
-		if ($this->usr == NULL || $this->usr[1]['role'] == 2)
+		if ($this->usr == NULL)
 		{
 			redirect('login');
 		}
@@ -50,7 +50,6 @@ class AgendaController extends CI_Controller
 
 		$dados = array(
 			'clinica_id' => $this->input->post('clinica_id'),
-			'paciente_id' => NULL,
 			'psicologo_id' => $this->input->post('psicologo_id')
 		);
 
@@ -127,9 +126,10 @@ class AgendaController extends CI_Controller
 
 	public function view()
 	{
+		$id = ($this->usr[1]['role'] == 1) ? $this->usr[0]['id'] : $this->usr[0]['psicologo_id'];
+		
 		$dados = array(
-			'clinica' => $this->clinicas->view($this->usr[0]['id'])
-
+			'clinica' => $this->clinicas->view($id)
 		);
 
 		$this->load->view('Home/menu');
@@ -141,9 +141,13 @@ class AgendaController extends CI_Controller
 		$clinica = $this->input->post('clinica_id');
 
 		list($ano, $mes) = explode("-", $this->input->post('mes'));
+
+		// Se o usuário logado for um psicólogo, então será seu próprio ID
+		// Caso for um secretário, será sua chave estrangeira
+		$id = ($this->usr[1]['role'] == 1) ? $this->usr[0]['id'] : $this->usr[0]['psicologo_id'];
 		
-		$dados['agendas'] = $this->agendas->search($this->usr[0]['id'], $clinica, $mes, $ano);
-		$dados['clinica'] = $this->clinicas->view($this->usr[0]['id']);
+		$dados['agendas'] = $this->agendas->search($id, $clinica, $mes, $ano);
+		$dados['clinica'] = $this->clinicas->view($id);
 		
 		if(count($dados['agendas'])==0)
 		{
@@ -165,7 +169,9 @@ class AgendaController extends CI_Controller
 	}
 
 	public function update(){
-
+		$dados = $this->input->post();
+		$this->agendas->id = $dados['id'];
+		$result = $this->agendas->update($dados);
 	}
 
 }

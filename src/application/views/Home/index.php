@@ -5,7 +5,7 @@
           <div class='ls-background-primary ls-sm-space ls-sm-margin-bottom ls-text-md ls-ico-checkmark'><?=$update_info?></div>
         <?php endif;?>
 
-        <h1 class="ls-title-intro ls-ico-home">Página inicial</h1>
+        <h1 class="ls-title-intro ls-ico-home " style="text-align:center;"></h1>
 
         <?php if ($this->session->userdata('usuario')[1]['role'] == 1): ?>
           <div class="ls-box ls-board-box ls-no-border">
@@ -52,6 +52,14 @@
             </div>
             <hr>
           </div>
+
+        <?php else:?>
+        <div class="ls-alert-info">
+            <strong class="ls-ico-info">Restrição:</strong> 
+            No nosso sistema, a secretária apenas pode ver agendas que são ligadas a ela e encaixar pacientes nos horários pertencentes
+            a cada agenda. 
+         </div>
+
         <?php endif ?>
 
         <?php if ($this->session->userdata('usuario')[1]['role'] == 2): ?>

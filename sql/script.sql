@@ -1,5 +1,6 @@
 -- '1' : Psicologo
 -- '2' : Secretaria
+create database psi;
 
 create table usuario(
 	id int AUTO_INCREMENT primary key,
@@ -89,7 +90,7 @@ create table sessao(
 create table agenda(
 	id int primary key not null auto_increment,
 	clinica_id int,
-	paciente_id int, 
+	nomepaciente varchar(100), 
 	dia date,
 	horario time,
 	psicologo_id int
@@ -99,9 +100,6 @@ create table agenda(
 
 alter table agenda
 add constraint fk_agenda_clinica foreign key (clinica_id) references clinica(id);
-
-alter table agenda
-add constraint fk_agenda_paciente foreign key (paciente_id) references paciente(id);
 
 alter table agenda
 add constraint fk_agenda_psicologo foreign key (psicologo_id) references psicologo(id);

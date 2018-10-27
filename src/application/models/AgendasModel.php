@@ -3,6 +3,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class AgendasModel extends CI_Model 
 {
+    public $id;
+
     public function add($dados)
     {
         $this->db->insert('agenda', $dados);
@@ -24,5 +26,12 @@ class AgendasModel extends CI_Model
     {
         $this->db->where('id', $id);
 		$this->db->delete('agenda');
+    }
+
+    public function update($dados)
+    {
+        $this->db->set($dados);
+        $this->db->where('id', $this->id);
+        $this->db->update('agenda');
     }
 }

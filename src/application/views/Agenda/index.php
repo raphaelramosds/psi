@@ -1,3 +1,13 @@
+<?php 
+    if ($this->session->userdata('usuario')[1]['role'] == 2  ):
+        $id = $this->session->userdata('usuario')[0]['id'];
+        $psicologo = $this->session->userdata('usuario')[0]['psicologo_id'];
+        $c = "SELECT * FROM clinica as c WHERE c.id IN (SELECT cs.clinica_id FROM clinica_secretaria as cs WHERE cs.secretaria_id = $id) AND c.id_psicologo = $psicologo";
+        $clinicas = $this->db->query($c)->result();
+    endif;
+                        
+?> 
+
 <div class="ls-main">
 	<div class="container-fluid">
 		<h1 class="ls-title-intro ls-ico-calendar">Agenda</h1>
@@ -13,12 +23,22 @@
 						<b class="ls-label-text">Filtrar por Clínica</b>
                         <div class="ls-custom-select">
                             <select name="clinica_id" class="ls-select" required>
-                            <?php foreach($clinica as $d): ?>
-                            <option value="<?=$d->id?>"><?=$d->nome?></option>
-                            <?php endforeach;?>
+                            <?php if ($this->session->userdata('usuario')[1]['role'] == 1  ): ?>
+                                <?php foreach($clinica as $d): ?>
+                                <option value="<?=$d->id?>"><?=$d->nome?></option>
+                                <?php endforeach;?>
+
+                            <?php else:?>
+                                <?php foreach($clinicas as $c):?>
+                                <option value="<?=$c->id?>"><?=$c->nome?></option>
+                                <?php endforeach;?>
+
+                            <?php endif;?>
+                            <!--Recuperar agendas relacionadas a secretária-->
                             </select>
                         </div>
 					</label>
+
 
 					<label class="ls-label col-md-6">
 						<b class="ls-label-text">Filtrar por mês e ano</b>	
@@ -27,7 +47,9 @@
 					</label>
 
 					<button type="submit" class='ls-btn' >Buscar agenda</button>
+                    <?php if ($this->session->userdata('usuario')[1]['role'] == 1  ): ?>
                     <a data-ls-module="modal" data-target="#modalLarge" class="ls-btn-primary" class='ls-btn' style="color:white;">Abrir novo horário</a>
+                    <?php endif;?>
 
 				</fieldset>
 			</form>
@@ -73,14 +95,16 @@
                     ?>                  
                     <?php foreach($details as $d):?>
                         <br>
-                        <?php if($d->paciente_id == NULL):?>
-                            <a class="ls-tag-success" data-ls-module="modal" data-target="#encaixar">Livre</a>
+                        <?php if($d->nomepaciente == NULL):?>
+                            <a class="ls-tag-success editar" data-ls-module="modal" data-target="#encaixar" data-id="<?=$d->id?>">Livre</a>
                         <?php else:?>
-
-                            <a class="ls-tag-danger" data-ls-module="modal" data-target="#encaixar">Ocupado</a>
+                            
+                            <a class="ls-tag-danger editar" data-ls-module="modal" data-target="#encaixar" data-id="<?=$d->id?>">Ocupado</a>
                         <?php endif;?>
 
                         <?=$d->horario?>
+
+                        <!-- Query para recuperar possível nome do paciente que já está cadastrado -->
                     <?php endforeach;?>
                     
                 </div>
@@ -94,6 +118,18 @@
 		</div>
 	</div>
 </div>
+
+<script>
+    // Preencher campos no modal
+
+    $('.editar').click(function(){
+        id = $(this).data('id')
+
+        $('#idagenda').val(id)
+	    
+    })
+
+</script>
 
 <script>
     function descobrir(dia){
@@ -165,7 +201,6 @@
 
 
                     <div class="ls-actions-btn">
-                        <input type="hidden" name="paciente_id" value="<?=NULL?>">
                         <input type="hidden" name="psicologo_id" value="<?=$this->session->userdata('usuario')[0]['id']?>">
                         <button type="button" class="ls-btn" id="maishorarios">Adcionar horário</button>
                         <button type="button" class="ls-btn" data-ls-module="modal" data-target="#dinamic" class="ls-btn-primary" class='ls-btn'> Registrar horários de forma dinâmica</button>
@@ -252,7 +287,6 @@
 
 
                     <div class="ls-actions-btn">
-                        <input type="hidden" name="paciente_id" value="<?=NULL?>">
                         <input type="hidden" name="psicologo_id" value="<?=$this->session->userdata('usuario')[0]['id']?>">
                         <button type="submit" class="ls-btn">Salvar dados da Agenda</button>
                     </div>
@@ -274,18 +308,44 @@
         <h4 class="ls-modal-title">Informações do horário</h4>
         </div>
         <div class="ls-modal-body">
-        <form method="POST" action="<?=base_url('AgendaController/update')?>" class="ls-form ls-form-horizontal row">
-            <fieldset>
-                <label class="ls-label col-12">
-                    <b class="ls-label-text">Paciente</b>
-                    <input type="text" value="<?=''?>">
-                </label>
-            </fieldset>
-        </div>
-        <div class="ls-modal-footer">
-        <!-- Id da Agenda -->
-        <input type="hidden" name="id" value="<?=0?>">
-        <button type="submit" class="ls-btn-primary">Salvar</button>
+            <form id="formulario" method="post" action="<?php echo base_url('AgendaController/update')?>" class="ls-form ls-form-horizontal row">
+                <fieldset>
+                    <label class="ls-label col-12">
+                        <b class="ls-label-text">Paciente</b>
+                        <input type="text" name="nomepaciente">
+                    </label>
+                    <label class="ls-label col-12">
+                        <input type="number" name="id" id="idagenda" value="">
+                        <button type='button' id="atualizar" class="ls-btn-primary">Salvar</button>
+                    </label>
+                </fieldset>
+            </form>
         </div>
     </div>
 </div>
+
+
+<script>
+
+    $(document).ready(function(){
+        $('#atualizar').click(function(){
+            dados = $('#formulario').serialize()
+            url = $('#formulario').attr('action')
+         
+            $.ajax({
+                type:'ajax',
+                method:'post',
+                url:url,
+                data:dados,
+                async:false,
+                success:function(response){
+                    // Chamar a página novamente
+                },
+                error:function(){
+
+                }
+            })
+        })
+    })
+
+</script>

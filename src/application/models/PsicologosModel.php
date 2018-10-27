@@ -38,4 +38,10 @@ class PsicologosModel extends CI_Model
 		//return $dados;
 	}
 
+	public function atualizarcodigo($id, $codigo){
+		$this->db->set('codigo', $codigo);
+		$this->db->where('id', $id);
+		$this->db->update('psicologo');
+	}
+
 }
