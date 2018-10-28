@@ -15,6 +15,8 @@ class AgendaController extends CI_Controller
 		$this->load->model('ClinicasModel','clinicas');
 		$this->load->model('AgendasModel', 'agendas');
 
+		$this->load->view('Home/menu');
+
 		if ($this->usr == NULL)
 		{
 			redirect('login');
@@ -132,7 +134,6 @@ class AgendaController extends CI_Controller
 			'clinica' => $this->clinicas->view($id)
 		);
 
-		$this->load->view('Home/menu');
 		$this->load->view('Agenda/index', $dados);
 	}
 
@@ -148,6 +149,7 @@ class AgendaController extends CI_Controller
 		
 		$dados['agendas'] = $this->agendas->search($id, $clinica, $mes, $ano);
 		$dados['clinica'] = $this->clinicas->view($id);
+		$dados['mes'] = $this->input->post('mes');
 		
 		if(count($dados['agendas'])==0)
 		{
@@ -158,8 +160,9 @@ class AgendaController extends CI_Controller
 			$this->session->set_flashdata('vazio',"");
 		}
 
-		$this->load->view('Home/menu');
+		$this->session->set_userdata('agendas',$dados);
 		$this->load->view('Agenda/index', $dados);
+
 	}
 
 	public function delete($id){
@@ -172,7 +175,17 @@ class AgendaController extends CI_Controller
 		$dados = $this->input->post();
 		$this->agendas->id = $dados['id'];
 		$result = $this->agendas->update($dados);
+
+		$this->session->set_flashdata('success',"Adicionado com sucesso, filtre a agenda para ver os horário");
+		$this->load->view('Agenda/index', $this->session->userdata('agendas'));
 	}
 
+	public function recuperarPaciente(){
+		$q = "SELECT a.nomepaciente FROM agenda AS a WHERE a.id = ".$this->input->post('id');
+		$result = $this->db->query($q)->result();
+		echo json_encode($result);
+		exit;
+
+	}
 }
 	

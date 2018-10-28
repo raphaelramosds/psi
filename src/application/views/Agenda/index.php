@@ -65,10 +65,18 @@
         <?php if(isset($agendas)):?>
 
         <?php $diasemana = array('Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb');?>
-
-
+        <?php $meses = array('Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'); ?>
 
         <div class="container-fluid">
+
+            <h1><?php 
+            
+                list($ano, $mesnumero) = explode('-',$mes);
+                echo $meses[$mesnumero - 1]." de ".$ano."<hr>";
+
+            ?>
+            
+            </h1>
 
             <?php foreach($agendas as $a):?>
 
@@ -81,7 +89,7 @@
                     <h1 class="display-4"><span class="badge badge-secondary"><?=date('d',strtotime($a->dia))?></span></h1>
                     <h2 ><?=$diasemana[$numero_dia]?></h2>
                     <div class="ls-actions-btn">
-                        <a href="#" class="ls-btn-primary-danger ls-ico-remove" ></a>
+                        <!-- <a href="#" class="ls-btn-primary-danger ls-ico-remove" ></a> -->
                         <a href="#" class="ls-btn-primary-success ls-ico-search" onclick="descobrir(<?=$a->id ?>)"></a>
                     </div>
                         
@@ -96,10 +104,10 @@
                     <?php foreach($details as $d):?>
                         <br>
                         <?php if($d->nomepaciente == NULL):?>
-                            <a class="ls-tag-success editar" data-ls-module="modal" data-target="#encaixar" data-id="<?=$d->id?>">Livre</a>
+                            <a class="ls-tag-success editar" data-ls-module="modal"  data-target="#encaixar" data-id="<?=$d->id?>">Livre</a>
                         <?php else:?>
                             
-                            <a class="ls-tag-danger editar" data-ls-module="modal" data-target="#encaixar" data-id="<?=$d->id?>">Ocupado</a>
+                            <a class="ls-tag-danger editar" data-ls-module="modal"  data-target="#encaixar" data-id="<?=$d->id?>">Ocupado</a>
                         <?php endif;?>
 
                         <?=$d->horario?>
@@ -126,6 +134,17 @@
         id = $(this).data('id')
 
         $('#idagenda').val(id)
+
+        $.ajax({
+            type:'ajax',
+            dataType:'json',
+            method:'post',
+            url:'<?=base_url('AgendaController/recuperarPaciente')?>',
+            data:{'id':id},
+            success:function(data){
+                $('#nomedopaciente').val(data[0].nomepaciente)
+            }
+        })
 	    
     })
 
@@ -308,15 +327,15 @@
         <h4 class="ls-modal-title">Informações do horário</h4>
         </div>
         <div class="ls-modal-body">
-            <form id="formulario" method="post" action="<?php echo base_url('AgendaController/update')?>" class="ls-form ls-form-horizontal row">
+            <form method="post" action="<?php echo base_url('AgendaController/update')?>" class="ls-form ls-form-horizontal row">
                 <fieldset>
                     <label class="ls-label col-12">
                         <b class="ls-label-text">Paciente</b>
-                        <input type="text" name="nomepaciente">
+                        <input type="text" name="nomepaciente" id="nomedopaciente">
                     </label>
                     <label class="ls-label col-12">
-                        <input type="number" name="id" id="idagenda" value="">
-                        <button type='button' id="atualizar" class="ls-btn-primary">Salvar</button>
+                        <input type="hidden" name="id" id="idagenda" value="">
+                        <button type='submit' id="atualizar" class="ls-btn-primary">Salvar</button>
                     </label>
                 </fieldset>
             </form>
@@ -324,28 +343,4 @@
     </div>
 </div>
 
-
-<script>
-
-    $(document).ready(function(){
-        $('#atualizar').click(function(){
-            dados = $('#formulario').serialize()
-            url = $('#formulario').attr('action')
-         
-            $.ajax({
-                type:'ajax',
-                method:'post',
-                url:url,
-                data:dados,
-                async:false,
-                success:function(response){
-                    // Chamar a página novamente
-                },
-                error:function(){
-
-                }
-            })
-        })
-    })
-
-</script>
+<!-- Requisição para recupera nome do paciente (caso exista) que foi encaixado -->
