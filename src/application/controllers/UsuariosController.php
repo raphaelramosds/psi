@@ -146,9 +146,32 @@ class UsuariosController extends CI_Controller
 			'usuario_idusuario' => $this->input->post('usuario_idusuario'),
 		);
 
-		$codigo = $this->input->post('codigo');
+		if($user_reg['role'] == 2)
+		{
+			$codigo = $this->input->post('codigopsicologo');
+			$request = $this->db->query("SELECT p.id FROM psicologo as p WHERE p.codigo = $codigo")->result();
+			$view_redirect = 'create-secretaria';
 
-		$request = $this->db->query("SELECT id FROM psicologo as p WHERE p.codigo = $codigo")->result();
+			if(count($request) == 0)
+			{
+				$this->session->set_flashdata('erro_secretaria',"Esse código não envolve nenhum psicólogo");
+				redirect($view_redirect);
+			}
+			
+			$secretaria_reg['psicologo_id'] = $request[0]->id;
+
+			// Atualizar código
+			
+			$codigo = rand();
+
+			$this->psicologos->atualizarcodigo($request[0]->id, $codigo);
+		}
+
+		else
+		{
+			$view_redirect = 'cadastre';
+		}
+		
 
 		//Faça criptografia da senha
 
@@ -159,22 +182,7 @@ class UsuariosController extends CI_Controller
 		$users_count 		= count($this->usuarios->duplicate_user($user_reg['username']));
 		$email_count		= count($this->usuarios->verify_email($user_reg['email']));
 		$crp_count			= count($this->db->query("SELECT * FROM psicologo WHERE crp = '".$psicologo_reg['crp']."'")->result());
-		$view_redirect		= ($user_reg['role'] == 2) ? 'create-secretaria' : 'cadastre';
-		$request = $this->db->query("SELECT id FROM psicologo as p WHERE p.codigo = $codigo")->result();
 
-		if(count($request) == 0)
-		{
-			$this->session->set_flashdata('erro_secretaria',"Esse código não envolve nenhum psicólogo");
-			redirect($view_redirect);
-		}
-
-		$secretaria_reg['psicologo_id'] = $request[0]->id;
-
-		// Atualizar código
-		
-		$codigo = rand();
-
-		$this->psicologos->atualizarcodigo($request[0]->id, $codigo);
 
 		if($users_count == 1)
 		{
@@ -225,7 +233,7 @@ class UsuariosController extends CI_Controller
 
 		$view_success_cadastre = ($role == 1) ? 'login' : 'view-secretaria';
 
-		redirect($view_success_cadastre);
+		redirect('login');
 	}
 
 
