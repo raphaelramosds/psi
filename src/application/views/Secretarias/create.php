@@ -7,6 +7,9 @@
     <div class="container-fluid">
         <h1 class="ls-title-intro ls-txt-center">Cadastro de secretária</h1>
         <div class="ls-box ls-board-box ls-no-border">
+            <?php if(isset($erro_secretaria)):?>
+            <?=$erro_secretaria?>
+            <?php endif;?>
             <?php if (isset($erro_user)):?>
                 <div class='ls-sm-space' style='font-size:20px; color:red;'><?=$erro_user?></div>
             <?php endif;?>
@@ -76,7 +79,7 @@
                         <?php endif;?>
                         <br>
                         <b class="ls-label-text">Código do psicólogo</b><span class="ls-color-danger">*</span>
-                        <input type="number" name="codigo" required>
+                        <input type="number" name="codigopsicologo" required>
                     </label>
                     
                     <div class="ls-actions-btn">
