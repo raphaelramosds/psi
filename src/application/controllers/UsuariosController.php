@@ -182,7 +182,6 @@ class UsuariosController extends CI_Controller
 		$users_count 		= count($this->usuarios->duplicate_user($user_reg['username']));
 		$email_count		= count($this->usuarios->verify_email($user_reg['email']));
 		$crp_count			= count($this->db->query("SELECT * FROM psicologo WHERE crp = '".$psicologo_reg['crp']."'")->result());
-<<<<<<< HEAD
 		$view_redirect		= ($user_reg['role'] == 2) ? 'create-secretaria' : 'cadastre';
 		$request = $this->db->query("SELECT id FROM psicologo as p WHERE p.codigo = $codigo")->result();
 
@@ -197,8 +196,6 @@ class UsuariosController extends CI_Controller
 		// Atualizar código
 		
 		$codigo = rand();
-=======
->>>>>>> 6804df62e285860a7efd0afe0c02dbc1cd5dffca
 
 
 		if($users_count == 1)
@@ -248,11 +245,6 @@ class UsuariosController extends CI_Controller
 
 		$this->session->set_flashdata('success','Sucesso ao se cadastrar');
 
-<<<<<<< HEAD
-=======
-		$view_success_cadastre = ($role == 1) ? 'login' : 'view-secretaria';
-
->>>>>>> 6804df62e285860a7efd0afe0c02dbc1cd5dffca
 		redirect('login');
 	}
 
