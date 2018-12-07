@@ -2,17 +2,14 @@
 $url = base_url("assets/xml/doencas.xml");
 $xml = simplexml_load_file($url);
 
-if($dataprontuarios == NULL)
-{
-	redirect("view-paciente");
-}
 
-$this->db->select('nome');
-$this->db->from('paciente');
-$this->db->where('id = '.$dataprontuarios[0]->paciente_id);
-$this->db->order_by("nome", "asc");
+	$this->db->select('id, nome');
+	$this->db->from('paciente');
+	$this->db->where('id = '.$this->session->userdata('paciente'));
+	$this->db->order_by("nome", "asc");
+	
+	$paciente = $this->db->get()->row_array();
 
-$paciente = $this->db->get()->row_array();
 
 ?>
 
@@ -20,6 +17,14 @@ $paciente = $this->db->get()->row_array();
 	<div class="container-fluid">
 		<h1 class="ls-title-intro ls-ico-pencil">Prontuário <b><?=$paciente['nome']?></b></h1>
 		<div class="ls-box ls-board-box ls-no-border">
+
+			<form  action="<?=base_url('ProntuariosController/search')?>" class="ls-form ls-form-inline" method="POST">
+				<label class="ls-label" role="search">
+					<b class="ls-label-text">Filtrar pelo mês:</b>
+					<input type="month" name="mes" required="" class="ls-field">
+				</label>
+				<input type="submit" value="Buscar" class="ls-btn" title="Buscar">
+			</form>
 			
 			<?php if(isset($add_prontuario)):?>
 				<div class='ls-background-primary ls-sm-space ls-sm-margin-bottom ls-text-md ls-ico-checkmark'><?=$add_prontuario?></div>
@@ -29,21 +34,26 @@ $paciente = $this->db->get()->row_array();
 				<div class='ls-background-primary ls-sm-space ls-sm-margin-bottom ls-text-md ls-ico-checkmark'><?=$update_prontuario?></div>
 			<?php endif;?>
 
+			<?php if($dataprontuarios == NULL):?>
+			<div class="ls-alert-info">
+            Não há nada aqui
+         	</div>
+
+			<?php else:?>
 			<table class="ls-table ls-table-striped">
 				<tr>
-					<th>Número da ficha</th>
+					<!-- <th>Número da ficha</th> -->
 					<th>Clínica</th>
 					<th>CID10/DSM</th>
-					<th>Encaminhado</th>
-					<th>Alta</th>
+					<th>Data da criação</th>
 					<th></th>
 				</tr>
 
 				<?php foreach ($dataprontuarios as $value): ?>
 					<tr>
-						<td>
+						<!-- <td>
 							<?=$value->numeroprontuario ?>
-						</td>
+						</td> -->
 
 						<?php
 						$this->db->select('nome');
@@ -69,8 +79,10 @@ $paciente = $this->db->get()->row_array();
 							<?php endif; ?>
 						</td>
 
-						<td><?=$value->encaminhado ?></td>
-						<td><?=$value->alta ?></td>
+						<td><?php
+							$date = new DateTime($value->data);
+							echo $date->format('d/m/Y')
+						?></td>
 
 						<td class="ls-text-center">
 							<div data-ls-module='dropdown' class='ls-dropdown'>
@@ -85,8 +97,9 @@ $paciente = $this->db->get()->row_array();
 					</tr>
 				<?php endforeach; ?>
 			 </table>
-			 <a  data-ls-module="modal" data-target="#ficha" onClick="paciente(<?=$dataprontuarios[0]->paciente_id?>)" class='ls-btn'> Adcionar nova ficha</a>
-			 <a href="<?=base_url('view-paciente')?>" class="ls-btn-danger">Voltar</a>
+			<?php endif;?>
+			<a  data-ls-module="modal" data-target="#ficha" onClick="paciente(<?=$paciente['id']?>)" class='ls-btn'> Adcionar nova ficha</a>
+			<a href="<?=base_url('view-paciente')?>" class="ls-btn-danger">Voltar</a>
 		</div>
 	</div>
 </div>

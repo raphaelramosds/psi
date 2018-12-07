@@ -17,7 +17,10 @@
 					<p>Meu Código<br><small>Dê esse código à secretária para cadastrá-la</small></p>
 					<?=$datapsicologos['codigo']?>
 					<hr>
-					<p>Data de nascimento: </p><?=$datapsicologos['datanascimento'] ?>
+					<p>Data de nascimento: </p>
+					<?php 
+					$data = new DateTime($datapsicologos['datanascimento']); 
+					echo $data->format('d/m/Y'); ?>
 					<hr>
 					<p>Sexo: </p>
 					<?php if ($datapsicologos['sexo'] == 'M'): ?>

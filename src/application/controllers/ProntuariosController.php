@@ -39,11 +39,28 @@ class ProntuariosController extends CI_Controller
 			'update_prontuario' => $this->session->flashdata('update_prontuario'),
 		); 
 
-
 		$this->load->view('Home/menu');
-
 		$this->load->view('Prontuarios/index', $data_flash_inf);
 	}
+
+	public function search()
+	{
+
+		list($ano, $mes) = explode("-", $this->input->post('mes'));
+		$id = $this->usr[0]['id'];
+
+		$paciente = $this->session->userdata('paciente');
+
+		$pesquisa = array(
+			'dataprontuarios' 	=> $this->prontuarios->search($id, $mes, $ano, $paciente), 
+			'clinicas' 			=> $this->clinicas->view($id),
+			'psicologo' 		=> $id
+		);
+
+		$this->load->view('Home/menu');
+		$this->load->view('Prontuarios/index', $pesquisa);
+	}
+
 
 	public function add()
 	{
@@ -88,5 +105,6 @@ class ProntuariosController extends CI_Controller
 		$this->session->set_flashdata("update_prontuario",'Atualizado com sucesso');
 		redirect('view-prontuario');
 	}
+
 
 }

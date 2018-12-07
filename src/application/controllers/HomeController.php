@@ -30,7 +30,22 @@ class HomeController extends CI_Controller
 		);
 
 		$this->load->view('Home/menu');
-		$this->load->view('Home/index', $count_registers);
+
+		if($this->usr[1]['role'] == 2)
+		{
+			$id = $this->usr[0]['psicologo_id'];
+		
+			$dados = array(
+				'clinica' => $this->clinicas->view($id)
+			);
+	
+			$this->load->view('Agenda/index', $dados);
+		}
+
+		else
+		{
+			$this->load->view('Home/index', $count_registers);
+		}
 	}
 
 	public function viewcid()

@@ -1,6 +1,5 @@
 -- '1' : Psicologo
 -- '2' : Secretaria
-create database psi;
 
 create table usuario(
 	id int AUTO_INCREMENT primary key,
@@ -76,7 +75,8 @@ create table prontuario(
 	evolucao text,
 	id_psicologo int,
 	clinica_id int,
-	paciente_id int
+	paciente_id int,
+	data date
 );
 
 create table sessao(

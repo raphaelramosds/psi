@@ -64,7 +64,7 @@ class PacientesController extends CI_Controller
 		$this->load->view('Home/menu');
 		$this->load->view('Pacientes/create', array('psicologo_id'=>$this->usr[0]['id']));
 	}
-
+	
 	public function add()
 	{
 		if ($this->usr[1]['role'] == 1 || $this->usr[1]['role'] == 2)
@@ -113,7 +113,7 @@ class PacientesController extends CI_Controller
 
 		$config = array(
 			'base_url' 			=> base_url('PacientesController/index'),
-			'per_page' 			=> 4,
+			'per_page' 			=> 8,
 			'num_links' 		=> 10,
 			'uri_segment' 		=> 3,
 			'total_rows' 		=> $this->pacientes->count_results($this->usr[0]['id']),

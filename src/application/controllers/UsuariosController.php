@@ -162,7 +162,7 @@ class UsuariosController extends CI_Controller
 		$view_redirect		= ($user_reg['role'] == 2) ? 'create-secretaria' : 'cadastre';
 		$request = $this->db->query("SELECT id FROM psicologo as p WHERE p.codigo = $codigo")->result();
 
-		if(count($request) == 0)
+		if(count($request) == 0 && $user_reg['role'] == 2)
 		{
 			$this->session->set_flashdata('erro_secretaria',"Esse código não envolve nenhum psicólogo");
 			redirect($view_redirect);
@@ -223,9 +223,7 @@ class UsuariosController extends CI_Controller
 
 		$this->session->set_flashdata('success','Sucesso ao se cadastrar');
 
-		$view_success_cadastre = ($role == 1) ? 'login' : 'view-secretaria';
-
-		redirect($view_success_cadastre);
+		redirect('login');
 	}
 
 

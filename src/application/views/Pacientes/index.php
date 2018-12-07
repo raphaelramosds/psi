@@ -151,13 +151,15 @@
 			    <b class="ls-label-text">Evolução</b>
 			    <textarea rows="10" name="evolucao" ></textarea>
 		  	</label>
+
 			<!-- id do psicologo -->
 			<input type="hidden" name="id_psicologo" required="required" value="<?=$psicologo?>">
 			<input type="hidden" name="paciente_id" required="required" id="paciente_id" value="">
-	  
+	  		<input type="hidden" name="data" value="<?php echo date('Y-m-d')?>">
+
 			<script>
 				$('.criarprontuario').click(function(){
-					id = (this).data('id')
+					id = $(this).data('id')
 					$('#paciente_id').val(id)
 				})
 	  		</script>

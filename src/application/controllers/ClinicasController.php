@@ -95,7 +95,7 @@ class ClinicasController extends CI_Controller
 		
 		$config = array(
 			'base_url' 			=> base_url('ClinicasController/index'),
-			'per_page' 			=> 4,
+			'per_page' 			=> 8,
 			'num_links' 		=> 10,
 			'uri_segment' 		=> 3,
 			'total_rows' 		=> $this->clinicas->count_results($this->usr[0]['id']),

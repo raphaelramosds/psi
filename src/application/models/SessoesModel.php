@@ -39,4 +39,14 @@ class SessoesModel extends CI_Model
 		$this->db->update('sessao');
 	}
 
+	public function search($id, $mes, $ano)
+	{
+		$query = "SELECT * FROM sessao 
+        WHERE numero_prontuario = $id AND 
+        Month(data) = $mes AND
+        Year(data) = $ano
+        GROUP BY data ORDER BY data ASC";
+        return $this->db->query($query)->result();
+	}
+
 }

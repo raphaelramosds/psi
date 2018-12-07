@@ -27,7 +27,6 @@
         </div>
       </div>
       <span class="ls-show-sidebar ls-ico-menu"></span>
-      <a href="<?=base_url('home')?>"  class="ls-go-next"><span class="ls-text">Tela inicial</span></a>
       <h1 class="ls-brand-name"><a href="<?=base_url('home')?>" class="ls-ico">
       <img src="<?=base_url('assets/images/logo2.png')?>" height="30px" width="60px"></a>
       </h1>
@@ -36,8 +35,8 @@
       <div class="ls-sidebar-inner">
           <nav class="ls-menu">
             <ul>
+              <?php if ($this->session->userdata('usuario')[1]['role'] == 1  ): ?>
                 <li><a href = "<?=base_url('home')?>" class="ls-ico-home">Início</a></li>
-                <?php if ($this->session->userdata('usuario')[1]['role'] == 1  ): ?>
                 <li><a href = "<?=base_url('view-psycho')?>" class="ls-ico-user">Meu perfil</a></li>
                 <li><a href = "#" class="ls-ico-bukets">Cadastro</a>
                   <ul>
@@ -47,8 +46,8 @@
                   </ul>
                 </li>
                 <li><a href="<?=base_url('cid')?>" class="ls-ico-eye">Consultar doença</a></li>
-                <?php endif ?>
                 <li><a href="<?=base_url('view-agenda')?>" class="ls-ico-calendar">Agenda</a></li>
+                <?php endif ?>
                 <li><a href = "<?=base_url('HomeController/loggout')?>" class="ls-ico-export" style="color:#1DD1A4;">Sair</a></li>
             </ul>
           </nav>

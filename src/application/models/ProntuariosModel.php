@@ -24,16 +24,16 @@ class ProntuariosModel extends CI_Model
 		return $query->result();
 	}
 
-	public function search($id, $nomepaciente)
-	{
-		//select * from prontuario, paciente where prontuario.psicologo_crp=500 and prontuario.paciente_id = paciente.idpaciente and nomepaciente like '_inicial_%'
-		$this->db->from('prontuario, paciente');
-		$this->db->where('prontuario.id_psicologo',$id);
-		$this->db->where('prontuario.paciente_id = paciente.id');
-		$this->db->like('nome', $nomepaciente);
-		$query = $this->db->get()->result();
-		return $query;
-	}
+	// public function search($id, $nomepaciente)
+	// {
+	// 	//select * from prontuario, paciente where prontuario.psicologo_crp=500 and prontuario.paciente_id = paciente.idpaciente and nomepaciente like '_inicial_%'
+	// 	$this->db->from('prontuario, paciente');
+	// 	$this->db->where('prontuario.id_psicologo',$id);
+	// 	$this->db->where('prontuario.paciente_id = paciente.id');
+	// 	$this->db->like('nome', $nomepaciente);
+	// 	$query = $this->db->get()->result();
+	// 	return $query;
+	// }
 
 	public function add($dados)
 	{
@@ -60,4 +60,14 @@ class ProntuariosModel extends CI_Model
 		$this->db->update('prontuario');
 	}
 
+	public function search($id,$mes,$ano,$paciente)
+	{
+        $query = "SELECT * FROM prontuario 
+        WHERE paciente_id = $paciente AND 
+    	id_psicologo = $id AND
+        Month(data) = $mes AND
+        Year(data) = $ano
+        GROUP BY data ORDER BY data ASC";
+        return $this->db->query($query)->result();
+	}
 }

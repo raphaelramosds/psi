@@ -22,6 +22,19 @@ class SessoesController extends CI_Controller
 		redirect('view-sessao');
 	}
 
+	public function search()
+	{
+		$prontuario = $this->session->userdata('prontuario');
+		list($ano, $mes) = explode('-', $this->input->post('mes'));
+
+		$data_flash = array(
+			'datasessoes' 	=> $this->sessoes->search($prontuario, $mes, $ano)
+		);
+
+		$this->load->view('Home/menu');
+		$this->load->view('Sessoes/index', $data_flash);
+	}
+
 	public function view()
 	{
 		$prontuario = $this->session->userdata('prontuario');

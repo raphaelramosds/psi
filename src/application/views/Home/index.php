@@ -5,12 +5,12 @@
           <div class='ls-background-primary ls-sm-space ls-sm-margin-bottom ls-text-md ls-ico-checkmark'><?=$update_info?></div>
         <?php endif;?>
 
-        <h1 class="ls-title-intro ls-ico-home " style="text-align:center;"></h1>
+        <h1 class="ls-title-intro ls-ico-home">Prontuários em um Sistema Inteligente</h1>
 
         <?php if ($this->session->userdata('usuario')[1]['role'] == 1): ?>
           <div class="ls-box ls-board-box ls-no-border">
             <div id="sending-stats" class="row">
-
+      
               <div class="col-sm-4 col-md-3">
                 <div class="ls-box">
                   <div class="ls-box-head">

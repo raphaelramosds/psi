@@ -37,6 +37,10 @@
 					<b class="ls-label-text">Alta</b>
 					<div class="ls-custom-select">
 						<select class="ls-select" name="alta" required="required">
+							<option selected="selected">
+								<?php if($prontuarios->alta == "S"){ echo "Sim"; } else { echo "Não"; }?>
+								
+							</option>
 							<option value="S">Sim</option>
 							<option value="N">Não</option>
 						</select>
@@ -47,6 +51,9 @@
 					<b class="ls-label-text">Encaminhado</b>
 					<div class="ls-custom-select">
 						<select class="ls-select" name="encaminhado" required="required">
+							<option selected="selected">
+								<?php if($prontuarios->encaminhado == "S"){ echo "Sim"; } else { echo "Não"; }?>	
+							</option>
 							<option value="S">Sim</option>
 							<option value="N">Não</option>
 						</select>
