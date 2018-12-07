@@ -110,7 +110,7 @@
 			<label for="" class="ls-label">
 				<b class="ls-label-text">CID10/DSM</b>
 				<p class="ls-label-info">Abrir pesquisa de CID10</a></p>
-				<input type="text" name="cid10" required="required">
+				<input type="text" name="cid10">
 			</label>
 
 			<!-- Alta -->
