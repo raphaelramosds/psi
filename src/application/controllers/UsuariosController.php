@@ -183,19 +183,25 @@ class UsuariosController extends CI_Controller
 		$email_count		= count($this->usuarios->verify_email($user_reg['email']));
 		$crp_count			= count($this->db->query("SELECT * FROM psicologo WHERE crp = '".$psicologo_reg['crp']."'")->result());
 		$view_redirect		= ($user_reg['role'] == 2) ? 'create-secretaria' : 'cadastre';
-		$request = $this->db->query("SELECT id FROM psicologo as p WHERE p.codigo = $codigo")->result();
 
-		if(count($request) == 0 && $user_reg['role'] == 2)
+		if($user_reg['role'] == 2)
 		{
-			$this->session->set_flashdata('erro_secretaria',"Esse código não envolve nenhum psicólogo");
-			redirect($view_redirect);
+
+			$request = $this->db->query("SELECT id FROM psicologo as p WHERE p.codigo = $codigo")->result();
+
+			if(count($request) == 0)
+			{
+				$this->session->set_flashdata('erro_secretaria',"Esse código não envolve nenhum psicólogo");
+				redirect($view_redirect);
+			}
+			
+			$codigo = rand();
 		}
 
 		$secretaria_reg['psicologo_id'] = $request[0]->id;
 
 		// Atualizar código
 		
-		$codigo = rand();
 
 
 		if($users_count == 1)

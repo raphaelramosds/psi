@@ -90,13 +90,16 @@ create table sessao(
 create table agenda(
 	id int primary key not null auto_increment,
 	clinica_id int,
-	nomepaciente varchar(100), 
+	paciente_id int, 
 	dia date,
 	horario time,
 	psicologo_id int
 );
 
 -- FK Agenda
+
+alter table agenda
+add constraint fk_agenda_paciente foreign key (paciente_id) references paciente(id);
 
 alter table agenda
 add constraint fk_agenda_clinica foreign key (clinica_id) references clinica(id);
