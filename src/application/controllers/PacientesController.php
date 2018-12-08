@@ -67,15 +67,12 @@ class PacientesController extends CI_Controller
 	
 	public function add()
 	{
-		if ($this->usr[1]['role'] == 1 || $this->usr[1]['role'] == 2)
-		{
-			$paciente_reg = $this->input->post();
+		$paciente_reg = $this->input->post();
 
-			$this->pacientes->add($paciente_reg);
-			$this->session->set_flashdata("add_paciente",'Adcionado com sucesso!');
+		$this->pacientes->add($paciente_reg);
+		$this->session->set_flashdata("add_paciente",'Adcionado com sucesso!');
 
-			redirect('view-paciente');
-		}
+		redirect('view-paciente');
 	}
 
 	public function delete($id)

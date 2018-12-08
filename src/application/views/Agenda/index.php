@@ -15,6 +15,11 @@
 		<div class='ls-background-primary ls-sm-space ls-sm-margin-bottom ls-text-md ls-ico-checkmark'><?=$this->session->userdata('success')?></div>
 		<?php endif;?>
 		<div class="ls-box">
+            <?php if($this->session->flashdata('add_paciente')):?>
+            <div class="ls-alert-success">
+                <strong class=""></strong> <?=$this->session->flashdata('add_paciente')?>
+            </div>
+            <?php endif;?>
 			<h5 class='ls-title-3'>Procurar agenda</h5>	
 			<hr>
 			<form method="POST" action="<?=base_url('AgendaController/search')?>" class="ls-form ls-form-horizontal row">
@@ -47,6 +52,10 @@
 					</label>
 
 					<button type="submit" class='ls-btn' >Buscar agenda</button>
+                    <?php if($this->session->userdata('usuario')[1]['role'] == 2):?>
+                        <button type="button" class="ls-btn-primary" data-ls-module="modal" data-target="#adicionarPaciente">Adicionar paciente</button>
+                    <?php endif;?>
+                
                     <?php if ($this->session->userdata('usuario')[1]['role'] == 1  ): ?>
                     <a data-ls-module="modal" data-target="#modalLarge" class="ls-btn-primary" class='ls-btn' style="color:white;">Abrir novo horário</a>
                     <?php endif;?>
@@ -54,6 +63,39 @@
 				</fieldset>
 			</form>
 		</div>
+
+        <div class="ls-modal" id="adicionarPaciente">
+        <div class="ls-modal-box">
+            <div class="ls-modal-header">
+                <button data-dismiss="modal">&times;</button>
+                <h4 class="ls-modal-title">Adicione pacientes</h4>
+            </div>
+            <div class="ls-modal-body" id="myModalBody">
+                <form method="post" action="<?php echo base_url('SecretariasController/addpaciente')?>" class="ls-form ls-form-horizontal row">
+                    <fieldset>
+                        <label class="ls-label col-12">
+                            <b class="ls-label-text">Nome completo</b>
+                            <input type="text" name="nome">
+                        </label>
+                        <label class="ls-label col-12">
+                            <b class="ls-label-text">Telefone</b>
+                            <input type="text" name="telefone" class="ls-mask-phone8_with_ddd" placeholder="(99) 9999-9999">
+                        </label>
+                        <label class="ls-label col-12">
+                            <b class="ls-label-text">Email</b>
+                            <input type="text" name="email">
+                        </label>
+
+                    </fieldset>
+            </div>
+            <div class="ls-modal-footer">
+                <input type="hidden" value="<?=$this->session->userdata('usuario')[0]['psicologo_id']?>" name="id_psicologo">
+                <button type="submit" class="ls-btn-primary">Salvar</button>
+            </div>
+            </form>
+        </div>
+        </div>
+
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
         <?php if($this->session->flashdata('vazio')):?>
 

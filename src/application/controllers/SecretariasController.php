@@ -13,6 +13,7 @@ class SecretariasController extends CI_Controller
 		$this->load->model('SecretariasModel','secretarias');
 		$this->load->model('ClinicaSecretariaModel', 'clinicasecretaria');
 		$this->load->model('UsuariosModel','usuarios');
+		$this->load->model('PacientesModel','pacientes');
 
 		if ($this->usr == NULL) 
 		{
@@ -66,5 +67,15 @@ class SecretariasController extends CI_Controller
 		$this->secretarias->delete($id);
 		$this->usuarios->delete($q->id);
 		redirect('view-secretaria');
+	}
+
+	public function addpaciente()
+	{
+		$paciente_reg = $this->input->post();
+
+		$this->pacientes->add($paciente_reg);
+		$this->session->set_flashdata("add_paciente",'Adcionado com sucesso!');
+
+		redirect('view-agenda');
 	}
 }
