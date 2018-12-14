@@ -64,38 +64,6 @@
 			</form>
 		</div>
 
-        <div class="ls-modal" id="adicionarPaciente">
-        <div class="ls-modal-box">
-            <div class="ls-modal-header">
-                <button data-dismiss="modal">&times;</button>
-                <h4 class="ls-modal-title">Adicione pacientes</h4>
-            </div>
-            <div class="ls-modal-body" id="myModalBody">
-                <form method="post" action="<?php echo base_url('SecretariasController/addpaciente')?>" class="ls-form ls-form-horizontal row">
-                    <fieldset>
-                        <label class="ls-label col-12">
-                            <b class="ls-label-text">Nome completo</b>
-                            <input type="text" name="nome">
-                        </label>
-                        <label class="ls-label col-12">
-                            <b class="ls-label-text">Telefone</b>
-                            <input type="text" name="telefone" class="ls-mask-phone8_with_ddd" placeholder="(99) 9999-9999">
-                        </label>
-                        <label class="ls-label col-12">
-                            <b class="ls-label-text">Email</b>
-                            <input type="text" name="email">
-                        </label>
-
-                    </fieldset>
-            </div>
-            <div class="ls-modal-footer">
-                <input type="hidden" value="<?=$this->session->userdata('usuario')[0]['psicologo_id']?>" name="id_psicologo">
-                <button type="submit" class="ls-btn-primary">Salvar</button>
-            </div>
-            </form>
-        </div>
-        </div>
-
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
         <?php if($this->session->flashdata('vazio')):?>
 
@@ -185,6 +153,8 @@
             data:{'id':id},
             success:function(data){
                 $('#nomedopaciente').val(data[0].nomepaciente)
+                $('#email').val(data[0].email)
+                $('#telefone').val(data[0].telefone)
             }
         })
 	    
@@ -369,12 +339,32 @@
         <h4 class="ls-modal-title">Informações do horário</h4>
         </div>
         <div class="ls-modal-body">
+            <p><b>Importante:</b> Pesquise o nome do paciente para ver se ele está cadastrado no sistema</p>
+            <div class="col-12">
+                <input type="text" name="nomePesquisa" id='nome'>
+                <button type="button" id="procurarPacientes" class="ls-ico-search ls-btn"></button>
+            </div>
+                    
+            <hr>
+
             <form method="post" action="<?php echo base_url('AgendaController/update')?>" class="ls-form ls-form-horizontal row">
                 <fieldset>
                     <label class="ls-label col-12">
                         <b class="ls-label-text">Paciente</b>
                         <input type="text" name="nomepaciente" id="nomedopaciente">
                     </label>
+
+                    <label class="ls-label col-12">
+                        <b class="ls-label-text">Telefone</b>
+                        <input type="text" name="telefone" class="ls-mask-phone8_with_ddd" placeholder="(99) 9999-9999" id="telefone">
+                    </label>
+
+                    <label class="ls-label col-12">
+                        <b class="ls-label-text">Email</b>
+                        <input type="text" name="email" placeholder="exemplo@gmail.com" id="email">
+                    </label>
+
+
                     <label class="ls-label col-12">
                         <input type="hidden" name="id" id="idagenda" value="">
                         <button type='submit' id="atualizar" class="ls-btn-primary">Salvar</button>
@@ -385,4 +375,68 @@
     </div>
 </div>
 
-<!-- Requisição para recupera nome do paciente (caso exista) que foi encaixado -->
+
+    <div class="ls-modal" id="adicionarPaciente">
+        <div class="ls-modal-box">
+            <div class="ls-modal-header">
+                <button data-dismiss="modal">&times;</button>
+                <h4 class="ls-modal-title">Adicione pacientes</h4>
+            </div>
+            
+            <div id="lista">
+            
+            </div>
+
+            <div class="ls-modal-body" id="myModalBody">
+                <form method="post" action="<?php echo base_url('SecretariasController/addpaciente')?>" class="ls-form ls-form-horizontal row">
+                    <fieldset>
+                        <label class="ls-label col-12">
+                            <b class="ls-label-text">Nome completo</b>
+                            <input type="text" name="nome">
+                        </label>
+                        <label class="ls-label col-12">
+                            <b class="ls-label-text">Telefone</b>
+                            <input type="text" name="telefone" class="ls-mask-phone8_with_ddd" placeholder="(99) 9999-9999">
+                        </label>
+                        <label class="ls-label col-12">
+                            <b class="ls-label-text">Email</b>
+                            <input type="text" name="email">
+                        </label>
+
+                    </fieldset>
+            </div>
+            <div class="ls-modal-footer">
+                <input type="hidden" value="<?=$this->session->userdata('usuario')[0]['psicologo_id']?>" name="id_psicologo">
+                <button type="submit" class="ls-btn-primary">Salvar</button>
+            </div>
+            </form>
+        </div>
+    </div>
+
+
+<script>
+
+$('#procurarPacientes').click(function(){
+    nome = $('#nome').val()
+    $.ajax({
+        type:'ajax',
+        dataType:'json',
+        method:'post',
+        url:'<?=base_url('AgendaController/recuperarPacientes')?>',
+        data:{'nomePesquisa': nome},
+        success:function(data){
+            for(i=0; i < data.length; i++){
+                $('#lista').append(
+                "<div id='field"+i+"'>" +
+                    "<input type='time' name='hora[]' required>" +
+                    "<button class='btn_remove' type='button' id='"+i+"'>Remover</button>" +
+                "</div>")
+            }
+        },
+        error:function(){ alert('Fatal') }
+    })
+    
+})
+
+</script>
+

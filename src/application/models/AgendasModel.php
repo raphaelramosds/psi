@@ -22,6 +22,7 @@ class AgendasModel extends CI_Model
 
     }
 
+
     public function delete($id)
     {
         $this->db->where('id', $id);
