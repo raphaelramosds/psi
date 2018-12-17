@@ -52,9 +52,6 @@
 					</label>
 
 					<button type="submit" class='ls-btn' >Buscar agenda</button>
-                    <?php if($this->session->userdata('usuario')[1]['role'] == 2):?>
-                        <button type="button" class="ls-btn-primary" data-ls-module="modal" data-target="#adicionarPaciente">Adicionar paciente</button>
-                    <?php endif;?>
                 
                     <?php if ($this->session->userdata('usuario')[1]['role'] == 1  ): ?>
                     <a data-ls-module="modal" data-target="#modalLarge" class="ls-btn-primary" class='ls-btn' style="color:white;">Abrir novo horário</a>
@@ -332,11 +329,13 @@
     </div>
 </div>
 
+
 <div class="ls-modal" id="encaixar">
     <div class="ls-modal-small">
         <div class="ls-modal-header">
         <button data-dismiss="modal">&times;</button>
-        <h4 class="ls-modal-title">Informações do horário</h4>
+        <h4 class="ls-modal-title">Encaixar o paciente</h4>
+        <p>Encaixe o paciente ao pedir seu nome, telefone e email</p>
         </div>
         <div class="ls-modal-body">
             <p><b>Importante:</b> Pesquise o nome do paciente para ver se ele está cadastrado no sistema</p>
@@ -344,6 +343,13 @@
                 <input type="text" name="nomePesquisa" id='nome'>
                 <button type="button" id="procurarPacientes" class="ls-ico-search ls-btn"></button>
             </div>
+
+            <hr>
+
+            <div id="listapacientes" class="col-12">
+                
+            </div>
+
                     
             <hr>
 
@@ -367,13 +373,52 @@
 
                     <label class="ls-label col-12">
                         <input type="hidden" name="id" id="idagenda" value="">
-                        <button type='submit' id="atualizar" class="ls-btn-primary">Salvar</button>
+                        <button type='submit' id="atualizar" class="ls-btn-primary">Encaixar</button>
+                        <?php if($this->session->userdata('usuario')[1]['role'] == 2):?>
+                        <button type="button" class="ls-btn ls-tooltip-top-left" aria-label="Se você não encontrar o paciente, cadastre ele clicando aqui" data-ls-module="modal" data-target="#adicionarPaciente">Adicionar paciente</button>
+                        <?php endif;?>
                     </label>
                 </fieldset>
             </form>
         </div>
     </div>
 </div>
+
+<script>
+$('#procurarPacientes').click(function(){
+    nome = $('#nome').val()
+    $.ajax({
+        type:'ajax',
+        dataType:'json',
+        method:'post',
+        url:'<?=base_url('AgendaController/recuperarPacientes')?>',
+        data:{'nomePesquisa': nome},
+        success:function(data){
+            $('#listapacientes .ls-box').remove()
+            $('#listapacientes .ls-alert-warning').remove()
+
+            if(data.length == 0){
+                $('#listapacientes').append("<div class='ls-alert-warning'><strong>Não encontrado:</strong> Cheque duas vezes. Você pode ter esquecido algum detalhe.</div>")
+            }
+
+            else{
+                for(i=0; i < data.length; i++){
+
+                    $('#listapacientes').append(
+                        "<div class='ls-box'>" +
+                        "<p><b>Nome: </b>" + data[i].nome + "</p>" +
+                        "<p><b>Telefone: </b>" + data[i].telefone + "</p>" +
+                        "<p><b>Email: </b>" + data[i].email + "</p>"+
+                        "</div>") 
+                }
+            }
+        },
+        error:function(){ alert('Fatal') }
+    })
+    
+})
+
+</script>
 
 
     <div class="ls-modal" id="adicionarPaciente">
@@ -383,10 +428,6 @@
                 <h4 class="ls-modal-title">Adicione pacientes</h4>
             </div>
             
-            <div id="lista">
-            
-            </div>
-
             <div class="ls-modal-body" id="myModalBody">
                 <form method="post" action="<?php echo base_url('SecretariasController/addpaciente')?>" class="ls-form ls-form-horizontal row">
                     <fieldset>
@@ -414,29 +455,4 @@
     </div>
 
 
-<script>
-
-$('#procurarPacientes').click(function(){
-    nome = $('#nome').val()
-    $.ajax({
-        type:'ajax',
-        dataType:'json',
-        method:'post',
-        url:'<?=base_url('AgendaController/recuperarPacientes')?>',
-        data:{'nomePesquisa': nome},
-        success:function(data){
-            for(i=0; i < data.length; i++){
-                $('#lista').append(
-                "<div id='field"+i+"'>" +
-                    "<input type='time' name='hora[]' required>" +
-                    "<button class='btn_remove' type='button' id='"+i+"'>Remover</button>" +
-                "</div>")
-            }
-        },
-        error:function(){ alert('Fatal') }
-    })
-    
-})
-
-</script>
 
