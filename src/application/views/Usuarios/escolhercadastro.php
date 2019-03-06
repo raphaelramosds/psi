@@ -13,7 +13,7 @@
       <div class="ls-login-inner">
         <div class="ls-login-container">
           <div class="headerlogo">
-            <img src="<?=base_url('assets/images/logo2.png')?>" width="90px" height="50px">
+            <img src="<?=base_url('assets/images/logo2.png')?>" height="50px" widht="50px; ">
           </div>
           <div class="ls-login-box ls-md-margin-top"  style="background-color:white;color:white;">
               <style>.headerlogo{margin-bottom:20px;}.input-style{border-bottom:3px solid white;}</style>

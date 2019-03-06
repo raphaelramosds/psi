@@ -5,7 +5,7 @@
           <div class='ls-background-primary ls-sm-space ls-sm-margin-bottom ls-text-md ls-ico-checkmark'><?=$update_info?></div>
         <?php endif;?>
 
-        <h1 class="ls-title-intro ls-ico-home">Prontuários em um Sistema Inteligente</h1>
+        <h1 class="ls-title-intro ls-ico-home ls-txt-center"></h1>
 
         <?php if ($this->session->userdata('usuario')[1]['role'] == 1): ?>
           <div class="ls-box ls-board-box ls-no-border">
@@ -17,8 +17,8 @@
                     <h6 class="ls-title-4">Pacientes</h6>
                   </div>
                   <div class="ls-box-body">
-                    <span class="ls-board-data " style="font-size:40px; font-family:sans-serif">
-                     <strong><?=$counterpaciente?></strong>
+                    <span class="ls-board-data " style="font-size:70px;color:rgba(0,0,0,.2)">
+                     <span><?=$counterpaciente?></span>
                     </span>
                   </div>
                 </div>
@@ -30,8 +30,8 @@
                     <h6 class="ls-title-4">CLÍNICAS</h6>
                   </div>
                   <div class="ls-box-body">
-                    <span class="ls-board-data " style="font-size:40px; font-family:sans-serif">
-                     <strong><?=$counterclinica; ?></strong>
+                    <span class="ls-board-data " style="font-size:70px;color:rgba(0,0,0,.2)">
+                     <span><?=$counterclinica; ?></span>
                     </span>
                   </div>
                 </div>
@@ -43,8 +43,8 @@
                     <h6 class="ls-title-4">Prontuários</h6>
                   </div>
                   <div class="ls-box-body">
-                    <span class="ls-board-data " style="font-size:40px; font-family:sans-serif">
-                     <strong><?=$countersprontuario?></strong>
+                    <span class="ls-board-data " style="font-size:70px;color:rgba(0,0,0,.2)">
+                     <span><?=$countersprontuario?></span>
                     </span>
                   </div>
                 </div>

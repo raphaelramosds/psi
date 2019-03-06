@@ -1,7 +1,7 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');?>
 <html class="ls-theme-light-green">
   <head>
-    <title>Prontuários em um Sistema inteligente</title>
+    <title>Sistema para psicólogos</title>
     <meta name="viewport" content = "width=device-width, initial-scale=1, user-scalable=no">
     <!-- Styles -->
     <link href="<?=base_url('assets/css/locastyle.css')?>" rel="stylesheet" type="text/css">
@@ -27,12 +27,22 @@
         </div>
       </div>
       <span class="ls-show-sidebar ls-ico-menu"></span>
-      <h1 class="ls-brand-name"><a href="<?=base_url('home')?>" class="ls-ico">
-      <img src="<?=base_url('assets/images/logo2.png')?>" height="30px" width="60px"></a>
+
+      <h1 class="ls-brand-name" style="position:relative;left:20px;">
+        <a href="<?=base_url('home')?>">
+          <img src="<?=base_url('assets/images/logo.png')?>" style="height:40px;width:35px;position:relative; bottom:3px;" class="img-responsive" alt="Logotipo do sistema">
+          <strong style="position:relative;bottom:10px;">Psicologia</strong>
+
+        </a> 
       </h1>
     </div>
+    <style>
+      .ls-menu ul li{ border:none; }
+      
+    </style>
+
     <aside class="ls-sidebar">
-      <div class="ls-sidebar-inner">
+      <div class="ls-sidebar-inner "> 
           <nav class="ls-menu">
             <ul>
               <?php if ($this->session->userdata('usuario')[1]['role'] == 1  ): ?>
