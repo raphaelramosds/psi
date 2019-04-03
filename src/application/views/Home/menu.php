@@ -30,8 +30,8 @@
 
       <h1 class="ls-brand-name" style="position:relative;left:20px;">
         <a href="<?=base_url('home')?>">
-          <img src="<?=base_url('assets/images/logo.png')?>" style="height:40px;width:35px;position:relative; bottom:3px;" class="img-responsive" alt="Logotipo do sistema">
-          <strong style="position:relative;bottom:10px;">Psicologia</strong>
+          <img src="<?=base_url('assets/images/logo2.png')?>" style="height:35px" class="img-responsive" alt="Logotipo do sistema">
+          
 
         </a> 
       </h1>
