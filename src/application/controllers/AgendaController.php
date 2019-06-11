@@ -180,6 +180,7 @@ class AgendaController extends CI_Controller
 		$this->load->view('Agenda/index', $this->session->userdata('agendas'));
 	}
 
+	// Preencher campos das informações do paciente que está relacionadas ao horário 
 	public function recuperarPaciente()
 	{
 		$q = "SELECT * FROM agenda AS a WHERE a.id = ".$this->input->post('id');
@@ -191,7 +192,8 @@ class AgendaController extends CI_Controller
 	// A partir do nome e o id do psicólogo, essa query vai retornar todos os emails, telefones e nomes dos pacientes filtrados
 	public function recuperarPacientes()
 	{
-		$result = $this->pacientes->search($this->usr[0]['psicologo_id'], $this->input->post('nomePesquisa'));
+		$id = ($this->usr[1]['role'] == 1) ? $this->usr[0]['id'] : $this->usr[0]['psicologo_id'];
+		$result = $this->pacientes->search($id, $this->input->post('nomePesquisa'));
 		echo json_encode($result);
 		exit;
 
