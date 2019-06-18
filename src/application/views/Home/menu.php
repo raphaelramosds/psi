@@ -30,9 +30,7 @@
 
       <h1 class="ls-brand-name" style="position:relative;left:20px;">
         <a href="<?=base_url('home')?>">
-          <img src="<?=base_url('assets/images/logo2.png')?>" style="height:35px" class="img-responsive" alt="Logotipo do sistema">
-          
-
+          <img src="<?=base_url('assets/images/Negativa.png')?>" style="height:4vh" class="img-responsive" alt="Logotipo do sistema">
         </a> 
       </h1>
     </div>

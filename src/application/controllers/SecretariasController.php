@@ -9,6 +9,7 @@ class SecretariasController extends CI_Controller
 	{
 		parent::__construct();
 		$this->usr = $this->session->userdata('usuario');
+		$this->load->view('Home/menu');
 		$this->load->model('ClinicasModel', 'clinicas');
 		$this->load->model('SecretariasModel','secretarias');
 		$this->load->model('ClinicaSecretariaModel', 'clinicasecretaria');
@@ -31,7 +32,7 @@ class SecretariasController extends CI_Controller
 			'psicologo' => $this->usr[0]['id']
 		);
 
-		$this->load->view('Home/menu');
+		
 		$this->load->view('Secretarias/index', $dados);
 
 	}
@@ -47,7 +48,6 @@ class SecretariasController extends CI_Controller
 			'usuario'		=> $this->usuarios->view_user($q->id)
 		);
 
-		$this->load->view('Home/menu');
 		// Exiba dois opção para dois Formulários: Informações da Secretária e Informações Usuário
 		$this->load->view('Secretarias/update', $data_update);
 	}

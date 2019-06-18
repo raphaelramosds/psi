@@ -55,8 +55,8 @@ add constraint fk_clinica_secretaria_secretaria foreign key (secretaria_id) refe
 
 create table paciente(
 	id int AUTO_INCREMENT primary key,
-	numerosus int,
-	cartaosaude int,
+	numerosus varchar(50),
+	cartaosaude varchar(50),
 	profissao varchar(50),
 	email varchar(50) not null,
 	nome varchar(50) not null,

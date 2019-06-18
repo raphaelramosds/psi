@@ -9,6 +9,7 @@ class ClinicaSecretaria extends CI_Controller
 	{
 		parent::__construct();
 		$this->usr = $this->session->userdata('usuario');
+		$this->load->view('Home/menu');
 		$this->load->model('ClinicasModel',"clinicas");
         $this->load->model('PacientesModel',"pacientes");
         $this->load->model('ClinicaSecretariaModel', 'clinicasecretaria');
@@ -26,7 +27,6 @@ class ClinicaSecretaria extends CI_Controller
 			'secretaria' => $id
 		);
 		
-        $this->load->view('Home/menu');
         $this->load->view('ClinicaSecretaria/index',$dados);
 	}
 

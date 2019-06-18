@@ -8,6 +8,7 @@ class ProntuariosController extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
+		$this->load->view('Home/menu');
 		$this->usr = $this->session->userdata('usuario');
 		$this->load->model('ProntuariosModel','prontuarios');
 		$this->load->model('ClinicasModel','clinicas');
@@ -39,7 +40,6 @@ class ProntuariosController extends CI_Controller
 			'update_prontuario' => $this->session->flashdata('update_prontuario'),
 		); 
 
-		$this->load->view('Home/menu');
 		$this->load->view('Prontuarios/index', $data_flash_inf);
 	}
 
@@ -57,7 +57,6 @@ class ProntuariosController extends CI_Controller
 			'psicologo' 		=> $id
 		);
 
-		$this->load->view('Home/menu');
 		$this->load->view('Prontuarios/index', $pesquisa);
 	}
 
@@ -91,7 +90,6 @@ class ProntuariosController extends CI_Controller
 			'pacientes'	    => $this->pacientes->view($id_psicologo)
 		);
 
-		$this->load->view('Home/menu');
 		$this->load->view('Prontuarios/update', $data_prontuarios);
 	}
 

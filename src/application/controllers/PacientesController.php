@@ -8,6 +8,7 @@ class PacientesController extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
+		$this->load->view('Home/menu');
 		$this->usr = $this->session->userdata('usuario');
 		$this->load->model('PacientesModel','pacientes');
 		$this->load->model('ClinicasModel','clinicas');
@@ -40,7 +41,6 @@ class PacientesController extends CI_Controller
 			'clinicas' 			=> $this->clinicas->view($id)
 		);
 
-		$this->load->view('Home/menu');
 		$this->load->view('Pacientes/index', $data_pagination_paciente);
 	}
 
@@ -48,7 +48,6 @@ class PacientesController extends CI_Controller
 	{
 		$paciente = $this->input->post('paciente');
 
-		$this->load->view('Home/menu');
 
 		$data_pacientes_search = array(
 			'datapacientes'	=> $this->pacientes->search($this->usr[0]['id'], $paciente),
@@ -61,7 +60,6 @@ class PacientesController extends CI_Controller
 
 	public function create()
 	{
-		$this->load->view('Home/menu');
 		$this->load->view('Pacientes/create', array('psicologo_id'=>$this->usr[0]['id']));
 	}
 	
@@ -89,8 +87,6 @@ class PacientesController extends CI_Controller
 
 	public function edit($id)
 	{	
-		
-		$this->load->view('Home/menu');
 		$this->load->view('Pacientes/update', array('pacientes'=>$this->pacientes->view_id($id)));
 	}
 

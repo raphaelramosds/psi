@@ -9,6 +9,7 @@ class ClinicasController extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->model('ClinicasModel','clinicas');
+		$this->load->view('Home/menu');
 		$this->usr = $this->session->userdata('usuario');
 		if ($this->usr == NULL || $this->usr[1]['role'] == 2) 
 		{
@@ -29,7 +30,6 @@ class ClinicasController extends CI_Controller
 			'delete_clinica' => $this->session->flashdata('delete_clinica') 
 		);
 
-		$this->load->view('Home/menu');
 		$this->load->view('Clinicas/index', $data_clinica_pagination);
 	}
 
@@ -37,7 +37,6 @@ class ClinicasController extends CI_Controller
 	{
 		$nomeclinica = $this->input->post('nome');
 
-		$this->load->view('Home/menu');
 		$this->load->view('Clinicas/index', array(
 			'dataclinica' => $this->clinicas->search($this->usr[0]['id'], $nomeclinica),
 			'delete' => $this->session->flashdata('delete')
@@ -47,7 +46,6 @@ class ClinicasController extends CI_Controller
 	public function create()
 	{
 
-		$this->load->view('Home/menu');
 		$this->load->view('Clinicas/create',array('psicologo' => $this->usr[0]['id']));
 	}
 
@@ -76,7 +74,6 @@ class ClinicasController extends CI_Controller
 	public function edit($id)
 	{
 		
-		$this->load->view('Home/menu');
 		$this->load->view('Clinicas/update', array('clinicas' => $this->clinicas->view_id($id)));
 	}
 
