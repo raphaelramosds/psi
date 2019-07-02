@@ -31,8 +31,8 @@
 			</tr>
 			<?php foreach ($datapacientes as $value): ?>
 				<?php
-				$this->db->from('prontuario, paciente');
-				$this->db->where('prontuario.paciente_id = '.$value->id);
+				$this->db->from($this->db->dbprefix('prontuario').','.$this->db->dbprefix('paciente'));
+				$this->db->where($this->db->dbprefix('prontuario').".paciente_id = ".$value->id);
 				$paciente_prontuario = $this->db->get()->result();
 				?>
 				<tr>

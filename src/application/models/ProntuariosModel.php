@@ -8,7 +8,7 @@ class ProntuariosModel extends CI_Model
 
 	public function count_results($id){
 		$this->db->select('id');
-		$this->db->from('prontuario');
+		$this->db->from($this->db->dbprefix('prontuario'));
 		$this->db->where('id_psicologo',$id);
 		$num_results = $this->db->count_all_results();
 		return $num_results;
@@ -17,9 +17,9 @@ class ProntuariosModel extends CI_Model
 	public function view($id, $paciente)
 	{
 		// SELECT * FROM prontuario WHERE psicologo.crp = prontuario.psicologo_crp AND psicologo.crp = $crp
-		$this->db->from('prontuario');
-		$this->db->where('prontuario.id_psicologo = '.$id);
-		$this->db->where('prontuario.paciente_id = '.$paciente);
+		$this->db->from($this->db->dbprefix('prontuario'));
+		$this->db->where($this->db->dbprefix('prontuario').'.id_psicologo = '.$id);
+		$this->db->where($this->db->dbprefix('prontuario').'.paciente_id = '.$paciente);
 		$query = $this->db->get();
 		return $query->result();
 	}
@@ -37,19 +37,19 @@ class ProntuariosModel extends CI_Model
 
 	public function add($dados)
 	{
-		$this->db->insert('prontuario',$dados);
+		$this->db->insert($this->db->dbprefix('prontuario'),$dados);
 	}
 
 	public function delete($idprontuario)
 	{
 		$this->db->where('numeroprontuario',$idprontuario);
-		$this->db->delete('prontuario');
+		$this->db->delete($this->db->dbprefix('prontuario'));
 	}
 
 	public function view_id($id)
 	{
 		$this->db->where('numeroprontuario', $id);
-		$query = $this->db->get('prontuario');
+		$query = $this->db->get($this->db->dbprefix('prontuario'));
 		return $query->row();
 	}
 
@@ -57,12 +57,12 @@ class ProntuariosModel extends CI_Model
 	{
 		$this->db->set($data);
 		$this->db->where('numeroprontuario', $this->numeroprontuario);
-		$this->db->update('prontuario');
+		$this->db->update($this->db->dbprefix('prontuario'));
 	}
 
 	public function search($id,$mes,$ano,$paciente)
 	{
-        $query = "SELECT * FROM prontuario 
+        $query = "SELECT * FROM ".$this->db->dbprefix('prontuario')."
         WHERE paciente_id = $paciente AND 
     	id_psicologo = $id AND
         Month(data) = $mes AND

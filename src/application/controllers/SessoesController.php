@@ -29,7 +29,7 @@ class SessoesController extends CI_Controller
 		list($ano, $mes) = explode('-', $this->input->post('mes'));
 
 		$data_flash = array(
-			'datasessoes' 	=> $this->sessoes->search($prontuario, $mes, $ano)
+			'datasessoes' => $this->sessoes->search($prontuario, $mes, $ano)
 		);
 
 		$this->load->view('Sessoes/index', $data_flash);

@@ -7,9 +7,9 @@ class SessoesModel extends CI_Model
 
 	public function view($numeroprontuario)
 	{
-		$this->db->from('prontuario, sessao');
-		$this->db->where('prontuario.numeroprontuario = sessao.numero_prontuario');
-		$this->db->where('sessao.numero_prontuario = '.$numeroprontuario);
+		$this->db->from($this->db->dbprefix('prontuario').','. $this->db->dbprefix('sessao'));
+		$this->db->where($this->db->dbprefix('prontuario').'.numeroprontuario ='. $this->db->dbprefix('sessao').'.numero_prontuario');
+		$this->db->where($this->db->dbprefix('sessao').'.numero_prontuario = '.$numeroprontuario);
 		$query = $this->db->get();
 		return $query->result();
 	}
@@ -17,36 +17,38 @@ class SessoesModel extends CI_Model
 	public function view_id($id)
 	{
 		$this->db->where('id', $id);
-		$query = $this->db->get('sessao');
+		$query = $this->db->get($this->db->dbprefix('sessao'));
 		return $query->row();
 	}
 
 	public function add($dados)
 	{
-		$this->db->insert('sessao', $dados);
+		$this->db->insert($this->db->dbprefix('sessao'), $dados);
 	}
 	
 	public function delete($id)
 	{
 		$this->db->where('id',$id);
-		$this->db->delete('sessao');
+		$this->db->delete($this->db->dbprefix('sessao'));
 	}
 
 	public function update($dados)
 	{
 		$this->db->where('id', $this->id);
 		$this->db->set($dados);
-		$this->db->update('sessao');
+		$this->db->update($this->db->dbprefix('sessao'));
 	}
 
 	public function search($id, $mes, $ano)
 	{
-		$query = "SELECT * FROM sessao 
-        WHERE numero_prontuario = $id AND 
+		$query = "SELECT * FROM ".$this->db->dbprefix('sessao').
+		" WHERE numero_prontuario = $id AND 
         Month(data) = $mes AND
         Year(data) = $ano
-        GROUP BY data ORDER BY data ASC";
-        return $this->db->query($query)->result();
+		GROUP BY data ORDER BY data ASC";
+		$resultado = $this->db->query($query);
+
+		return $resultado->result();
 	}
 
 }

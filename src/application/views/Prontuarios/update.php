@@ -13,7 +13,7 @@
 								<?php
 								$idclinica = $prontuarios->clinica_id;
 								$this->db->select('nome');
-								$this->db->from('clinica');
+								$this->db->from($this->db->dbprefix('clinica'));
 								$this->db->where('clinica.id = '.$idclinica);
 								$nome = $this->db->get()->result();
 								foreach ($nome as $value) 

@@ -7,13 +7,13 @@ class AgendasModel extends CI_Model
 
     public function add($dados)
     {
-        $this->db->insert('agenda', $dados);
+        $this->db->insert($this->db->dbprefix('agenda'), $dados);
     }
 
     public function search($id, $clinica=NULL, $mes=NULL, $ano=NULL)
     {
-        $query = "SELECT * FROM agenda 
-        WHERE clinica_id = $clinica AND 
+        $query = "SELECT * FROM ".$this->db->dbprefix('agenda').
+        " WHERE clinica_id = $clinica AND 
         psicologo_id = $id AND
         Month(dia) = $mes AND
         Year(dia) = $ano
@@ -26,13 +26,13 @@ class AgendasModel extends CI_Model
     public function delete($id)
     {
         $this->db->where('id', $id);
-		$this->db->delete('agenda');
+		$this->db->delete($this->db->dbprefix('agenda'));
     }
 
     public function update($dados)
     {
         $this->db->set($dados);
         $this->db->where('id', $this->id);
-        $this->db->update('agenda');
+        $this->db->update($this->db->dbprefix('agenda'));
     }
 }

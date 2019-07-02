@@ -183,7 +183,7 @@ class AgendaController extends CI_Controller
 	// Preencher campos das informações do paciente que está relacionadas ao horário 
 	public function recuperarPaciente()
 	{
-		$q = "SELECT * FROM agenda AS a WHERE a.id = ".$this->input->post('id');
+		$q = "SELECT * FROM ".$this->db->dbprefix('agenda')." AS a WHERE a.id = ".$this->input->post('id');
 		$result = $this->db->query($q)->result();
 		echo json_encode($result);
 		exit;

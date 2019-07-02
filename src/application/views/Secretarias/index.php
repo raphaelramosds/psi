@@ -18,8 +18,8 @@
 					<p>Agendas de clínicas que podem ser alteradas:</p>
 					<dt>
 					<?php 
-						$q = "SELECT * FROM clinica as c
-						WHERE c.id IN (SELECT cs.clinica_id FROM clinica_secretaria as cs WHERE cs.secretaria_id = $row->id)
+						$q = "SELECT * FROM ".$this->db->dbprefix('clinica')." as c
+						WHERE c.id IN (SELECT cs.clinica_id FROM ". $this->db->dbprefix('clinica_secretaria') ." as cs WHERE cs.secretaria_id = $row->id)
 						AND c.id_psicologo = $psicologo";
 						$clinicas = $this->db->query($q)->result();
 
@@ -29,7 +29,7 @@
 							<small><?=$cs->nome?></small>
 							<?php 
 								// Recuperar id da table clinica_secretaria a partir do ID da agenda
-								$c = "SELECT * FROM clinica_secretaria AS cs WHERE cs.clinica_id = $cs->id AND secretaria_id = $row->id";
+								$c = "SELECT * FROM ".$this->db->dbprefix('clinica_secretaria')." AS cs WHERE cs.clinica_id = $cs->id AND secretaria_id = $row->id";
 								$result = $this->db->query($c)->row();	
 							?>
 

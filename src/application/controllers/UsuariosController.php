@@ -149,7 +149,7 @@ class UsuariosController extends CI_Controller
 		if($user_reg['role'] == 2)
 		{
 			$codigo = $this->input->post('codigopsicologo');
-			$request = $this->db->query("SELECT p.id FROM psicologo as p WHERE p.codigo = $codigo")->result();
+			$request = $this->db->query("SELECT p.id FROM ".$this->db->dbprefix('psicologo')." as p WHERE p.codigo = $codigo")->result();
 			$view_redirect = 'create-secretaria';
 
 			if(count($request) == 0)
@@ -181,13 +181,13 @@ class UsuariosController extends CI_Controller
 
 		$users_count 		= count($this->usuarios->duplicate_user($user_reg['username']));
 		$email_count		= count($this->usuarios->verify_email($user_reg['email']));
-		$crp_count			= count($this->db->query("SELECT * FROM psicologo WHERE crp = '".$psicologo_reg['crp']."'")->result());
+		$crp_count			= count($this->db->query("SELECT * FROM ".$this->db->dbprefix('psicologo')." WHERE crp = '".$psicologo_reg['crp']."'")->result());
 		$view_redirect		= ($user_reg['role'] == 2) ? 'create-secretaria' : 'cadastre';
 
 		if($user_reg['role'] == 2)
 		{
 
-			$request = $this->db->query("SELECT id FROM psicologo as p WHERE p.codigo = $codigo")->result();
+			$request = $this->db->query("SELECT id FROM ".$this->db->dbprefix('psicologo')." as p WHERE p.codigo = $codigo")->result();
 
 			if(count($request) == 0)
 			{
@@ -232,7 +232,7 @@ class UsuariosController extends CI_Controller
 
 		$this->usuarios->add($user_reg);
 
-		$query 			= $this->db->query("SELECT * FROM usuario WHERE username = '".$user_reg['username']."'");
+		$query 			= $this->db->query("SELECT * FROM ".$this->db->dbprefix('usuario')." WHERE username = '".$user_reg['username']."'");
 		$find_usuario 	= $query->row();
 		$id 			= $find_usuario->id;
 		$role 			= $find_usuario->role;

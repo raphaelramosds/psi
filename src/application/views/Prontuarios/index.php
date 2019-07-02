@@ -4,7 +4,7 @@ $xml = simplexml_load_file($url);
 
 
 	$this->db->select('id, nome');
-	$this->db->from('paciente');
+	$this->db->from($this->db->dbprefix('paciente'));
 	$this->db->where('id = '.$this->session->userdata('paciente'));
 	$this->db->order_by("nome", "asc");
 	
@@ -57,7 +57,7 @@ $xml = simplexml_load_file($url);
 
 						<?php
 						$this->db->select('nome');
-						$this->db->from('clinica');
+						$this->db->from($this->db->dbprefix('clinica'));
 						$this->db->where('id = '.$value->clinica_id);
 						$this->db->order_by("nome", "asc");
 

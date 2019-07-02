@@ -16,6 +16,7 @@ $db['default'] = array(
         // 'database' => 'id6224306_psi',
         
         'dbdriver' => 'mysqli',
+        //'dbprefix' => 'psi_',
         'dbprefix' => '',
         'pconnect' => TRUE,
         'db_debug' => FALSE,

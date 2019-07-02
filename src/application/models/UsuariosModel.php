@@ -5,20 +5,20 @@ class UsuariosModel extends CI_Model
 
 	function add($dados)
 	{
-		$this->db->insert('usuario',$dados);
+		$this->db->insert($this->db->dbprefix('usuario'),$dados);
 	}
 
 	function duplicate_user($name)
 	{
 		$this->db->where('username',$name);
-		$query = $this->db->get('usuario')->result();
+		$query = $this->db->get($this->db->dbprefix('usuario'))->result();
 		return $query;
 	}
 
 	function verify_email($email)
 	{
 		$this->db->where('email',$email);
-		$query = $this->db->get('usuario')->result();
+		$query = $this->db->get($this->db->dbprefix('usuario'))->result();
 		
 		return $query;
 	}
@@ -26,13 +26,13 @@ class UsuariosModel extends CI_Model
 	function delete($id)
 	{
 		$this->db->where('id',$id);
-		$this->db->delete('usuario');
+		$this->db->delete($this->db->dbprefix('usuario'));
 	}
 
 	function view_user($id_usuario)
 	{
 		$this->db->where('id',$id_usuario);
-		$query = $this->db->get('usuario')->result();
+		$query = $this->db->get($this->db->dbprefix('usuario'))->result();
 
 		return $query;
 	}
@@ -41,13 +41,13 @@ class UsuariosModel extends CI_Model
 	{
 		$this->db->where('id', $this->id);
 		$this->db->set($dados);
-		$this->db->update('usuario');
+		$this->db->update($this->db->dbprefix('usuario'));
 	}
 
 	function update_pass($new_pass, $id_usuario)
 	{
 		$this->db->set('senha',$new_pass);
 		$this->db->where('id', $id_usuario);
-		$this->db->update('usuario');
+		$this->db->update($this->db->dbprefix('usuario'));
 	}
 }

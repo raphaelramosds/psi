@@ -14,10 +14,10 @@ class PacientesModel extends CI_Model
 			$this->db->limit($limit, $offset);
 		}
 
-		$this->db->from('psicologo, paciente');
-		$this->db->where('psicologo.id = paciente.id_psicologo');
+		$this->db->from($this->db->dbprefix('psicologo').",".$this->db->dbprefix('paciente'));
+		$this->db->where($this->db->dbprefix('psicologo').'.id ='.$this->db->dbprefix('paciente').'.id_psicologo');
 		$this->db->where('id_psicologo', $id);
-		$this->db->order_by("paciente.nome", "asc");
+		$this->db->order_by($this->db->dbprefix('paciente').".nome", "asc");
 		$query = $this->db->get();
 		return $query->result();
 	}
@@ -30,27 +30,27 @@ class PacientesModel extends CI_Model
 			//Número de registro a serem retornados ($limit) e a página de registro ($offset)
 			$this->db->limit($limit, $offset);
 		}
-		$this->db->from('paciente');
+		$this->db->from($this->db->dbprefix('paciente'));
 		$this->db->where('id_psicologo', $id);
-		$this->db->like('paciente.nome', $nomepaciente);
+		$this->db->like($this->db->dbprefix('paciente').'.nome', $nomepaciente);
 		return $this->db->get()->result();
 	}
 
 	public function add($dados)
 	{
-		$this->db->insert('paciente',$dados);
+		$this->db->insert($this->db->dbprefix('paciente'),$dados);
 	}
 
 	public function delete($id)
 	{
 		$this->db->where('id',$id);
-		$this->db->delete('paciente');
+		$this->db->delete($this->db->dbprefix('paciente'));
 	}
 
 	public function view_id($id)
 	{
 		$this->db->where('id', $id);
-		$query = $this->db->get('paciente');
+		$query = $this->db->get($this->db->dbprefix('paciente'));
 		return $query->row();
 	}
 	
@@ -58,13 +58,13 @@ class PacientesModel extends CI_Model
 	{
 		$this->db->set($dados);
 		$this->db->where('id',$this->id);
-		$this->db->update('paciente');
+		$this->db->update($this->db->dbprefix('paciente'));
 	}
 
 	public function count_results($id_psicologo)
 	{
 		$this->db->select('id');
-		$this->db->from('paciente');
+		$this->db->from($this->db->dbprefix('paciente'));
 		$this->db->where('id_psicologo',$id_psicologo);
 		$num_results = $this->db->count_all_results();
 		return $num_results;

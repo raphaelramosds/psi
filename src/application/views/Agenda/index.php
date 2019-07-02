@@ -2,7 +2,7 @@
     if ($this->session->userdata('usuario')[1]['role'] == 2  ):
         $id = $this->session->userdata('usuario')[0]['id'];
         $psicologo = $this->session->userdata('usuario')[0]['psicologo_id'];
-        $c = "SELECT * FROM clinica as c WHERE c.id IN (SELECT cs.clinica_id FROM clinica_secretaria as cs WHERE cs.secretaria_id = $id) AND c.id_psicologo = $psicologo";
+        $c = "SELECT * FROM ".$this->db->dbprefix('clinica')." as c WHERE c.id IN (SELECT cs.clinica_id FROM ".$this->db->dbprefix('clinica_secretaria')." as cs WHERE cs.secretaria_id = $id) AND c.id_psicologo = $psicologo";
         $clinicas = $this->db->query($c)->result();
     endif;
                         
