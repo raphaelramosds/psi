@@ -16,7 +16,7 @@
 					<hr>
 					<small>Espere alguns minutos até chegar ao seu email...</small>
 				</header>
-				<form action="<?=base_url()?>UsuariosController/confirm_code" role="form" method="POST">
+				<form action="<?=base_url()?>Usuarios/confirm_code" role="form" method="POST">
 					<fieldset>
 						<style>label{margin: 0 auto;}</style>
 						<?php if(isset($erro_code)):?>

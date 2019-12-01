@@ -14,7 +14,7 @@
 				<header class="ls-info-header" style="text-align:center;border:none">
 					<h2 class="ls-title-3" >Cadastro de Psicólogo</span></h2>
 				</header>
-				<form action="<?=base_url('UsuariosController/add')?>" role="form" method="POST">
+				<form action="<?=base_url('Usuarios/add')?>" role="form" method="POST">
 					<fieldset>
 						<label for="" class="ls-label">
 							<b class="ls-label-text">Informações do usuário <span class="ls-color-danger">*</span></b>

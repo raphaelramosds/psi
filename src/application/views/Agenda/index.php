@@ -22,7 +22,7 @@
             <?php endif;?>
 			<h5 class='ls-title-3'>Procurar agenda</h5>	
 			<hr>
-			<form method="POST" action="<?=base_url('AgendaController/search')?>" class="ls-form ls-form-horizontal row">
+			<form method="POST" action="<?=base_url('Agenda/search')?>" class="ls-form ls-form-horizontal row">
 				<fieldset>
 					<label class="ls-label col-md-6">
 						<b class="ls-label-text">Filtrar por Clínica</b>
@@ -146,7 +146,7 @@
             type:'ajax',
             dataType:'json',
             method:'post',
-            url:'<?=base_url('AgendaController/recuperarPaciente')?>',
+            url:'<?=base_url('Agenda/recuperarPaciente')?>',
             data:{'id':id},
             success:function(data){
                 $('#nomedopaciente').val(data[0].nomepaciente)
@@ -196,7 +196,7 @@
       <h4 class="ls-modal-title">Cadastrar nova Agenda</h4>
     </div>
     <div class="ls-modal-body">
-	<form action="<?=base_url('AgendaController/add')?>" method="POST" class="ls-form ls-form-horizontal row" data-ls-module="form">
+	<form action="<?=base_url('Agenda/add')?>" method="POST" class="ls-form ls-form-horizontal row" data-ls-module="form">
                 <fieldset>
                     <label class="ls-label col-md-12 col-lg-12 col-xs-12">
                         <b class="ls-label-text">Clínica</b>
@@ -224,26 +224,30 @@
                     </label>
 
 
-                   <div id="dynamic_fields" class="col-md-4 col-xs-12">
+                   <div id="dynamic_fields" class="col-xs-12">
                    </div>
 
 
                     <div class="ls-actions-btn">
                         <input type="hidden" name="psicologo_id" value="<?=$this->session->userdata('usuario')[0]['id']?>">
                         <button type="button" class="ls-btn" id="maishorarios">Adcionar horário</button>
-                        <button type="button" class="ls-btn" data-ls-module="modal" data-target="#dinamic" class="ls-btn-primary" class='ls-btn'> Registrar horários de forma dinâmica</button>
-                        <button type="submit" class="ls-btn">Salvar dados da Agenda</button>
+                        <button type="button" class="ls-btn" data-ls-module="modal" data-target="#dinamic" class="ls-btn-primary"> Registrar horários de forma dinâmica</button>
+                        <button type="submit" class="ls-btn-primary">Salvar dados da Agenda</button>
                     </div>
-
+                
+                    <style>
+                        .altura{ height:2em; }
+                    </style>
                     <script>
                     i = 0
 
                     $(document).on('click', '#maishorarios', function(){
                         $('#dynamic_fields').append(
                             "<div id='field"+i+"'>" +
-                                "<input type='time' name='hora[]' required>" +
-                                "<button class='btn_remove' type='button' id='"+i+"'>Remover</button>" +
-                            "</div>")
+                                "<input class='altura' type='time' name='hora[]' required />" +
+                                "<button class='altura btn_remove ls-cursor-pointer ls-ico-remove ls-btn-danger ls-xs-margin-left ls-no-margin' type='button' id='"+i+"'></button> <hr>" +
+                            "</div>"
+                        );
                         i++	
                     })
 
@@ -272,7 +276,7 @@
         <h4 class="ls-modal-title">Cadastrar nova Agenda com Intervalo de horário</h4>
         </div>
         <div class="ls-modal-body">
-            <form action="<?=base_url('AgendaController/add')?>" method="POST" class="ls-form ls-form-horizontal row" data-ls-module="form">
+            <form action="<?=base_url('Agenda/add')?>" method="POST" class="ls-form ls-form-horizontal row" data-ls-module="form">
             <fieldset>
                     <label class="ls-label col-md-12 col-lg-12 col-xs-12">
                         <b class="ls-label-text">Clínica</b>
@@ -316,7 +320,7 @@
 
                     <div class="ls-actions-btn">
                         <input type="hidden" name="psicologo_id" value="<?=$this->session->userdata('usuario')[0]['id']?>">
-                        <button type="submit" class="ls-btn">Salvar dados da Agenda</button>
+                        <button type="submit" class="ls-btn-primary">Salvar dados da Agenda</button>
                     </div>
 
 
@@ -353,7 +357,7 @@
                     
             <hr>
 
-            <form method="post" action="<?php echo base_url('AgendaController/update')?>" class="ls-form ls-form-horizontal row">
+            <form method="post" action="<?php echo base_url('Agenda/update')?>" class="ls-form ls-form-horizontal row">
                 <fieldset>
                     <label class="ls-label col-12">
                         <b class="ls-label-text">Paciente</b>
@@ -391,7 +395,7 @@ $('#procurarPacientes').click(function(){
         type:'ajax',
         dataType:'json',
         method:'post',
-        url:'<?=base_url('AgendaController/recuperarPacientes')?>',
+        url:'<?=base_url('Agenda/recuperarPacientes')?>',
         data:{'nomePesquisa': nome},
         success:function(data){
             $('#listapacientes .ls-box').remove()
@@ -429,7 +433,7 @@ $('#procurarPacientes').click(function(){
             </div>
             
             <div class="ls-modal-body" id="myModalBody">
-                <form method="post" action="<?php echo base_url('SecretariasController/addpaciente')?>" class="ls-form ls-form-horizontal row">
+                <form method="post" action="<?php echo base_url('Secretarias/addpaciente')?>" class="ls-form ls-form-horizontal row">
                     <fieldset>
                         <label class="ls-label col-12">
                             <b class="ls-label-text">Nome completo</b>

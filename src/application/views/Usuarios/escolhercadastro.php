@@ -17,7 +17,7 @@
           </div>
           <div class="ls-login-box ls-md-margin-top"  style="background-color:white;color:white;">
               <style>.headerlogo{margin-bottom:20px;}.input-style{border-bottom:3px solid white;}</style>
-              <form role="form" class="ls-form ls-login-form" action="<?=base_url('UsuariosController/redirecionarcadastro')?>" method="POST">
+              <form role="form" class="ls-form ls-login-form" action="<?=base_url('Usuarios/redirecionarcadastro')?>" method="POST">
                 <fieldset>
                   <label class="ls-label">
                     <b class="ls-label-text">Cadastar-se como:</b>

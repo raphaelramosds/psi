@@ -14,7 +14,7 @@
 				<header class="ls-info-header" style="text-align:center;border:none">
 					<h2 class="ls-title-3" >Nova <span style="background:#1DD1A4;padding:10px;color:white;display:inline-block;">senha</span></h2>
 				</header>
-				<form action="<?=base_url()?>UsuariosController/update_method_password" role="form" method="POST">
+				<form action="<?=base_url()?>Usuarios/update_method_password" role="form" method="POST">
 					<fieldset>
 						<style>label{margin: 0 auto;}</style>
 						<label for="" class="ls-label col-md-4">

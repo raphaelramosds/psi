@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class PacientesController extends CI_Controller 
+class Pacientes extends CI_Controller 
 {
 	public $usr;
 

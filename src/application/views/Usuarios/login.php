@@ -17,7 +17,7 @@
           </div>
           <div class="ls-login-box ls-md-margin-top"  style="background-color:white;color:white;border-radius:10px;">
               <style>.headerlogo{margin-bottom:20px;}.input-style{border-bottom:3px solid white;}</style>
-              <form role="form" class="ls-form ls-login-form" action="UsuariosController/auth" method="POST">
+              <form role="form" class="ls-form ls-login-form" action="Usuarios/auth" method="POST">
                 <fieldset>
                   <?php if(isset($success)):?>
                     <div class='ls-sm-space ls-txt-center ls-color-success' style='font-size:20px;'><?=$success?></div>

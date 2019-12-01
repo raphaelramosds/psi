@@ -1,7 +1,7 @@
 	<?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class UsuariosController extends CI_Controller 
+class Usuarios extends CI_Controller 
 {
 	public function __construct()
 	{
@@ -14,10 +14,10 @@ class UsuariosController extends CI_Controller
 	public function login()
 	{
 		$data_flash = array(
-			'success' 					=> $this->session->flashdata('success'),
-			'erro'    					=> $this->session->flashdata('erro_autenticacao'),
-			'success_update_password' 	=> $this->session->flashdata('success_update_password'),
-			'user_noexists'				=> $this->session->flashdata('user_noexists')
+			'success' => $this->session->flashdata('success'),
+			'erro' => $this->session->flashdata('erro_autenticacao'),
+			'success_update_password' => $this->session->flashdata('success_update_password'),
+			'user_noexists' => $this->session->flashdata('user_noexists')
 		);
 
 		$this->load->view('Usuarios/login',$data_flash);
@@ -27,7 +27,7 @@ class UsuariosController extends CI_Controller
 	public function auth()
 	{
 		$user_reg = array(
-			'nome'  => $this->input->post('username'),
+			'nome' => $this->input->post('username'),
 			'senha' => $this->input->post("senha")
 		);
 
@@ -70,10 +70,10 @@ class UsuariosController extends CI_Controller
 	public function get()
 	{
 		return array(
-			'username' 	=> $this->input->post('username'),
-			'senha' 	=> $this->input->post('senha'),
-			'email'		=> $this->input->post('email'),
-			'role'		=> $this->input->post('role')
+			'username'=> $this->input->post('username'),
+			'senha' => $this->input->post('senha'),
+			'email' => $this->input->post('email'),
+			'role' => $this->input->post('role')
 		);
 	}
 
@@ -101,8 +101,8 @@ class UsuariosController extends CI_Controller
 	{
 
 		$data_form_secretaria = array(
-			'erro_senha'		=> $this->session->flashdata('erro_senha'), 
-			'erro_user'			=> $this->session->flashdata('erro_user')
+			'erro_senha' => $this->session->flashdata('erro_senha'), 
+			'erro_user'	=> $this->session->flashdata('erro_user')
 		); 
 
 		$this->load->view('Secretarias/create', $data_form_secretaria);
@@ -111,10 +111,10 @@ class UsuariosController extends CI_Controller
 	public function create()
 	{
 		$data_flash = array(
-			'erro_senha'	=> $this->session->flashdata('erro_senha'), 
-			'erro_user'		=> $this->session->flashdata('erro_user'),
-			'erro_email'    => $this->session->flashdata('erro_email'),
-			'erro_crp'      => $this->session->flashdata('erro_crp')
+			'erro_senha' => $this->session->flashdata('erro_senha'), 
+			'erro_user' => $this->session->flashdata('erro_user'),
+			'erro_email' => $this->session->flashdata('erro_email'),
+			'erro_crp' => $this->session->flashdata('erro_crp')
 		);
 
 		$this->load->view('Usuarios/create', $data_flash);
@@ -124,21 +124,21 @@ class UsuariosController extends CI_Controller
 	public function add()
 	{
 	
-		$user_reg 			= $this->get();
-		$psicologo_reg		= array(
-			'crp' 				=> $this->input->post('crp'),
-			'datanascimento' 	=> $this->input->post('datanasc'),
-			'nome' 				=> $this->input->post('nome'),
-			'sexo' 				=> $this->input->post('sexo'),
+		$user_reg = $this->get();
+		$psicologo_reg = array(
+			'crp' => $this->input->post('crp'),
+			'datanascimento' => $this->input->post('datanasc'),
+			'nome' => $this->input->post('nome'),
+			'sexo' => $this->input->post('sexo'),
 			'usuario_idusuario' =>  $this->input->post('idusuario'), //Até agora vazio,
-			'codigo'			=> $this->input->post('codigo')
+			'codigo'=> $this->input->post('codigo')
 		);
 
-		$secretaria_reg		= array(
-			'nome' 				=> $this->input->post('nome'),
-			'telefone' 			=> $this->input->post('telefone'),
-			'sexo' 				=> $this->input->post('sexo'),
-			'endereco' 			=> $this->input->post('endereco'),
+		$secretaria_reg = array(
+			'nome' 	=> $this->input->post('nome'),
+			'telefone' => $this->input->post('telefone'),
+			'sexo' => $this->input->post('sexo'),
+			'endereco' => $this->input->post('endereco'),
 			'usuario_idusuario' => $this->input->post('usuario_idusuario'),
 		);
 
@@ -175,10 +175,10 @@ class UsuariosController extends CI_Controller
 
 		//Validações para Redirect
 
-		$users_count 		= count($this->usuarios->duplicate_user($user_reg['username']));
-		$email_count		= count($this->usuarios->verify_email($user_reg['email']));
-		$crp_count			= count($this->db->query("SELECT * FROM ".$this->db->dbprefix('psicologo')." WHERE crp = '".$psicologo_reg['crp']."'")->result());
-		$view_redirect		= ($user_reg['role'] == 2) ? 'create-secretaria' : 'cadastre';
+		$users_count = count($this->usuarios->duplicate_user($user_reg['username']));
+		$email_count = count($this->usuarios->verify_email($user_reg['email']));
+		$crp_count = count($this->db->query("SELECT * FROM ".$this->db->dbprefix('psicologo')." WHERE crp = '".$psicologo_reg['crp']."'")->result());
+		$view_redirect = ($user_reg['role'] == 2) ? 'create-secretaria' : 'cadastre';
 
 		if($user_reg['role'] == 2)
 		{
@@ -228,10 +228,10 @@ class UsuariosController extends CI_Controller
 
 		$this->usuarios->add($user_reg);
 
-		$query 			= $this->db->query("SELECT * FROM ".$this->db->dbprefix('usuario')." WHERE username = '".$user_reg['username']."'");
-		$find_usuario 	= $query->row();
-		$id 			= $find_usuario->id;
-		$role 			= $find_usuario->role;
+		$query = $this->db->query("SELECT * FROM ".$this->db->dbprefix('usuario')." WHERE username = '".$user_reg['username']."'");
+		$find_usuario = $query->row();
+		$id = $find_usuario->id;
+		$role = $find_usuario->role;
 
 		if ($role == 2)
 		{
@@ -270,9 +270,9 @@ class UsuariosController extends CI_Controller
 	public function forgotPassword()
 	{
 		$data_flash = array(
-			'invalid_email'      => $this->session->flashdata('invalid_email'),
+			'invalid_email' => $this->session->flashdata('invalid_email'),
 			'success_send_email' => $this->session->flashdata('success_send_email'),
-			'erro_send_email'    => $this->session->flashdata('erro_send_email')
+			'erro_send_email' => $this->session->flashdata('erro_send_email')
 		);
 
 		$this->load->view('Usuarios/recovery', $data_flash);
@@ -282,7 +282,7 @@ class UsuariosController extends CI_Controller
 	public function recoveryPass()
 	{
 
-		$email   = $this->input->post('email');
+		$email = $this->input->post('email');
 		$request = $this->usuarios->verify_email($email);
 
 		if (count($request) == 0)
@@ -355,7 +355,7 @@ class UsuariosController extends CI_Controller
 	{
 		$code_type = $this->input->post('code');
 		$code_auth = $this->session->userdata('code_access');
-		$usuario   = $this->session->userdata('usuario_data_confirm'); 
+		$usuario = $this->session->userdata('usuario_data_confirm'); 
 
 		if ($code_type != $code_auth)
 		{

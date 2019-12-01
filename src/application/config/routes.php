@@ -2,60 +2,60 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 
-$route['default_controller']   = 'UsuariosController/login';
-$route['404_override']         = '';
+$route['default_controller'] = 'Usuarios/login';
+$route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
 //Home
-$route['cid'] = 'HomeController/viewcid';
+$route['cid'] = 'Home/viewcid';
 
 //Login
-$route['home']            = 'HomeController';
-$route['login']           = 'UsuariosController/login';
-$route['cadastre']        = 'UsuariosController/create';
-$route['forgot-password'] = 'UsuariosController/forgotPassword';
-$route['auth-code']       = 'UsuariosController/auth_code';
-$route['escolher']        = 'UsuariosController/escolhercadastro';
+$route['home'] = 'Home';
+$route['login'] = 'Usuarios/login';
+$route['cadastre'] = 'Usuarios/create';
+$route['forgot-password'] = 'Usuarios/forgotPassword';
+$route['auth-code'] = 'Usuarios/auth_code';
+$route['escolher'] = 'Usuarios/escolhercadastro';
 
 //Psicólogo
-$route['update-psycho/(:num)']  = 'PsicologosController/edit/$1';
-$route['view-psycho']           = 'PsicologosController';
+$route['update-psycho/(:num)'] = 'Psicologos/edit/$1';
+$route['view-psycho'] = 'Psicologos';
 
 //Clinicas
-$route['create-clinica']        = 'ClinicasController/create';
-$route['update-clinica/(:num)'] = 'ClinicasController/edit/$1';
-$route['delete-clinica/(:num)'] = 'ClinicasController/delete/$1';
-$route['view-clinica']          = 'ClinicasController/index';
+$route['create-clinica'] = 'Clinicas/create';
+$route['update-clinica/(:num)'] = 'Clinicas/edit/$1';
+$route['delete-clinica/(:num)'] = 'Clinicas/delete/$1';
+$route['view-clinica'] = 'Clinicas/index';
 
 //Pacientes
-$route['create-paciente']        = 'PacientesController/create';
-$route['update-paciente/(:num)'] = 'PacientesController/edit/$1';
-$route['delete-paciente/(:num)'] = 'PacientesController/delete/$1';
-$route['view-paciente']          = 'PacientesController/index';
+$route['create-paciente'] = 'Pacientes/create';
+$route['update-paciente/(:num)'] = 'Pacientes/edit/$1';
+$route['delete-paciente/(:num)'] = 'Pacientes/delete/$1';
+$route['view-paciente'] = 'Pacientes/index';
 
 //Prontuarios
-$route['create-prontuario']         = 'ProntuariosController/create';
-$route['update-prontuario/(:num)']  = 'ProntuariosController/edit/$1';
-$route['delete-prontuario/(:num)']  = 'ProntuariosController/delete/$1';
-$route['index-prontuario/(:num)']   = 'ProntuariosController/index/$1';
-$route['view-prontuario']           = 'ProntuariosController/view';
+$route['create-prontuario'] = 'Prontuarios/create';
+$route['update-prontuario/(:num)'] = 'Prontuarios/edit/$1';
+$route['delete-prontuario/(:num)'] = 'Prontuarios/delete/$1';
+$route['index-prontuario/(:num)'] = 'Prontuarios/index/$1';
+$route['view-prontuario'] = 'Prontuarios/view';
 
 //Sessoes
-$route['create-sessao']        = 'SessoesController/create';
-$route['update-sessao/(:num)'] = 'SessoesController/edit/$1';
-$route['delete-sessao/(:num)'] = 'SessoesController/delete/$1';
-$route['index-sessao/(:num)']  = 'SessoesController/index/$1';
-$route['view-sessao']          = 'SessoesController/view';
+$route['create-sessao'] = 'Sessoes/create';
+$route['update-sessao/(:num)'] = 'Sessoes/edit/$1';
+$route['delete-sessao/(:num)'] = 'Sessoes/delete/$1';
+$route['index-sessao/(:num)'] = 'Sessoes/index/$1';
+$route['view-sessao'] = 'Sessoes/view';
 
 //Secretarias
-$route['create-secretaria']         = 'UsuariosController/createsecretaria';
-$route['view-secretaria']           = 'SecretariasController/view';
-$route['update-secretaria/(:num)']  = 'SecretariasController/edit/$1';
-$route['delete-secretaria/(:num)']	= 'SecretariasController/delete/$1';
+$route['create-secretaria'] = 'Usuarios/createsecretaria';
+$route['view-secretaria'] = 'Secretarias/view';
+$route['update-secretaria/(:num)'] = 'Secretarias/edit/$1';
+$route['delete-secretaria/(:num)'] = 'Secretarias/delete/$1';
 
 //Agenda
-$route['view-agenda'] = 'AgendaController/view';
-$route['create-agenda'] = 'AgendaController/create';
+$route['view-agenda'] = 'Agenda/view';
+$route['create-agenda'] = 'Agenda/create';
 
 $route['clinica-secretaria/(:num)'] = "ClinicaSecretaria/index/$1";
 
