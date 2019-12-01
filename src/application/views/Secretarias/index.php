@@ -4,7 +4,7 @@
 
 			<?php if (count($data_secretaria) == 0):?>
 			<div class="ls-alert-info">
-            Não há secretária cadastrada
+				<strong>Atenção:</strong> Não há nenhuma secretária cadastrada. Para registrar uma nova secretária, é necessário que ela faça o cadastro no sistema com o seu código que pode ser encontrado no <a href="<?=base_url('view-psycho')?>">Meu Perfil</a>
          	</div>
 			<?php endif;?>
 
