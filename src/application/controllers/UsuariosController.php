@@ -6,7 +6,6 @@ class UsuariosController extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->library('Role');
 		$this->load->model('UsuariosModel','usuarios');
 		$this->load->model('PsicologosModel','psicologos');
 		$this->load->model('SecretariasModel','secretarias');
@@ -40,20 +39,17 @@ class UsuariosController extends CI_Controller
 		$usuario_found = $this->db->get('usuario')->row_array();
 
 		// Verificar se o usuário existe
-		print_r($usuario_found);
-
 		if($usuario_found != NULL)
 		{
 			// Colocar todos os dados do usuário em uma Matriz
 			$request_data = [
-				$this->role->identifyUser($usuario_found['role'], $usuario_found['id']),
-				$usuario_found
+				$this->usuarios->identifyUser($usuario_found['role'], $usuario_found['id']), // Dados do Psicólogo/Secretária
+				$usuario_found // Dados do usuário
 			];
 
 			//Verificar se o usuário se atribui à algum Psicologo ou Secretário
 			if($request_data == NULL)
 			{
-
 				$this->usuarios->delete($usuario_found['id']);
 				$this->session->set_flashdata('user_noexists','O usuário não corresponde a nenhum psicólogo ou secretária. Faça novamente o cadastro');
 				redirect('/');

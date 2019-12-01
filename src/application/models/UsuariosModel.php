@@ -3,6 +3,22 @@
 class UsuariosModel extends CI_Model
 {
 
+	public function identifyUser($role, $id_user)
+    {
+        if ($role == 1) 
+        {
+            $this->db->where('psicologo.usuario_idusuario', $id_user);
+            $request = $this->db->get('psicologo')->row_array();
+            return $request;
+        }
+        else if ($role == 2) 
+        {
+            $this->db->where('secretaria.usuario_idusuario', $id_user);
+            $request = $this->db->get('secretaria')->row_array();
+            return $request;
+        }
+    }
+
 	function add($dados)
 	{
 		$this->db->insert($this->db->dbprefix('usuario'),$dados);
