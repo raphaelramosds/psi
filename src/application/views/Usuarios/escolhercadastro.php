@@ -20,9 +20,10 @@
               <form role="form" class="ls-form ls-login-form" action="<?=base_url('UsuariosController/redirecionarcadastro')?>" method="POST">
                 <fieldset>
                   <label class="ls-label">
-                    <b class="ls-label-text">Se cadastrar como:</b>
+                    <b class="ls-label-text">Cadastar-se como:</b>
                     <div class="ls-custom-select">
                             <select name="escolha" class="ls-select" required>
+                                <option value="">Escolha a sua opção</option>
                                 <option value="secretaria">Secretária</option>
                                 <option value="psicologo">Psicólogo</option>
                             </select>
