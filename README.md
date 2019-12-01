@@ -15,9 +15,5 @@ Funcionalidades futuras: <br/>
 * Chat box para dúvidas de psicólogos
 
 
-| Login | Senha | Link do site |
-|----------|:-------------:| :----------------------:|
-| admin | root | [Prontuário Eletrônico](http://psiprontuarios.epizy.com/)|
-
 
 
