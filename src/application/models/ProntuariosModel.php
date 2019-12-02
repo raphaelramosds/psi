@@ -67,7 +67,7 @@ class ProntuariosModel extends CI_Model
     	id_psicologo = $id AND
         Month(data) = $mes AND
         Year(data) = $ano
-        GROUP BY data ORDER BY data ASC";
+        ORDER BY data ASC";
         return $this->db->query($query)->result();
 	}
 }

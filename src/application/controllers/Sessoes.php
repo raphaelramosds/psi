@@ -39,9 +39,9 @@ class Sessoes extends CI_Controller
 	{
 		$prontuario = $this->session->userdata('prontuario');
 		$data_flash = array(
-			'datasessoes' 	=> $this->sessoes->view($prontuario),
+			'datasessoes' => $this->sessoes->view($prontuario),
 			'update_sessao' => $this->session->flashdata('update_sessao'),
-			'add_sessao' 	=> $this->session->flashdata('add_sessao'),
+			'add_sessao' => $this->session->flashdata('add_sessao'),
 			'delete_sessao' => $this->session->flashdata('delete_sessao')
 		);
 

@@ -2,7 +2,7 @@
 	<div class="container-fluid">
 		<h1 class="ls-title-intro ls-ico-pencil">Editar sessão</h1>
 		<div class="ls-box ls-board-box ls-no-border">
-				<form action="<?=base_url()?>SessoesController/update" method="POST" class="ls-form ls-form-horizontal row">
+				<form action="<?=base_url()?>Sessoes/update" method="POST" class="ls-form ls-form-horizontal row">
 					<fieldset>
 					<input type="hidden" name="id" value="<?=$sessao->id ?>">
 					<label class="ls-label col-md-6 col-xs-12">

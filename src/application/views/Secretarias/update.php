@@ -8,7 +8,7 @@
             </ul>
             <div class="ls-tabs-container" id="awesome-tab-content">
                 <div id="tab6" class="ls-tab-content ls-active">
-                    <form action="<?=base_url('UsuariosController/update')?>" method="post" data-ls-module="form">
+                    <form action="<?=base_url('Usuarios/update')?>" method="post" data-ls-module="form">
                         <fieldset>
                             <label class="ls-label">
                                 <p class="ls-label-info">Nome de usuário</p>
@@ -29,7 +29,7 @@
                 </div>
 
                 <div id="tab7" class="ls-tab-content">
-                    <form action="<?=base_url('SecretariasController/update')?>" method="post" data-ls-module="form">
+                    <form action="<?=base_url('Secretarias/update')?>" method="post" data-ls-module="form">
                         <fieldset>
                             <label class="ls-label">
                                 <p class="ls-label-info">Nome</p>
@@ -78,7 +78,7 @@
       <h4 class="ls-modal-title">Alterar senha</h4>
     </div>
     <div class="ls-modal-body" id="myModalBody">
-        <form action="<?=base_url('UsuariosController/update')?>" method="post" data-ls-module="form">
+        <form action="<?=base_url('Usuarios/update')?>" method="post" data-ls-module="form">
             <fieldset>
                 <label for="" class="ls-label">
                     <b class="ls-label-text">Senha <span class="ls-color-danger">*</span></b>

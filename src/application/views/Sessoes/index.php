@@ -3,7 +3,7 @@
 		<h1 class="ls-title-intro ls-ico-pencil">Sessões cadastradas</h1>
 		<div class="ls-box ls-board-box ls-no-border">
 
-		<form  action="<?=base_url('SessoesController/search')?>" class="ls-form ls-form-inline" method="POST">
+		<form  action="<?=base_url('Sessoes/search')?>" class="ls-form ls-form-inline" method="POST">
 			<label class="ls-label" role="search">
 				<b class="ls-label-text">Filtrar sessões pelo mês:</b>
 				<input type="month" name="mes" required="" class="ls-field">
@@ -36,7 +36,7 @@
 			<?php foreach ($datasessoes as $value): ?>
 				<tr>
 					<td><?=$value->titulo?></td>
-					<td><?=$value->descricao?></td>
+					<td style="overflow: hidden;text-overflow: ellipsis; white-space: nowrap;"><?=$value->descricao?></td>
 					<td><?php
 							$date = new DateTime($value->data);
 							echo $date->format('d/m/Y')

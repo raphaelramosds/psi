@@ -29,16 +29,16 @@ class Pacientes extends CI_Controller
 
 		$offset = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
 		$data_pagination_paciente = array(
-			'datapacientes'		=> $this->pacientes->view($id, $config['per_page'], $offset),
-			'delete' 			=> $this->session->flashdata('delete'),
-			'pagination' 		=> $this->pagination->create_links(),
-			'update_paciente' 	=> $this->session->flashdata('update_paciente'),
-			'add_paciente' 		=> $this->session->flashdata('add_paciente'),
-			'delete_paciente' 	=> $this->session->flashdata('delete_paciente'),
+			'datapacientes'	=> $this->pacientes->view($id, $config['per_page'], $offset),
+			'delete' => $this->session->flashdata('delete'),
+			'pagination' => $this->pagination->create_links(),
+			'update_paciente' => $this->session->flashdata('update_paciente'),
+			'add_paciente' => $this->session->flashdata('add_paciente'),
+			'delete_paciente' => $this->session->flashdata('delete_paciente'),
 			//Dados do Model-View Prontuário
-			'psicologo' 		=> $id,
+			'psicologo' => $id,
 			//Exibir Clínicas cadastradas pelo psicologo
-			'clinicas' 			=> $this->clinicas->view($id)
+			'clinicas' => $this->clinicas->view($id)
 		);
 
 		$this->load->view('Pacientes/index', $data_pagination_paciente);
@@ -47,12 +47,16 @@ class Pacientes extends CI_Controller
 	public function search()
 	{
 		$paciente = $this->input->post('paciente');
-
+		$id = $this->usr[0]['id'];
 
 		$data_pacientes_search = array(
 			'datapacientes'	=> $this->pacientes->search($this->usr[0]['id'], $paciente),
-			'delete' 		=> $this->session->flashdata('delete'),
-			'pagination' 	=> NULL
+			'delete' => $this->session->flashdata('delete'),
+			'pagination' => NULL,
+			//Dados do Model-View Prontuário
+			'psicologo' => $id,
+			//Exibir Clínicas cadastradas pelo psicologo
+			'clinicas' => $this->clinicas->view($id)
 		);
 
 		$this->load->view('Pacientes/index', $data_pacientes_search);
@@ -105,39 +109,39 @@ class Pacientes extends CI_Controller
 	{
 
 		$config = array(
-			'base_url' 			=> base_url('PacientesController/index'),
-			'per_page' 			=> 8,
-			'num_links' 		=> 10,
-			'uri_segment' 		=> 3,
-			'total_rows' 		=> $this->pacientes->count_results($this->usr[0]['id']),
+			'base_url' => base_url('Pacientes/index'),
+			'per_page' => 8,
+			'num_links' => 10,
+			'uri_segment' => 3,
+			'total_rows' => $this->pacientes->count_results($this->usr[0]['id']),
 
-			'full_tag_open' 	=> "<ul class = 'ls-pagination-filter'>",
-			'full_tag_close' 	=> "</ul>",
+			'full_tag_open' => "<ul class = 'ls-pagination-filter'>",
+			'full_tag_close' => "</ul>",
 
-			'first_link' 		=> FALSE,
-			'last_link' 		=> FALSE,
+			'first_link' => FALSE,
+			'last_link' => FALSE,
 
-			'first_tag_open' 	=> "<li>",
-			'first_tag_close' 	=> "</li>",
+			'first_tag_open' => "<li>",
+			'first_tag_close' => "</li>",
 
-			'prev_link' 		=> "Anterior",
+			'prev_link' => "Anterior",
 
-			'prev_tag_open'		=> "<li>",
-			'prev_tag_close' 	=> "</li>",
+			'prev_tag_open'	=> "<li>",
+			'prev_tag_close' => "</li>",
 
-			'next_link' 		=> "Proxima",
+			'next_link' => "Proxima",
 
-			'next_tag_open' 	=> "<li>",
-			'next_tag_close'	=> "</li>",
+			'next_tag_open' => "<li>",
+			'next_tag_close' => "</li>",
 
-			'last_tag_open' 	=> "<li>",
-			'last_tag_close'    => "</li>",
+			'last_tag_open' => "<li>",
+			'last_tag_close' => "</li>",
 
-			'cur_tag_open' 		=> "<li class = 'ls-active'><a href='#'>",
-			'cur_tag_close' 	=> "</a></li>",
+			'cur_tag_open' => "<li class = 'ls-active'><a href='#'>",
+			'cur_tag_close' => "</a></li>",
 
-			'num_tag_open' 		=> "<li>",
-			'num_tag_close' 	=> "</li>"
+			'num_tag_open' => "<li>",
+			'num_tag_close' => "</li>"
 		);
 		return $config;
 	}

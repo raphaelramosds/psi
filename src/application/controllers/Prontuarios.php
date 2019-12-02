@@ -31,11 +31,11 @@ class Prontuarios extends CI_Controller
 
 		$paciente = $this->session->userdata('paciente');
 		$data_flash_inf = array(
-			'dataprontuarios' 	=> $this->prontuarios->view($id, $paciente),
-			'delete' 			=> $this->session->flashdata('delete'),
-			'clinicas' 			=> $this->clinicas->view($id),
-			'psicologo' 		=> $id,
-			'add_prontuario' 	=> $this->session->flashdata('add_prontuario'),
+			'dataprontuarios' => $this->prontuarios->view($id, $paciente),
+			'delete' => $this->session->flashdata('delete'),
+			'clinicas' => $this->clinicas->view($id),
+			'psicologo'=> $id,
+			'add_prontuario' => $this->session->flashdata('add_prontuario'),
 			'delete_prontuario' => $this->session->flashdata('delete_prontuario'),
 			'update_prontuario' => $this->session->flashdata('update_prontuario'),
 		); 
@@ -52,9 +52,9 @@ class Prontuarios extends CI_Controller
 		$paciente = $this->session->userdata('paciente');
 
 		$pesquisa = array(
-			'dataprontuarios' 	=> $this->prontuarios->search($id, $mes, $ano, $paciente), 
-			'clinicas' 			=> $this->clinicas->view($id),
-			'psicologo' 		=> $id
+			'dataprontuarios' => $this->prontuarios->search($id, $mes, $ano, $paciente), 
+			'clinicas' => $this->clinicas->view($id),
+			'psicologo' => $id
 		);
 
 		$this->load->view('Prontuarios/index', $pesquisa);
@@ -65,6 +65,7 @@ class Prontuarios extends CI_Controller
 	{
 
 		$prontuario_reg = $this->input->post();
+		$prontuario_reg['cid10'] = strtoupper($prontuario_reg['cid10']);
 
 		$this->prontuarios->add($prontuario_reg);
 
@@ -85,9 +86,9 @@ class Prontuarios extends CI_Controller
 		$id_psicologo = $this->usr[0]['id'];
 
 		$data_prontuarios = array(
-			'prontuarios' 	=> $this->prontuarios->view_id($id),
-			'clinicas' 		=> $this->clinicas->view($id_psicologo),
-			'pacientes'	    => $this->pacientes->view($id_psicologo)
+			'prontuarios' => $this->prontuarios->view_id($id),
+			'clinicas' => $this->clinicas->view($id_psicologo),
+			'pacientes' => $this->pacientes->view($id_psicologo)
 		);
 
 		$this->load->view('Prontuarios/update', $data_prontuarios);
@@ -97,6 +98,7 @@ class Prontuarios extends CI_Controller
 	{
 
 		$prontuario_reg = $this->input->post();	
+		$prontuario_reg['cid10'] = strtoupper($prontuario_reg['cid10']);
 
 		$this->prontuarios->numeroprontuario = $this->input->post('numeroprontuario');
 		$this->prontuarios->update($prontuario_reg);

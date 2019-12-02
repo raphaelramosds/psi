@@ -3,7 +3,7 @@
 	<div class="container-fluid">
 		<h1 class="ls-title-intro ls-ico-stats">Registre uma nova sessão</h1>
 		<div class="ls-box ls-board-box ls-no-border">
-			<form action="<?=base_url()?>SessoesController/add" method="POST" class="ls-form ls-form-horizontal row">
+			<form action="<?=base_url()?>Sessoes/add" method="POST" class="ls-form ls-form-horizontal row">
 				<fieldset>
 				<label class="ls-label col-md-4 col-xs-12">
 					<b class="ls-label-text">Título da sessão</b>
@@ -34,7 +34,7 @@
 			<span class = "in_box" id="hora">00:</span><span class = "in_box" id="minuto">00:</span><span class = "in_box" id="segundo">00</span>
 			<br>
 			<button id = "comeca" onClick = "tempo(1)" class="btn_box" type="button"> INICIAR </button>
-			<button id = "parar"  onClick="stop_time()" class="btn_box" type="button" style="display:none"> PARAR </button>
+			<button id = "parar"  onClick = "stop_time()" class="btn_box" type="button" style="display:none"> PARAR </button>
 		</form>
 	</div>
 </div>

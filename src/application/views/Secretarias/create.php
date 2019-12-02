@@ -13,7 +13,7 @@
             <?php if (isset($erro_user)):?>
                 <div class='ls-sm-space' style='font-size:20px; color:red;'><?=$erro_user?></div>
             <?php endif;?>
-            <form action="<?=base_url('UsuariosController/add')?>" method="POST"  data-ls-module="form" class="ls-form ls-form-horizontal row">
+            <form action="<?=base_url('Usuarios/add')?>" method="POST"  data-ls-module="form" class="ls-form ls-form-horizontal row">
                 <fieldset>
                     <label class="ls-label col-md-12">
                         <b class="ls-label-text">Informações do usuário <span class="ls-color-danger">*</span></b>

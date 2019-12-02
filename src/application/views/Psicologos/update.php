@@ -3,7 +3,7 @@
 <div class="container-fluid">
 	<h1 class="ls-title-intro ls-ico-pencil">Editar suas informações</h1>
 		<div class="ls-box ls-board-box" style="border:none;">
-		<form action="<?=base_url()?>PsicologosController/update" method="POST" class="ls-form ls-form-horizontal row">
+		<form action="<?=base_url()?>Psicologos/update" method="POST" class="ls-form ls-form-horizontal row">
 			<fieldset>
 
 				<label class="ls-label col-md-12">

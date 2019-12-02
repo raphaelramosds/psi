@@ -18,7 +18,7 @@ $xml = simplexml_load_file($url);
 		<h1 class="ls-title-intro ls-ico-pencil">Prontuário <b><?=$paciente['nome']?></b></h1>
 		<div class="ls-box ls-board-box ls-no-border">
 
-			<form  action="<?=base_url('ProntuariosController/search')?>" class="ls-form ls-form-inline" method="POST">
+			<form  action="<?=base_url('Prontuarios/search')?>" class="ls-form ls-form-inline" method="POST">
 				<label class="ls-label" role="search">
 					<b class="ls-label-text">Filtrar pelo mês:</b>
 					<input type="month" name="mes" required="" class="ls-field">
@@ -113,7 +113,7 @@ $xml = simplexml_load_file($url);
     </div>
 
     <div class="ls-modal-body" id="myModalBody">
-      <form action="<?=base_url('ProntuariosController/add')?>" method="POST" class="ls-form ls-form-horizontal row" data-ls-module="form">
+      <form action="<?=base_url('Prontuarios/add')?>" method="POST" class="ls-form ls-form-horizontal row" data-ls-module="form">
 			<!-- Clínica -->
 			<label for="clinica" class="ls-label">
 				<b class="ls-label-text">Clínica</b>
@@ -140,8 +140,8 @@ $xml = simplexml_load_file($url);
 				<b class="ls-label-text">Alta</b>
 				<div class="ls-custom-select">
 					<select class="ls-select" name="alta" required="required">
-						<option value="S">Sim</option>
 						<option value="N">Não</option>
+						<option value="S">Sim</option>
 					</select>
 				</div>
 			</label>
@@ -152,8 +152,8 @@ $xml = simplexml_load_file($url);
 				<b class="ls-label-text">Encaminhado</b>
 				<div class="ls-custom-select">
 					<select class="ls-select" name="encaminhado">
-						<option value="S">Sim</option>
 						<option value="N">Não</option>
+						<option value="S">Sim</option>
 					</select>
 				</div>
 			</label>
@@ -176,6 +176,7 @@ $xml = simplexml_load_file($url);
 			<!-- id do psicologo -->
 			<input type="hidden" name="id_psicologo" required="required" value="<?=$psicologo?>">
 			<input type="hidden" name="paciente_id" required="required" id="paciente_id" value="">
+			<input type="hidden" name="data" value="<?php echo date('Y-m-d')?>">
 			<script type="text/javascript">
 				function paciente(idpaciente)
 				{

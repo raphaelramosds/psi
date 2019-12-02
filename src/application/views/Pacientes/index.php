@@ -11,7 +11,7 @@
 				<div class='ls-background-primary ls-sm-space ls-sm-margin-bottom ls-text-md ls-ico-checkmark'><?=$update_paciente?></div>
 			<?php endif;?>
 			
-			<form  action="<?=base_url('PacientesController/search')?>" class="ls-form ls-form-inline" method="POST">
+			<form  action="<?=base_url('Pacientes/search')?>" class="ls-form ls-form-inline" method="POST">
 				<label class="ls-label" role="search">
 					<input type="text" id="q" name="paciente" aria-label="Faça sua busca pelo paciente" placeholder="Nome do paciente" required="" class="ls-field">
 				</label>
@@ -24,7 +24,6 @@
 				<th>Email</th>
 				<th>Telefone</th>
 				<th>Profissão</th>
-				<th>Sexo</th>
 				<th>Cartão de Saúde</th>
 				<th>Numeros SUS</th>
 				<th></th>
@@ -40,7 +39,6 @@
 					<td><?=$value->email?></td>
 					<td><?=$value->telefone?></td>
 					<td><?=$value->profissao?></td>
-					<td><?=$value->sexo?></td>
 					<td>
 						<?php if($value->cartaosaude == 0):?>
 							<?="Não registrado"?>
@@ -91,7 +89,7 @@
     </div>
 
     <div class="ls-modal-body" id="myModalBody">
-      <form action="<?=base_url('ProntuariosController/add')?>" method="POST" class="ls-form ls-form-horizontal row" data-ls-module="form">
+      <form action="<?=base_url('Prontuarios/add')?>" method="POST" class="ls-form ls-form-horizontal row" data-ls-module="form">
 			<!-- Clínica -->
 			<label for="clinica" class="ls-label">
 				<b class="ls-label-text">Clínica</b>
@@ -118,8 +116,8 @@
 				<b class="ls-label-text">Alta</b>
 				<div class="ls-custom-select">
 					<select class="ls-select" name="alta" required="required">
-						<option value="S">Sim</option>
 						<option value="N">Não</option>
+						<option value="S">Sim</option>
 					</select>
 				</div>
 			</label>
@@ -130,8 +128,8 @@
 				<b class="ls-label-text">Encaminhado</b>
 				<div class="ls-custom-select">
 					<select class="ls-select" name="encaminhado" required="required">
-						<option value="S">Sim</option>
 						<option value="N">Não</option>
+						<option value="S">Sim</option>
 					</select>
 				</div>
 			</label>

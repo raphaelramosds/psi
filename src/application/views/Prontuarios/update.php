@@ -2,7 +2,7 @@
 	<div class="container-fluid">
 		<h1 class="ls-title-intro ls-ico-pencil">Detalhes</h1>
 		<div class="ls-box ls-board-box ls-no-border">
-		<form action="<?=base_url('ProntuariosController/update')?>" method="POST" class="ls-form ls-form-horizontal row" data-ls-module="form">
+		<form action="<?=base_url('Prontuarios/update')?>" method="POST" class="ls-form ls-form-horizontal row" data-ls-module="form">
 			<fieldset>
 
 				<label for="" class="ls-label col-md-4 col-xs-12">

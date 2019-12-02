@@ -2,7 +2,7 @@
 	<div class="container-fluid">
 		<h1 class="ls-title-intro ls-ico-pencil">Criar paciente</h1>
 		<div class="ls-box ls-board-box ls-no-border">
-			<form action="<?=base_url('PacientesController/add')?>" method="POST" class="ls-form ls-form-horizontal row" data-ls-module="form">
+			<form action="<?=base_url('Pacientes/add')?>" method="POST" class="ls-form ls-form-horizontal row" data-ls-module="form">
 				<fieldset>
 
 					<label class="ls-label col-md-12">

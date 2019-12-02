@@ -44,8 +44,8 @@ class Secretarias extends CI_Controller
 		$q = $this->secretarias->view_user_by_secretaria($id);
 
 		$data_update = array(
-			'secretaria' 	=> $this->secretarias->view_id($id),
-			'usuario'		=> $this->usuarios->view_user($q->id)
+			'secretaria' => $this->secretarias->view_id($id),
+			'usuario' => $this->usuarios->view_user($q->id)
 		);
 
 		// Exiba dois opção para dois Formulários: Informações da Secretária e Informações Usuário
