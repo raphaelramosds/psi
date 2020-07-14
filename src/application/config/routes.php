@@ -24,7 +24,6 @@ $route['view-psycho'] = 'Psicologos';
 //Clinicas
 $route['create-clinica'] = 'Clinicas/create';
 $route['update-clinica/(:num)'] = 'Clinicas/edit/$1';
-$route['delete-clinica/(:num)'] = 'Clinicas/delete/$1';
 $route['view-clinica'] = 'Clinicas/index';
 
 //Pacientes

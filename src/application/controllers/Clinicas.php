@@ -60,15 +60,12 @@ class Clinicas extends CI_Controller
 		redirect('view-clinica');
 	}
 
-	public function delete($id)
-	{
-		if ($id != NULL) 
-		{
-			$this->clinicas->delete($id);
-			$this->session->set_flashdata("delete_clinica",'Deletada com sucesso!');
+	public function delete(){
 
-			redirect('view-clinica');
-		}
+	 	$id = $this->input->post('clinica');
+		$this->clinicas->delete($id);
+     	echo json_encode('Sucesso na requisição');
+        exit;
 	}
 
 	public function edit($id)

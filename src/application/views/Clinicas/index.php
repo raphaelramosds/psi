@@ -27,17 +27,21 @@
 					<th class="ls-txt-center"></th>
 				</tr>
 				<?php foreach ($dataclinica as $value): ?>
-				<tr>
+				<tr id="clinica<?=$value->id?>">
 					<td><?=$value->nome?></td>
 					<td><?=$value->telefone?></td>
 					<td><?=$value->estado?></td>
 					<td><?=$value->cidade?></td>
 					<td class="ls-txt-left">
 						<div data-ls-module='dropdown' class='ls-dropdown'>
-							<a href="$" class="ls-btn">Ação</a>
+							<a href="$" class="ls-btn" onclick="preencher(<?=$value->id?>)">Ação</a>
 							<ul class="ls-dropdown-nav">
-								<li><a href="<?=base_url('update-clinica')?>/<?=$value->id?>" class='ls-ico-pencil ls-color-black ls-no-bghover' title='Editar'>Editar</a></li>
-								<li><a href="<?=base_url('delete-clinica')?>/<?=$value->id?>" class='ls-ico-remove ls-color-danger' title='Excluir'>Excluir</a></li>								
+								<li>
+									<a href="<?=base_url('update-clinica')?>/<?=$value->id?>" class='ls-ico-pencil ls-color-black ls-no-bghover' title='Editar'>Editar</a>
+								</li>
+								<li>
+									<a data-ls-module="modal" data-target="#confirmacaoRetirar" class='ls-ico-remove ls-color-danger' title='Excluir'>Excluir</a>
+								</li>								
 							</ul>
 						</div>
 					</td>
@@ -52,3 +56,46 @@
 		</div>
 	</div>
 </div>
+
+<!-- Confirmação da retiradas -->
+
+<div class="ls-modal" id="confirmacaoRetirar">
+  <div class="ls-modal-box">
+    <div class="ls-modal-header">
+      <button data-dismiss="modal">&times;</button>
+      <h4 class="ls-modal-title">Modal title</h4>
+    </div>
+    <div class="ls-modal-body" id="myModalBody">
+    	Tem certeza que deseja excluir?
+    	<input type="hidden" id="excludente" type="number">
+    </div>
+    <div class="ls-modal-footer">
+      <button class="ls-btn ls-float-right" data-dismiss="modal">Close</button>
+      <button type="submit" class="ls-btn-danger" id="retirar">Sim</button>
+    </div>
+  </div>
+</div><!-- /.modal -->
+
+
+<script>
+	
+	function preencher(request){$("#excludente").val(request);}
+
+	$('#retirar').click(function(){
+	    $.ajax({
+	        type:'ajax',
+	        dataType:'json',
+	        method:'post',
+	        url: "<?=base_url('Clinicas/delete')?>",
+	        data:{
+	            clinica:$("#excludente").val(),
+	        },
+	        success:function(data){
+	            alert(data);
+	            $("#clinica" + $("#excludente").val() ).hide();
+
+	        }
+	    })
+	})
+
+</script>
