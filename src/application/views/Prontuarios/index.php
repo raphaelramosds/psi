@@ -28,8 +28,6 @@ $xml = simplexml_load_file($url);
 			
 			<?php if(isset($add_prontuario)):?>
 				<div class='ls-background-primary ls-sm-space ls-sm-margin-bottom ls-text-md ls-ico-checkmark'><?=$add_prontuario?></div>
-			<?php elseif(isset($delete_prontuario)):?>
-				<div class='ls-background-primary ls-sm-space ls-sm-margin-bottom ls-text-md ls-ico-checkmark'><?=$delete_prontuario?></div>
 			<?php elseif(isset($update_prontuario)):?>
 				<div class='ls-background-primary ls-sm-space ls-sm-margin-bottom ls-text-md ls-ico-checkmark'><?=$update_prontuario?></div>
 			<?php endif;?>
@@ -50,7 +48,7 @@ $xml = simplexml_load_file($url);
 				</tr>
 
 				<?php foreach ($dataprontuarios as $value): ?>
-					<tr>
+					<tr id="prontuario<?=$value->numeroprontuario?>">
 						<!-- <td>
 							<?=$value->numeroprontuario ?>
 						</td> -->
@@ -86,11 +84,14 @@ $xml = simplexml_load_file($url);
 
 						<td class="ls-text-center">
 							<div data-ls-module='dropdown' class='ls-dropdown'>
-								<a href='#' class='ls-btn'>Ação</a>
+								<a href='#' class='ls-btn' onclick="preencher(<?=$value->numeroprontuario?>)">Ação</a>
 								<ul class="ls-dropdown-nav">
 									<li><a href="<?=base_url('index-sessao')?>/<?=$value->numeroprontuario?>" class='ls-ico-docs ls-color-black ls-no-bghover' title='Ver sessões'>Ver sessões</a></li>
-									<li><a href="<?=base_url('update-prontuario')?>/<?=$value->numeroprontuario?>" class='ls-ico-search ls-color-black ls-no-bghover' title='Detalhar'>Ver/Editar informações</a></li>		
-									<li><a href="<?=base_url('delete-prontuario')?>/<?=$value->numeroprontuario?>" class='ls-ico-remove ls-color-danger' title='Excluir'>Excluir</a></li>									
+									<li><a href="<?=base_url('update-prontuario')?>/<?=$value->numeroprontuario?>" class='ls-ico-search ls-color-black ls-no-bghover' title='Detalhar'>Ver/Editar informações</a></li>	
+
+									<li>
+										<a data-ls-module="modal" data-target="#confirmacaoRetirar" class='ls-ico-remove ls-color-danger ls-cursor-pointer' title='Excluir'>Excluir</a>
+									</li>									
 								</ul>
 							</div>
 						</td>
@@ -188,3 +189,45 @@ $xml = simplexml_load_file($url);
     </div>
   </div>
 </div>
+
+<!-- Confirmação da retiradas -->
+
+<div class="ls-modal" id="confirmacaoRetirar">
+  <div class="ls-modal-box">
+    <div class="ls-modal-header">
+      <button data-dismiss="modal">&times;</button>
+      <h4 class="ls-modal-title">Confirmação de exclusão</h4>
+    </div>
+    <div class="ls-modal-body" id="myModalBody">
+    	Tem certeza que deseja excluir?
+    	<input type="hidden" id="excludente" type="number">
+    </div>
+    <div class="ls-modal-footer">
+      <button class="ls-btn ls-float-right" data-dismiss="modal">Close</button>
+      <button type="submit" class="ls-btn-danger" id="retirar">Sim</button>
+    </div>
+  </div>
+</div><!-- /.modal -->
+
+
+<script>
+	
+	function preencher(request){$("#excludente").val(request);}
+
+	$('#retirar').click(function(){
+	    $.ajax({
+	        type:'ajax',
+	        dataType:'json',
+	        method:'post',
+	        url: "<?=base_url('Prontuarios/delete')?>",
+	        data:{
+	            prontuario:$("#excludente").val(),
+	        },
+	        success:function(data){
+	            $("#prontuario" + $("#excludente").val() ).fadeOut("slow");;
+	            locastyle.modal.close()
+	        }
+	    })
+	})
+
+</script>

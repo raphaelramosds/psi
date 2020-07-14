@@ -34,7 +34,7 @@
 				<th class="ls-txt-center">Ação</th>
 			</tr>
 			<?php foreach ($datasessoes as $value): ?>
-				<tr>
+				<tr id="sessao<?=$value->id?>">
 					<td><?=$value->titulo?></td>
 					<td style="overflow: hidden;text-overflow: ellipsis; white-space: nowrap;"><?=$value->descricao?></td>
 					<td><?php
@@ -42,8 +42,12 @@
 							echo $date->format('d/m/Y')
 						?></td>
 					<td class='ls-txt-center'>
-						<a href="<?=base_url()?>delete-sessao/<?=$value->id?>" class='ls-ico-remove ls-btn-danger' title='Excluir'>Excluir</a>
-						<a href="<?=base_url()?>update-sessao/<?=$value->id?>" class='ls-ico-search ls-btn' title='Editar'>Ver/Editar</a>
+
+						<a href="<?=base_url()?>update-sessao/<?=$value->id?>" class='ls-ico-search ls-btn' title='Editar'>Ver</a>
+
+
+						<a data-ls-module="modal" data-target="#confirmacaoRetirar" class='ls-ico-remove ls-color-danger ls-btn' title='Excluir' onclick="preencher(<?=$value->id?>)">Excluir</a>
+
 					</td>
 				</tr>
 			<?php endforeach ?>
@@ -55,3 +59,45 @@
 		</div>
 	</div>
 </div>
+
+<!-- Confirmação da retiradas -->
+
+<div class="ls-modal" id="confirmacaoRetirar">
+  <div class="ls-modal-box">
+    <div class="ls-modal-header">
+      <button data-dismiss="modal">&times;</button>
+      <h4 class="ls-modal-title">Confirmação de exclusão</h4>
+    </div>
+    <div class="ls-modal-body" id="myModalBody">
+    	Tem certeza que deseja excluir?
+    	<input type="hidden" id="excludente" type="number">
+    </div>
+    <div class="ls-modal-footer">
+      <button class="ls-btn ls-float-right" data-dismiss="modal">Close</button>
+      <button type="submit" class="ls-btn-danger" id="retirar">Sim</button>
+    </div>
+  </div>
+</div><!-- /.modal -->
+
+
+<script>
+	
+	function preencher(request){$("#excludente").val(request);}
+
+	$('#retirar').click(function(){
+	    $.ajax({
+	        type:'ajax',
+	        dataType:'json',
+	        method:'post',
+	        url: "<?=base_url('Sessoes/delete')?>",
+	        data:{
+	            sessao:$("#excludente").val(),
+	        },
+	        success:function(data){
+	            $("#sessao" + $("#excludente").val() ).fadeOut("slow");
+	            locastyle.modal.close()
+	        }
+	    })
+	})
+
+</script>

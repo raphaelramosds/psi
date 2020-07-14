@@ -5,8 +5,6 @@
 			
 			<?php if(isset($add_clinica)):?>
 				<div class='ls-background-primary ls-sm-space ls-sm-margin-bottom ls-text-md ls-ico-checkmark'><?=$add_clinica?></div>
-			<?php elseif(isset($delete_clinica)):?>
-				<div class='ls-background-primary ls-sm-space ls-sm-margin-bottom ls-text-md ls-ico-checkmark'><?=$delete_clinica?></div>
 			<?php elseif(isset($update_clinica)):?>
 				<div class='ls-background-primary ls-sm-space ls-sm-margin-bottom ls-text-md ls-ico-checkmark'><?=$update_clinica?></div>
 			<?php endif;?>
@@ -40,7 +38,7 @@
 									<a href="<?=base_url('update-clinica')?>/<?=$value->id?>" class='ls-ico-pencil ls-color-black ls-no-bghover' title='Editar'>Editar</a>
 								</li>
 								<li>
-									<a data-ls-module="modal" data-target="#confirmacaoRetirar" class='ls-ico-remove ls-color-danger' title='Excluir'>Excluir</a>
+									<a data-ls-module="modal" data-target="#confirmacaoRetirar" class='ls-ico-remove ls-color-danger ls-cursor-pointer' title='Excluir'>Excluir</a>
 								</li>								
 							</ul>
 						</div>
@@ -63,7 +61,7 @@
   <div class="ls-modal-box">
     <div class="ls-modal-header">
       <button data-dismiss="modal">&times;</button>
-      <h4 class="ls-modal-title">Modal title</h4>
+      <h4 class="ls-modal-title">Confirmação de exclusão</h4>
     </div>
     <div class="ls-modal-body" id="myModalBody">
     	Tem certeza que deseja excluir?
@@ -91,9 +89,11 @@
 	            clinica:$("#excludente").val(),
 	        },
 	        success:function(data){
-	            alert(data);
-	            $("#clinica" + $("#excludente").val() ).hide();
-
+	            $("#clinica" + $("#excludente").val() ).fadeOut("slow");
+	            locastyle.modal.close()
+	        },
+	        error:function(){
+	        	alert("Esta clínica está atribuída a um prontuário. Então, não é possível removê-la.");
 	        }
 	    })
 	})

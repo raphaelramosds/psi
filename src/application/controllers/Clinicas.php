@@ -64,7 +64,7 @@ class Clinicas extends CI_Controller
 
 	 	$id = $this->input->post('clinica');
 		$this->clinicas->delete($id);
-     	echo json_encode('Sucesso na requisição');
+		echo json_encode('Excluido com sucesso');
         exit;
 	}
 

@@ -71,22 +71,20 @@ class Pacientes extends CI_Controller
 	{
 		$paciente_reg = $this->input->post();
 
+		/* Query para verificar se o email é unico */
+
 		$this->pacientes->add($paciente_reg);
 		$this->session->set_flashdata("add_paciente",'Adcionado com sucesso!');
 
 		redirect('view-paciente');
 	}
 
-	public function delete($id)
+	public function delete()
 	{
-		if ($id != NULL) 
-		{
-
-			$this->pacientes->delete($id);
-			$this->session->set_flashdata("delete_paciente",'Deletado com sucesso!');
-
-			redirect('view-paciente');
-		}
+	 	$id = $this->input->post('paciente');
+		$this->pacientes->delete($id);
+     	echo json_encode('Excluido com sucesso');
+        exit;
 	}
 
 	public function edit($id)

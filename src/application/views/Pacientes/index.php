@@ -5,8 +5,6 @@
 			
 			<?php if(isset($add_paciente)):?>
 				<div class='ls-background-primary ls-sm-space ls-sm-margin-bottom ls-text-md ls-ico-checkmark'><?=$add_paciente?></div>
-			<?php elseif(isset($delete_paciente)):?>
-				<div class='ls-background-primary ls-sm-space ls-sm-margin-bottom ls-text-md ls-ico-checkmark'><?=$delete_paciente?></div>
 			<?php elseif(isset($update_paciente)):?>
 				<div class='ls-background-primary ls-sm-space ls-sm-margin-bottom ls-text-md ls-ico-checkmark'><?=$update_paciente?></div>
 			<?php endif;?>
@@ -34,7 +32,7 @@
 				$this->db->where($this->db->dbprefix('prontuario').".paciente_id = ".$value->id);
 				$paciente_prontuario = $this->db->get()->result();
 				?>
-				<tr>
+				<tr id="paciente<?=$value->id?>">
 					<td><?=$value->nome?></td>
 					<td><?=$value->email?></td>
 					<td><?=$value->telefone?></td>
@@ -55,7 +53,7 @@
 					</td>
 					<td class='ls-txt-left'>
 						<div data-ls-module='dropdown' class='ls-dropdown'>
-							<a href='#' class='ls-btn'>Ação</a>
+							<a href='#' class='ls-btn' onclick="preencher(<?=$value->id?>)">Ação</a>
 							<ul class='ls-dropdown-nav'>
 								<li><a href="<?=base_url('update-paciente')?>/<?=$value->id?>" class='ls-ico-pencil ls-color-black ls-no-bghover' title='Editar'>Editar</a></li>
 								<li>
@@ -65,7 +63,9 @@
 										<a class='ls-ico-plus ls-color-black ls-no-bghover ls-cursor-pointer criarprontuario' title='Adcionar prontuário' data-ls-module="modal" data-target="#prontuario" data-id="<?=$value->id?>">Adcionar prontuário</a>
 									<?php endif ?>
 								</li>
-								<li><a href="<?=base_url('delete-paciente')?>/<?=$value->id?>" class='ls-ico-remove ls-color-danger' title='Excluir'>Excluir</a></li>
+								<li>
+									<a data-ls-module="modal" data-target="#confirmacaoRetirar" class='ls-ico-remove ls-color-danger ls-cursor-pointer' title='Excluir'>Excluir</a>
+								</li>
 							</ul>
 						</div>
 					</td>
@@ -80,6 +80,7 @@
 		</div>
 	</div>
 </div>
+
 <!-- Modal div: -->
 <div class="ls-modal" id="prontuario">
   <div class="ls-modal-box ls-sm-space">
@@ -167,3 +168,48 @@
     </div>
   </div>
 </div>
+
+<!-- Confirmação da retiradas -->
+
+<div class="ls-modal" id="confirmacaoRetirar">
+  <div class="ls-modal-box">
+    <div class="ls-modal-header">
+      <button data-dismiss="modal">&times;</button>
+      <h4 class="ls-modal-title">Confirmação de exclusão</h4>
+    </div>
+    <div class="ls-modal-body" id="myModalBody">
+    	Tem certeza que deseja excluir?
+    	<input type="hidden" id="excludente" type="number">
+    </div>
+    <div class="ls-modal-footer">
+      <button class="ls-btn ls-float-right" data-dismiss="modal">Close</button>
+      <button type="submit" class="ls-btn-danger" id="retirar">Sim</button>
+    </div>
+  </div>
+</div><!-- /.modal -->
+
+
+<script>
+	
+	function preencher(request){$("#excludente").val(request);}
+
+	$('#retirar').click(function(){
+	    $.ajax({
+	        type:'ajax',
+	        dataType:'json',
+	        method:'post',
+	        url: "<?=base_url('Pacientes/delete')?>",
+	        data:{
+	            paciente:$("#excludente").val(),
+	        },
+	        success:function(data){
+	            $("#paciente" + $("#excludente").val() ).fadeOut("slow");
+	            locastyle.modal.close()
+	        },
+	        error:function(){
+	        	alert("Este paciente está atribuído a um prontuário. Então, não é possível removê-lo.");
+	        }
+	    })
+	})
+
+</script>

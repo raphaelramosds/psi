@@ -41,7 +41,7 @@
 					<label class="ls-label col-md-4 col-xs-12">
 						<b class="ls-label-text">Email</b>
 						<p class="ls-labe-info">Para melhor contato</p>
-						<input type="email" name="email">
+						<input type="email" name="email" required="required">
 					</label>
 
 					<label class="ls-label col-md-4 col-xs-12">

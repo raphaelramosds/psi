@@ -62,13 +62,13 @@ class Sessoes extends CI_Controller
 		redirect("view-sessao");
 	}
 
-	public function delete($id)
+	public function delete()
 	{
+		$id = $this->input->post('sessao');
 		$this->sessoes->delete($id);
+		echo json_encode('Excluido com sucesso');
+        exit;
 
-		$this->session->set_flashdata("delete_sessao","Deletada com sucesso!");
-		
-		redirect('view-sessao');
 	}
 
 	public function edit($id)

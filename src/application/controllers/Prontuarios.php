@@ -74,12 +74,12 @@ class Prontuarios extends CI_Controller
 
 	}
 
-	public function delete($idprontuario = NULL)
+	public function delete()
 	{
-
+		$idprontuario = $this->input->post('prontuario');
 		$this->prontuarios->delete($idprontuario);
-		$this->session->set_flashdata("delete_prontuario","Deletado com sucesso!");
-		redirect('view-prontuario');
+		echo json_encode('Excluido com sucesso');
+        exit;
 	}
 
 	public function edit($id){

@@ -29,13 +29,11 @@ $route['view-clinica'] = 'Clinicas/index';
 //Pacientes
 $route['create-paciente'] = 'Pacientes/create';
 $route['update-paciente/(:num)'] = 'Pacientes/edit/$1';
-$route['delete-paciente/(:num)'] = 'Pacientes/delete/$1';
 $route['view-paciente'] = 'Pacientes/index';
 
 //Prontuarios
 $route['create-prontuario'] = 'Prontuarios/create';
 $route['update-prontuario/(:num)'] = 'Prontuarios/edit/$1';
-$route['delete-prontuario/(:num)'] = 'Prontuarios/delete/$1';
 $route['index-prontuario/(:num)'] = 'Prontuarios/index/$1';
 $route['view-prontuario'] = 'Prontuarios/view';
 
