@@ -157,4 +157,5 @@ alter table psi_prontuario
 add constraint fk_paciente_prontuario foreign key (paciente_id) references psi_paciente(id);
 
 alter table psi_sessao
-add constraint fk_prontuario_sessao foreign key (numero_prontuario) references psi_prontuario(numeroprontuario);
+add constraint fk_prontuario_sessao foreign key (numero_prontuario) references psi_prontuario(numeroprontuario)
+ON DELETE CASCADE ON UPDATE CASCADE;

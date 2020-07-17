@@ -1,4 +1,4 @@
-	<?php
+<?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Usuarios extends CI_Controller 
@@ -102,7 +102,8 @@ class Usuarios extends CI_Controller
 
 		$data_form_secretaria = array(
 			'erro_senha' => $this->session->flashdata('erro_senha'), 
-			'erro_user'	=> $this->session->flashdata('erro_user')
+			'erro_user'	=> $this->session->flashdata('erro_user'),
+			'erro_email' => $this->session->flashdata('erro_email')
 		); 
 
 		$this->load->view('Secretarias/create', $data_form_secretaria);
@@ -192,13 +193,12 @@ class Usuarios extends CI_Controller
 			}
 			
 			$codigo = rand();
+			$secretaria_reg['psicologo_id'] = $request[0]->id;
 		}
 
-		$secretaria_reg['psicologo_id'] = $request[0]->id;
 
 		// Atualizar código
 		
-
 
 		if($users_count == 1)
 		{

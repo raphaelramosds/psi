@@ -41,6 +41,11 @@
 
 
                     <label class="ls-label col-md-12">
+                        
+                         <?php if (isset($erro_email)): ?>
+                            <div class='ls-sm-space ' style='font-size:20px; color:red;'><?=$erro_email?></div>
+                        <?php endif ?>
+                        
                         <b class="ls-label-text">Email <span class="ls-color-danger">*</span></b>
                         <input type="email" name="email" placeholder="exemplo@dominio.com">
                     </label>    

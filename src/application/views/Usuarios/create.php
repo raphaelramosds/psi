@@ -63,7 +63,7 @@
 
 						<label class="ls-label">
 							<b class="ls-label-text">Data nascimento</b>
-							<input type="date" name="datanasc" placeholder="Digite nesse formato: ano/mês/dia">
+							<input type="date" name="datanasc" value="<?php echo date("Y-m-d");?>">
 						</label>
 
 						<label class="ls-label">
