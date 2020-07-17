@@ -313,7 +313,7 @@
                    </label>
 
                    <label class="ls-label col-md-6">
-                        <b class="ls-label-text">Horário</b>
+                        <b class="ls-label-text">Início do expediente</b>
                         <input type='time' name='hora[]' required>
                    </label>
 
