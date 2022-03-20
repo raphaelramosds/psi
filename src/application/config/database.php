@@ -7,16 +7,10 @@ $query_builder = TRUE;
 $db['default'] = array(
         'dsn'      => '',
         'hostname' => 'localhost',
-        'username' => 'root',
-        'password' => '',
-        'database' => 'psi',
-        
-        // 'username' => 'id6224306_root',
-        // 'password' => '12345',
-        // 'database' => 'id6224306_psi',
-        
+        'username' => 'psi',
+        'password' => 'wxtzqh73bVDQSg',
+        'database' => 'psi',        
         'dbdriver' => 'mysqli',
-        //'dbprefix' => 'psi_',
         'dbprefix' => '',
         'pconnect' => TRUE,
         'db_debug' => TRUE,
