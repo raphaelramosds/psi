@@ -1,12 +1,11 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');?>
 <html class="ls-theme-light-green">
   <head>
-    <title>Sistema para psicólogos</title>
+    <title>PSI - Psicólogos</title>
     <meta name="viewport" content = "width=device-width, initial-scale=1, user-scalable=no">
     <!-- Styles -->
     <link href="<?=base_url('assets/css/locastyle.css')?>" rel="stylesheet" type="text/css">
     <link href="<?=base_url('assets/css/links_style.css')?>" rel="stylesheet" type="text/css">
-    <link rel="icon" sizes="10x5" href="<?=base_url('assets/images/logo.png')?>">
   </head>
   <body>
 		<style>input, select{ font-weight:normal; }</style>
