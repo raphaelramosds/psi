@@ -28,7 +28,7 @@ Currently, PSI allows psychologists
 
 ## ✒️ Software Register
 
-On March 23th 2018, this application was registered as Computer Program by the Brazil's institute of industrial property It's verification serial is BR512019000073-0
+On March 23th 2018, this application was registered as Computer Program by Brazil's institute of industrial property. It's verification serial is BR512019000073-0
 
 
 
