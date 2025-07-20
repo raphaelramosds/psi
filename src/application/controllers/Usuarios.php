@@ -6,6 +6,13 @@ class Usuarios extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
+
+		$this->load->library('migration');
+		if ($this->migration->current() === FALSE)
+		{
+			show_error($this->migration->error_string());
+		}
+
 		$this->load->model('UsuariosModel','usuarios');
 		$this->load->model('PsicologosModel','psicologos');
 		$this->load->model('SecretariasModel','secretarias');
