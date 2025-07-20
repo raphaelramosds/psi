@@ -1,5 +1,7 @@
 FROM serversideup/php:7.4-fpm-apache
 
-COPY . /var/www/html/public
+WORKDIR /var/www/html/public
+
+COPY . .
 
 USER www-data
