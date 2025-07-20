@@ -1,5 +1,5 @@
 <?php
-$url = base_url("assets/xml/doencas.xml");
+$url = "assets/xml/doencas.xml";
 $xml = simplexml_load_file($url);
 
 

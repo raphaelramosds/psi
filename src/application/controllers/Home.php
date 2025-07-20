@@ -50,7 +50,7 @@ class Home extends CI_Controller
 
 	public function viewcid()
 	{	
-		$url = base_url("assets/xml/doencas.xml");
+		$url = "assets/xml/doencas.xml";
 		$xml = simplexml_load_file($url);
 
 		$this->load->view('Home/menu', array('nome' => $this->usr[0]['nome']));
