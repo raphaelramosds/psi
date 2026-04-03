@@ -95,13 +95,8 @@
                 <div class="col-2 text-right">
                     <h1 class="display-4"><span class="badge badge-secondary"><?=date('d',strtotime($a->dia))?></span></h1>
                     <h2 ><?=$diasemana[$numero_dia]?></h2>
-                    <div class="ls-actions-btn">
-                        <!-- <a href="#" class="ls-btn-primary-danger ls-ico-remove" ></a> -->
-                        <a href="#" class="ls-btn-primary-success ls-ico-search" onclick="descobrir(<?=$a->id ?>)"></a>
-                    </div>
-                        
                 </div>
-                <div class="col-10" style="position:relative; left:50px;bottom:25px; display:none;" id="horario<?=$a->id?>">
+                <div class="col-10" style="position:relative; left:50px;bottom:25px;" id="horario<?=$a->dia?>">
 
                     <?php 
                         $this->db->from('agenda');
